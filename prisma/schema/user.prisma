@@ -1,0 +1,163 @@
+model User {
+  id        String     @id @default(uuid()) @db.Uuid()
+  profileId String
+  createdAt DateTime   @default(now())
+  updateAt  DateTime   @updatedAt
+  flags     UserFlag[]
+
+  // email
+  primaryEmailId String  @unique
+  primaryEmail   Email   @relation("PrimaryEmail", fields: [primaryEmailId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  subEmails      Email[] @relation("SubEmails")
+
+  // phone
+  primaryPhoneId String? @unique
+  primaryPhone   Phone?  @relation("PrimaryPhone", fields: [primaryPhoneId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  subPhones      Phone[] @relation("SubPhones")
+
+  // information
+  hashedPassword String
+  displayName    String
+  username       String?
+
+  // addition information
+  gender        Gender
+  pronoun       String?
+  birthday      DateTime
+  biography     String?
+  websites      String[]
+  language      String?
+  socialLinkeds SocialLinkeds[]
+
+  // other user relation
+  sentRelations          Relation[]   @relation("SentRelations")
+  receivedRelations      Relation[]   @relation("ReceivedRelations")
+  sentFriendRequests     Friendship[] @relation("SentFriendRequests")
+  receivedFriendRequests Friendship[] @relation("ReceivedFriendRequests")
+
+  // metadata
+  deletedAt DateTime?
+
+  // user media
+  avatarUrl String?
+  bannerUrl String?
+
+  // relations
+  posts     Post[]
+  comments  Comment[]
+  reactions Reaction[]
+}
+
+model Friendship {
+  requesterId String
+  addresseeId String
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  requester User @relation("SentFriendRequests", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee User @relation("ReceivedFriendRequests", fields: [addresseeId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, addresseeId], name: "id") // không cho phép trùng lời mời
+}
+
+model Relation {
+  sourceUserId String
+  targetUserId String
+  type         RelationType
+  status       Status
+  scope        Scope
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  sourceUser User @relation("SentRelations", fields: [sourceUserId], references: [id], onDelete: Cascade)
+  targetUser User @relation("ReceivedRelations", fields: [targetUserId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceUserId, targetUserId, type], name: "id")
+}
+
+model Email {
+  id    String @id @default(uuid()) @db.Uuid
+  value String
+  scope Scope
+
+  subEmailsUserId  String?
+  primaryEmailUser User?   @relation("PrimaryEmail")
+  subEmailsUser    User?   @relation("SubEmails", fields: [subEmailsUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Phone {
+  id    String @id @default(uuid()) @db.Uuid
+  value String
+  scope Scope
+
+  subEmailsUserId  String?
+  primaryPhoneUser User?   @relation("PrimaryPhone")
+  subPhonesUser    User?   @relation("SubPhones", fields: [subEmailsUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model SocialLinkeds {
+  id       String   @id @default(uuid())
+  platform Platform
+  userId   String   @db.Uuid
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+enum UserFlag {
+  SUSPENDED
+  DELETED
+  ACTIVE
+  OFFLINE
+  HIDDEN
+}
+
+enum RelationType {
+  FARTHER
+  MORTHER
+  DAUGHTER // Con gái
+  SON // Con trai
+  YOUNG_SISTER
+  YOUNG_BROTHER
+  SISTER
+  BROTHER
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+  DECLINED
+  BLOCKED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum Platform {
+  GITHUB
+  INSTAGRAM
+  TIKTOK
+  YOUTUBE
+  THREADS
+  X
+  SNAPCHAT
+  TWITCH
+  WHATSAPP
+  LINE
+  WECHAT
+  KIK
+  PINTEREST
+  TUMBLR
+  ASK_FM
+  SOUNDCLOUD
+  SPOTIFY
+  LINKEDIN
+  SKYPE
+  QQ
+  KAKAO_TALK
+  VK
+  OK
+  OCULUS
+}

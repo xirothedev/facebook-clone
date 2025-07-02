@@ -1,0 +1,5 @@
+enum Scope {
+  EVERYONE
+  FRIENDS_ONLY
+  PRIVATE
+}
