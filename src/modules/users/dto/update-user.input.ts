@@ -1,8 +1,36 @@
-// import { CreateUserInput } from './create-user.input';
-// import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { Field, ID, InputType } from '@nestjs/graphql';
+import { UserQL } from '../entities/user.entity';
+import { Gender } from 'prisma/generated';
 
-// @InputType()
-// export class UpdateUserInput extends PartialType(CreateUserInput) {
-//   @Field(() => Int)
-//   id: number;
-// }
+@InputType()
+export class UpdateUserInput implements Partial<UserQL> {
+  @Field(() => ID)
+  id: string;
+
+  @Field({ nullable: true })
+  profileId?: string;
+
+  @Field({ nullable: true })
+  displayName?: string;
+
+  @Field({ nullable: true })
+  username?: string;
+
+  @Field({ nullable: true })
+  gender?: Gender;
+
+  @Field({ nullable: true })
+  pronoun?: string;
+
+  @Field({ nullable: true })
+  birthday?: Date;
+
+  @Field({ nullable: true })
+  biography?: string;
+
+  @Field(() => [String], { nullable: true })
+  websites?: string[];
+
+  @Field({ nullable: true })
+  language?: string;
+}
