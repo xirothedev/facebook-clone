@@ -72,4 +72,41 @@ export class EmailService {
             throw new Error(`Cannot send this email: ${error.message}`);
         }
     }
+
+    async sendResetPasswordAccount(toEmail: string, token: string){
+        try{
+
+            const filePath = join(__dirname, 'templates', 'sendResetPassword.html');
+
+            if (!existsSync(filePath)) {
+                throw new Error(`Template not found: ${filePath}`);
+            }
+
+            const source = readFileSync(filePath, 'utf-8');
+            const subject = "Reset your account - Facebook Service";
+
+            const verificationCode = token.substring(0, 6).toUpperCase();
+            const displayName = toEmail.split('@')[0];
+
+            const html = source.replace(/{{CODE_HERE}}/g, verificationCode)
+
+            const mailOptions = {
+                from: `"Facebook Accounts <${process.env.EMAIL_USER}>`,
+                to: toEmail,
+                subject,
+                html
+            };
+
+            const info = await this.transporter.sendMail(mailOptions);
+
+            return {
+                success: true,
+                messageId: info.messageId
+            }
+            
+        } catch(error){
+            console.error('Error sending email:', error);
+            throw new Error(`Cannot send this email: ${error.message}`);
+        }
+    }
 }

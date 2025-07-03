@@ -29,9 +29,19 @@ export class AuthService {
 
   // generate profileId
   private generateProfileId(): string {
-    const timestamp = Date.now(); 
-    const random = Math.floor(1000 + Math.random() * 9000); 
-    return `${timestamp}${random}`; 
+    const timestamp = Date.now();
+    const random = Math.floor(1000 + Math.random() * 9000);
+    return `${timestamp}${random}`;
+  }
+
+  async validate(email: string) {
+    return await this.prisma.user.findFirst({
+      where: {
+        primaryEmail: {
+          value: email
+        }
+      }
+    })
   }
 
   // đăng kí cơ bản ban đầu là như này 
@@ -54,7 +64,7 @@ export class AuthService {
       }
     })
 
-    this.emailService.sendVerificationRegisterEmail(data.valuePrimaryEmail,this.tokenService.generateJwtToken(data.valuePrimaryEmail))
+    this.emailService.sendVerificationRegisterEmail(data.valuePrimaryEmail, this.tokenService.generateJwtToken(data.valuePrimaryEmail))
 
     return {
       msg: 'Register successful',

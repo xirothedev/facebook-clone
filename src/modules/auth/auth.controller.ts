@@ -2,12 +2,13 @@ import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { RegisterUser } from './dto/register-auth.dto';
+import { EmailGuard } from './guards/email-guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-
+  @UseGuards(EmailGuard)
   @Post('registerUser')
   async registerUser(@Body()data: RegisterUser){
     return await this.authService.registerUser(data)
