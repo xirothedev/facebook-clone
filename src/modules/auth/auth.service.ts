@@ -10,7 +10,6 @@ const MAXINUM_AVAILABLE_TIME = 5 * 60_000
 
 @Injectable()
 export class AuthService {
-
   constructor(
     private readonly prisma: PrismaService,
     private readonly emailService: EmailService,

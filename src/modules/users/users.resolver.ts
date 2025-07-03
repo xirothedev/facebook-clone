@@ -1,35 +1,55 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { UsersService } from './users.service';
+import { Req, UseGuards } from '@nestjs/common';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
 import { User } from './entities/user.entity';
-import { CreateUserInput } from './dto/create-user.input';
-import { UpdateUserInput } from './dto/update-user.input';
+import { UsersService } from './users.service';
+import { Email } from './entities/email.entity';
+import { Phone } from './entities/phone.entity';
+import { SocialLinkeds } from './entities/social-linkeds.entity';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Mutation(() => User)
-  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.usersService.create(createUserInput);
-  }
-
-  @Query(() => [User], { name: 'users' })
-  findAll() {
-    return this.usersService.findAll();
+  @UseGuards(AuthGuard('jwt'))
+  @Query(() => User, { name: 'me' })
+  findMe(@Req() req: Request) {
+    return this.usersService.findMe(req)
   }
 
   @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.usersService.findOne(id);
+  findUser(@Args('id', { type: () => String }) id: string) {
+    return this.usersService.findUser(id);
   }
 
-  @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.usersService.update(updateUserInput.id, updateUserInput);
+  @Query(() => [User], { name: "users" })
+  findUsers(@Args('searchstring', { type: () => String }) searchstring: string) {
+    return this.usersService.findUsers(searchstring);
   }
 
-  @Mutation(() => User)
-  removeUser(@Args('id', { type: () => Int }) id: number) {
-    return this.usersService.remove(id);
+  @ResolveField(() => Email)
+  primaryEmail(@Parent() user: User) {
+    return this.usersService.getPrimaryEmail(user.id);
+  }
+
+  @ResolveField(() => [Email])
+  subEmails(@Parent() user: User) {
+    return this.usersService.getSubEmails(user.id);
+  }
+
+  @ResolveField(() => Phone, { nullable: true })
+  primaryPhone(@Parent() user: User) {
+    return this.usersService.getPrimaryPhone(user.id);
+  }
+
+  @ResolveField(() => [Phone])
+  subPhones(@Parent() user: User) {
+    return this.usersService.getSubPhones(user.id);
+  }
+
+  @ResolveField(() => [SocialLinkeds])
+  socialLinkeds(@Parent() user: User) {
+    return this.usersService.getSocialLinkeds(user.id);
   }
 }

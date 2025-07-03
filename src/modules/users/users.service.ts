@@ -1,26 +1,73 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserInput } from './dto/create-user.input';
-import { UpdateUserInput } from './dto/update-user.input';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Request } from 'express';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+  constructor(private readonly prismaService: PrismaService) { }
+
+  findMe(req: Request) {
+    return req.user
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findUser(identify: string) {
+    const [user1, user2, user3] = await this.prismaService.$transaction([
+      this.prismaService.user.findFirst({
+        where: { OR: [{ id: identify }, { profileId: identify }, { username: identify }] }
+      }),
+      this.prismaService.email.findFirst({ where: { value: identify, NOT: { primaryEmailUser: null } } }),
+      this.prismaService.phone.findFirst({ where: { value: identify, NOT: { primaryPhoneUser: null } } })
+    ])
+
+
+    if (!user1 && !user2 && !user3) {
+      throw new NotFoundException({ message: "User not found" })
+    }
+
+    const user = user1 || user2 || user3
+
+    return user
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findUsers(searchstring: string) {
+    const users = await this.prismaService.user.findMany({
+      where: { OR: [{ id: searchstring }, { profileId: searchstring }, { username: searchstring }, { displayName: { contains: searchstring } }] }
+    })
+
+    if (users.length === 0) {
+      throw new NotFoundException({ message: "No user found" })
+    }
+
+    return users
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  getPrimaryEmail(id: string) {
+    return this.prismaService.email.findFirst({
+      where: { primaryEmailUser: { id } },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  getSubEmails(id: string) {
+    return this.prismaService.email.findMany({
+      where: { subEmailsUser: { id } },
+    });
+  }
+
+  getPrimaryPhone(id: string) {
+    return this.prismaService.phone.findFirst({
+      where: { primaryPhoneUser: { id } },
+    });
+  }
+
+  getSubPhones(id: string) {
+    return this.prismaService.phone.findMany({
+      where: { subPhonesUser: { id } },
+    });
+  }
+
+  getSocialLinkeds(id: string) {
+    return this.prismaService.socialLinkeds.findMany({
+      where: { userId: id },
+    });
   }
 }

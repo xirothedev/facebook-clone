@@ -348,7 +348,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/andev/facebook-clone-backend-nestjs/prisma/generated",
+      "value": "/home/xiro/workspace/facebook-clone-backend-nestjs/prisma/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -369,7 +369,7 @@ const config = {
       "postgresqlExtensions",
       "relationJoins"
     ],
-    "sourceFilePath": "/home/andev/facebook-clone-backend-nestjs/prisma/schema/schema.prisma",
+    "sourceFilePath": "/home/xiro/workspace/facebook-clone-backend-nestjs/prisma/schema/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

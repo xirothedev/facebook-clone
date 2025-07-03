@@ -12,7 +12,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit,OnModule
         { emit: 'event', level: 'info' },
         { emit: 'event', level: 'warn' },
       ],
-      omit: { user: { hashedPassword: true } },//có nghĩa là mặc định, trường password sẽ bị loại bỏ khỏi kết quả truy vấn cho model User . Đây là một cách để đảm bảo rằng mật khẩu của người dùng không bị lộ ra ngoài khi truy vấn dữ liệu.
+      omit: { user: { hashedPassword: true } },
     })
   }
 
