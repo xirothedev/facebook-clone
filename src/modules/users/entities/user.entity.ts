@@ -1,6 +1,5 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Gender, UserFlag } from 'prisma/generated';
-import { registerEnumType } from '@nestjs/graphql';
+import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Gender, User, UserFlag } from 'prisma/generated';
 
 registerEnumType(UserFlag, {
   name: 'UserFlag',
@@ -11,7 +10,7 @@ registerEnumType(Gender, {
 }); 
 
 @ObjectType()
-export class User {
+export class UserQL implements Partial<User> {
   @Field(() => ID)
   id: string;
 
@@ -32,9 +31,6 @@ export class User {
 
   @Field({ nullable: true })
   primaryPhoneId?: string;
-
-  @Field()
-  hashedPassword: string;
 
   @Field()
   displayName: string;

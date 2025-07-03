@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Request } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
 export class UsersService {
@@ -39,6 +40,13 @@ export class UsersService {
     }
 
     return users
+  }
+
+  async updateUser(id: string, updateUserInput: UpdateUserInput) {
+    return this.prismaService.user.update({
+      where: { id },
+      data: updateUserInput,
+    });
   }
 
   getPrimaryEmail(id: string) {

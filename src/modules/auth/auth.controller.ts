@@ -1,11 +1,9 @@
-import { Body, Controller, Get, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from './auth.service';
-import { RegisterUser } from './dto/register-auth.dto';
-import { EmailGuard } from './guards/email-guard';
-import { ChangePassword } from './dto/change-pasword-auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { AuthService } from './auth.service';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { RegisterUser } from './dto/register-auth.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -14,7 +12,6 @@ export class AuthController {
     private readonly prisma: PrismaService
   ) {}
 
-  @UseGuards(EmailGuard)
   @Post('register')
   async registerUser(@Body()data: RegisterUser){
     return this.authService.registerUser(data)
