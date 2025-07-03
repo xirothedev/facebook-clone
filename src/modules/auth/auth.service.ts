@@ -49,4 +49,30 @@ export class AuthService {
     }
   }
 
+  // đăng kí cơ bản ban đầu là như này 
+  async registerUser(data: RegisterUser) {
+
+    const hashedPassword = await this.hashingPassword(data.password)
+
+    const primaryEmail = await this.prisma.email.create({
+      data: { value: data.primaryEmail }
+    })
+
+    const newUser = await this.prisma.user.create({
+      data: {
+        displayName: data.displayName,
+        dateOfBirth: this.parseDate(data.dateOfBirth),
+        gender: data.gender,
+        primaryEmail: primaryEmail.value,
+        password: hashedPassword
+      }
+    })
+
+    return {
+      msg: 'Register successful',
+      newUser,
+      '@timestamp': new Date().toISOString(),
+    }
+  }
+
 }
