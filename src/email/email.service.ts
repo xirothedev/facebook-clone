@@ -43,7 +43,7 @@ export class EmailService {
                 .replace(/{{USER_NAME}}/g, displayName)
                 .replace(/{{VERIFICATION_CODE}}/g, verificationCode)
                 .replace(/{{CURRENT_YEAR}}/g, new Date().getFullYear().toString())
-                .replace(/{{COMPANY_NAME}}/g, 'Thaiandev Service')
+                .replace(/{{COMPANY_NAME}}/g, 'Facebook Service')
                 .replace(/{{SUPPORT_EMAIL}}/g, process.env.EMAIL_USER || '');
 
             const mailOptions = {

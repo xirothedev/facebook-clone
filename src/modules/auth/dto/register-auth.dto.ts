@@ -1,7 +1,7 @@
-import { IsStrongPassword } from 'class-validator';
+import { IsEmail, IsStrongPassword } from 'class-validator';
 import { Matches } from 'class-validator';
 import { IsNotEmpty } from 'class-validator';
-import { Gender } from 'prisma/generated';
+import { Email, Gender } from 'prisma/generated';
 export class RegisterUser {
     @IsNotEmpty({ message: 'Name is not empty' })
     displayName: string
@@ -12,8 +12,13 @@ export class RegisterUser {
     dateOfBirth: string
     @IsNotEmpty({ message: 'Gender is not empty' })
     gender: Gender
-    @IsNotEmpty({ message: 'Email is not empty' })
-    primaryEmail: string
+    @IsEmail(
+    {
+        allow_display_name: false,
+        require_tld: true
+    }
+    ,{ message: 'Email is not accepted' })
+    valuePrimaryEmail: string
     @IsNotEmpty({ message: 'Password is not empty' })
     @IsStrongPassword({
         minLength: 8,
