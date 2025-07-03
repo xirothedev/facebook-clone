@@ -155,6 +155,7 @@ exports.Prisma.CommentScalarFieldEnum = {
   parentId: 'parentId',
   createdAt: 'createdAt',
   updateAt: 'updateAt',
+  deletedAt: 'deletedAt',
   updateHistories: 'updateHistories',
   status: 'status'
 };
@@ -217,7 +218,7 @@ exports.Prisma.PhoneScalarFieldEnum = {
   id: 'id',
   value: 'value',
   scope: 'scope',
-  subEmailsUserId: 'subEmailsUserId'
+  subPhonesUserId: 'subPhonesUserId'
 };
 
 exports.Prisma.SocialLinkedsScalarFieldEnum = {

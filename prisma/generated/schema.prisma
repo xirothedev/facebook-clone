@@ -27,7 +27,7 @@ enum ResourceType {
 
 model Post {
   id        String     @id @default(cuid())
-  authorId  String
+  authorId  String     @db.Uuid
   author    User       @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt DateTime   @default(now())
   updateAt  DateTime   @updatedAt
@@ -43,7 +43,7 @@ model Post {
 
 model Comment {
   id       String @id @default(cuid())
-  authorId String
+  authorId String @db.Uuid
   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   postId String
@@ -55,6 +55,7 @@ model Comment {
 
   createdAt       DateTime      @default(now())
   updateAt        DateTime      @updatedAt
+  deletedAt       DateTime?
   updateHistories String[]
   status          CommentStatus
   reations        Reaction[]
@@ -62,7 +63,7 @@ model Comment {
 
 model Reaction {
   id       String @id @default(cuid())
-  authorId String
+  authorId String @db.Uuid
   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   postId String?
@@ -114,12 +115,12 @@ model User {
   flags     UserFlag[]
 
   // email
-  primaryEmailId String  @unique
+  primaryEmailId String  @unique @db.Uuid
   primaryEmail   Email   @relation("PrimaryEmail", fields: [primaryEmailId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   subEmails      Email[] @relation("SubEmails")
 
   // phone
-  primaryPhoneId String? @unique
+  primaryPhoneId String? @unique @db.Uuid
   primaryPhone   Phone?  @relation("PrimaryPhone", fields: [primaryPhoneId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   subPhones      Phone[] @relation("SubPhones")
 
@@ -157,8 +158,8 @@ model User {
 }
 
 model Friendship {
-  requesterId String
-  addresseeId String
+  requesterId String   @db.Uuid
+  addresseeId String   @db.Uuid
   status      Status   @default(PENDING)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -170,8 +171,8 @@ model Friendship {
 }
 
 model Relation {
-  sourceUserId String
-  targetUserId String
+  sourceUserId String       @db.Uuid
+  targetUserId String       @db.Uuid
   type         RelationType
   status       Status
   scope        Scope
@@ -187,9 +188,9 @@ model Relation {
 model Email {
   id    String @id @default(uuid()) @db.Uuid
   value String
-  scope Scope
+  scope Scope  @default(EVERYONE)
 
-  subEmailsUserId  String?
+  subEmailsUserId  String? @db.Uuid
   primaryEmailUser User?   @relation("PrimaryEmail")
   subEmailsUser    User?   @relation("SubEmails", fields: [subEmailsUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
@@ -199,9 +200,9 @@ model Phone {
   value String
   scope Scope
 
-  subEmailsUserId  String?
+  subPhonesUserId  String? @db.Uuid
   primaryPhoneUser User?   @relation("PrimaryPhone")
-  subPhonesUser    User?   @relation("SubPhones", fields: [subEmailsUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  subPhonesUser    User?   @relation("SubPhones", fields: [subPhonesUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model SocialLinkeds {

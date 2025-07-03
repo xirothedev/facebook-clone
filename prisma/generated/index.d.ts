@@ -4305,6 +4305,7 @@ export namespace Prisma {
     parentId: string | null
     createdAt: Date | null
     updateAt: Date | null
+    deletedAt: Date | null
     status: $Enums.CommentStatus | null
   }
 
@@ -4315,6 +4316,7 @@ export namespace Prisma {
     parentId: string | null
     createdAt: Date | null
     updateAt: Date | null
+    deletedAt: Date | null
     status: $Enums.CommentStatus | null
   }
 
@@ -4325,6 +4327,7 @@ export namespace Prisma {
     parentId: number
     createdAt: number
     updateAt: number
+    deletedAt: number
     updateHistories: number
     status: number
     _all: number
@@ -4338,6 +4341,7 @@ export namespace Prisma {
     parentId?: true
     createdAt?: true
     updateAt?: true
+    deletedAt?: true
     status?: true
   }
 
@@ -4348,6 +4352,7 @@ export namespace Prisma {
     parentId?: true
     createdAt?: true
     updateAt?: true
+    deletedAt?: true
     status?: true
   }
 
@@ -4358,6 +4363,7 @@ export namespace Prisma {
     parentId?: true
     createdAt?: true
     updateAt?: true
+    deletedAt?: true
     updateHistories?: true
     status?: true
     _all?: true
@@ -4442,6 +4448,7 @@ export namespace Prisma {
     parentId: string | null
     createdAt: Date
     updateAt: Date
+    deletedAt: Date | null
     updateHistories: string[]
     status: $Enums.CommentStatus
     _count: CommentCountAggregateOutputType | null
@@ -4470,6 +4477,7 @@ export namespace Prisma {
     parentId?: boolean
     createdAt?: boolean
     updateAt?: boolean
+    deletedAt?: boolean
     updateHistories?: boolean
     status?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -4487,6 +4495,7 @@ export namespace Prisma {
     parentId?: boolean
     createdAt?: boolean
     updateAt?: boolean
+    deletedAt?: boolean
     updateHistories?: boolean
     status?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -4501,6 +4510,7 @@ export namespace Prisma {
     parentId?: boolean
     createdAt?: boolean
     updateAt?: boolean
+    deletedAt?: boolean
     updateHistories?: boolean
     status?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -4515,11 +4525,12 @@ export namespace Prisma {
     parentId?: boolean
     createdAt?: boolean
     updateAt?: boolean
+    deletedAt?: boolean
     updateHistories?: boolean
     status?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "postId" | "parentId" | "createdAt" | "updateAt" | "updateHistories" | "status", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "postId" | "parentId" | "createdAt" | "updateAt" | "deletedAt" | "updateHistories" | "status", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
@@ -4555,6 +4566,7 @@ export namespace Prisma {
       parentId: string | null
       createdAt: Date
       updateAt: Date
+      deletedAt: Date | null
       updateHistories: string[]
       status: $Enums.CommentStatus
     }, ExtArgs["result"]["comment"]>
@@ -4991,6 +5003,7 @@ export namespace Prisma {
     readonly parentId: FieldRef<"Comment", 'String'>
     readonly createdAt: FieldRef<"Comment", 'DateTime'>
     readonly updateAt: FieldRef<"Comment", 'DateTime'>
+    readonly deletedAt: FieldRef<"Comment", 'DateTime'>
     readonly updateHistories: FieldRef<"Comment", 'String[]'>
     readonly status: FieldRef<"Comment", 'CommentStatus'>
   }
@@ -11427,21 +11440,21 @@ export namespace Prisma {
     id: string | null
     value: string | null
     scope: $Enums.Scope | null
-    subEmailsUserId: string | null
+    subPhonesUserId: string | null
   }
 
   export type PhoneMaxAggregateOutputType = {
     id: string | null
     value: string | null
     scope: $Enums.Scope | null
-    subEmailsUserId: string | null
+    subPhonesUserId: string | null
   }
 
   export type PhoneCountAggregateOutputType = {
     id: number
     value: number
     scope: number
-    subEmailsUserId: number
+    subPhonesUserId: number
     _all: number
   }
 
@@ -11450,21 +11463,21 @@ export namespace Prisma {
     id?: true
     value?: true
     scope?: true
-    subEmailsUserId?: true
+    subPhonesUserId?: true
   }
 
   export type PhoneMaxAggregateInputType = {
     id?: true
     value?: true
     scope?: true
-    subEmailsUserId?: true
+    subPhonesUserId?: true
   }
 
   export type PhoneCountAggregateInputType = {
     id?: true
     value?: true
     scope?: true
-    subEmailsUserId?: true
+    subPhonesUserId?: true
     _all?: true
   }
 
@@ -11544,7 +11557,7 @@ export namespace Prisma {
     id: string
     value: string
     scope: $Enums.Scope
-    subEmailsUserId: string | null
+    subPhonesUserId: string | null
     _count: PhoneCountAggregateOutputType | null
     _min: PhoneMinAggregateOutputType | null
     _max: PhoneMaxAggregateOutputType | null
@@ -11568,7 +11581,7 @@ export namespace Prisma {
     id?: boolean
     value?: boolean
     scope?: boolean
-    subEmailsUserId?: boolean
+    subPhonesUserId?: boolean
     primaryPhoneUser?: boolean | Phone$primaryPhoneUserArgs<ExtArgs>
     subPhonesUser?: boolean | Phone$subPhonesUserArgs<ExtArgs>
   }, ExtArgs["result"]["phone"]>
@@ -11577,7 +11590,7 @@ export namespace Prisma {
     id?: boolean
     value?: boolean
     scope?: boolean
-    subEmailsUserId?: boolean
+    subPhonesUserId?: boolean
     subPhonesUser?: boolean | Phone$subPhonesUserArgs<ExtArgs>
   }, ExtArgs["result"]["phone"]>
 
@@ -11585,7 +11598,7 @@ export namespace Prisma {
     id?: boolean
     value?: boolean
     scope?: boolean
-    subEmailsUserId?: boolean
+    subPhonesUserId?: boolean
     subPhonesUser?: boolean | Phone$subPhonesUserArgs<ExtArgs>
   }, ExtArgs["result"]["phone"]>
 
@@ -11593,10 +11606,10 @@ export namespace Prisma {
     id?: boolean
     value?: boolean
     scope?: boolean
-    subEmailsUserId?: boolean
+    subPhonesUserId?: boolean
   }
 
-  export type PhoneOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "value" | "scope" | "subEmailsUserId", ExtArgs["result"]["phone"]>
+  export type PhoneOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "value" | "scope" | "subPhonesUserId", ExtArgs["result"]["phone"]>
   export type PhoneInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     primaryPhoneUser?: boolean | Phone$primaryPhoneUserArgs<ExtArgs>
     subPhonesUser?: boolean | Phone$subPhonesUserArgs<ExtArgs>
@@ -11618,7 +11631,7 @@ export namespace Prisma {
       id: string
       value: string
       scope: $Enums.Scope
-      subEmailsUserId: string | null
+      subPhonesUserId: string | null
     }, ExtArgs["result"]["phone"]>
     composites: {}
   }
@@ -12047,7 +12060,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Phone", 'String'>
     readonly value: FieldRef<"Phone", 'String'>
     readonly scope: FieldRef<"Phone", 'Scope'>
-    readonly subEmailsUserId: FieldRef<"Phone", 'String'>
+    readonly subPhonesUserId: FieldRef<"Phone", 'String'>
   }
     
 
@@ -13608,6 +13621,7 @@ export namespace Prisma {
     parentId: 'parentId',
     createdAt: 'createdAt',
     updateAt: 'updateAt',
+    deletedAt: 'deletedAt',
     updateHistories: 'updateHistories',
     status: 'status'
   };
@@ -13688,7 +13702,7 @@ export namespace Prisma {
     id: 'id',
     value: 'value',
     scope: 'scope',
-    subEmailsUserId: 'subEmailsUserId'
+    subPhonesUserId: 'subPhonesUserId'
   };
 
   export type PhoneScalarFieldEnum = (typeof PhoneScalarFieldEnum)[keyof typeof PhoneScalarFieldEnum]
@@ -13996,7 +14010,7 @@ export namespace Prisma {
     OR?: PostWhereInput[]
     NOT?: PostWhereInput | PostWhereInput[]
     id?: StringFilter<"Post"> | string
-    authorId?: StringFilter<"Post"> | string
+    authorId?: UuidFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updateAt?: DateTimeFilter<"Post"> | Date | string
     scope?: EnumScopeFilter<"Post"> | $Enums.Scope
@@ -14027,7 +14041,7 @@ export namespace Prisma {
     AND?: PostWhereInput | PostWhereInput[]
     OR?: PostWhereInput[]
     NOT?: PostWhereInput | PostWhereInput[]
-    authorId?: StringFilter<"Post"> | string
+    authorId?: UuidFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updateAt?: DateTimeFilter<"Post"> | Date | string
     scope?: EnumScopeFilter<"Post"> | $Enums.Scope
@@ -14058,7 +14072,7 @@ export namespace Prisma {
     OR?: PostScalarWhereWithAggregatesInput[]
     NOT?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Post"> | string
-    authorId?: StringWithAggregatesFilter<"Post"> | string
+    authorId?: UuidWithAggregatesFilter<"Post"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updateAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     scope?: EnumScopeWithAggregatesFilter<"Post"> | $Enums.Scope
@@ -14072,11 +14086,12 @@ export namespace Prisma {
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
     id?: StringFilter<"Comment"> | string
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: UuidFilter<"Comment"> | string
     postId?: StringFilter<"Comment"> | string
     parentId?: StringNullableFilter<"Comment"> | string | null
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updateAt?: DateTimeFilter<"Comment"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Comment"> | Date | string | null
     updateHistories?: StringNullableListFilter<"Comment">
     status?: EnumCommentStatusFilter<"Comment"> | $Enums.CommentStatus
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -14093,6 +14108,7 @@ export namespace Prisma {
     parentId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     updateHistories?: SortOrder
     status?: SortOrder
     author?: UserOrderByWithRelationInput
@@ -14107,11 +14123,12 @@ export namespace Prisma {
     AND?: CommentWhereInput | CommentWhereInput[]
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: UuidFilter<"Comment"> | string
     postId?: StringFilter<"Comment"> | string
     parentId?: StringNullableFilter<"Comment"> | string | null
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updateAt?: DateTimeFilter<"Comment"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Comment"> | Date | string | null
     updateHistories?: StringNullableListFilter<"Comment">
     status?: EnumCommentStatusFilter<"Comment"> | $Enums.CommentStatus
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -14128,6 +14145,7 @@ export namespace Prisma {
     parentId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     updateHistories?: SortOrder
     status?: SortOrder
     _count?: CommentCountOrderByAggregateInput
@@ -14140,11 +14158,12 @@ export namespace Prisma {
     OR?: CommentScalarWhereWithAggregatesInput[]
     NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Comment"> | string
-    authorId?: StringWithAggregatesFilter<"Comment"> | string
+    authorId?: UuidWithAggregatesFilter<"Comment"> | string
     postId?: StringWithAggregatesFilter<"Comment"> | string
     parentId?: StringNullableWithAggregatesFilter<"Comment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     updateAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Comment"> | Date | string | null
     updateHistories?: StringNullableListFilter<"Comment">
     status?: EnumCommentStatusWithAggregatesFilter<"Comment"> | $Enums.CommentStatus
   }
@@ -14154,7 +14173,7 @@ export namespace Prisma {
     OR?: ReactionWhereInput[]
     NOT?: ReactionWhereInput | ReactionWhereInput[]
     id?: StringFilter<"Reaction"> | string
-    authorId?: StringFilter<"Reaction"> | string
+    authorId?: UuidFilter<"Reaction"> | string
     postId?: StringNullableFilter<"Reaction"> | string | null
     commentId?: StringNullableFilter<"Reaction"> | string | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -14177,7 +14196,7 @@ export namespace Prisma {
     AND?: ReactionWhereInput | ReactionWhereInput[]
     OR?: ReactionWhereInput[]
     NOT?: ReactionWhereInput | ReactionWhereInput[]
-    authorId?: StringFilter<"Reaction"> | string
+    authorId?: UuidFilter<"Reaction"> | string
     postId?: StringNullableFilter<"Reaction"> | string | null
     commentId?: StringNullableFilter<"Reaction"> | string | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -14200,7 +14219,7 @@ export namespace Prisma {
     OR?: ReactionScalarWhereWithAggregatesInput[]
     NOT?: ReactionScalarWhereWithAggregatesInput | ReactionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Reaction"> | string
-    authorId?: StringWithAggregatesFilter<"Reaction"> | string
+    authorId?: UuidWithAggregatesFilter<"Reaction"> | string
     postId?: StringNullableWithAggregatesFilter<"Reaction"> | string | null
     commentId?: StringNullableWithAggregatesFilter<"Reaction"> | string | null
   }
@@ -14214,8 +14233,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updateAt?: DateTimeFilter<"User"> | Date | string
     flags?: EnumUserFlagNullableListFilter<"User">
-    primaryEmailId?: StringFilter<"User"> | string
-    primaryPhoneId?: StringNullableFilter<"User"> | string | null
+    primaryEmailId?: UuidFilter<"User"> | string
+    primaryPhoneId?: UuidNullableFilter<"User"> | string | null
     hashedPassword?: StringFilter<"User"> | string
     displayName?: StringFilter<"User"> | string
     username?: StringNullableFilter<"User"> | string | null
@@ -14347,8 +14366,8 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updateAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     flags?: EnumUserFlagNullableListFilter<"User">
-    primaryEmailId?: StringWithAggregatesFilter<"User"> | string
-    primaryPhoneId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    primaryEmailId?: UuidWithAggregatesFilter<"User"> | string
+    primaryPhoneId?: UuidNullableWithAggregatesFilter<"User"> | string | null
     hashedPassword?: StringWithAggregatesFilter<"User"> | string
     displayName?: StringWithAggregatesFilter<"User"> | string
     username?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -14367,8 +14386,8 @@ export namespace Prisma {
     AND?: FriendshipWhereInput | FriendshipWhereInput[]
     OR?: FriendshipWhereInput[]
     NOT?: FriendshipWhereInput | FriendshipWhereInput[]
-    requesterId?: StringFilter<"Friendship"> | string
-    addresseeId?: StringFilter<"Friendship"> | string
+    requesterId?: UuidFilter<"Friendship"> | string
+    addresseeId?: UuidFilter<"Friendship"> | string
     status?: EnumStatusFilter<"Friendship"> | $Enums.Status
     createdAt?: DateTimeFilter<"Friendship"> | Date | string
     updatedAt?: DateTimeFilter<"Friendship"> | Date | string
@@ -14391,8 +14410,8 @@ export namespace Prisma {
     AND?: FriendshipWhereInput | FriendshipWhereInput[]
     OR?: FriendshipWhereInput[]
     NOT?: FriendshipWhereInput | FriendshipWhereInput[]
-    requesterId?: StringFilter<"Friendship"> | string
-    addresseeId?: StringFilter<"Friendship"> | string
+    requesterId?: UuidFilter<"Friendship"> | string
+    addresseeId?: UuidFilter<"Friendship"> | string
     status?: EnumStatusFilter<"Friendship"> | $Enums.Status
     createdAt?: DateTimeFilter<"Friendship"> | Date | string
     updatedAt?: DateTimeFilter<"Friendship"> | Date | string
@@ -14415,8 +14434,8 @@ export namespace Prisma {
     AND?: FriendshipScalarWhereWithAggregatesInput | FriendshipScalarWhereWithAggregatesInput[]
     OR?: FriendshipScalarWhereWithAggregatesInput[]
     NOT?: FriendshipScalarWhereWithAggregatesInput | FriendshipScalarWhereWithAggregatesInput[]
-    requesterId?: StringWithAggregatesFilter<"Friendship"> | string
-    addresseeId?: StringWithAggregatesFilter<"Friendship"> | string
+    requesterId?: UuidWithAggregatesFilter<"Friendship"> | string
+    addresseeId?: UuidWithAggregatesFilter<"Friendship"> | string
     status?: EnumStatusWithAggregatesFilter<"Friendship"> | $Enums.Status
     createdAt?: DateTimeWithAggregatesFilter<"Friendship"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Friendship"> | Date | string
@@ -14426,8 +14445,8 @@ export namespace Prisma {
     AND?: RelationWhereInput | RelationWhereInput[]
     OR?: RelationWhereInput[]
     NOT?: RelationWhereInput | RelationWhereInput[]
-    sourceUserId?: StringFilter<"Relation"> | string
-    targetUserId?: StringFilter<"Relation"> | string
+    sourceUserId?: UuidFilter<"Relation"> | string
+    targetUserId?: UuidFilter<"Relation"> | string
     type?: EnumRelationTypeFilter<"Relation"> | $Enums.RelationType
     status?: EnumStatusFilter<"Relation"> | $Enums.Status
     scope?: EnumScopeFilter<"Relation"> | $Enums.Scope
@@ -14454,8 +14473,8 @@ export namespace Prisma {
     AND?: RelationWhereInput | RelationWhereInput[]
     OR?: RelationWhereInput[]
     NOT?: RelationWhereInput | RelationWhereInput[]
-    sourceUserId?: StringFilter<"Relation"> | string
-    targetUserId?: StringFilter<"Relation"> | string
+    sourceUserId?: UuidFilter<"Relation"> | string
+    targetUserId?: UuidFilter<"Relation"> | string
     type?: EnumRelationTypeFilter<"Relation"> | $Enums.RelationType
     status?: EnumStatusFilter<"Relation"> | $Enums.Status
     scope?: EnumScopeFilter<"Relation"> | $Enums.Scope
@@ -14482,8 +14501,8 @@ export namespace Prisma {
     AND?: RelationScalarWhereWithAggregatesInput | RelationScalarWhereWithAggregatesInput[]
     OR?: RelationScalarWhereWithAggregatesInput[]
     NOT?: RelationScalarWhereWithAggregatesInput | RelationScalarWhereWithAggregatesInput[]
-    sourceUserId?: StringWithAggregatesFilter<"Relation"> | string
-    targetUserId?: StringWithAggregatesFilter<"Relation"> | string
+    sourceUserId?: UuidWithAggregatesFilter<"Relation"> | string
+    targetUserId?: UuidWithAggregatesFilter<"Relation"> | string
     type?: EnumRelationTypeWithAggregatesFilter<"Relation"> | $Enums.RelationType
     status?: EnumStatusWithAggregatesFilter<"Relation"> | $Enums.Status
     scope?: EnumScopeWithAggregatesFilter<"Relation"> | $Enums.Scope
@@ -14498,7 +14517,7 @@ export namespace Prisma {
     id?: UuidFilter<"Email"> | string
     value?: StringFilter<"Email"> | string
     scope?: EnumScopeFilter<"Email"> | $Enums.Scope
-    subEmailsUserId?: StringNullableFilter<"Email"> | string | null
+    subEmailsUserId?: UuidNullableFilter<"Email"> | string | null
     primaryEmailUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     subEmailsUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
@@ -14519,7 +14538,7 @@ export namespace Prisma {
     NOT?: EmailWhereInput | EmailWhereInput[]
     value?: StringFilter<"Email"> | string
     scope?: EnumScopeFilter<"Email"> | $Enums.Scope
-    subEmailsUserId?: StringNullableFilter<"Email"> | string | null
+    subEmailsUserId?: UuidNullableFilter<"Email"> | string | null
     primaryEmailUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     subEmailsUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
@@ -14541,7 +14560,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Email"> | string
     value?: StringWithAggregatesFilter<"Email"> | string
     scope?: EnumScopeWithAggregatesFilter<"Email"> | $Enums.Scope
-    subEmailsUserId?: StringNullableWithAggregatesFilter<"Email"> | string | null
+    subEmailsUserId?: UuidNullableWithAggregatesFilter<"Email"> | string | null
   }
 
   export type PhoneWhereInput = {
@@ -14551,7 +14570,7 @@ export namespace Prisma {
     id?: UuidFilter<"Phone"> | string
     value?: StringFilter<"Phone"> | string
     scope?: EnumScopeFilter<"Phone"> | $Enums.Scope
-    subEmailsUserId?: StringNullableFilter<"Phone"> | string | null
+    subPhonesUserId?: UuidNullableFilter<"Phone"> | string | null
     primaryPhoneUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     subPhonesUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
@@ -14560,7 +14579,7 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     scope?: SortOrder
-    subEmailsUserId?: SortOrderInput | SortOrder
+    subPhonesUserId?: SortOrderInput | SortOrder
     primaryPhoneUser?: UserOrderByWithRelationInput
     subPhonesUser?: UserOrderByWithRelationInput
   }
@@ -14572,7 +14591,7 @@ export namespace Prisma {
     NOT?: PhoneWhereInput | PhoneWhereInput[]
     value?: StringFilter<"Phone"> | string
     scope?: EnumScopeFilter<"Phone"> | $Enums.Scope
-    subEmailsUserId?: StringNullableFilter<"Phone"> | string | null
+    subPhonesUserId?: UuidNullableFilter<"Phone"> | string | null
     primaryPhoneUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     subPhonesUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
@@ -14581,7 +14600,7 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     scope?: SortOrder
-    subEmailsUserId?: SortOrderInput | SortOrder
+    subPhonesUserId?: SortOrderInput | SortOrder
     _count?: PhoneCountOrderByAggregateInput
     _max?: PhoneMaxOrderByAggregateInput
     _min?: PhoneMinOrderByAggregateInput
@@ -14594,7 +14613,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Phone"> | string
     value?: StringWithAggregatesFilter<"Phone"> | string
     scope?: EnumScopeWithAggregatesFilter<"Phone"> | $Enums.Scope
-    subEmailsUserId?: StringNullableWithAggregatesFilter<"Phone"> | string | null
+    subPhonesUserId?: UuidNullableWithAggregatesFilter<"Phone"> | string | null
   }
 
   export type SocialLinkedsWhereInput = {
@@ -14814,6 +14833,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
@@ -14830,6 +14850,7 @@ export namespace Prisma {
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
@@ -14840,6 +14861,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
@@ -14856,6 +14878,7 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
@@ -14869,6 +14892,7 @@ export namespace Prisma {
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
   }
@@ -14877,6 +14901,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
@@ -14888,6 +14913,7 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
@@ -15255,7 +15281,7 @@ export namespace Prisma {
   export type EmailCreateInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     primaryEmailUser?: UserCreateNestedOneWithoutPrimaryEmailInput
     subEmailsUser?: UserCreateNestedOneWithoutSubEmailsInput
   }
@@ -15263,7 +15289,7 @@ export namespace Prisma {
   export type EmailUncheckedCreateInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     subEmailsUserId?: string | null
     primaryEmailUser?: UserUncheckedCreateNestedOneWithoutPrimaryEmailInput
   }
@@ -15287,7 +15313,7 @@ export namespace Prisma {
   export type EmailCreateManyInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     subEmailsUserId?: string | null
   }
 
@@ -15316,7 +15342,7 @@ export namespace Prisma {
     id?: string
     value: string
     scope: $Enums.Scope
-    subEmailsUserId?: string | null
+    subPhonesUserId?: string | null
     primaryPhoneUser?: UserUncheckedCreateNestedOneWithoutPrimaryPhoneInput
   }
 
@@ -15332,7 +15358,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
-    subEmailsUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    subPhonesUserId?: NullableStringFieldUpdateOperationsInput | string | null
     primaryPhoneUser?: UserUncheckedUpdateOneWithoutPrimaryPhoneNestedInput
   }
 
@@ -15340,7 +15366,7 @@ export namespace Prisma {
     id?: string
     value: string
     scope: $Enums.Scope
-    subEmailsUserId?: string | null
+    subPhonesUserId?: string | null
   }
 
   export type PhoneUpdateManyMutationInput = {
@@ -15353,7 +15379,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
-    subEmailsUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    subPhonesUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SocialLinkedsCreateInput = {
@@ -15545,6 +15571,18 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type UuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
   export type EnumScopeFilter<$PrismaModel = never> = {
     equals?: $Enums.Scope | EnumScopeFieldRefInput<$PrismaModel>
     in?: $Enums.Scope[] | ListEnumScopeFieldRefInput<$PrismaModel>
@@ -15623,6 +15661,21 @@ export namespace Prisma {
     content?: SortOrder
   }
 
+  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type EnumScopeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Scope | EnumScopeFieldRefInput<$PrismaModel>
     in?: $Enums.Scope[] | ListEnumScopeFieldRefInput<$PrismaModel>
@@ -15658,6 +15711,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type EnumCommentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.CommentStatus | EnumCommentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.CommentStatus[] | ListEnumCommentStatusFieldRefInput<$PrismaModel>
@@ -15687,6 +15751,7 @@ export namespace Prisma {
     parentId?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    deletedAt?: SortOrder
     updateHistories?: SortOrder
     status?: SortOrder
   }
@@ -15698,6 +15763,7 @@ export namespace Prisma {
     parentId?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    deletedAt?: SortOrder
     status?: SortOrder
   }
 
@@ -15708,6 +15774,7 @@ export namespace Prisma {
     parentId?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
+    deletedAt?: SortOrder
     status?: SortOrder
   }
 
@@ -15727,6 +15794,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumCommentStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -15765,18 +15846,6 @@ export namespace Prisma {
     commentId?: SortOrder
   }
 
-  export type UuidFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedUuidFilter<$PrismaModel> | string
-  }
-
   export type EnumUserFlagNullableListFilter<$PrismaModel = never> = {
     equals?: $Enums.UserFlag[] | ListEnumUserFlagFieldRefInput<$PrismaModel> | null
     has?: $Enums.UserFlag | EnumUserFlagFieldRefInput<$PrismaModel> | null
@@ -15785,22 +15854,23 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type UuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
   export type EnumGenderFilter<$PrismaModel = never> = {
     equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
     in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
     notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
     not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type EmailScalarRelationFilter = {
@@ -15935,19 +16005,19 @@ export namespace Prisma {
     bannerUrl?: SortOrder
   }
 
-  export type UuidWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
-    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumGenderWithAggregatesFilter<$PrismaModel = never> = {
@@ -15958,20 +16028,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumGenderFilter<$PrismaModel>
     _max?: NestedEnumGenderFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumStatusFilter<$PrismaModel = never> = {
@@ -16103,21 +16159,21 @@ export namespace Prisma {
     id?: SortOrder
     value?: SortOrder
     scope?: SortOrder
-    subEmailsUserId?: SortOrder
+    subPhonesUserId?: SortOrder
   }
 
   export type PhoneMaxOrderByAggregateInput = {
     id?: SortOrder
     value?: SortOrder
     scope?: SortOrder
-    subEmailsUserId?: SortOrder
+    subPhonesUserId?: SortOrder
   }
 
   export type PhoneMinOrderByAggregateInput = {
     id?: SortOrder
     value?: SortOrder
     scope?: SortOrder
-    subEmailsUserId?: SortOrder
+    subPhonesUserId?: SortOrder
   }
 
   export type EnumPlatformFilter<$PrismaModel = never> = {
@@ -16338,6 +16394,10 @@ export namespace Prisma {
     connectOrCreate?: ReactionCreateOrConnectWithoutCommentInput | ReactionCreateOrConnectWithoutCommentInput[]
     createMany?: ReactionCreateManyCommentInputEnvelope
     connect?: ReactionWhereUniqueInput | ReactionWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type CommentUpdateupdateHistoriesInput = {
@@ -16653,10 +16713,6 @@ export namespace Prisma {
   export type UserUpdatewebsitesInput = {
     set?: string[]
     push?: string | string[]
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type EmailUpdateOneRequiredWithoutPrimaryEmailUserNestedInput = {
@@ -17246,6 +17302,17 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedUuidFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidFilter<$PrismaModel> | string
+  }
+
   export type NestedEnumScopeFilter<$PrismaModel = never> = {
     equals?: $Enums.Scope | EnumScopeFieldRefInput<$PrismaModel>
     in?: $Enums.Scope[] | ListEnumScopeFieldRefInput<$PrismaModel>
@@ -17258,6 +17325,20 @@ export namespace Prisma {
     in?: $Enums.PostStatus[] | ListEnumPostStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.PostStatus[] | ListEnumPostStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumPostStatusFilter<$PrismaModel> | $Enums.PostStatus
+  }
+
+  export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type NestedEnumScopeWithAggregatesFilter<$PrismaModel = never> = {
@@ -17292,6 +17373,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedEnumCommentStatusFilter<$PrismaModel = never> = {
@@ -17329,69 +17421,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumCommentStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CommentStatus | EnumCommentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.CommentStatus[] | ListEnumCommentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CommentStatus[] | ListEnumCommentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumCommentStatusWithAggregatesFilter<$PrismaModel> | $Enums.CommentStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumCommentStatusFilter<$PrismaModel>
-    _max?: NestedEnumCommentStatusFilter<$PrismaModel>
-  }
-
-  export type NestedUuidFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidFilter<$PrismaModel> | string
-  }
-
-  export type NestedEnumGenderFilter<$PrismaModel = never> = {
-    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
-    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
-    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedUuidWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedEnumGenderWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
-    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
-    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumGenderFilter<$PrismaModel>
-    _max?: NestedEnumGenderFilter<$PrismaModel>
-  }
-
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -17404,6 +17433,58 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCommentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CommentStatus | EnumCommentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.CommentStatus[] | ListEnumCommentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CommentStatus[] | ListEnumCommentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumCommentStatusWithAggregatesFilter<$PrismaModel> | $Enums.CommentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCommentStatusFilter<$PrismaModel>
+    _max?: NestedEnumCommentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
+  }
+
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
   }
 
   export type NestedEnumStatusFilter<$PrismaModel = never> = {
@@ -17550,6 +17631,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
@@ -17564,6 +17646,7 @@ export namespace Prisma {
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
@@ -17674,7 +17757,7 @@ export namespace Prisma {
     OR?: ReactionScalarWhereInput[]
     NOT?: ReactionScalarWhereInput | ReactionScalarWhereInput[]
     id?: StringFilter<"Reaction"> | string
-    authorId?: StringFilter<"Reaction"> | string
+    authorId?: UuidFilter<"Reaction"> | string
     postId?: StringNullableFilter<"Reaction"> | string | null
     commentId?: StringNullableFilter<"Reaction"> | string | null
   }
@@ -17700,11 +17783,12 @@ export namespace Prisma {
     OR?: CommentScalarWhereInput[]
     NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
     id?: StringFilter<"Comment"> | string
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: UuidFilter<"Comment"> | string
     postId?: StringFilter<"Comment"> | string
     parentId?: StringNullableFilter<"Comment"> | string | null
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updateAt?: DateTimeFilter<"Comment"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Comment"> | Date | string | null
     updateHistories?: StringNullableListFilter<"Comment">
     status?: EnumCommentStatusFilter<"Comment"> | $Enums.CommentStatus
   }
@@ -17809,6 +17893,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
@@ -17824,6 +17909,7 @@ export namespace Prisma {
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     reations?: ReactionUncheckedCreateNestedManyWithoutCommentInput
@@ -17838,6 +17924,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
@@ -17852,6 +17939,7 @@ export namespace Prisma {
     postId: string
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
@@ -18013,6 +18101,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
@@ -18028,6 +18117,7 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     reations?: ReactionUncheckedUpdateManyWithoutCommentNestedInput
@@ -18165,6 +18255,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
@@ -18180,6 +18271,7 @@ export namespace Prisma {
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
@@ -18313,6 +18405,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
@@ -18328,6 +18421,7 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
@@ -18336,14 +18430,14 @@ export namespace Prisma {
   export type EmailCreateWithoutPrimaryEmailUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     subEmailsUser?: UserCreateNestedOneWithoutSubEmailsInput
   }
 
   export type EmailUncheckedCreateWithoutPrimaryEmailUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     subEmailsUserId?: string | null
   }
 
@@ -18355,14 +18449,14 @@ export namespace Prisma {
   export type EmailCreateWithoutSubEmailsUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     primaryEmailUser?: UserCreateNestedOneWithoutPrimaryEmailInput
   }
 
   export type EmailUncheckedCreateWithoutSubEmailsUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     primaryEmailUser?: UserUncheckedCreateNestedOneWithoutPrimaryEmailInput
   }
 
@@ -18387,7 +18481,7 @@ export namespace Prisma {
     id?: string
     value: string
     scope: $Enums.Scope
-    subEmailsUserId?: string | null
+    subPhonesUserId?: string | null
   }
 
   export type PhoneCreateOrConnectWithoutPrimaryPhoneUserInput = {
@@ -18581,6 +18675,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     post: PostCreateNestedOneWithoutCommentsInput
@@ -18595,6 +18690,7 @@ export namespace Prisma {
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
@@ -18681,7 +18777,7 @@ export namespace Prisma {
     id?: UuidFilter<"Email"> | string
     value?: StringFilter<"Email"> | string
     scope?: EnumScopeFilter<"Email"> | $Enums.Scope
-    subEmailsUserId?: StringNullableFilter<"Email"> | string | null
+    subEmailsUserId?: UuidNullableFilter<"Email"> | string | null
   }
 
   export type PhoneUpsertWithoutPrimaryPhoneUserInput = {
@@ -18706,7 +18802,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
-    subEmailsUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    subPhonesUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PhoneUpsertWithWhereUniqueWithoutSubPhonesUserInput = {
@@ -18732,7 +18828,7 @@ export namespace Prisma {
     id?: UuidFilter<"Phone"> | string
     value?: StringFilter<"Phone"> | string
     scope?: EnumScopeFilter<"Phone"> | $Enums.Scope
-    subEmailsUserId?: StringNullableFilter<"Phone"> | string | null
+    subPhonesUserId?: UuidNullableFilter<"Phone"> | string | null
   }
 
   export type SocialLinkedsUpsertWithWhereUniqueWithoutUserInput = {
@@ -18780,8 +18876,8 @@ export namespace Prisma {
     AND?: RelationScalarWhereInput | RelationScalarWhereInput[]
     OR?: RelationScalarWhereInput[]
     NOT?: RelationScalarWhereInput | RelationScalarWhereInput[]
-    sourceUserId?: StringFilter<"Relation"> | string
-    targetUserId?: StringFilter<"Relation"> | string
+    sourceUserId?: UuidFilter<"Relation"> | string
+    targetUserId?: UuidFilter<"Relation"> | string
     type?: EnumRelationTypeFilter<"Relation"> | $Enums.RelationType
     status?: EnumStatusFilter<"Relation"> | $Enums.Status
     scope?: EnumScopeFilter<"Relation"> | $Enums.Scope
@@ -18825,8 +18921,8 @@ export namespace Prisma {
     AND?: FriendshipScalarWhereInput | FriendshipScalarWhereInput[]
     OR?: FriendshipScalarWhereInput[]
     NOT?: FriendshipScalarWhereInput | FriendshipScalarWhereInput[]
-    requesterId?: StringFilter<"Friendship"> | string
-    addresseeId?: StringFilter<"Friendship"> | string
+    requesterId?: UuidFilter<"Friendship"> | string
+    addresseeId?: UuidFilter<"Friendship"> | string
     status?: EnumStatusFilter<"Friendship"> | $Enums.Status
     createdAt?: DateTimeFilter<"Friendship"> | Date | string
     updatedAt?: DateTimeFilter<"Friendship"> | Date | string
@@ -18869,7 +18965,7 @@ export namespace Prisma {
     OR?: PostScalarWhereInput[]
     NOT?: PostScalarWhereInput | PostScalarWhereInput[]
     id?: StringFilter<"Post"> | string
-    authorId?: StringFilter<"Post"> | string
+    authorId?: UuidFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updateAt?: DateTimeFilter<"Post"> | Date | string
     scope?: EnumScopeFilter<"Post"> | $Enums.Scope
@@ -20182,6 +20278,7 @@ export namespace Prisma {
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
   }
@@ -20208,6 +20305,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
@@ -20222,6 +20320,7 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
@@ -20234,6 +20333,7 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
@@ -20244,6 +20344,7 @@ export namespace Prisma {
     postId: string
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
   }
@@ -20258,6 +20359,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
@@ -20272,6 +20374,7 @@ export namespace Prisma {
     postId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
@@ -20284,6 +20387,7 @@ export namespace Prisma {
     postId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
@@ -20309,7 +20413,7 @@ export namespace Prisma {
   export type EmailCreateManySubEmailsUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
   }
 
   export type PhoneCreateManySubPhonesUserInput = {
@@ -20371,6 +20475,7 @@ export namespace Prisma {
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
+    deletedAt?: Date | string | null
     updateHistories?: CommentCreateupdateHistoriesInput | string[]
     status: $Enums.CommentStatus
   }
@@ -20570,6 +20675,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
@@ -20584,6 +20690,7 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
@@ -20596,6 +20703,7 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateHistories?: CommentUpdateupdateHistoriesInput | string[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
