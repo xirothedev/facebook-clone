@@ -15333,7 +15333,7 @@ export namespace Prisma {
   export type PhoneCreateInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     primaryPhoneUser?: UserCreateNestedOneWithoutPrimaryPhoneInput
     subPhonesUser?: UserCreateNestedOneWithoutSubPhonesInput
   }
@@ -15341,7 +15341,7 @@ export namespace Prisma {
   export type PhoneUncheckedCreateInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     subPhonesUserId?: string | null
     primaryPhoneUser?: UserUncheckedCreateNestedOneWithoutPrimaryPhoneInput
   }
@@ -15365,7 +15365,7 @@ export namespace Prisma {
   export type PhoneCreateManyInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     subPhonesUserId?: string | null
   }
 
@@ -18473,14 +18473,14 @@ export namespace Prisma {
   export type PhoneCreateWithoutPrimaryPhoneUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     subPhonesUser?: UserCreateNestedOneWithoutSubPhonesInput
   }
 
   export type PhoneUncheckedCreateWithoutPrimaryPhoneUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     subPhonesUserId?: string | null
   }
 
@@ -18492,14 +18492,14 @@ export namespace Prisma {
   export type PhoneCreateWithoutSubPhonesUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     primaryPhoneUser?: UserCreateNestedOneWithoutPrimaryPhoneInput
   }
 
   export type PhoneUncheckedCreateWithoutSubPhonesUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
     primaryPhoneUser?: UserUncheckedCreateNestedOneWithoutPrimaryPhoneInput
   }
 
@@ -20419,7 +20419,7 @@ export namespace Prisma {
   export type PhoneCreateManySubPhonesUserInput = {
     id?: string
     value: string
-    scope: $Enums.Scope
+    scope?: $Enums.Scope
   }
 
   export type SocialLinkedsCreateManyUserInput = {

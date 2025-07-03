@@ -198,7 +198,7 @@ model Email {
 model Phone {
   id    String @id @default(uuid()) @db.Uuid
   value String
-  scope Scope
+  scope Scope  @default(EVERYONE)
 
   subPhonesUserId  String? @db.Uuid
   primaryPhoneUser User?   @relation("PrimaryPhone")
