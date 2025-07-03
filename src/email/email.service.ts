@@ -3,17 +3,10 @@ import { ConfigService } from "@nestjs/config";
 import { existsSync, readFileSync } from 'fs';
 import * as nodemailer from 'nodemailer';
 import { join } from 'path';
-import { v4 as uuidv4 } from 'uuid';
-import Redis from 'ioredis';
 
-const redis = new Redis({
-  host: process.env.REDIS_HOST,
-  port: Number(process.env.REDIS_PORT),
-  password: process.env.REDIS_PASSWORD,
-});
 @Injectable()
 export class EmailService {
-    private transporter
+    private transporter: nodemailer.Transporter
 
     constructor(private config: ConfigService) {
         this.transporter = nodemailer.createTransport({
@@ -36,7 +29,7 @@ export class EmailService {
             const source = readFileSync(filePath, 'utf-8');
             const subject = "Verify your account - Facebook Service";
 
-            const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+            const baseUrl = process.env.BASE_URL || 'http://localhost:4000';
             const verifyLink = `${baseUrl}/auth/verifying-account?email=${encodeURIComponent(toEmail)}&token=${encodeURIComponent(token)}`;
 
             const verificationCode = token.substring(0, 6).toUpperCase();
@@ -93,7 +86,7 @@ export class EmailService {
             const subject = "Reset your account - Facebook Service";
 
             const verificationCode = token.substring(0, 6).toUpperCase();
-            const displayName = toEmail.split('@')[0];
+            // const displayName = toEmail.split('@')[0];
 
             const html = source.replace(/{{CODE_HERE}}/g, verificationCode)
 
@@ -128,9 +121,9 @@ export class EmailService {
             const source = readFileSync(filePath, 'utf8')
             const subject = "Did you just change your password?"
 
-            const token = uuidv4();
-            const redisKey = `recovery:${token}`;
-            await redis.set(redisKey, toEmail, 'EX', 60 * 60 * 24);
+            // const token = uuidv4();
+            // const redisKey = `recovery:${token}`;
+            // await redis.set(redisKey, toEmail, 'EX', 60 * 60 * 24);
 
 
             const linkCallbackAccount = ''

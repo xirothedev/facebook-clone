@@ -15591,19 +15591,19 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    profileId?: string
     primaryEmailId?: string
     primaryPhoneId?: string
+    username?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    profileId?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updateAt?: DateTimeFilter<"User"> | Date | string
     status?: EnumStatusAccountFilter<"User"> | $Enums.StatusAccount
     flags?: EnumUserFlagNullableListFilter<"User">
     hashedPassword?: StringFilter<"User"> | string
     displayName?: StringFilter<"User"> | string
-    username?: StringNullableFilter<"User"> | string | null
     gender?: EnumGenderFilter<"User"> | $Enums.Gender
     pronoun?: StringNullableFilter<"User"> | string | null
     birthday?: DateTimeFilter<"User"> | Date | string
@@ -15626,7 +15626,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     reactions?: ReactionListRelationFilter
     code?: CodeListRelationFilter
-  }, "id" | "primaryEmailId" | "primaryPhoneId">
+  }, "id" | "profileId" | "primaryEmailId" | "primaryPhoneId" | "username">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder

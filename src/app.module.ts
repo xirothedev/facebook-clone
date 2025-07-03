@@ -14,6 +14,7 @@ import { join } from 'node:path'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { JwtModule } from '@nestjs/jwt'
 import { HttpModule } from '@nestjs/axios'
+import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { HttpModule } from '@nestjs/axios'
     UsersModule,
     PostsModule,
     MediaModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],
