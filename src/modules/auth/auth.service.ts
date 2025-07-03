@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { RegisterUser } from './dto/register-auth.dto';
-const argon2 = require('argon2');
+import { hash } from "argon2"
 
 @Injectable()
 export class AuthService {
@@ -11,12 +11,16 @@ export class AuthService {
   ) { }
 
   private async hashingPassword(password: string): Promise<string> {
-    return await argon2.hash(password)
+    return await hash(password)
   }
 
   private parseDate(input: string): Date {
     const [day, month, year] = input.split('/');
-    return new Date(`${year}-${month}-${day}T00:00:00.000Z`);
+    const today = new Date()
+    today.setDate(+day)
+    today.setMonth(+month - 1) // 0 - 11
+    today.setFullYear(+year)
+    return new Date();
   }
 
   // đăng kí cơ bản ban đầu là như này 

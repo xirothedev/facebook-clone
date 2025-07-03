@@ -1,20 +1,12 @@
-<<<<<<< HEAD
-import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
+import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-=======
-import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/register-auth.dto';
->>>>>>> 3e6d858 (feat: update Prisma schema to use UUID for user and email identifiers)
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
 
-<<<<<<< HEAD
   @Post('login')
   async login(@Req() req, @Res() res) {
   // const token = this.authService.login(req.user);
@@ -32,6 +24,4 @@ export class AuthController {
   getProfile(@Req() req) {
     return req.user;
   }
-=======
->>>>>>> 3e6d858 (feat: update Prisma schema to use UUID for user and email identifiers)
 }
