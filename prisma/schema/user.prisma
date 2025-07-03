@@ -3,6 +3,7 @@ model User {
   profileId String     
   createdAt DateTime   @default(now())
   updateAt  DateTime   @updatedAt
+  status    StatusAccount @default(ACTIVE)
   flags     UserFlag[]
 
   // email
@@ -180,4 +181,12 @@ enum Platform {
   VK
   OK
   OCULUS
+}
+
+enum StatusAccount {
+  ACTIVE
+  DISABLE       //Bị khóa do vi phạm chính sách
+  RESTRICTED    //Bị hạn chế tính năng
+  CHECKPOINT    //Cần xác minh danh tính
+  BANNED        //	Khóa vĩnh viễn
 }

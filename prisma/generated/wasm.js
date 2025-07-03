@@ -172,6 +172,7 @@ exports.Prisma.UserScalarFieldEnum = {
   profileId: 'profileId',
   createdAt: 'createdAt',
   updateAt: 'updateAt',
+  status: 'status',
   flags: 'flags',
   primaryEmailId: 'primaryEmailId',
   primaryPhoneId: 'primaryPhoneId',
@@ -276,6 +277,14 @@ exports.CommentStatus = exports.$Enums.CommentStatus = {
   HIDDEN: 'HIDDEN',
   DELETED: 'DELETED',
   PENDING: 'PENDING'
+};
+
+exports.StatusAccount = exports.$Enums.StatusAccount = {
+  ACTIVE: 'ACTIVE',
+  DISABLE: 'DISABLE',
+  RESTRICTED: 'RESTRICTED',
+  CHECKPOINT: 'CHECKPOINT',
+  BANNED: 'BANNED'
 };
 
 exports.Gender = exports.$Enums.Gender = {
