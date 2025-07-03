@@ -14,7 +14,9 @@ export class EmailStrategy{
         const exitingUser = await this.authService.validate(valuePrimaryEmail)
 
         if(exitingUser){
-            await this.emailService.sendResetPasswordAccount(valuePrimaryEmail,Math.floor(100000 + Math.random() * 900000).toString())
+            const token = Math.floor(100000 + Math.random() * 900000).toString()
+            await this.authService.handleAfterRegisterAvailableAccount(exitingUser.id,token)
+            await this.emailService.sendResetPasswordAccount(valuePrimaryEmail,token)
             throw new ForbiddenException('Account is active')
         }
     }

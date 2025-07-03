@@ -3,7 +3,14 @@ import { ConfigService } from "@nestjs/config";
 import { existsSync, readFileSync } from 'fs';
 import * as nodemailer from 'nodemailer';
 import { join } from 'path';
+import { v4 as uuidv4 } from 'uuid';
+import Redis from 'ioredis';
 
+const redis = new Redis({
+  host: process.env.REDIS_HOST,
+  port: Number(process.env.REDIS_PORT),
+  password: process.env.REDIS_PASSWORD,
+});
 @Injectable()
 export class EmailService {
     private transporter
@@ -73,10 +80,10 @@ export class EmailService {
         }
     }
 
-    async sendResetPasswordAccount(toEmail: string, token: string){
-        try{
+    async sendResetPasswordAccount(toEmail: string, token: string) {
+        try {
 
-            const filePath = join(__dirname, 'templates', 'sendResetPassword.html');
+            const filePath = join(__dirname, 'templates', 'sendResetPasswordAfterRegisterAvailableAccount.html');
 
             if (!existsSync(filePath)) {
                 throw new Error(`Template not found: ${filePath}`);
@@ -103,10 +110,49 @@ export class EmailService {
                 success: true,
                 messageId: info.messageId
             }
-            
-        } catch(error){
+
+        } catch (error) {
             console.error('Error sending email:', error);
             throw new Error(`Cannot send this email: ${error.message}`);
+        }
+    }
+
+    async sendNotificationResetPassword(toEmail: string) {
+        try {
+            const filePath = join(__dirname, 'templates', 'notificationResetPassword.html')
+
+            if (!existsSync(filePath)) {
+                throw new Error(`Template not found: ${filePath}`)
+            }
+
+            const source = readFileSync(filePath, 'utf8')
+            const subject = "Did you just change your password?"
+
+            const token = uuidv4();
+            const redisKey = `recovery:${token}`;
+            await redis.set(redisKey, toEmail, 'EX', 60 * 60 * 24);
+
+
+            const linkCallbackAccount = ''
+
+            const html = source.replace(/{{Link_here}}/g, linkCallbackAccount)
+
+            const mailOptions = {
+                from: `"Facebook Accounts <${process.env.EMAIL_USER}>`,
+                to: toEmail,
+                subject,
+                html
+            }
+
+            const info = await this.transporter.sendMail(mailOptions)
+
+            return {
+                success: true,
+                messageId: info.messageId
+            }
+        } catch (error) {
+            console.error("Error sending email:", error)
+            throw new Error(`Cannot send this email ${error.message}`)
         }
     }
 }

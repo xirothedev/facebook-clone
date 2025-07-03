@@ -227,6 +227,15 @@ exports.Prisma.SocialLinkedsScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.CodeScalarFieldEnum = {
+  token: 'token',
+  expiresAt: 'expiresAt',
+  type: 'type',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -328,6 +337,12 @@ exports.Platform = exports.$Enums.Platform = {
   OCULUS: 'OCULUS'
 };
 
+exports.TypeCode = exports.$Enums.TypeCode = {
+  VERIFICATION: 'VERIFICATION',
+  RESETPASSWORD: 'RESETPASSWORD',
+  REACTIVE: 'REACTIVE'
+};
+
 exports.Prisma.ModelName = {
   Media: 'Media',
   Post: 'Post',
@@ -338,7 +353,8 @@ exports.Prisma.ModelName = {
   Relation: 'Relation',
   Email: 'Email',
   Phone: 'Phone',
-  SocialLinkeds: 'SocialLinkeds'
+  SocialLinkeds: 'SocialLinkeds',
+  Code: 'Code'
 };
 
 /**

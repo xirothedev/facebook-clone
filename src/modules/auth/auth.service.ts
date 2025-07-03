@@ -1,9 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { RegisterUser } from './dto/register-auth.dto';
 import { hash } from "argon2"
 import { EmailService } from 'src/email/email.service';
 import { TokenService } from './token.service';
+import { ChangePassword } from './dto/change-pasword-auth.dto';
+
+const MAXINUM_AVAILABLE_TIME = 5 * 60_000
 
 @Injectable()
 export class AuthService {
@@ -70,6 +73,53 @@ export class AuthService {
       msg: 'Register successful',
       newUser,
       '@timestamp': new Date().toISOString(),
+    }
+  }
+
+  // handle after register but account is available , using the token to change the password
+  async handleAfterRegisterAvailableAccount(userId: string, token: string) {
+    await this.prisma.code.upsert({
+      where: { id: { type: "VERIFICATION", userId: userId } },
+      update: {
+        token: token,
+        expiresAt: new Date(Date.now() + MAXINUM_AVAILABLE_TIME)
+      },
+      create: {
+        type: "VERIFICATION",
+        token: token,
+        userId: userId,
+        expiresAt: new Date(Date.now() + MAXINUM_AVAILABLE_TIME)
+      }
+    })
+  }
+
+  // change password with code 
+  async changePasswordWithCode(data: ChangePassword) {
+    const code = await this.prisma.code.findFirst({
+      where: { userId: data.userId, type: "VERIFICATION" }
+    })
+
+    if (!code) {
+      throw new NotFoundException('Code is not available or expired')
+    }
+
+    if (data.token !== code.token) {
+      throw new ForbiddenException('Code does not matched')
+    }
+
+    const user = await this.prisma.user.update({
+      where: { id: data.userId },
+      data: {
+        hashedPassword: await this.hashingPassword(data.newPassword),
+        code: { delete: { id: { type: "VERIFICATION", userId: data.userId } } }
+      }
+    })
+
+    await this.emailService.sendNotificationResetPassword(data.email)
+
+    return {
+      message: 'Change password successful',
+      '@timestamp': new Date().toISOString()
     }
   }
 

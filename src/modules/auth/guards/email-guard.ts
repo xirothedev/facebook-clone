@@ -9,7 +9,7 @@ import { EmailStrategy } from '../strategies/email.strategy';
 
 @Injectable()
 export class EmailGuard implements CanActivate {
-  constructor(private readonly emailStrategy: EmailStrategy) {}
+  constructor( private readonly emailStrategy: EmailStrategy ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
@@ -18,6 +18,7 @@ export class EmailGuard implements CanActivate {
     if (!valuePrimaryEmail ) throw new BadRequestException('Email is necessary');
 
     await this.emailStrategy.validate(valuePrimaryEmail);
+
 
     return true;
   }
