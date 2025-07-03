@@ -172,6 +172,7 @@ exports.Prisma.UserScalarFieldEnum = {
   profileId: 'profileId',
   createdAt: 'createdAt',
   updateAt: 'updateAt',
+  status: 'status',
   flags: 'flags',
   primaryEmailId: 'primaryEmailId',
   primaryPhoneId: 'primaryPhoneId',
@@ -227,6 +228,15 @@ exports.Prisma.SocialLinkedsScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.CodeScalarFieldEnum = {
+  token: 'token',
+  expiresAt: 'expiresAt',
+  type: 'type',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -267,6 +277,14 @@ exports.CommentStatus = exports.$Enums.CommentStatus = {
   HIDDEN: 'HIDDEN',
   DELETED: 'DELETED',
   PENDING: 'PENDING'
+};
+
+exports.StatusAccount = exports.$Enums.StatusAccount = {
+  ACTIVE: 'ACTIVE',
+  DISABLE: 'DISABLE',
+  RESTRICTED: 'RESTRICTED',
+  CHECKPOINT: 'CHECKPOINT',
+  BANNED: 'BANNED'
 };
 
 exports.Gender = exports.$Enums.Gender = {
@@ -328,6 +346,12 @@ exports.Platform = exports.$Enums.Platform = {
   OCULUS: 'OCULUS'
 };
 
+exports.TypeCode = exports.$Enums.TypeCode = {
+  VERIFICATION: 'VERIFICATION',
+  RESETPASSWORD: 'RESETPASSWORD',
+  REACTIVE: 'REACTIVE'
+};
+
 exports.Prisma.ModelName = {
   Media: 'Media',
   Post: 'Post',
@@ -338,7 +362,8 @@ exports.Prisma.ModelName = {
   Relation: 'Relation',
   Email: 'Email',
   Phone: 'Phone',
-  SocialLinkeds: 'SocialLinkeds'
+  SocialLinkeds: 'SocialLinkeds',
+  Code: 'Code'
 };
 
 /**
