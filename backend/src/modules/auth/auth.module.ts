@@ -7,12 +7,11 @@ import { AuthService } from './auth.service';
 import { TokenService } from './token.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { LoginAttemptService } from './loginAttempt.service';
 
 @Module({
   imports: [
-    EmailModule,
-    RedisModule,
-    ConfigModule,
+    EmailModule,RedisModule,ConfigModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -23,7 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, TokenService],
+  providers: [AuthService, JwtStrategy, TokenService, LoginAttemptService],
   exports: [AuthService],
 })
 export class AuthModule {}

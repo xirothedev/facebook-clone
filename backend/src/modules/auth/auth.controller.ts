@@ -1,13 +1,12 @@
 import { Cookies } from '@/common/decorators/cookie.decorator';
+import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
 import { Body, Controller, Delete, Get, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from './auth.service';
-import { ChangePasswordDto } from './dto/change-password.dto';
+import { ChangePasswordDto, ForgotPasswordDto } from './dto/change-password.dto';
 import { LoginAuth } from './dto/login-auth.dto';
 import { RegisterUser } from './dto/register-auth.dto';
-import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
-import { ExtractJwt } from 'passport-jwt';
 
 
 @Controller('auth')
@@ -42,6 +41,16 @@ export class AuthController {
   @Delete("logout")
   async logout( @Res({ passthrough: true }) res: Response, @Cookies('session_id') sessionId?: string){
     return this.authService.logout(res,sessionId)
+  }
+
+  @Get('forgot-password')
+  async forgotPassword(@Query("email") email: string) {
+    return this.authService.forgotPassword(email)
+  }
+
+  @Patch('verify-token-forgot-password')
+  async verifyTokenForgotPassword(@Body() data: ForgotPasswordDto ) {
+    return this.authService.verifyTokenForgotPassword(data)
   }
 
   // test
