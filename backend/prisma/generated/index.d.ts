@@ -2145,6 +2145,7 @@ export namespace Prisma {
     comments: number
     reactions: number
     code: number
+    session: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2159,6 +2160,7 @@ export namespace Prisma {
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
     reactions?: boolean | UserCountOutputTypeCountReactionsArgs
     code?: boolean | UserCountOutputTypeCountCodeArgs
+    session?: boolean | UserCountOutputTypeCountSessionArgs
   }
 
   // Custom InputTypes
@@ -2247,6 +2249,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CodeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
 
@@ -7233,7 +7242,7 @@ export namespace Prisma {
       comments: Prisma.$CommentPayload<ExtArgs>[]
       reactions: Prisma.$ReactionPayload<ExtArgs>[]
       code: Prisma.$CodePayload<ExtArgs>[]
-      session: Prisma.$SessionPayload<ExtArgs> | null
+      session: Prisma.$SessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7663,7 +7672,7 @@ export namespace Prisma {
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reactions<T extends User$reactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     code<T extends User$codeArgs<ExtArgs> = {}>(args?: Subset<T, User$codeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    session<T extends User$sessionArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    session<T extends User$sessionArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8417,6 +8426,11 @@ export namespace Prisma {
      */
     include?: SessionInclude<ExtArgs> | null
     where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -14943,6 +14957,7 @@ export namespace Prisma {
     createdAt: Date | null
     lastLoginAt: Date | null
     refreshTokenHashed: string | null
+    deviceName: string | null
     userAgent: string | null
     ipAddress: string | null
     userId: string | null
@@ -14955,6 +14970,7 @@ export namespace Prisma {
     createdAt: Date | null
     lastLoginAt: Date | null
     refreshTokenHashed: string | null
+    deviceName: string | null
     userAgent: string | null
     ipAddress: string | null
     userId: string | null
@@ -14967,6 +14983,7 @@ export namespace Prisma {
     createdAt: number
     lastLoginAt: number
     refreshTokenHashed: number
+    deviceName: number
     userAgent: number
     ipAddress: number
     userId: number
@@ -14981,6 +14998,7 @@ export namespace Prisma {
     createdAt?: true
     lastLoginAt?: true
     refreshTokenHashed?: true
+    deviceName?: true
     userAgent?: true
     ipAddress?: true
     userId?: true
@@ -14993,6 +15011,7 @@ export namespace Prisma {
     createdAt?: true
     lastLoginAt?: true
     refreshTokenHashed?: true
+    deviceName?: true
     userAgent?: true
     ipAddress?: true
     userId?: true
@@ -15005,6 +15024,7 @@ export namespace Prisma {
     createdAt?: true
     lastLoginAt?: true
     refreshTokenHashed?: true
+    deviceName?: true
     userAgent?: true
     ipAddress?: true
     userId?: true
@@ -15090,6 +15110,7 @@ export namespace Prisma {
     createdAt: Date
     lastLoginAt: Date | null
     refreshTokenHashed: string | null
+    deviceName: string | null
     userAgent: string | null
     ipAddress: string | null
     userId: string
@@ -15119,6 +15140,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastLoginAt?: boolean
     refreshTokenHashed?: boolean
+    deviceName?: boolean
     userAgent?: boolean
     ipAddress?: boolean
     userId?: boolean
@@ -15132,6 +15154,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastLoginAt?: boolean
     refreshTokenHashed?: boolean
+    deviceName?: boolean
     userAgent?: boolean
     ipAddress?: boolean
     userId?: boolean
@@ -15145,6 +15168,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastLoginAt?: boolean
     refreshTokenHashed?: boolean
+    deviceName?: boolean
     userAgent?: boolean
     ipAddress?: boolean
     userId?: boolean
@@ -15158,13 +15182,14 @@ export namespace Prisma {
     createdAt?: boolean
     lastLoginAt?: boolean
     refreshTokenHashed?: boolean
+    deviceName?: boolean
     userAgent?: boolean
     ipAddress?: boolean
     userId?: boolean
     revoked?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "expiresAt" | "createdAt" | "lastLoginAt" | "refreshTokenHashed" | "userAgent" | "ipAddress" | "userId" | "revoked", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "expiresAt" | "createdAt" | "lastLoginAt" | "refreshTokenHashed" | "deviceName" | "userAgent" | "ipAddress" | "userId" | "revoked", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -15186,6 +15211,7 @@ export namespace Prisma {
       createdAt: Date
       lastLoginAt: Date | null
       refreshTokenHashed: string | null
+      deviceName: string | null
       userAgent: string | null
       ipAddress: string | null
       userId: string
@@ -15619,6 +15645,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Session", 'DateTime'>
     readonly lastLoginAt: FieldRef<"Session", 'DateTime'>
     readonly refreshTokenHashed: FieldRef<"Session", 'String'>
+    readonly deviceName: FieldRef<"Session", 'String'>
     readonly userAgent: FieldRef<"Session", 'String'>
     readonly ipAddress: FieldRef<"Session", 'String'>
     readonly userId: FieldRef<"Session", 'String'>
@@ -16219,6 +16246,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     lastLoginAt: 'lastLoginAt',
     refreshTokenHashed: 'refreshTokenHashed',
+    deviceName: 'deviceName',
     userAgent: 'userAgent',
     ipAddress: 'ipAddress',
     userId: 'userId',
@@ -16807,7 +16835,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     reactions?: ReactionListRelationFilter
     code?: CodeListRelationFilter
-    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    session?: SessionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -16844,7 +16872,7 @@ export namespace Prisma {
     comments?: CommentOrderByRelationAggregateInput
     reactions?: ReactionOrderByRelationAggregateInput
     code?: CodeOrderByRelationAggregateInput
-    session?: SessionOrderByWithRelationInput
+    session?: SessionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -16884,7 +16912,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     reactions?: ReactionListRelationFilter
     code?: CodeListRelationFilter
-    session?: XOR<SessionNullableScalarRelationFilter, SessionWhereInput> | null
+    session?: SessionListRelationFilter
   }, "id" | "profileId" | "primaryEmailId" | "primaryPhoneId" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -17288,6 +17316,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Session"> | Date | string
     lastLoginAt?: DateTimeNullableFilter<"Session"> | Date | string | null
     refreshTokenHashed?: StringNullableFilter<"Session"> | string | null
+    deviceName?: StringNullableFilter<"Session"> | string | null
     userAgent?: StringNullableFilter<"Session"> | string | null
     ipAddress?: StringNullableFilter<"Session"> | string | null
     userId?: UuidFilter<"Session"> | string
@@ -17301,6 +17330,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastLoginAt?: SortOrderInput | SortOrder
     refreshTokenHashed?: SortOrderInput | SortOrder
+    deviceName?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     ipAddress?: SortOrderInput | SortOrder
     userId?: SortOrder
@@ -17318,6 +17348,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Session"> | Date | string
     lastLoginAt?: DateTimeNullableFilter<"Session"> | Date | string | null
     refreshTokenHashed?: StringNullableFilter<"Session"> | string | null
+    deviceName?: StringNullableFilter<"Session"> | string | null
     userAgent?: StringNullableFilter<"Session"> | string | null
     ipAddress?: StringNullableFilter<"Session"> | string | null
     revoked?: BoolFilter<"Session"> | boolean
@@ -17330,6 +17361,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastLoginAt?: SortOrderInput | SortOrder
     refreshTokenHashed?: SortOrderInput | SortOrder
+    deviceName?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     ipAddress?: SortOrderInput | SortOrder
     userId?: SortOrder
@@ -17348,6 +17380,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     lastLoginAt?: DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
     refreshTokenHashed?: StringNullableWithAggregatesFilter<"Session"> | string | null
+    deviceName?: StringNullableWithAggregatesFilter<"Session"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"Session"> | string | null
     ipAddress?: StringNullableWithAggregatesFilter<"Session"> | string | null
     userId?: UuidWithAggregatesFilter<"Session"> | string
@@ -17689,7 +17722,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -17724,7 +17757,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -17759,7 +17792,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -17794,7 +17827,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -18199,6 +18232,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastLoginAt?: Date | string | null
     refreshTokenHashed?: string | null
+    deviceName?: string | null
     userAgent?: string | null
     ipAddress?: string | null
     revoked?: boolean
@@ -18211,6 +18245,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastLoginAt?: Date | string | null
     refreshTokenHashed?: string | null
+    deviceName?: string | null
     userAgent?: string | null
     ipAddress?: string | null
     userId: string
@@ -18223,6 +18258,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     revoked?: BoolFieldUpdateOperationsInput | boolean
@@ -18235,6 +18271,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
@@ -18247,6 +18284,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastLoginAt?: Date | string | null
     refreshTokenHashed?: string | null
+    deviceName?: string | null
     userAgent?: string | null
     ipAddress?: string | null
     userId: string
@@ -18259,6 +18297,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     revoked?: BoolFieldUpdateOperationsInput | boolean
@@ -18270,6 +18309,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
@@ -18785,9 +18825,10 @@ export namespace Prisma {
     none?: CodeWhereInput
   }
 
-  export type SessionNullableScalarRelationFilter = {
-    is?: SessionWhereInput | null
-    isNot?: SessionWhereInput | null
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
   }
 
   export type EmailOrderByRelationAggregateInput = {
@@ -18815,6 +18856,10 @@ export namespace Prisma {
   }
 
   export type CodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19159,6 +19204,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastLoginAt?: SortOrder
     refreshTokenHashed?: SortOrder
+    deviceName?: SortOrder
     userAgent?: SortOrder
     ipAddress?: SortOrder
     userId?: SortOrder
@@ -19171,6 +19217,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastLoginAt?: SortOrder
     refreshTokenHashed?: SortOrder
+    deviceName?: SortOrder
     userAgent?: SortOrder
     ipAddress?: SortOrder
     userId?: SortOrder
@@ -19183,6 +19230,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastLoginAt?: SortOrder
     refreshTokenHashed?: SortOrder
+    deviceName?: SortOrder
     userAgent?: SortOrder
     ipAddress?: SortOrder
     userId?: SortOrder
@@ -19624,10 +19672,11 @@ export namespace Prisma {
     connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
   }
 
-  export type SessionCreateNestedOneWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput
-    connect?: SessionWhereUniqueInput
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput = {
@@ -19707,10 +19756,11 @@ export namespace Prisma {
     connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
   }
 
-  export type SessionUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput
-    connect?: SessionWhereUniqueInput
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type EnumStatusAccountFieldUpdateOperationsInput = {
@@ -19903,14 +19953,18 @@ export namespace Prisma {
     deleteMany?: CodeScalarWhereInput | CodeScalarWhereInput[]
   }
 
-  export type SessionUpdateOneWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput
-    upsert?: SessionUpsertWithoutUserInput
-    disconnect?: SessionWhereInput | boolean
-    delete?: SessionWhereInput | boolean
-    connect?: SessionWhereUniqueInput
-    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutUserInput, SessionUpdateWithoutUserInput>, SessionUncheckedUpdateWithoutUserInput>
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput = {
@@ -20067,14 +20121,18 @@ export namespace Prisma {
     deleteMany?: CodeScalarWhereInput | CodeScalarWhereInput[]
   }
 
-  export type SessionUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput
-    upsert?: SessionUpsertWithoutUserInput
-    disconnect?: SessionWhereInput | boolean
-    delete?: SessionWhereInput | boolean
-    connect?: SessionWhereUniqueInput
-    update?: XOR<XOR<SessionUpdateToOneWithWhereWithoutUserInput, SessionUpdateWithoutUserInput>, SessionUncheckedUpdateWithoutUserInput>
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSentFriendRequestsInput = {
@@ -20716,7 +20774,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -20750,7 +20808,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -20858,7 +20916,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -20892,7 +20950,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReactionUpsertWithWhereUniqueWithoutPostInput = {
@@ -20983,7 +21041,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -21017,7 +21075,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -21185,7 +21243,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -21219,7 +21277,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutCommentsInput = {
@@ -21357,7 +21415,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReactionsInput = {
@@ -21391,7 +21449,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReactionsInput = {
@@ -21501,7 +21559,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReactionsInput = {
@@ -21535,7 +21593,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutReactionsInput = {
@@ -21944,6 +22002,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastLoginAt?: Date | string | null
     refreshTokenHashed?: string | null
+    deviceName?: string | null
     userAgent?: string | null
     ipAddress?: string | null
     revoked?: boolean
@@ -21955,6 +22014,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastLoginAt?: Date | string | null
     refreshTokenHashed?: string | null
+    deviceName?: string | null
     userAgent?: string | null
     ipAddress?: string | null
     revoked?: boolean
@@ -21963,6 +22023,11 @@ export namespace Prisma {
   export type SessionCreateOrConnectWithoutUserInput = {
     where: SessionWhereUniqueInput
     create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type EmailUpsertWithoutPrimaryEmailUserInput = {
@@ -22270,37 +22335,36 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableFilter<"Code"> | Date | string | null
   }
 
-  export type SessionUpsertWithoutUserInput = {
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
     create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-    where?: SessionWhereInput
   }
 
-  export type SessionUpdateToOneWithWhereWithoutUserInput = {
-    where?: SessionWhereInput
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
     data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
   }
 
-  export type SessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type SessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    revoked?: BoolFieldUpdateOperationsInput | boolean
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: UuidFilter<"Session"> | string
+    expiresAt?: DateTimeNullableFilter<"Session"> | Date | string | null
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastLoginAt?: DateTimeNullableFilter<"Session"> | Date | string | null
+    refreshTokenHashed?: StringNullableFilter<"Session"> | string | null
+    deviceName?: StringNullableFilter<"Session"> | string | null
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    userId?: UuidFilter<"Session"> | string
+    revoked?: BoolFilter<"Session"> | boolean
   }
 
   export type UserCreateWithoutSentFriendRequestsInput = {
@@ -22334,7 +22398,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentFriendRequestsInput = {
@@ -22368,7 +22432,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentFriendRequestsInput = {
@@ -22407,7 +22471,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceivedFriendRequestsInput = {
@@ -22441,7 +22505,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceivedFriendRequestsInput = {
@@ -22491,7 +22555,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentFriendRequestsInput = {
@@ -22525,7 +22589,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceivedFriendRequestsInput = {
@@ -22570,7 +22634,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedFriendRequestsInput = {
@@ -22604,7 +22668,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSentRelationsInput = {
@@ -22638,7 +22702,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentRelationsInput = {
@@ -22672,7 +22736,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentRelationsInput = {
@@ -22711,7 +22775,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceivedRelationsInput = {
@@ -22745,7 +22809,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceivedRelationsInput = {
@@ -22795,7 +22859,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentRelationsInput = {
@@ -22829,7 +22893,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceivedRelationsInput = {
@@ -22874,7 +22938,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedRelationsInput = {
@@ -22908,7 +22972,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPrimaryEmailInput = {
@@ -22942,7 +23006,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPrimaryEmailInput = {
@@ -22976,7 +23040,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPrimaryEmailInput = {
@@ -23015,7 +23079,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubEmailsInput = {
@@ -23049,7 +23113,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubEmailsInput = {
@@ -23099,7 +23163,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPrimaryEmailInput = {
@@ -23133,7 +23197,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutSubEmailsInput = {
@@ -23178,7 +23242,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubEmailsInput = {
@@ -23212,7 +23276,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPrimaryPhoneInput = {
@@ -23246,7 +23310,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPrimaryPhoneInput = {
@@ -23280,7 +23344,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPrimaryPhoneInput = {
@@ -23319,7 +23383,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubPhonesInput = {
@@ -23353,7 +23417,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubPhonesInput = {
@@ -23403,7 +23467,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPrimaryPhoneInput = {
@@ -23437,7 +23501,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutSubPhonesInput = {
@@ -23482,7 +23546,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubPhonesInput = {
@@ -23516,7 +23580,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSocialLinkedsInput = {
@@ -23550,7 +23614,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSocialLinkedsInput = {
@@ -23584,7 +23648,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSocialLinkedsInput = {
@@ -23634,7 +23698,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSocialLinkedsInput = {
@@ -23668,7 +23732,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCodeInput = {
@@ -23702,7 +23766,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    session?: SessionCreateNestedOneWithoutUserInput
+    session?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCodeInput = {
@@ -23736,7 +23800,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    session?: SessionUncheckedCreateNestedOneWithoutUserInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCodeInput = {
@@ -23786,7 +23850,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    session?: SessionUpdateOneWithoutUserNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCodeInput = {
@@ -23820,7 +23884,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    session?: SessionUncheckedUpdateOneWithoutUserNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionInput = {
@@ -24203,6 +24267,18 @@ export namespace Prisma {
     updatedAt?: Date | string | null
   }
 
+  export type SessionCreateManyUserInput = {
+    id?: string
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    lastLoginAt?: Date | string | null
+    refreshTokenHashed?: string | null
+    deviceName?: string | null
+    userAgent?: string | null
+    ipAddress?: string | null
+    revoked?: boolean
+  }
+
   export type EmailUpdateWithoutSubEmailsUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
@@ -24465,6 +24541,42 @@ export namespace Prisma {
     type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    revoked?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

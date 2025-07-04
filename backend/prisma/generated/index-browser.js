@@ -243,6 +243,7 @@ exports.Prisma.SessionScalarFieldEnum = {
   createdAt: 'createdAt',
   lastLoginAt: 'lastLoginAt',
   refreshTokenHashed: 'refreshTokenHashed',
+  deviceName: 'deviceName',
   userAgent: 'userAgent',
   ipAddress: 'ipAddress',
   userId: 'userId',

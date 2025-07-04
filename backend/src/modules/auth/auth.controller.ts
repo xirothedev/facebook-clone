@@ -1,11 +1,13 @@
-import { Body, Controller, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from './auth.service';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { LoginAuth } from './dto/login-auth.dto';
 import { RegisterUser } from './dto/register-auth.dto';
+import { Cookies } from './decorators/cookie.decorator';
+
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -15,7 +17,7 @@ export class AuthController {
 
 
   @Post('register')
-  async registerUser(@Body()data: RegisterUser){
+  async registerUser(@Body() data: RegisterUser){
     return this.authService.registerUser(data)
   }
 
@@ -26,16 +28,24 @@ export class AuthController {
   }
 
   @Post("login")
-  async login(@Body()data: LoginAuth,res: Response){
-    return this.authService.login(data,res)
+  async login(@Body() data: LoginAuth, @Res() res: Response, @Req() req: Request) {
+    const result = await this.authService.login(data, res, req);
+    return res.json(result); // Đảm bảo trả response về cho client
   }
 
+  @Get("recovery-account")
   async recoveryAccount(@Query("email") email: string) {
     return this.authService.recoveryAccount(email)
   }
 
-  // @Patch('changePasswordWithCode')
-  // async changePasswordWithCode(@Body()data: ChangePassword){
-  //   return await this.authService.changePasswordWithCode(data)
-  // }
+  @Delete("logout")
+  async logout( @Res({ passthrough: true }) res: Response, @Cookies('session_id') sessionId?: string){
+    return this.authService.logout(res,sessionId)
+  }
+
+  // test
+  @Get('getList')
+  async getList(){
+    return await this.prismaService.user.findMany()
+  }
 }

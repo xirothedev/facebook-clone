@@ -157,7 +157,7 @@ model User {
   comments  Comment[]
   reactions Reaction[]
   code      Code[]
-  session   Session?
+  session   Session[]
 }
 
 model Friendship {
@@ -235,6 +235,7 @@ model Session {
   createdAt          DateTime  @default(now()) @db.Timestamptz
   lastLoginAt        DateTime? @default(now()) @db.Timestamptz
   refreshTokenHashed String?   @db.VarChar(255)
+  deviceName         String?
   userAgent          String?   @db.VarChar(255)
   ipAddress          String?   @db.VarChar(45)
   userId             String    @unique @db.Uuid

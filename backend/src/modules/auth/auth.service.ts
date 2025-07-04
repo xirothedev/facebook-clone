@@ -9,9 +9,11 @@ import { TokenService } from './token.service';
 import { Session, User } from 'prisma/generated';
 import { Response } from 'express'
 import { randomUUID } from 'node:crypto';
-import { CookieParseOptions } from 'cookie-parser';
+import { CookieOptions } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { verify } from 'argon2'
+import { Request } from 'express';
+import { UAParser } from 'ua-parser-js';
 const MAXINUM_AVAILABLE_TIME = 5 * 60_000
 const MIN_TIME_TO_REQUEST = 60_000
 
@@ -39,12 +41,43 @@ export class AuthService {
   async validate(email: string) {
     return await this.prismaService.user.findFirst({
       where: {
-        primaryEmail: {
-          value: email
-        }
+        primaryEmail: { value: email }
       }
     })
   }
+
+
+  async findUserById(id: string) {
+    return await this.prismaService.user.findFirst({
+      where: { id: id }
+    })
+  }
+
+  // get ip user
+  private extractIp(req: Request): string {
+    const xForwardedFor = req.headers['x-forwarded-for'] as string;
+    return xForwardedFor?.split(',')[0] || req.socket.remoteAddress || '';
+  }
+
+  // get user agent
+  private getDeviceName(userAgent: string): string {
+    const parser = new UAParser(userAgent);
+    const browser = parser.getBrowser().name || 'Unknown browser';
+    const os = parser.getOS().name || 'Unknown OS';
+    return `${browser} on ${os}`;
+  }
+
+  async detectDevice(userId: string, ip: string, deviceName: string) {
+    const lastSession = await this.prismaService.session.findFirst({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    if (!lastSession) return true;
+
+    return lastSession.deviceName !== deviceName || lastSession.ipAddress !== ip;
+  }
+
 
   async registerUser(body: RegisterUser) {
     const user = await this.prismaService.email.findFirst({ where: { value: body.email, NOT: { primaryEmailUser: null } } })
@@ -204,7 +237,7 @@ export class AuthService {
   // }
 
 
-  async createSession(userId: string, res: Response) {
+  async createSession(userId: string, res: Response, req: Request) {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
       include: {
@@ -212,6 +245,9 @@ export class AuthService {
       }
     })
 
+    const ip = this.extractIp(req) // ip user
+    const userAgent = req.headers['user-agent'] || 'Unknown'// user agent
+    const deviceName = this.getDeviceName(userAgent)
 
     const tokens = await this.tokenService.generateTokens(userId, String(user?.primaryEmail.value))
 
@@ -223,11 +259,27 @@ export class AuthService {
         session = existingSession
       } else {
         const newSessionId = randomUUID()
-        session = await this.prismaService.session.create({ data: { id: newSessionId, userId: userId } })
+        session = await this.prismaService.session.create({
+          data: {
+            id: newSessionId,
+            userId: userId,
+            ipAddress: ip,
+            userAgent,
+            deviceName
+          }
+        })
       }
     } else {
       const newSessionId = randomUUID()
-      session = await this.prismaService.session.create({ data: { id: newSessionId, userId: userId } })
+      session = await this.prismaService.session.create({
+        data: {
+          id: newSessionId,
+          userId: userId,
+          ipAddress: ip,
+          userAgent,
+          deviceName
+        }
+      })
     }
 
     res.cookie('session_id', session.id, {
@@ -236,7 +288,12 @@ export class AuthService {
 
     await this.tokenService.storeRefreshToken(userId, tokens.refreshToken, sessionId)
 
-    const cookieOptions = this.configService.getOrThrow<CookieParseOptions>('cookie')
+    const cookieOptions: CookieOptions = {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+      path: '/',
+    }
     res
       .cookie('refresh_token', tokens.refreshToken, {
         ...cookieOptions,
@@ -250,25 +307,67 @@ export class AuthService {
     return { tokens, session }
   }
 
-  async login(data: any,res: Response) {
+  async login(data: any, res: Response, req: Request) {
     const user = await this.prismaService.user.findFirst({
-      where: { primaryEmail: { value: data.email } }
+      where: { primaryEmail: { value: data.email } },
+      omit: { hashedPassword: false },
+      include: { primaryEmail: true }
     })
 
-    if(!user){
+    if (!user) {
       throw new NotFoundException('User not found')
     }
 
-    const isMatch = await verify(user.hashedPassword,data.password)
+    const isMatch = await verify(user.hashedPassword, data.password)
 
-    if(!isMatch){
+    if (!isMatch) {
       throw new UnauthorizedException('Password is not matched')
     }
 
-    await this.createSession(user.id, res)
+    const ip = this.extractIp(req) // ip user
+    const userAgent = req.headers['user-agent'] || 'Unknown'// user agent
+    const deviceName = this.getDeviceName(userAgent)
+
+    const isNew = await this.detectDevice(user.id, ip, deviceName);
+
+    if (isNew) {
+      await this.emailService.sendDetectOtherDevice(user.primaryEmail.value, ip, userAgent, deviceName)
+    }
+
+    const session = await this.createSession(user.id, res, req)
+
+    const { hashedPassword, ...userWithoutPassword } = user
 
     return {
-      message: 'Login successful'
+      message: 'Login successful',
+      data: userWithoutPassword
     }
   }
+
+  async logout(res: Response, sessionId?: string) {
+
+    res.clearCookie("access_token").clearCookie("refresh_token")
+
+    const session = await this.prismaService.session.findFirst({
+      where: { id: sessionId }
+    })
+
+    // Try to get sessionId from argument or cookies
+    const sid = sessionId || res.req.cookies?.session_id;
+    if (!sid) {
+      throw new NotFoundException('Session ID is required for logout');
+    }
+
+    await this.prismaService.session.updateMany({
+      where: { id: sid, userId: session?.userId },
+      data: { refreshTokenHashed: null, revoked: true }
+    });
+
+    return {
+      message: 'Logout successful'
+    }
+  }
+
+  
+
 }
