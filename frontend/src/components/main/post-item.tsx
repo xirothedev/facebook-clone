@@ -1,43 +1,87 @@
-'use client';
-
-import Image from 'next/image';
-import { MoreHorizontal } from 'lucide-react';
+import Image from "next/image";
 
 export default function PostItem() {
-  return (
-    <div className="bg-[#242526] rounded-lg shadow p-4 mb-4 text-white">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-3">
-          <Image src="/user-avatar.jpg" alt="User" width={36} height={36} className="rounded-full" />
-          <div>
-            <p className="text-sm font-semibold">TOP Comments</p>
-            <span className="text-xs text-gray-400">3 phút trước · 🌐</span>
-          </div>
-        </div>
-        <MoreHorizontal className="cursor-pointer text-gray-400" />
-      </div>
+	return (
+		<div className="w-full mb-4 mx-auto bg-white rounded-md shadow-sm border">
+			{/* Header */}
+			<div className="flex items-start gap-3 px-4 pt-4">
+				<Image
+					src="/avatar-user.jpg"
+					alt="Page avatar"
+					width={40}
+					height={40}
+					className="rounded-full"
+				/>
+				<div>
+					<p className="text-sm font-semibold leading-tight">
+						Lê Ngọc Minh Phương
+					</p>
+					<p className="text-xs text-gray-500">13 giờ · 🌐</p>
+				</div>
+				<div className="ml-auto text-gray-500 cursor-pointer">⋯</div>
+			</div>
 
-      {/* Caption */}
-      <p className="text-sm mb-2">
-        Ai tài trợ cho ông áo xanh kia đôi dép khác đi. Đang xúc động mà dép cứ tuột hoài zậy 🤣🤣
-      </p>
+			{/* Caption */}
+			<p className="px-4 py-2 text-sm">Gu tui trai artist</p>
 
-      {/* Video */}
-      <div className="rounded-lg overflow-hidden max-h-[400px]">
-        <video controls className="w-full">
-          <source src="/sample-video.mp4" type="video/mp4" />
-          <track
-            kind="captions"
-            src="/sample-video-captions.vtt"
-            srcLang="vi"
-            label="Vietnamese"
-            default
-          />
-          {/* Fallback text for browsers that do not support the video element */}
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-  );
+			{/* Main Image */}
+			<div className="relative w-auto h-[750px]">
+				<Image
+					src="/post-image.jpg"
+					alt="Post content"
+					fill
+					className="object-contain rounded-b-md"
+				/>
+			</div>
+
+			{/* Reaction Summary */}
+			<div className="flex items-center px-4 py-2 text-sm text-gray-600">
+				<div className="flex items-center gap-1">
+					<div className="w-5 h-5 bg-blue-600 rounded-full text-white text-xs flex items-center justify-center">
+						👍
+					</div>
+					<div className="w-5 h-5 bg-pink-500 rounded-full text-white text-xs flex items-center justify-center -ml-1">
+						❤️
+					</div>
+					<span className="ml-2">4,6K</span>
+				</div>
+				<div className="ml-auto">43 bình luận · 1 lượt chia sẻ</div>
+			</div>
+
+			<hr />
+
+			{/* Actions */}
+			<div className="flex justify-between px-4 py-1 text-sm text-gray-600">
+				<button
+					type="button"
+					className="flex items-center gap-2 hover:bg-gray-100 w-full justify-center py-2 rounded-md"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="currentColor"
+						viewBox="0 0 24 24"
+						className="w-5 h-5"
+						aria-label="Like"
+						role="img"
+					>
+						<title>Thích</title>
+						<path d="M9 22H5a2 2 0 0 1-2-2v-7h6v9zm-4-2h2v-5H5v5zM23 11.5c0-.6-.4-1-1-1h-6V6a2 2 0 0 0-2-2h-1.3l.3-1.2v-.2a1 1 0 0 0-1-1h-2.2a1 1 0 0 0-1 .8L8.1 6.6l-.1.4v11h9.4c.9 0 1.7-.6 1.9-1.4l1.6-6.3v-.1z" />
+					</svg>
+					Thích
+				</button>
+				<button
+					type="button"
+					className="flex items-center gap-2 hover:bg-gray-100 w-full justify-center py-2 rounded-md"
+				>
+					💬 Bình luận
+				</button>
+				<button
+					type="button"
+					className="flex items-center gap-2 hover:bg-gray-100 w-full justify-center py-2 rounded-md"
+				>
+					🔗 Chia sẻ
+				</button>
+			</div>
+		</div>
+	);
 }

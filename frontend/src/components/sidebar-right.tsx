@@ -1,5 +1,8 @@
 "use client";
 
+import { Ellipsis, Search } from "lucide-react";
+import { ScrollArea } from "./ui/scroll-area";
+import Link from "next/link";
 import Image from "next/image";
 
 const friendsOnline = [
@@ -13,74 +16,57 @@ const friendsOnline = [
 
 export default function SidebarRight() {
 	return (
-		<aside className="hidden xl:block w-[350px] pt-16 px-4 text-white h-screen overflow-y-auto bg-[#18191A]">
-			{/* Lời mời kết bạn */}
-			<section className="mb-6">
-				<h3 className="font-semibold text-sm mb-2">Lời mời kết bạn</h3>
-				<div className="flex flex-col items-center justify-between bg-[#242526] p-2 rounded">
-					<div className="flex items-center gap-2">
-						<Image
-							src="/avatar-user.jpg"
-							alt="Duy Trương Phương"
-							width={40}
-							height={40}
-							className="rounded-full"
-						/>
-						<span className="text-sm font-medium">Duy Trương Phương</span>
-					</div>
-					<div className="flex gap-1">
-						<button
-							type="button"
-							className="bg-blue-500 text-white text-xs px-2 py-1 rounded"
-						>
-							Xác nhận
-						</button>
-						<button
-							type="button"
-							className="bg-gray-600 text-white text-xs px-2 py-1 rounded"
-						>
-							Xóa
-						</button>
+		<ScrollArea className="px-2 py-4 h-[calc(100vh-56px)] flex flex-col gap-0.5 overflow-y-auto">
+			<section data-type="contact">
+				<div className="p-2 flex justify-between text-black/60">
+					<h2 className="font-semibold">Người liên hệ</h2>
+					<div className="flex gap-6">
+						<Search size={20} />
+						<Ellipsis size={20} />
 					</div>
 				</div>
-			</section>
 
-			{/* Sinh nhật */}
-			<section className="mb-6">
-				<h3 className="font-semibold text-sm mb-2">Sinh nhật</h3>
-				<div className="text-sm text-gray-300">
-					🎂 Hôm nay là sinh nhật của{" "}
-					<span className="font-semibold text-white">Nhan Nguyễn</span>.
-				</div>
-			</section>
-
-			{/* Danh sách bạn bè online */}
-			<section>
-				<h3 className="font-semibold text-sm mb-2">Người liên hệ</h3>
-				<ul className="space-y-2">
-					{friendsOnline.map((friend, i) => (
-						<li
+				{[
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+					{ url: "/avatar-user.jpg", href: "/@me", label: "Lê Thành Trung" },
+				].map(({ href, label, url }, i) => {
+					return (
+						<Link
 							key={i}
-							className="flex items-center gap-3 cursor-pointer hover:bg-[#3A3B3C] p-2 rounded"
+							href={href}
+							className="flex items-center gap-3 p-2 hover:bg-(--primary-background) rounded-md"
 						>
-							<div className="relative">
-								<Image
-									src={friend.avatar}
-									alt={friend.name}
-									width={36}
-									height={36}
-									className="rounded-full"
-								/>
-								<span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-[#18191A]" />
-							</div>
-							<div>
-								<p className="text-sm font-medium">{friend.name}</p>
-								<p className="text-xs text-gray-400">{friend.time}</p>
-							</div>
-						</li>
-					))}
-				</ul>
+							<Image
+								src={url}
+								alt="User"
+								width={36}
+								height={36}
+								className="rounded-full"
+							/>
+							<span className="font-medium">{label}</span>
+						</Link>
+					);
+				})}
 			</section>
-		</aside>
+		</ScrollArea>
 	);
 }

@@ -1,30 +1,118 @@
-'use client';
+import Image from "next/image";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
-import Image from 'next/image';
-
-const stories = [
-  { name: 'Ng Thảo', img: '/story1.jpg' },
-  { name: 'Hồng Trang Đỏ', img: '/story2.jpg' },
-  { name: 'Lê Hoàng Việt', img: '/story3.jpg' },
-  { name: 'Hứa Thị Ánh Nguyệt', img: '/story4.jpg' },
-];
-
-export default function StoriesList() {
-  return (
-    <div className="flex overflow-x-auto gap-3 pb-2 mb-4">
-      <StoryCard name="Bạn" img="/user-avatar.jpg" isCreate />
-      {stories.map((s, i) => (
-        <StoryCard key={i} name={s.name} img={s.img} />
-      ))}
-    </div>
-  );
+interface Story {
+	id: string;
+	name: string;
+	avatarUrl: string;
+	backgroundUrl: string;
+	isMe?: boolean;
 }
 
-function StoryCard({ name, img, isCreate = false }: { name: string; img: string; isCreate?: boolean }) {
-  return (
-    <div className="min-w-[100px] h-[170px] bg-[#3A3B3C] rounded-lg overflow-hidden relative cursor-pointer">
-      <Image src={img} alt={name} fill className="object-cover" />
-      <div className="absolute bottom-0 bg-black/60 text-xs p-1 w-full text-center">{isCreate ? 'Tạo tin' : name}</div>
-    </div>
-  );
+const stories: Story[] = [
+	{
+		id: "me",
+		name: "Tạo tin",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+		isMe: true,
+	},
+	{
+		id: "1",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+	{
+		id: "2",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+	{
+		id: "3",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+	{
+		id: "4",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+	{
+		id: "5",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+	{
+		id: "6",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+	{
+		id: "7",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+	{
+		id: "8",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+	{
+		id: "9",
+		name: "Lê Thành Trung",
+		avatarUrl: "/avatar-user.jpg",
+		backgroundUrl: "/avatar-user.jpg",
+	},
+];
+
+export default function StorisList() {
+	return (
+		<ScrollArea className="w-full overflow-x-auto mb-4">
+			<div className="flex gap-3 w-max">
+				{stories.map((story) => (
+					<div
+						key={story.id}
+						className="relative w-[112px] h-[200px] rounded-xl overflow-hidden shadow-md bg-gray-200 shrink-0"
+					>
+						<Image
+							src={story.backgroundUrl}
+							alt={story.name}
+							fill
+							className="object-cover"
+						/>
+						<div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+						{/* Avatar */}
+						<div className="absolute top-2 left-2 w-9 h-9 rounded-full border-2 border-blue-500 overflow-hidden bg-white">
+							<Image
+								src={story.avatarUrl}
+								alt={story.name}
+								width={36}
+								height={36}
+							/>
+							{story.isMe && (
+								<div className="absolute inset-0 flex items-center justify-center bg-black/40 text-white font-bold text-xl">
+									+
+								</div>
+							)}
+						</div>
+
+						{/* Name */}
+						<div className="absolute bottom-2 left-2 right-2 text-white text-sm font-semibold drop-shadow">
+							{story.name}
+						</div>
+					</div>
+				))}
+			</div>
+			<ScrollBar hidden={true} orientation="horizontal" />
+		</ScrollArea>
+	);
 }
