@@ -1,3 +1,4 @@
-export interface Payload {
-  userId: string
+interface JwtPayload {
+  id: string;
+  email: string;
 }

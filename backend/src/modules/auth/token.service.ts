@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { randomInt } from 'crypto';
@@ -6,7 +6,7 @@ import { hash } from 'argon2'
 import { PrismaService } from "@/prisma/prisma.service";
 
 @Injectable()
-export class TokenService{
+export class TokenService {
 
     constructor(
         private readonly jwtService: JwtService,
@@ -56,6 +56,33 @@ export class TokenService{
                 refreshTokenHashed: hashedRefreshToken
             }
         })
+    }
+
+    async refreshToken(refreshToken: string, userId: string){
+        const user = await this.prismaService.user.findUnique({
+            where: { id: userId },
+            include: { primaryEmail: true }
+        })
+
+        if(!user){
+            throw new UnauthorizedException('User not found')
+        }
+
+        const payload = {
+            sub: userId,
+            email: user.primaryEmail.value
+        }
+
+        return {
+            accessToken: this.jwtService.signAsync(payload, {
+                secret: this.configService.getOrThrow<string>('JWT_SECRET'),
+                expiresIn: this.configService.getOrThrow<string>('JWT_EXPIRES_IN')
+            }),
+            refreshToken: this.jwtService.signAsync(payload, {
+                secret: this.configService.getOrThrow<string>('REFRESH_TOKEN_SECRET'),
+                expiresIn: this.configService.getOrThrow<string>('REFRESH_TOKEN_TIME_LIFE')
+            })
+        }
     }
 
 }

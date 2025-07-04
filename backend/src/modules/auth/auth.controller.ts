@@ -1,12 +1,14 @@
+import { Cookies } from '@/common/decorators/cookie.decorator';
 import { Body, Controller, Delete, Get, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { Request, Response } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from './auth.service';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { LoginAuth } from './dto/login-auth.dto';
 import { RegisterUser } from './dto/register-auth.dto';
-import { Cookies } from './decorators/cookie.decorator';
+import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
+import { ExtractJwt } from 'passport-jwt';
+
 
 @Controller('auth')
 export class AuthController {
@@ -15,16 +17,15 @@ export class AuthController {
     private readonly prismaService: PrismaService
   ) {}
 
-
   @Post('register')
   async registerUser(@Body() data: RegisterUser){
     return this.authService.registerUser(data)
   }
 
   @Patch("change-password")
-  @UseGuards(AuthGuard('jwt'))
-  async changePassword(@Body() data: ChangePasswordDto) {
-    return this.authService.changePassword(data)
+  @UseGuards(JwtAuthGuard)
+  async changePassword(@Body() data: ChangePasswordDto, @Req() req: Request) {
+    return this.authService.changePassword(data, req)
   }
 
   @Post("login")

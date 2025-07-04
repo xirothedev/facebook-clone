@@ -1,19 +1,16 @@
 import { PrismaService } from '@/prisma/prisma.service';
+import { RedisService } from '@/redis/redis.service';
 import { Snowflake } from '@/utils/snowflake';
 import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { argon2id, hash } from "argon2";
+import { ConfigService } from '@nestjs/config';
+import { argon2id, hash, verify } from "argon2";
+import { CookieOptions, Request, Response } from 'express';
+import { randomUUID } from 'node:crypto';
 import { EmailService } from 'src/email/email.service';
+import { UAParser } from 'ua-parser-js';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { RegisterUser } from './dto/register-auth.dto';
 import { TokenService } from './token.service';
-import { Session, User } from 'prisma/generated';
-import { Response } from 'express'
-import { randomUUID } from 'node:crypto';
-import { CookieOptions } from 'express';
-import { ConfigService } from '@nestjs/config';
-import { verify } from 'argon2'
-import { Request } from 'express';
-import { UAParser } from 'ua-parser-js';
 const MAXINUM_AVAILABLE_TIME = 5 * 60_000
 const MIN_TIME_TO_REQUEST = 60_000
 
@@ -23,17 +20,18 @@ export class AuthService {
     private readonly prismaService: PrismaService,
     private readonly emailService: EmailService,
     private readonly tokenService: TokenService,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
+    private readonly redisService: RedisService
   ) { }
 
   private async hashingPassword(password: string): Promise<string> {
     return await hash(password,
       {
         type: argon2id,
-        memoryCost: 2 ** 16, // 64 MB RAM (65536 KiB)
-        timeCost: 3, // 3 vòng lặp
-        parallelism: 1, // 1 luồng (hoặc 2 nếu server nhiều core)
-        hashLength: 32, // độ dài chuỗi hash
+        memoryCost: 2 ** 16, 
+        timeCost: 3, 
+        parallelism: 1,
+        hashLength: 32
       }
     )
   }
@@ -45,7 +43,6 @@ export class AuthService {
       }
     })
   }
-
 
   async findUserById(id: string) {
     return await this.prismaService.user.findFirst({
@@ -110,16 +107,47 @@ export class AuthService {
     }
   }
 
-  async changePassword(body: ChangePasswordDto) {
-    // kiểm tra pass cũ
+  async changePassword(data: ChangePasswordDto,req: Request) {
 
-    // lưu pass cũ vào redis
+    const MAX_TIME_SAVE = 60 * 60 * 24 * 30
 
-    // hash pass mới
+    if (!req.user?.id) {
+      throw new UnauthorizedException('User ID is missing');
+    }
 
-    // đổi trong database
+    const user = await this.prismaService.user.findFirst({
+      where: { id: req.user?.id },
+      omit: { hashedPassword: false }
+    })
 
-    return
+    if (!user || typeof user.hashedPassword !== 'string') {
+      throw new UnauthorizedException('User not found or password is missing');
+    }
+
+    const isMatch = await verify(user.hashedPassword, data.oldPassword);
+
+    if (!isMatch) {
+      throw new UnauthorizedException('Password is not matched');
+    }
+
+    await this.redisService.set(req.user?.id, data.oldPassword, MAX_TIME_SAVE);
+
+    const hashedNewPassword = await this.hashingPassword(data.newPassword)
+
+    const newUser = await this.prismaService.user.update({
+      where: { id: req.user.id },
+      data: { hashedPassword: hashedNewPassword },
+      include: { primaryEmail: true }
+    })
+
+    const { hashedPassword,...userWithoutPassword } = newUser
+
+    await this.emailService.sendNotificationResetPassword(newUser.primaryEmail.value)
+
+    return {
+      message: 'Change Password successful',
+      data: userWithoutPassword
+    }
   }
 
   async recoveryAccount(email: string) {
@@ -252,25 +280,18 @@ export class AuthService {
     const tokens = await this.tokenService.generateTokens(userId, String(user?.primaryEmail.value))
 
     const sessionId = res.req.cookies?.session_id
-    let session: Session
-    if (sessionId) {
-      const existingSession = await this.prismaService.session.findUnique({ where: { id: sessionId } })
-      if (existingSession) {
-        session = existingSession
-      } else {
-        const newSessionId = randomUUID()
-        session = await this.prismaService.session.create({
-          data: {
-            id: newSessionId,
-            userId: userId,
-            ipAddress: ip,
-            userAgent,
-            deviceName
-          }
-        })
-      }
+    let session = await this.prismaService.session.findFirst({ where: { userId } });
+    if (session) {
+      session = await this.prismaService.session.update({
+        where: { id: session.id },
+        data: {
+          ipAddress: ip,
+          userAgent,
+          deviceName
+        }
+      });
     } else {
-      const newSessionId = randomUUID()
+      const newSessionId = randomUUID();
       session = await this.prismaService.session.create({
         data: {
           id: newSessionId,
@@ -279,7 +300,7 @@ export class AuthService {
           userAgent,
           deviceName
         }
-      })
+      });
     }
 
     res.cookie('session_id', session.id, {
@@ -314,15 +335,11 @@ export class AuthService {
       include: { primaryEmail: true }
     })
 
-    if (!user) {
-      throw new NotFoundException('User not found')
-    }
+    if (!user) { throw new NotFoundException('User not found') }
 
     const isMatch = await verify(user.hashedPassword, data.password)
 
-    if (!isMatch) {
-      throw new UnauthorizedException('Password is not matched')
-    }
+    if (!isMatch) { throw new UnauthorizedException('Password is not matched') }
 
     const ip = this.extractIp(req) // ip user
     const userAgent = req.headers['user-agent'] || 'Unknown'// user agent
@@ -330,9 +347,8 @@ export class AuthService {
 
     const isNew = await this.detectDevice(user.id, ip, deviceName);
 
-    if (isNew) {
-      await this.emailService.sendDetectOtherDevice(user.primaryEmail.value, ip, userAgent, deviceName)
-    }
+    // if detected new device , send email to user
+    if (isNew) { await this.emailService.sendDetectOtherDevice(user.primaryEmail.value, ip, userAgent, deviceName) }
 
     const session = await this.createSession(user.id, res, req)
 
