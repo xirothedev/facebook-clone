@@ -121,7 +121,8 @@ export type PostStatus = (typeof PostStatus)[keyof typeof PostStatus]
 export const TypeCode: {
   VERIFICATION: 'VERIFICATION',
   RESETPASSWORD: 'RESETPASSWORD',
-  REACTIVE: 'REACTIVE'
+  REACTIVE: 'REACTIVE',
+  TWOFACODE: 'TWOFACODE'
 };
 
 export type TypeCode = (typeof TypeCode)[keyof typeof TypeCode]
@@ -13872,7 +13873,6 @@ export namespace Prisma {
   }
 
   export type CodeMinAggregateOutputType = {
-    token: string | null
     expiresAt: Date | null
     type: $Enums.TypeCode | null
     userId: string | null
@@ -13881,7 +13881,6 @@ export namespace Prisma {
   }
 
   export type CodeMaxAggregateOutputType = {
-    token: string | null
     expiresAt: Date | null
     type: $Enums.TypeCode | null
     userId: string | null
@@ -13890,7 +13889,7 @@ export namespace Prisma {
   }
 
   export type CodeCountAggregateOutputType = {
-    token: number
+    tokens: number
     expiresAt: number
     type: number
     userId: number
@@ -13901,7 +13900,6 @@ export namespace Prisma {
 
 
   export type CodeMinAggregateInputType = {
-    token?: true
     expiresAt?: true
     type?: true
     userId?: true
@@ -13910,7 +13908,6 @@ export namespace Prisma {
   }
 
   export type CodeMaxAggregateInputType = {
-    token?: true
     expiresAt?: true
     type?: true
     userId?: true
@@ -13919,7 +13916,7 @@ export namespace Prisma {
   }
 
   export type CodeCountAggregateInputType = {
-    token?: true
+    tokens?: true
     expiresAt?: true
     type?: true
     userId?: true
@@ -14001,8 +13998,8 @@ export namespace Prisma {
   }
 
   export type CodeGroupByOutputType = {
-    token: string
-    expiresAt: Date
+    tokens: string[]
+    expiresAt: Date | null
     type: $Enums.TypeCode
     userId: string
     createdAt: Date
@@ -14027,7 +14024,7 @@ export namespace Prisma {
 
 
   export type CodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    token?: boolean
+    tokens?: boolean
     expiresAt?: boolean
     type?: boolean
     userId?: boolean
@@ -14037,7 +14034,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["code"]>
 
   export type CodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    token?: boolean
+    tokens?: boolean
     expiresAt?: boolean
     type?: boolean
     userId?: boolean
@@ -14047,7 +14044,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["code"]>
 
   export type CodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    token?: boolean
+    tokens?: boolean
     expiresAt?: boolean
     type?: boolean
     userId?: boolean
@@ -14057,7 +14054,7 @@ export namespace Prisma {
   }, ExtArgs["result"]["code"]>
 
   export type CodeSelectScalar = {
-    token?: boolean
+    tokens?: boolean
     expiresAt?: boolean
     type?: boolean
     userId?: boolean
@@ -14065,7 +14062,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type CodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"token" | "expiresAt" | "type" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["code"]>
+  export type CodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tokens" | "expiresAt" | "type" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["code"]>
   export type CodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -14082,8 +14079,8 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      token: string
-      expiresAt: Date
+      tokens: string[]
+      expiresAt: Date | null
       type: $Enums.TypeCode
       userId: string
       createdAt: Date
@@ -14171,8 +14168,8 @@ export namespace Prisma {
      * // Get first 10 Codes
      * const codes = await prisma.code.findMany({ take: 10 })
      * 
-     * // Only select the `token`
-     * const codeWithTokenOnly = await prisma.code.findMany({ select: { token: true } })
+     * // Only select the `tokens`
+     * const codeWithTokensOnly = await prisma.code.findMany({ select: { tokens: true } })
      * 
      */
     findMany<T extends CodeFindManyArgs>(args?: SelectSubset<T, CodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -14216,9 +14213,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Codes and only return the `token`
-     * const codeWithTokenOnly = await prisma.code.createManyAndReturn({
-     *   select: { token: true },
+     * // Create many Codes and only return the `tokens`
+     * const codeWithTokensOnly = await prisma.code.createManyAndReturn({
+     *   select: { tokens: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -14307,9 +14304,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Codes and only return the `token`
-     * const codeWithTokenOnly = await prisma.code.updateManyAndReturn({
-     *   select: { token: true },
+     * // Update zero or more Codes and only return the `tokens`
+     * const codeWithTokensOnly = await prisma.code.updateManyAndReturn({
+     *   select: { tokens: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -14512,7 +14509,7 @@ export namespace Prisma {
    * Fields of the Code model
    */
   interface CodeFieldRefs {
-    readonly token: FieldRef<"Code", 'String'>
+    readonly tokens: FieldRef<"Code", 'String[]'>
     readonly expiresAt: FieldRef<"Code", 'DateTime'>
     readonly type: FieldRef<"Code", 'TypeCode'>
     readonly userId: FieldRef<"Code", 'String'>
@@ -16229,7 +16226,7 @@ export namespace Prisma {
 
 
   export const CodeScalarFieldEnum: {
-    token: 'token',
+    tokens: 'tokens',
     expiresAt: 'expiresAt',
     type: 'type',
     userId: 'userId',
@@ -17250,8 +17247,8 @@ export namespace Prisma {
     AND?: CodeWhereInput | CodeWhereInput[]
     OR?: CodeWhereInput[]
     NOT?: CodeWhereInput | CodeWhereInput[]
-    token?: StringFilter<"Code"> | string
-    expiresAt?: DateTimeFilter<"Code"> | Date | string
+    tokens?: StringNullableListFilter<"Code">
+    expiresAt?: DateTimeNullableFilter<"Code"> | Date | string | null
     type?: EnumTypeCodeFilter<"Code"> | $Enums.TypeCode
     userId?: UuidFilter<"Code"> | string
     createdAt?: DateTimeFilter<"Code"> | Date | string
@@ -17260,8 +17257,8 @@ export namespace Prisma {
   }
 
   export type CodeOrderByWithRelationInput = {
-    token?: SortOrder
-    expiresAt?: SortOrder
+    tokens?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
     type?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -17274,8 +17271,8 @@ export namespace Prisma {
     AND?: CodeWhereInput | CodeWhereInput[]
     OR?: CodeWhereInput[]
     NOT?: CodeWhereInput | CodeWhereInput[]
-    token?: StringFilter<"Code"> | string
-    expiresAt?: DateTimeFilter<"Code"> | Date | string
+    tokens?: StringNullableListFilter<"Code">
+    expiresAt?: DateTimeNullableFilter<"Code"> | Date | string | null
     type?: EnumTypeCodeFilter<"Code"> | $Enums.TypeCode
     userId?: UuidFilter<"Code"> | string
     createdAt?: DateTimeFilter<"Code"> | Date | string
@@ -17284,8 +17281,8 @@ export namespace Prisma {
   }, "id">
 
   export type CodeOrderByWithAggregationInput = {
-    token?: SortOrder
-    expiresAt?: SortOrder
+    tokens?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
     type?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -17299,8 +17296,8 @@ export namespace Prisma {
     AND?: CodeScalarWhereWithAggregatesInput | CodeScalarWhereWithAggregatesInput[]
     OR?: CodeScalarWhereWithAggregatesInput[]
     NOT?: CodeScalarWhereWithAggregatesInput | CodeScalarWhereWithAggregatesInput[]
-    token?: StringWithAggregatesFilter<"Code"> | string
-    expiresAt?: DateTimeWithAggregatesFilter<"Code"> | Date | string
+    tokens?: StringNullableListFilter<"Code">
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"Code"> | Date | string | null
     type?: EnumTypeCodeWithAggregatesFilter<"Code"> | $Enums.TypeCode
     userId?: UuidWithAggregatesFilter<"Code"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Code"> | Date | string
@@ -18165,8 +18162,8 @@ export namespace Prisma {
   }
 
   export type CodeCreateInput = {
-    token: string
-    expiresAt: Date | string
+    tokens?: CodeCreatetokensInput | string[]
+    expiresAt?: Date | string | null
     type: $Enums.TypeCode
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -18174,8 +18171,8 @@ export namespace Prisma {
   }
 
   export type CodeUncheckedCreateInput = {
-    token: string
-    expiresAt: Date | string
+    tokens?: CodeCreatetokensInput | string[]
+    expiresAt?: Date | string | null
     type: $Enums.TypeCode
     userId: string
     createdAt?: Date | string
@@ -18183,8 +18180,8 @@ export namespace Prisma {
   }
 
   export type CodeUpdateInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: CodeUpdatetokensInput | string[]
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18192,8 +18189,8 @@ export namespace Prisma {
   }
 
   export type CodeUncheckedUpdateInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: CodeUpdatetokensInput | string[]
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18201,8 +18198,8 @@ export namespace Prisma {
   }
 
   export type CodeCreateManyInput = {
-    token: string
-    expiresAt: Date | string
+    tokens?: CodeCreatetokensInput | string[]
+    expiresAt?: Date | string | null
     type: $Enums.TypeCode
     userId: string
     createdAt?: Date | string
@@ -18210,16 +18207,16 @@ export namespace Prisma {
   }
 
   export type CodeUpdateManyMutationInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: CodeUpdatetokensInput | string[]
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CodeUncheckedUpdateManyInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: CodeUpdatetokensInput | string[]
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19157,7 +19154,7 @@ export namespace Prisma {
   }
 
   export type CodeCountOrderByAggregateInput = {
-    token?: SortOrder
+    tokens?: SortOrder
     expiresAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -19166,7 +19163,6 @@ export namespace Prisma {
   }
 
   export type CodeMaxOrderByAggregateInput = {
-    token?: SortOrder
     expiresAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -19175,7 +19171,6 @@ export namespace Prisma {
   }
 
   export type CodeMinOrderByAggregateInput = {
-    token?: SortOrder
     expiresAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -20313,10 +20308,19 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSocialLinkedsInput, UserUpdateWithoutSocialLinkedsInput>, UserUncheckedUpdateWithoutSocialLinkedsInput>
   }
 
+  export type CodeCreatetokensInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutCodeInput = {
     create?: XOR<UserCreateWithoutCodeInput, UserUncheckedCreateWithoutCodeInput>
     connectOrCreate?: UserCreateOrConnectWithoutCodeInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type CodeUpdatetokensInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type EnumTypeCodeFieldUpdateOperationsInput = {
@@ -21971,16 +21975,16 @@ export namespace Prisma {
   }
 
   export type CodeCreateWithoutUserInput = {
-    token: string
-    expiresAt: Date | string
+    tokens?: CodeCreatetokensInput | string[]
+    expiresAt?: Date | string | null
     type: $Enums.TypeCode
     createdAt?: Date | string
     updatedAt?: Date | string | null
   }
 
   export type CodeUncheckedCreateWithoutUserInput = {
-    token: string
-    expiresAt: Date | string
+    tokens?: CodeCreatetokensInput | string[]
+    expiresAt?: Date | string | null
     type: $Enums.TypeCode
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -22327,8 +22331,8 @@ export namespace Prisma {
     AND?: CodeScalarWhereInput | CodeScalarWhereInput[]
     OR?: CodeScalarWhereInput[]
     NOT?: CodeScalarWhereInput | CodeScalarWhereInput[]
-    token?: StringFilter<"Code"> | string
-    expiresAt?: DateTimeFilter<"Code"> | Date | string
+    tokens?: StringNullableListFilter<"Code">
+    expiresAt?: DateTimeNullableFilter<"Code"> | Date | string | null
     type?: EnumTypeCodeFilter<"Code"> | $Enums.TypeCode
     userId?: UuidFilter<"Code"> | string
     createdAt?: DateTimeFilter<"Code"> | Date | string
@@ -24260,8 +24264,8 @@ export namespace Prisma {
   }
 
   export type CodeCreateManyUserInput = {
-    token: string
-    expiresAt: Date | string
+    tokens?: CodeCreatetokensInput | string[]
+    expiresAt?: Date | string | null
     type: $Enums.TypeCode
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -24520,24 +24524,24 @@ export namespace Prisma {
   }
 
   export type CodeUpdateWithoutUserInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: CodeUpdatetokensInput | string[]
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CodeUncheckedUpdateWithoutUserInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: CodeUpdatetokensInput | string[]
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CodeUncheckedUpdateManyWithoutUserInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tokens?: CodeUpdatetokensInput | string[]
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

@@ -229,7 +229,7 @@ exports.Prisma.SocialLinkedsScalarFieldEnum = {
 };
 
 exports.Prisma.CodeScalarFieldEnum = {
-  token: 'token',
+  tokens: 'tokens',
   expiresAt: 'expiresAt',
   type: 'type',
   userId: 'userId',
@@ -363,7 +363,8 @@ exports.Platform = exports.$Enums.Platform = {
 exports.TypeCode = exports.$Enums.TypeCode = {
   VERIFICATION: 'VERIFICATION',
   RESETPASSWORD: 'RESETPASSWORD',
-  REACTIVE: 'REACTIVE'
+  REACTIVE: 'REACTIVE',
+  TWOFACODE: 'TWOFACODE'
 };
 
 exports.Prisma.ModelName = {

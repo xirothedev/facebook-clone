@@ -216,8 +216,8 @@ model SocialLinkeds {
 }
 
 model Code {
-  token     String
-  expiresAt DateTime @db.Timestamptz
+  tokens    String[]
+  expiresAt DateTime? @db.Timestamptz
 
   type   TypeCode
   userId String   @db.Uuid
@@ -249,6 +249,7 @@ enum TypeCode {
   VERIFICATION
   RESETPASSWORD
   REACTIVE
+  TWOFACODE
 }
 
 enum UserFlag {

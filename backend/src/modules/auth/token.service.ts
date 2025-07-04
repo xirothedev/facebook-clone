@@ -12,19 +12,27 @@ export class TokenService {
         private readonly jwtService: JwtService,
         private readonly configService: ConfigService,
         private readonly prismaService: PrismaService
-    ){}
+    ) { }
 
-    async generateCode(){
-        return randomInt(100000,999999)
+    async generateCode() {
+        return randomInt(100000, 999999)
     }
 
-    async generateTokens(userId: string, email: string){
+    async generateTWOFACODE() {
+        const tokens: string[] = [];
+
+        for (let i = 0; i < 6; i++) { tokens.push(String(this.generateCode())) }
+
+        return tokens
+    }
+
+    async generateTokens(userId: string, email: string) {
         const payload = {
             sub: userId,
             email: email
         }
 
-        const [ accessToken, refreshToken ] = await Promise.all([
+        const [accessToken, refreshToken] = await Promise.all([
             this.jwtService.signAsync(payload, {
                 secret: this.configService.getOrThrow<string>('JWT_SECRET'),
                 expiresIn: this.configService.getOrThrow<string>('JWT_EXPIRES_IN')
@@ -38,7 +46,7 @@ export class TokenService {
         return { accessToken, refreshToken }
     }
 
-    async storeRefreshToken(userId: string, refreshToken: string, sessionId: string){
+    async storeRefreshToken(userId: string, refreshToken: string, sessionId: string) {
         const hashedRefreshToken = await hash(refreshToken)
         const user = await this.prismaService.user.findUnique({
             where: { id: userId }
@@ -58,13 +66,13 @@ export class TokenService {
         })
     }
 
-    async refreshToken(refreshToken: string, userId: string){
+    async refreshToken(refreshToken: string, userId: string) {
         const user = await this.prismaService.user.findUnique({
             where: { id: userId },
             include: { primaryEmail: true }
         })
 
-        if(!user){
+        if (!user) {
             throw new UnauthorizedException('User not found')
         }
 

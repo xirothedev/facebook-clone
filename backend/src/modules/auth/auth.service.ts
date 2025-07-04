@@ -2,7 +2,6 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { RedisService } from '@/redis/redis.service';
 import { Snowflake } from '@/utils/snowflake';
 import { ConflictException, ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { argon2id, hash, verify } from "argon2";
 import { CookieOptions, Request, Response } from 'express';
 import { randomUUID } from 'node:crypto';
@@ -10,8 +9,8 @@ import { EmailService } from 'src/email/email.service';
 import { UAParser } from 'ua-parser-js';
 import { ChangePasswordDto, ForgotPasswordDto } from './dto/change-password.dto';
 import { RegisterUser } from './dto/register-auth.dto';
-import { TokenService } from './token.service';
 import { LoginAttemptService } from './loginAttempt.service';
+import { TokenService } from './token.service';
 
 const MAXINUM_AVAILABLE_TIME = 5 * 60_000
 const MIN_TIME_TO_REQUEST = 60_000
@@ -173,12 +172,12 @@ export class AuthService {
     await this.prismaService.code.upsert({
       where: { id: { type: "VERIFICATION", userId: user.id } },
       update: {
-        token: String(token),
+        tokens: [String(token)],
         expiresAt: new Date(Date.now() + MAXINUM_AVAILABLE_TIME)
       },
       create: {
         type: "VERIFICATION",
-        token: String(token),
+        tokens: [String(token)],
         userId: user.id,
         expiresAt: new Date(Date.now() + MAXINUM_AVAILABLE_TIME)
       }
@@ -193,14 +192,14 @@ export class AuthService {
 
   async confirmRecoveryAccount(email: string, code: string, newPassword: string) {
     const exitingUser = await this.prismaService.code.findFirst({
-      where: { token: code }
+      where: { tokens: { has: code } }
     })
 
     if (exitingUser && exitingUser?.createdAt.getTime() + MIN_TIME_TO_REQUEST > Date.now()) {
       throw new ConflictException('Please wait 1 minutes before requesting again')
     }
 
-    if (exitingUser?.token !== code || exitingUser.createdAt.getTime() + MAXINUM_AVAILABLE_TIME > Date.now()) {
+    if (!exitingUser?.tokens.includes(code) || exitingUser.createdAt.getTime() + MAXINUM_AVAILABLE_TIME < Date.now()) {
       throw new UnauthorizedException('Code is not matched or expired')
     }
 
@@ -233,12 +232,12 @@ export class AuthService {
     await this.prismaService.code.upsert({
       where: { id: { type: "VERIFICATION", userId: user.id } },
       update: {
-        token: String(token),
+        tokens: [String(token)],
         expiresAt: new Date(Date.now() + MAXINUM_AVAILABLE_TIME)
       },
       create: {
         type: "VERIFICATION",
-        token: String(token),
+        tokens: [String(token)],
         userId: user.id,
         expiresAt: new Date(Date.now() + MAXINUM_AVAILABLE_TIME)
       }
@@ -260,7 +259,7 @@ export class AuthService {
       throw new NotFoundException('Code is not available or expired')
     }
 
-    if (data.token !== code.token) {
+    if (!code.tokens.includes(data.token)) {
       throw new ForbiddenException('Code does not matched')
     }
 
@@ -342,6 +341,46 @@ export class AuthService {
     return { tokens, session }
   }
 
+  async logout(res: Response, sessionId?: string) {
+
+    res.clearCookie("access_token").clearCookie("refresh_token")
+
+    const session = await this.prismaService.session.findFirst({
+      where: { id: sessionId }
+    })
+
+    // Try to get sessionId from argument or cookies
+    const sid = sessionId || res.req.cookies?.session_id;
+    if (!sid) {
+      throw new NotFoundException('Session ID is required for logout');
+    }
+
+    await this.prismaService.session.updateMany({
+      where: { id: sid, userId: session?.userId },
+      data: { refreshTokenHashed: null, revoked: true }
+    });
+
+    return {
+      message: 'Logout successful'
+    }
+  }
+
+  async createTokensTwoFA(data: any, userId: string) {
+    const tokens: string[] = await this.tokenService.generateTWOFACODE();
+
+    const code = await this.prismaService.code.upsert({
+      where: { id: { userId: userId, type: "TWOFACODE" } },
+      update: {
+        tokens: tokens
+      },
+      create: {
+        tokens: tokens,
+        type: "TWOFACODE",
+        userId: userId
+      }
+    })
+  }
+
   async login(data: any, res: Response, req: Request) {
 
     const user = await this.prismaService.user.findFirst({
@@ -380,27 +419,50 @@ export class AuthService {
     }
   }
 
-  async logout(res: Response, sessionId?: string) {
-
-    res.clearCookie("access_token").clearCookie("refresh_token")
-
-    const session = await this.prismaService.session.findFirst({
-      where: { id: sessionId }
+  async verifyTwoFACodeLogin(data: any, res: Response, req: Request) {
+    const extingUser = await this.prismaService.user.findFirst({
+      where: { primaryEmail: { value: data.email } },
+      omit: { hashedPassword: false },
+      include: { primaryEmail: true }
     })
 
-    // Try to get sessionId from argument or cookies
-    const sid = sessionId || res.req.cookies?.session_id;
-    if (!sid) {
-      throw new NotFoundException('Session ID is required for logout');
+    if (!extingUser) {
+      throw new NotFoundException('User not found')
     }
 
-    await this.prismaService.session.updateMany({
-      where: { id: sid, userId: session?.userId },
-      data: { refreshTokenHashed: null, revoked: true }
-    });
+    const isMatch = await verify(extingUser.hashedPassword, data.password)
+
+    if (!isMatch) {
+      throw new UnauthorizedException('Password is not matched')
+    }
+
+    const ip = this.extractIp(req) // ip user
+    const userAgent = req.headers['user-agent'] || 'Unknown'// user agent
+    const deviceName = this.getDeviceName(userAgent)
+
+    const isNew = await this.detectDevice(extingUser.id, ip, deviceName);
+
+    if (isNew) {
+      await this.emailService.sendDetectOtherDevice(extingUser.primaryEmail.value, ip, userAgent, deviceName)
+      // check token
+      const tokensTwoFAs = await this.prismaService.code.findMany({
+        where: { userId: extingUser.id, type: "TWOFACODE" }
+      })
+
+      let check = false
+      tokensTwoFAs.forEach(token => {
+        if (token.tokens === data.token) check = true
+      })
+
+      if (!check) {
+        throw new UnauthorizedException('Code is not matched')
+      }
+    }
+
+    await this.createSession(extingUser.id, res, req)
 
     return {
-      message: 'Logout successful'
+      message: 'Login successful'
     }
   }
 
