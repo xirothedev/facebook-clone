@@ -1,6 +1,8 @@
 import type { Locale } from "@/i18n-config";
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { unstable_ViewTransition as ViewTransition } from "react";
+
 import "../globals.css";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -27,7 +29,9 @@ export default async function RootLayout({
 
 	return (
 		<html lang={lang}>
-			<body className={`${beVietnamPro.variable} antialiased`}>{children}</body>
+			<body className={`${beVietnamPro.variable} antialiased`}>
+				<ViewTransition>{children}</ViewTransition>
+			</body>
 		</html>
 	);
 }
