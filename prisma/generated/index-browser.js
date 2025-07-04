@@ -237,6 +237,18 @@ exports.Prisma.CodeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  lastLoginAt: 'lastLoginAt',
+  refreshTokenHashed: 'refreshTokenHashed',
+  userAgent: 'userAgent',
+  ipAddress: 'ipAddress',
+  userId: 'userId',
+  revoked: 'revoked'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -284,7 +296,8 @@ exports.StatusAccount = exports.$Enums.StatusAccount = {
   DISABLE: 'DISABLE',
   RESTRICTED: 'RESTRICTED',
   CHECKPOINT: 'CHECKPOINT',
-  BANNED: 'BANNED'
+  BANNED: 'BANNED',
+  RECOVERY: 'RECOVERY'
 };
 
 exports.Gender = exports.$Enums.Gender = {
@@ -363,7 +376,8 @@ exports.Prisma.ModelName = {
   Email: 'Email',
   Phone: 'Phone',
   SocialLinkeds: 'SocialLinkeds',
-  Code: 'Code'
+  Code: 'Code',
+  Session: 'Session'
 };
 
 /**

@@ -106,16 +106,14 @@
       "html-minifier": "npm:html-minifier-terser@6.1.0"
     },
     "onlyBuiltDependencies": [
-      "@biomejs/biome",
+      "@apollo/protobufjs",
       "@nestjs/core",
       "@prisma/client",
       "@prisma/engines",
       "@scarf/scarf",
       "@swc/core",
       "argon2",
-      "esbuild",
-      "prisma",
-      "unrs-resolver"
+      "prisma"
     ]
   },
   "prisma": {

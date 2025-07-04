@@ -1,0 +1,61 @@
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { JwtService } from "@nestjs/jwt";
+import { randomInt } from 'crypto';
+import { hash } from 'argon2'
+import { PrismaService } from "@/prisma/prisma.service";
+
+@Injectable()
+export class TokenService{
+
+    constructor(
+        private readonly jwtService: JwtService,
+        private readonly configService: ConfigService,
+        private readonly prismaService: PrismaService
+    ){}
+
+    async generateCode(){
+        return randomInt(100000,999999)
+    }
+
+    async generateTokens(userId: string, email: string){
+        const payload = {
+            sub: userId,
+            email: email
+        }
+
+        const [ accessToken, refreshToken ] = await Promise.all([
+            this.jwtService.signAsync(payload, {
+                secret: this.configService.getOrThrow<string>('jwt.secret'),
+                expiresIn: this.configService.getOrThrow<string>('jwt.expiresIn')
+            }),
+            this.jwtService.signAsync(payload, {
+                secret: this.configService.getOrThrow<string>('jwt.secretRefresh'),
+                expiresIn: this.configService.getOrThrow<string>('jwt.refreshExpiresIn')
+            })
+        ])
+
+        return { accessToken, refreshToken }
+    }
+
+    async storeRefreshToken(userId: string, refreshToken: string, sessionId: string){
+        const hashedRefreshToken = await hash(refreshToken)
+        const user = await this.prismaService.user.findUnique({
+            where: { id: userId }
+        })
+
+        this.prismaService.session.upsert({
+            where: { id: sessionId },
+            update: {
+                lastLoginAt: new Date(),
+                refreshTokenHashed: hashedRefreshToken
+            },
+            create: {
+                id: sessionId,
+                userId,
+                refreshTokenHashed: hashedRefreshToken
+            }
+        })
+    }
+
+}
