@@ -18,14 +18,6 @@ export class TokenService {
         return randomInt(100000, 999999)
     }
 
-    async generateTWOFACODE() {
-        const tokens: string[] = [];
-
-        for (let i = 0; i < 6; i++) { tokens.push(String(this.generateCode())) }
-
-        return tokens
-    }
-
     async generateTokens(userId: string, email: string) {
         const payload = {
             sub: userId,

@@ -365,22 +365,6 @@ export class AuthService {
     }
   }
 
-  async createTokensTwoFA(data: any, userId: string) {
-    const tokens: string[] = await this.tokenService.generateTWOFACODE();
-
-    const code = await this.prismaService.code.upsert({
-      where: { id: { userId: userId, type: "TWOFACODE" } },
-      update: {
-        tokens: tokens
-      },
-      create: {
-        tokens: tokens,
-        type: "TWOFACODE",
-        userId: userId
-      }
-    })
-  }
-
   async login(data: any, res: Response, req: Request) {
 
     const user = await this.prismaService.user.findFirst({
@@ -419,51 +403,6 @@ export class AuthService {
     }
   }
 
-  async verifyTwoFACodeLogin(data: any, res: Response, req: Request) {
-    const extingUser = await this.prismaService.user.findFirst({
-      where: { primaryEmail: { value: data.email } },
-      omit: { hashedPassword: false },
-      include: { primaryEmail: true }
-    })
-
-    if (!extingUser) {
-      throw new NotFoundException('User not found')
-    }
-
-    const isMatch = await verify(extingUser.hashedPassword, data.password)
-
-    if (!isMatch) {
-      throw new UnauthorizedException('Password is not matched')
-    }
-
-    const ip = this.extractIp(req) // ip user
-    const userAgent = req.headers['user-agent'] || 'Unknown'// user agent
-    const deviceName = this.getDeviceName(userAgent)
-
-    const isNew = await this.detectDevice(extingUser.id, ip, deviceName);
-
-    if (isNew) {
-      await this.emailService.sendDetectOtherDevice(extingUser.primaryEmail.value, ip, userAgent, deviceName)
-      // check token
-      const tokensTwoFAs = await this.prismaService.code.findMany({
-        where: { userId: extingUser.id, type: "TWOFACODE" }
-      })
-
-      let check = false
-      tokensTwoFAs.forEach(token => {
-        if (token.tokens === data.token) check = true
-      })
-
-      if (!check) {
-        throw new UnauthorizedException('Code is not matched')
-      }
-    }
-
-    await this.createSession(extingUser.id, res, req)
-
-    return {
-      message: 'Login successful'
-    }
-  }
+ 
 
 }

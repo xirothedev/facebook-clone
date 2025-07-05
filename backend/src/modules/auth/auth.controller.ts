@@ -53,16 +53,6 @@ export class AuthController {
     return this.authService.verifyTokenForgotPassword(data)
   }
 
-  @Post('take-code-2FA')
-  async createTokensTwoFA(data: any,@Query('userId') userId: string) {
-    return this.authService.createTokensTwoFA(data, userId)
-  }
-
-  @Post('verify-code-twoFa-code-login')
-  async verifyTwoFACodeLogin(data: any, res: Response, req: Request) {
-    const result = await this.authService.login(data, res, req);
-    return res.json(result);
-  }
   // test
   @Get('getList')
   async getList(){
