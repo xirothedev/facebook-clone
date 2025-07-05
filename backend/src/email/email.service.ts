@@ -121,11 +121,6 @@ export class EmailService {
             const source = readFileSync(filePath, 'utf8')
             const subject = "Did you just change your password?"
 
-            // const token = uuidv4();
-            // const redisKey = `recovery:${token}`;
-            // await redis.set(redisKey, toEmail, 'EX', 60 * 60 * 24);
-
-
             const linkCallbackAccount = ''
 
             const html = source.replace(/{{Link_here}}/g, linkCallbackAccount)
@@ -143,6 +138,42 @@ export class EmailService {
                 success: true,
                 messageId: info.messageId
             }
+        } catch (error) {
+            console.error("Error sending email:", error)
+            throw new Error(`Cannot send this email ${error.message}`)
+        }
+    }
+
+    async sendDetectOtherDevice(toEmail: string, ip: string, userAgent: string, deviceName: string) {
+        try {
+            const filePath = join(__dirname, 'templates', 'detectOtherDevice.html')
+
+            if (!existsSync(filePath)) {
+                throw new Error(`Template not found : ${filePath}`)
+
+                const source = readFileSync(filePath, 'utf-8')
+                const subject = "Activity your account recently"
+                const linkCallback = ''
+
+                const html = source.replace(/{{SECURITY_LINK}}/g, linkCallback)
+                                   .replace(/{{OPERATING_SYSTEM}}g/,deviceName)
+                                   .replace(/{{IP_ADDRESS}}g/,ip)
+                                   .replace(/{{BROWSER}}g/,userAgent)
+                                   
+                const mailOptions = {
+                    from: `"Facebook Accounts <${process.env.EMAIL_USER}>`,
+                    to: toEmail,
+                    subject,
+                    html
+                }
+
+                const info = await this.transporter.sendMail(mailOptions)
+                return {
+                    success: true,
+                    messageId: info.messageId
+                }
+            }
+
         } catch (error) {
             console.error("Error sending email:", error)
             throw new Error(`Cannot send this email ${error.message}`)

@@ -17,4 +17,16 @@ export class RedisService {
   getClient(): Redis {
     return this.client;
   }
+
+  async set(key: string, value: string, expireSeconds?: number): Promise<void> {
+    if (expireSeconds) {
+      await this.client.set(key, value, 'EX', expireSeconds);
+    } else {
+      await this.client.set(key, value);
+    }
+  }
+
+  async get(key: string): Promise<string | null> {
+    return this.client.get(key);
+  }
 }

@@ -9,3 +9,10 @@ export class ChangePasswordDto {
   @IsNotEmpty()
   newPassword: string
 }
+
+export class ForgotPasswordDto extends ChangePasswordDto {
+  userId: string
+  token: string
+  email: string
+}
+
