@@ -1,12 +1,12 @@
-import 'reflect-metadata'
 import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
-import * as cookieParser from 'cookie-parser'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-import helmet from 'helmet'
 import * as compression from 'compression'
+import * as cookieParser from 'cookie-parser'
+import helmet from 'helmet'
+import 'reflect-metadata'
 import { AppModule } from './app.module'
-import { ResponseInterceptor } from './interceptor/response.interceptor'
+import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 
 // Swagger config
 const swaggerConfig = new DocumentBuilder()
