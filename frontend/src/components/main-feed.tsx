@@ -16,7 +16,7 @@ export default function MainFeed() {
 				<PostItem />
 				<PostItem />
 			</div>
-			<ScrollBar hidden={true} />
+			<ScrollBar hidden={true} orientation="vertical" />
 		</ScrollArea>
 	);
 }
