@@ -207,7 +207,8 @@ export const StatusAccount: {
   DISABLE: 'DISABLE',
   RESTRICTED: 'RESTRICTED',
   CHECKPOINT: 'CHECKPOINT',
-  BANNED: 'BANNED'
+  BANNED: 'BANNED',
+  DEACTIVATED: 'DEACTIVATED'
 };
 
 export type StatusAccount = (typeof StatusAccount)[keyof typeof StatusAccount]

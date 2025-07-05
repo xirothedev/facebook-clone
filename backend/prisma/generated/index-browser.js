@@ -297,7 +297,8 @@ exports.StatusAccount = exports.$Enums.StatusAccount = {
   DISABLE: 'DISABLE',
   RESTRICTED: 'RESTRICTED',
   CHECKPOINT: 'CHECKPOINT',
-  BANNED: 'BANNED'
+  BANNED: 'BANNED',
+  DEACTIVATED: 'DEACTIVATED'
 };
 
 exports.Gender = exports.$Enums.Gender = {
