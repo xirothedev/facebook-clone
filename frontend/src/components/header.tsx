@@ -6,7 +6,6 @@ import {
 	House,
 	Menu,
 	MessageCircleMore,
-	Search,
 	TvMinimalPlay,
 	UsersRound,
 } from "lucide-react";
@@ -16,6 +15,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { SearchBox } from "./search-box";
 
 export default function Header() {
 	const pathname = usePathname();
@@ -28,7 +28,7 @@ export default function Header() {
 
 	return (
 		<header className="flex fixed bg-white justify-between shadow-md top-0 right-0 left-0 z-99">
-			<div data-type="left" className="px-4 py-2 flex gap-3 items-center">
+			<div data-type="left" className="px-4 py-2 flex gap-3 items-center relative">
 				<Image
 					src="/facebook-logo.svg"
 					width={0}
@@ -37,16 +37,7 @@ export default function Header() {
 					sizes="100vw"
 					alt="Facebook logo"
 				/>
-				<div className="h-10 min-w-min">
-					<div className="flex gap-1.5 bg-(--secondary-background) px-3 w-60 h-full items-center text-black/60 rounded-full">
-						<Search size={18} />
-						<input
-							type="text"
-							className="outline-none text-black"
-							placeholder="Tìm kiếm trên Facebook"
-						/>
-					</div>
-				</div>
+				<SearchBox />
 			</div>
 
 			<div data-type="right" className="flex gap-1.5 px-4 py-2">

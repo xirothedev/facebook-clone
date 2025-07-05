@@ -91,7 +91,7 @@ export default function StorisList() {
 						<div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 
 						{/* Avatar */}
-						<div className="absolute top-2 left-2 w-9 h-9 rounded-full border-2 border-blue-500 overflow-hidden bg-white">
+						<div className="absolute top-2 left-2 w-9 h-9 rounded-full border-2 border-blue-500 overflow-hidden">
 							<Image
 								src={story.avatarUrl}
 								alt={story.name}

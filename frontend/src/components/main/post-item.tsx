@@ -25,7 +25,7 @@ export default function PostItem() {
 			<p className="px-4 py-2 text-sm">Gu tui trai artist</p>
 
 			{/* Main Image */}
-			<div className="relative w-auto h-[750px]">
+			<div className="relative bg-black w-auto h-[750px]">
 				<Image
 					src="/post-image.jpg"
 					alt="Post content"
