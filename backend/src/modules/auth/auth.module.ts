@@ -1,4 +1,4 @@
-import { JwtStrategy } from '@/common/strategies/jwt.strategy';
+import { JwtStrategy } from '@/common/strategies/auth-cookie.strategy';
 import { RedisModule } from '@/redis/redis.module';
 import { Module } from '@nestjs/common';
 import { EmailModule } from 'src/email/email.module';

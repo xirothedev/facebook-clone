@@ -1,19 +1,19 @@
+import { AuthCookieGuard } from '@/common/guards/auth-cookie.guard';
 import { Req, UseGuards } from '@nestjs/common';
-import { Args, Parent, Query, ResolveField, Resolver, Mutation } from '@nestjs/graphql';
-import { AuthGuard } from '@nestjs/passport';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Request } from 'express';
-import { UserQL } from './entities/user.entity';
-import { UsersService } from './users.service';
+import { UpdateUserInput } from './dto/update-user.input';
 import { Email } from './entities/email.entity';
 import { Phone } from './entities/phone.entity';
 import { SocialLinkeds } from './entities/social-linkeds.entity';
-import { UpdateUserInput } from './dto/update-user.input';
+import { UserQL } from './entities/user.entity';
+import { UsersService } from './users.service';
 
 @Resolver(() => UserQL)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthCookieGuard)
   @Query(() => UserQL, { name: 'me' })
   findMe(@Req() req: Request) {
     return this.usersService.findMe(req)

@@ -2,21 +2,16 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { RedisService } from '@/redis/redis.service';
 import { Snowflake } from '@/utils/snowflake';
 import { ConflictException, ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 import { argon2id, hash, verify } from "argon2";
 import { CookieOptions, Request, Response } from 'express';
-import { randomUUID } from 'node:crypto';
-import { User } from 'prisma/generated';
 import { EmailService } from 'src/email/email.service';
 import { UAParser } from 'ua-parser-js';
-import {
-  FindUserResult,
-  RecoveryResponse
-} from './auth.interface';
+import { UsersService } from '../users/users.service';
 import { ChangePasswordDto, ForgotPasswordDto } from './dto/change-password.dto';
 import { RegisterUser } from './dto/register-auth.dto';
-import { LoginAttemptService } from './loginAttempt.service';
 import { TokenService } from './token.service';
-import { UsersService } from '../users/users.service';
 
 const MAXINUM_AVAILABLE_TIME = 5 * 60_000
 const MIN_TIME_TO_REQUEST = 60_000
@@ -28,8 +23,10 @@ export class AuthService {
     private readonly usersService: UsersService,
     private readonly emailService: EmailService,
     private readonly tokenService: TokenService,
-    private readonly loginAttempService: LoginAttemptService,
+    // private readonly loginAttempService: LoginAttemptService,
     private readonly redisService: RedisService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) { }
 
   public async hashing(string: string): Promise<string> {
@@ -44,12 +41,46 @@ export class AuthService {
     )
   }
 
-  async validate(email: string) {
-    return await this.prismaService.user.findFirst({
-      where: {
-        primaryEmail: { value: email }
+  /**
+   * Validates an access token and returns user information
+   * @param accessToken - The JWT access token to validate
+   * @throws UnauthorizedException - If token is invalid, expired, or user not found
+   */
+  async validate(accessToken: string) {
+    try {
+      const payload = await this.jwtService.verifyAsync(accessToken, {
+        secret: this.configService.getOrThrow<string>('JWT_SECRET'),
+      });
+
+      // Verify that the user exists in the database
+      const user = await this.prismaService.user.findUnique({
+        where: { id: payload.sub },
+        include: { primaryEmail: true }
+      });
+
+      if (!user) {
+        throw new UnauthorizedException('User not found');
       }
-    })
+
+      // Check if user has any active sessions (optional additional security)
+      const activeSession = await this.prismaService.session.findFirst({
+        where: {
+          userId: user.id,
+          revoked: false
+        }
+      });
+
+      if (!activeSession) {
+        throw new UnauthorizedException('User session is revoked');
+      }
+
+      return user
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      }
+      throw new UnauthorizedException('Invalid or expired access token');
+    }
   }
 
   // get ip user
@@ -166,7 +197,7 @@ export class AuthService {
     }
   }
 
-  async recoveryAccount(email: string): Promise<RecoveryResponse> {
+  async recoveryAccount(email: string) {
     // const exitingUser = await this.validate(email)
     const exitingUser = await this.usersService.findPrimaryUserByEmail(email)
 

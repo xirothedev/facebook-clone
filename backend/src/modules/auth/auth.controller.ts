@@ -14,10 +14,10 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly prismaService: PrismaService
-  ) {}
+  ) { }
 
   @Post('register')
-  async registerUser(@Body() data: RegisterUser){
+  async registerUser(@Body() data: RegisterUser) {
     return this.authService.registerUser(data)
   }
 
@@ -39,8 +39,8 @@ export class AuthController {
   }
 
   @Delete("logout")
-  async logout( @Res({ passthrough: true }) res: Response, @Cookies('session_id') sessionId?: string){
-    return this.authService.logout(res,sessionId)
+  async logout(@Res({ passthrough: true }) res: Response, @Cookies('session_id') sessionId?: string) {
+    return this.authService.logout(res, sessionId)
   }
 
   @Get('forgot-password')
@@ -49,13 +49,13 @@ export class AuthController {
   }
 
   @Patch('verify-token-forgot-password')
-  async verifyTokenForgotPassword(@Body() data: ForgotPasswordDto ) {
+  async verifyTokenForgotPassword(@Body() data: ForgotPasswordDto) {
     return this.authService.verifyTokenForgotPassword(data)
   }
 
   // test
   @Get('getList')
-  async getList(){
+  async getList() {
     return await this.prismaService.user.findMany()
   }
 }
