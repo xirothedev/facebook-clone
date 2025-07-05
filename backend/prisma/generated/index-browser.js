@@ -297,8 +297,7 @@ exports.StatusAccount = exports.$Enums.StatusAccount = {
   DISABLE: 'DISABLE',
   RESTRICTED: 'RESTRICTED',
   CHECKPOINT: 'CHECKPOINT',
-  BANNED: 'BANNED',
-  RECOVERY: 'RECOVERY'
+  BANNED: 'BANNED'
 };
 
 exports.Gender = exports.$Enums.Gender = {
@@ -364,7 +363,7 @@ exports.TypeCode = exports.$Enums.TypeCode = {
   VERIFICATION: 'VERIFICATION',
   RESETPASSWORD: 'RESETPASSWORD',
   REACTIVE: 'REACTIVE',
-  TWOFACODE: 'TWOFACODE'
+  RECOVERY: 'RECOVERY'
 };
 
 exports.Prisma.ModelName = {

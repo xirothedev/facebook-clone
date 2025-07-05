@@ -1,15 +1,18 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { randomInt } from 'crypto';
+import { randomInt, randomUUID } from 'crypto';
 import { hash } from 'argon2'
 import { PrismaService } from "@/prisma/prisma.service";
+import { JwtPayload } from "./auth.interface";
+import { AuthService } from "./auth.service";
 
 @Injectable()
 export class TokenService {
 
     constructor(
         private readonly jwtService: JwtService,
+        private readonly authService: AuthService,
         private readonly configService: ConfigService,
         private readonly prismaService: PrismaService
     ) { }
@@ -19,7 +22,7 @@ export class TokenService {
     }
 
     async generateTokens(userId: string, email: string) {
-        const payload = {
+        const payload: JwtPayload = {
             sub: userId,
             email: email
         }
@@ -38,24 +41,44 @@ export class TokenService {
         return { accessToken, refreshToken }
     }
 
-    async storeRefreshToken(userId: string, refreshToken: string, sessionId: string) {
-        const hashedRefreshToken = await hash(refreshToken)
-        const user = await this.prismaService.user.findUnique({
-            where: { id: userId }
-        })
+    async storeRefreshToken(userId: string, refreshToken: string, sessionId: string, options: { ipAddress: string, userAgent: string, deviceName: string }) {
+        const hashedRefreshToken = await this.authService.hashing(refreshToken)
 
-        this.prismaService.session.upsert({
-            where: { id: sessionId },
+        const session = this.prismaService.session.upsert({
+            where: { id: sessionId ?? "" },
             update: {
                 lastLoginAt: new Date(),
-                refreshTokenHashed: hashedRefreshToken
+                refreshTokenHashed: hashedRefreshToken,
+                ...options
             },
             create: {
                 id: sessionId,
                 userId,
-                refreshTokenHashed: hashedRefreshToken
+                refreshTokenHashed: hashedRefreshToken,
+                ...options
             }
         })
+
+        return session
+
+        // let session = await this.prismaService.session.findFirst({ where: { userId } });
+        // if (session) {
+        //     session = await this.prismaService.session.update({
+        //         where: { id: session.id },
+        //         data: options
+        //     });
+        // } else {
+        //     const newSessionId = randomUUID();
+        //     session = await this.prismaService.session.create({
+        //         data: {
+        //             id: newSessionId,
+        //             userId: userId,
+        //             ...options
+        //         }
+        //     });
+        // }
+
+        // const hashedRefreshToken = await hash(refreshToken)
     }
 
     async refreshToken(refreshToken: string, userId: string) {

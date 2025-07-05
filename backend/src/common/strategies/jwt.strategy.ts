@@ -1,13 +1,13 @@
+import { PassportStrategy } from '@nestjs/passport';
 import { AuthService } from '@/modules/auth/auth.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PassportStrategy } from '@nestjs/passport';
 import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, "cookie") {
   constructor(
     private readonly config: ConfigService,
     private readonly authService: AuthService,

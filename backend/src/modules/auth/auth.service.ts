@@ -5,12 +5,18 @@ import { ConflictException, ForbiddenException, Injectable, NotFoundException, U
 import { argon2id, hash, verify } from "argon2";
 import { CookieOptions, Request, Response } from 'express';
 import { randomUUID } from 'node:crypto';
+import { User } from 'prisma/generated';
 import { EmailService } from 'src/email/email.service';
 import { UAParser } from 'ua-parser-js';
+import {
+  FindUserResult,
+  RecoveryResponse
+} from './auth.interface';
 import { ChangePasswordDto, ForgotPasswordDto } from './dto/change-password.dto';
 import { RegisterUser } from './dto/register-auth.dto';
 import { LoginAttemptService } from './loginAttempt.service';
 import { TokenService } from './token.service';
+import { UsersService } from '../users/users.service';
 
 const MAXINUM_AVAILABLE_TIME = 5 * 60_000
 const MIN_TIME_TO_REQUEST = 60_000
@@ -19,14 +25,15 @@ const MIN_TIME_TO_REQUEST = 60_000
 export class AuthService {
   constructor(
     private readonly prismaService: PrismaService,
+    private readonly usersService: UsersService,
     private readonly emailService: EmailService,
     private readonly tokenService: TokenService,
     private readonly loginAttempService: LoginAttemptService,
     private readonly redisService: RedisService,
   ) { }
 
-  private async hashingPassword(password: string): Promise<string> {
-    return await hash(password,
+  public async hashing(string: string): Promise<string> {
+    return await hash(string,
       {
         type: argon2id,
         memoryCost: 2 ** 16,
@@ -45,12 +52,6 @@ export class AuthService {
     })
   }
 
-  async findUserById(id: string) {
-    return await this.prismaService.user.findFirst({
-      where: { id: id }
-    })
-  }
-
   // get ip user
   private extractIp(req: Request): string {
     const xForwardedFor = req.headers['x-forwarded-for'] as string;
@@ -65,26 +66,34 @@ export class AuthService {
     return `${browser} on ${os}`;
   }
 
-  async detectDevice(userId: string, ip: string, deviceName: string) {
-    const lastSession = await this.prismaService.session.findFirst({
-      where: { userId },
+  // async detectDevice(userId: string, ip: string, deviceName: string) {
+  //   const lastSession = await this.prismaService.session.findFirst({
+  //     where: { userId },
+  //     orderBy: { createdAt: 'desc' },
+  //   });
+
+  //   if (!lastSession) return true;
+
+  //   return lastSession.deviceName !== deviceName || lastSession.ipAddress !== ip;
+  // }
+
+  detectDevice(userId: string, ip: string, deviceName: string) {
+    return this.prismaService.session.findFirst({
+      where: { userId, deviceName, ipAddress: ip },
       orderBy: { createdAt: 'desc' },
     });
-
-    if (!lastSession) return true;
-
-    return lastSession.deviceName !== deviceName || lastSession.ipAddress !== ip;
   }
 
 
   async registerUser(body: RegisterUser) {
-    const user = await this.prismaService.email.findFirst({ where: { value: body.email, NOT: { primaryEmailUser: null } } })
+    // const user = await this.prismaService.email.findFirst({ where: { value: body.email, NOT: { primaryEmailUser: null } } })
+    const user = await this.usersService.findPrimaryUserByEmail(body.email)
 
     if (user) {
       throw new ConflictException("This email has been registered")
     }
 
-    const hashedPassword = await this.hashingPassword(body.password)
+    const hashedPassword = await this.hashing(body.password)
     const snowflake = new Snowflake()
 
     const newUser = await this.prismaService.user.create({
@@ -109,20 +118,24 @@ export class AuthService {
   }
 
   async changePassword(data: ChangePasswordDto, req: Request) {
-
-    const MAX_TIME_SAVE = 60 * 60 * 24 * 30
+    const MAX_TIME_SAVE = 60 * 60 * 24 * 30 // 30 days
 
     if (!req.user?.id) {
       throw new UnauthorizedException('User ID is missing');
     }
 
-    const user = await this.prismaService.user.findFirst({
+    // const user = await this.prismaService.user.findFirst({
+    const user = await this.prismaService.user.findUnique({
       where: { id: req.user?.id },
       omit: { hashedPassword: false }
     })
 
-    if (!user || typeof user.hashedPassword !== 'string') {
-      throw new UnauthorizedException('User not found or password is missing');
+    // if (!user || typeof user.hashedPassword !== 'string') {
+    //   throw new UnauthorizedException('User not found or password is missing');
+    // }
+
+    if (!user) {
+      throw new NotFoundException("User not found")
     }
 
     const isMatch = await verify(user.hashedPassword, data.oldPassword);
@@ -131,14 +144,16 @@ export class AuthService {
       throw new UnauthorizedException('Password is not matched');
     }
 
-    await this.redisService.set(req.user?.id, data.oldPassword, MAX_TIME_SAVE);
+    // await this.redisService.set(req.user?.id, data.oldPassword, MAX_TIME_SAVE);
+    await this.redisService.set(req.user.id, data.oldPassword, MAX_TIME_SAVE);
 
-    const hashedNewPassword = await this.hashingPassword(data.newPassword)
+    const hashedNewPassword = await this.hashing(data.newPassword)
 
     const newUser = await this.prismaService.user.update({
       where: { id: req.user.id },
       data: { hashedPassword: hashedNewPassword },
-      include: { primaryEmail: true }
+      // include: { primaryEmail: true }
+      include: { primaryEmail: { select: { value: true } } }
     })
 
     const { hashedPassword, ...userWithoutPassword } = newUser
@@ -151,34 +166,42 @@ export class AuthService {
     }
   }
 
-  async recoveryAccount(email: string) {
-    const exitingUser = await this.validate(email)
+  async recoveryAccount(email: string): Promise<RecoveryResponse> {
+    // const exitingUser = await this.validate(email)
+    const exitingUser = await this.usersService.findPrimaryUserByEmail(email)
 
     if (!exitingUser) {
       throw new NotFoundException('User is not found')
     }
 
+    // Kiểm tra nếu exitingUser là array thì lấy user đầu tiên
+    const user = Array.isArray(exitingUser) ? exitingUser[0] : exitingUser
+
+    if (!user) {
+      throw new NotFoundException('User is not found')
+    }
+
     const token = this.tokenService.generateCode()
 
-    const user = await this.prismaService.user.update({
-      where: { id: exitingUser.id },
-      data: {
-        status: "RECOVERY",
-        createdAt: new Date()
-      }
-    })
+    // const updatedUser = await this.prismaService.user.update({
+    //   where: { id: user.id },
+    //   data: {
+    //     status: "RECOVERY",
+    //     createdAt: new Date()
+    //   }
+    // })
 
     // update code
     await this.prismaService.code.upsert({
-      where: { id: { type: "VERIFICATION", userId: user.id } },
+      where: { id: { type: "RECOVERY", userId: user.id } },
       update: {
         tokens: [String(token)],
         expiresAt: new Date(Date.now() + MAXINUM_AVAILABLE_TIME)
       },
       create: {
-        type: "VERIFICATION",
-        tokens: [String(token)],
+        type: "RECOVERY",
         userId: user.id,
+        tokens: [String(token)],
         expiresAt: new Date(Date.now() + MAXINUM_AVAILABLE_TIME)
       }
     })
@@ -206,7 +229,7 @@ export class AuthService {
     await this.prismaService.user.update({
       where: { id: exitingUser.userId },
       data: {
-        hashedPassword: await this.hashingPassword(newPassword),
+        hashedPassword: await this.hashing(newPassword),
         code: { delete: { id: { type: "VERIFICATION", userId: exitingUser.userId } } }
       }
     })
@@ -266,7 +289,7 @@ export class AuthService {
     await this.prismaService.user.update({
       where: { id: data.userId },
       data: {
-        hashedPassword: await this.hashingPassword(data.newPassword),
+        hashedPassword: await this.hashing(data.newPassword),
         code: { delete: { id: { type: "VERIFICATION", userId: data.userId } } }
       }
     })
@@ -286,41 +309,17 @@ export class AuthService {
       }
     })
 
-    const ip = this.extractIp(req) // ip user
+    const ipAddress = this.extractIp(req) // ip user
     const userAgent = req.headers['user-agent'] || 'Unknown'// user agent
     const deviceName = this.getDeviceName(userAgent)
 
     const tokens = await this.tokenService.generateTokens(userId, String(user?.primaryEmail.value))
 
-    const sessionId = res.req.cookies?.session_id
-    let session = await this.prismaService.session.findFirst({ where: { userId } });
-    if (session) {
-      session = await this.prismaService.session.update({
-        where: { id: session.id },
-        data: {
-          ipAddress: ip,
-          userAgent,
-          deviceName
-        }
-      });
-    } else {
-      const newSessionId = randomUUID();
-      session = await this.prismaService.session.create({
-        data: {
-          id: newSessionId,
-          userId: userId,
-          ipAddress: ip,
-          userAgent,
-          deviceName
-        }
-      });
-    }
+    const session = await this.tokenService.storeRefreshToken(userId, tokens.refreshToken, res.req.cookies?.session_id, { deviceName, ipAddress, userAgent })
 
     res.cookie('session_id', session.id, {
       maxAge: 10 * 365 * 24 * 60 * 60 * 1000 // 10 years
     })
-
-    await this.tokenService.storeRefreshToken(userId, tokens.refreshToken, sessionId)
 
     const cookieOptions: CookieOptions = {
       httpOnly: true,
@@ -328,6 +327,7 @@ export class AuthService {
       sameSite: 'lax',
       path: '/',
     }
+
     res
       .cookie('refresh_token', tokens.refreshToken, {
         ...cookieOptions,
@@ -342,7 +342,6 @@ export class AuthService {
   }
 
   async logout(res: Response, sessionId?: string) {
-
     res.clearCookie("access_token").clearCookie("refresh_token")
 
     const session = await this.prismaService.session.findFirst({
@@ -375,10 +374,11 @@ export class AuthService {
 
     if (!user) { throw new NotFoundException('User not found') }
 
-    const isLocked = await this.loginAttempService.isLocked(user.primaryEmail.value);
-    if (isLocked) {
-      throw new ForbiddenException('Your account is temporary being locked. Please try later');
-    }
+    // check bị suspended hay không thôi
+    // const isLocked = await this.loginAttempService.isLocked(user.primaryEmail.value);
+    // if (isLocked) {
+    //   throw new ForbiddenException('Your account is temporary being locked. Please try later');
+    // }
 
     const isMatch = await verify(user.hashedPassword, data.password)
 
@@ -402,7 +402,4 @@ export class AuthService {
       data: userWithoutPassword
     }
   }
-
- 
-
 }

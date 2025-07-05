@@ -122,7 +122,7 @@ export const TypeCode: {
   VERIFICATION: 'VERIFICATION',
   RESETPASSWORD: 'RESETPASSWORD',
   REACTIVE: 'REACTIVE',
-  TWOFACODE: 'TWOFACODE'
+  RECOVERY: 'RECOVERY'
 };
 
 export type TypeCode = (typeof TypeCode)[keyof typeof TypeCode]
@@ -207,8 +207,7 @@ export const StatusAccount: {
   DISABLE: 'DISABLE',
   RESTRICTED: 'RESTRICTED',
   CHECKPOINT: 'CHECKPOINT',
-  BANNED: 'BANNED',
-  RECOVERY: 'RECOVERY'
+  BANNED: 'BANNED'
 };
 
 export type StatusAccount = (typeof StatusAccount)[keyof typeof StatusAccount]
