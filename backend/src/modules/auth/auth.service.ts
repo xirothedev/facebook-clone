@@ -329,6 +329,13 @@ export class AuthService {
 
     if (!isMatch) { throw new UnauthorizedException('Password is not matched') }
 
+    if( user.status === "DEACTIVATED" ) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: { status: "ACTIVE" }
+      })
+    }
+
     const detailUser = this.getDataUser(req)
 
     // detect true if UserAgent is not elements in list session.UserAgent 
@@ -346,4 +353,30 @@ export class AuthService {
       data: userWithoutPassword
     }
   }
+
+  async disableAccount(password: string, req: Request) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: req.user?.id },
+      omit: { hashedPassword: false }
+    })
+
+    const isMatchPassword  = await verify(user?.hashedPassword!, password)
+
+    if(!isMatchPassword) {
+      throw new UnauthorizedException('Password invalid')
+    }
+
+    const newUser = await this.prismaService.user.update({
+      where: { id: user?.id },
+      data: { status: "DEACTIVATED" }
+    })
+
+    const {hashedPassword,...userWithoutPassword} = newUser
+
+    return {
+      message: 'Disable account successful',
+      data: userWithoutPassword
+    }
+  }
+
 }

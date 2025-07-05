@@ -56,6 +56,12 @@ export class AuthController {
     return this.authService.verifyTokenForgotPassword(data)
   }
 
+  @Post('disable-account')
+  @UseGuards(AuthCookieGuard)
+  async disableAccount(@Body('password') password: string, @Req() req: Request) {
+    return this.authService.disableAccount(password,req)
+  }
+
   // test
   @Get('getList')
   async getList() {
