@@ -271,12 +271,12 @@ model User {
 
   // relations
   posts               Post[]
+  session             Session[]
   comments            Comment[]
   reactions           Reaction[]
-  code                Code[]
-  session             Session[]
-  notifications       Notification[] @relation("UserNotifications")
-  notificationActions Notification[] @relation("UserNotificationActions")
+  auth                Authentication[]
+  notifications       Notification[]   @relation("UserNotifications")
+  notificationActions Notification[]   @relation("UserNotificationActions")
 }
 
 model Friendship {
@@ -334,11 +334,11 @@ model SocialLinkeds {
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model Code {
-  tokens    String[]
+model Authentication {
+  code      String
   expiresAt DateTime? @db.Timestamptz
 
-  type   TypeCode
+  type   AuthType
   userId String   @db.Uuid
   user   User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
@@ -364,12 +364,11 @@ model Session {
   @@index([userId])
 }
 
-enum TypeCode {
+enum AuthType {
   VERIFICATION
-  RESETPASSWORD
+  RESET_PASSWORD
   REACTIVE
   RECOVERY
-  // TWOFACODE
 }
 
 enum UserFlag {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PrismaService } from '@/prisma/prisma.service';
 import { RedisService } from '@/redis/redis.service';
 import { Snowflake } from '@/utils/snowflake';
@@ -9,6 +10,7 @@ import { CookieOptions, Request, Response } from 'express';
 import { EmailService } from 'src/email/email.service';
 import { UAParser } from 'ua-parser-js';
 import { UsersService } from '../users/users.service';
+import { UserWithPrimaryEmailAndWithoutPassword } from './auth.interface';
 import { ChangePasswordDto, ForgotPasswordDto } from './dto/change-password.dto';
 import { RegisterUser } from './dto/register-auth.dto';
 import { TokenService } from './token.service';
@@ -193,17 +195,17 @@ export class AuthService {
       throw new NotFoundException('Account is not exited')
     }
 
-    const token = this.tokenService.generateCode()
+    const token = await this.tokenService.generateCode()
 
-    await this.prismaService.code.upsert({
+    await this.prismaService.authentication.upsert({
       where: { id: { type: "VERIFICATION", userId: user.id } },
       update: {
-        tokens: [String(token)],
+        code: token.toString(),
         expiresAt: new Date(Date.now() + MAX_AVAILABLE_TIME)
       },
       create: {
         type: "VERIFICATION",
-        tokens: [String(token)],
+        code: token.toString(),
         userId: user.id,
         expiresAt: new Date(Date.now() + MAX_AVAILABLE_TIME)
       }
@@ -212,20 +214,20 @@ export class AuthService {
     await this.emailService.sendResetPasswordAccount(email, String(token))
 
     return {
-      message: 'Send req forgot successful'
+      message: 'Send request forgot password successful'
     }
   }
 
   async verifyTokenForgotPassword(data: ForgotPasswordDto) {
-    const code = await this.prismaService.code.findFirst({
+    const auth = await this.prismaService.authentication.findFirst({
       where: { userId: data.userId, type: "VERIFICATION" }
     })
 
-    if (!code) {
-      throw new NotFoundException('Code is not available or expired')
+    if (!auth) {
+      throw new NotFoundException('Authentication process is not available')
     }
 
-    if (!code.tokens.includes(data.token)) {
+    if (auth.code !== data.token) {
       throw new ForbiddenException('Code does not matched')
     }
 
@@ -233,7 +235,9 @@ export class AuthService {
       where: { id: data.userId },
       data: {
         hashedPassword: await this.hashing(data.newPassword),
-        code: { delete: { id: { type: "VERIFICATION", userId: data.userId } } }
+        auth: {
+          delete: { id: { type: "VERIFICATION", userId: data.userId } }
+        }
       }
     })
 
@@ -244,21 +248,13 @@ export class AuthService {
     }
   }
 
-  async createSession(userId: string, res: Response, req: Request) {
-    const user = await this.prismaService.user.findUnique({
-      where: { id: userId },
-      include: {
-        primaryEmail: true
-      }
-    })
-
-    const ipAddress = this.extractIp(req) // ip user
-    const userAgent = req.headers['user-agent'] || 'Unknown'// user agent
+  async createSession(user: UserWithPrimaryEmailAndWithoutPassword, res: Response, req: Request) {
+    const ipAddress = this.extractIp(req)
+    const userAgent = req.headers['user-agent'] || 'Unknown'
     const deviceName = this.getDeviceName(userAgent)
 
-    const tokens = await this.tokenService.generateTokens(userId, String(user?.primaryEmail.value))
-
-    const session = await this.tokenService.storeRefreshToken(userId, tokens.refreshToken, res.req.cookies?.session_id, { deviceName, ipAddress, userAgent })
+    const tokens = await this.tokenService.generateTokens(user.id, String(user?.primaryEmail.value))
+    const session = await this.tokenService.storeRefreshToken(user.id, tokens.refreshToken, res.req.cookies?.session_id, { deviceName, ipAddress, userAgent })
 
     res.cookie('session_id', session.id, {
       maxAge: TIME_LIFE_SESSION
@@ -340,7 +336,7 @@ export class AuthService {
     // if detected new device , send email to user
     if (isNew) { await this.emailService.sendDetectOtherDevice(user.primaryEmail.value, detailUser.ipAddress, detailUser.userAgent, detailUser.deviceName) }
 
-    await this.createSession(user.id, res, req)
+    await this.createSession(user, res, req)
 
     const { hashedPassword, ...userWithoutPassword } = user
 
@@ -351,15 +347,21 @@ export class AuthService {
   }
 
   async disableAccount(password: string, req: Request) {
+    if (!req.user) {
+      throw new UnauthorizedException('User is not authenticated');
+    }
+
     const user = await this.prismaService.user.findUnique({
-      where: { id: req.user?.id },
+      where: { id: req.user.id },
       omit: { hashedPassword: false }
     })
 
-    const isMatchPassword = await verify(user?.hashedPassword!, password)
+    if (!user) throw new Error("Conflict database")
+
+    const isMatchPassword = await verify(user.hashedPassword, password)
 
     if (!isMatchPassword) {
-      throw new UnauthorizedException('Password invalid')
+      throw new UnauthorizedException('Password is not match')
     }
 
     const newUser = await this.prismaService.user.update({

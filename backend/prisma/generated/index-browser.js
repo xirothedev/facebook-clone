@@ -254,8 +254,8 @@ exports.Prisma.SocialLinkedsScalarFieldEnum = {
   userId: 'userId'
 };
 
-exports.Prisma.CodeScalarFieldEnum = {
-  tokens: 'tokens',
+exports.Prisma.AuthenticationScalarFieldEnum = {
+  code: 'code',
   expiresAt: 'expiresAt',
   type: 'type',
   userId: 'userId',
@@ -451,9 +451,9 @@ exports.Platform = exports.$Enums.Platform = {
   OCULUS: 'OCULUS'
 };
 
-exports.TypeCode = exports.$Enums.TypeCode = {
+exports.AuthType = exports.$Enums.AuthType = {
   VERIFICATION: 'VERIFICATION',
-  RESETPASSWORD: 'RESETPASSWORD',
+  RESET_PASSWORD: 'RESET_PASSWORD',
   REACTIVE: 'REACTIVE',
   RECOVERY: 'RECOVERY'
 };
@@ -470,7 +470,7 @@ exports.Prisma.ModelName = {
   Email: 'Email',
   Phone: 'Phone',
   SocialLinkeds: 'SocialLinkeds',
-  Code: 'Code',
+  Authentication: 'Authentication',
   Session: 'Session'
 };
 

@@ -1,5 +1,5 @@
-import { IsString, IsOptional, IsEnum, IsUUID, IsUrl, IsObject, IsBoolean, IsNumber, IsDateString } from 'class-validator';
-import { NotificationType, NotificationStatus, NotificationPriority } from 'prisma/generated';
+import { IsBoolean, IsEnum, IsNumber, IsObject, IsOptional, IsString, IsUUID, IsUrl } from 'class-validator';
+import { NotificationPriority, NotificationStatus, NotificationType } from 'prisma/generated';
 
 export class CreateNotificationDto {
   @IsUUID()

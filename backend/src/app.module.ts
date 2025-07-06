@@ -20,7 +20,7 @@ import { RedisModule } from './redis/redis.module'
 import { SupabaseModule } from './supabase/supabase.module'
 import { APP_GUARD } from '@nestjs/core'
 import { AuthCookieGuard } from './common/guards/auth-cookie.guard'
-import { NotificationsModule } from './modules/notifications/notifications.module';
+import { NotificationsModule } from './modules/notifications/notifications.module'
 
 @Module({
   imports: [
@@ -78,7 +78,8 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     NotificationsModule,
   ],
   controllers: [AppController],
-  providers: [AppService,
+  providers: [
+    AppService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
@@ -89,4 +90,4 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

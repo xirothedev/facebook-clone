@@ -69,7 +69,7 @@ export class PostsService {
     };
   }
 
-  async findAll(query: QueryPostDto, req: Request) {
+  async findAll(query: QueryPostDto) {
     const { page = 1, limit = 10, search, scope, authorId, sortBy = 'createdAt', sortOrder = 'desc' } = query;
     const skip = (page - 1) * limit;
 
@@ -132,7 +132,7 @@ export class PostsService {
     };
   }
 
-  async findByUser(userId: string, query: QueryPostDto, req: Request) {
+  async findByUser(userId: string, query: QueryPostDto) {
     const { page = 1, limit = 10, sortBy = 'createdAt', sortOrder = 'desc' } = query;
     const skip = (page - 1) * limit;
 
@@ -239,7 +239,7 @@ export class PostsService {
       throw new UnauthorizedException('You are not allowed to edit this post');
     }
 
-    let mediaUrls: string[] = [];
+    const mediaUrls: string[] = [];
     if (medias && medias.length > 0) {
       for (const file of medias) {
         const path = `${req.user.id}/${Date.now()}-${file.originalname}`;

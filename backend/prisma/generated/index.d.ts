@@ -69,10 +69,10 @@ export type Phone = $Result.DefaultSelection<Prisma.$PhonePayload>
  */
 export type SocialLinkeds = $Result.DefaultSelection<Prisma.$SocialLinkedsPayload>
 /**
- * Model Code
+ * Model Authentication
  * 
  */
-export type Code = $Result.DefaultSelection<Prisma.$CodePayload>
+export type Authentication = $Result.DefaultSelection<Prisma.$AuthenticationPayload>
 /**
  * Model Session
  * 
@@ -181,14 +181,14 @@ export const PostStatus: {
 export type PostStatus = (typeof PostStatus)[keyof typeof PostStatus]
 
 
-export const TypeCode: {
+export const AuthType: {
   VERIFICATION: 'VERIFICATION',
-  RESETPASSWORD: 'RESETPASSWORD',
+  RESET_PASSWORD: 'RESET_PASSWORD',
   REACTIVE: 'REACTIVE',
   RECOVERY: 'RECOVERY'
 };
 
-export type TypeCode = (typeof TypeCode)[keyof typeof TypeCode]
+export type AuthType = (typeof AuthType)[keyof typeof AuthType]
 
 
 export const UserFlag: {
@@ -314,9 +314,9 @@ export type PostStatus = $Enums.PostStatus
 
 export const PostStatus: typeof $Enums.PostStatus
 
-export type TypeCode = $Enums.TypeCode
+export type AuthType = $Enums.AuthType
 
-export const TypeCode: typeof $Enums.TypeCode
+export const AuthType: typeof $Enums.AuthType
 
 export type UserFlag = $Enums.UserFlag
 
@@ -582,14 +582,14 @@ export class PrismaClient<
   get socialLinkeds(): Prisma.SocialLinkedsDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.code`: Exposes CRUD operations for the **Code** model.
+   * `prisma.authentication`: Exposes CRUD operations for the **Authentication** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Codes
-    * const codes = await prisma.code.findMany()
+    * // Fetch zero or more Authentications
+    * const authentications = await prisma.authentication.findMany()
     * ```
     */
-  get code(): Prisma.CodeDelegate<ExtArgs, ClientOptions>;
+  get authentication(): Prisma.AuthenticationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -1051,7 +1051,7 @@ export namespace Prisma {
     Email: 'Email',
     Phone: 'Phone',
     SocialLinkeds: 'SocialLinkeds',
-    Code: 'Code',
+    Authentication: 'Authentication',
     Session: 'Session'
   };
 
@@ -1071,7 +1071,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "media" | "notification" | "post" | "comment" | "reaction" | "user" | "friendship" | "relation" | "email" | "phone" | "socialLinkeds" | "code" | "session"
+      modelProps: "media" | "notification" | "post" | "comment" | "reaction" | "user" | "friendship" | "relation" | "email" | "phone" | "socialLinkeds" | "authentication" | "session"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1889,77 +1889,77 @@ export namespace Prisma {
           }
         }
       }
-      Code: {
-        payload: Prisma.$CodePayload<ExtArgs>
-        fields: Prisma.CodeFieldRefs
+      Authentication: {
+        payload: Prisma.$AuthenticationPayload<ExtArgs>
+        fields: Prisma.AuthenticationFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.CodeFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload> | null
+            args: Prisma.AuthenticationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.CodeFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>
+            args: Prisma.AuthenticationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>
           }
           findFirst: {
-            args: Prisma.CodeFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload> | null
+            args: Prisma.AuthenticationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.CodeFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>
+            args: Prisma.AuthenticationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>
           }
           findMany: {
-            args: Prisma.CodeFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>[]
+            args: Prisma.AuthenticationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>[]
           }
           create: {
-            args: Prisma.CodeCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>
+            args: Prisma.AuthenticationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>
           }
           createMany: {
-            args: Prisma.CodeCreateManyArgs<ExtArgs>
+            args: Prisma.AuthenticationCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.CodeCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>[]
+            args: Prisma.AuthenticationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>[]
           }
           delete: {
-            args: Prisma.CodeDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>
+            args: Prisma.AuthenticationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>
           }
           update: {
-            args: Prisma.CodeUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>
+            args: Prisma.AuthenticationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>
           }
           deleteMany: {
-            args: Prisma.CodeDeleteManyArgs<ExtArgs>
+            args: Prisma.AuthenticationDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.CodeUpdateManyArgs<ExtArgs>
+            args: Prisma.AuthenticationUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.CodeUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>[]
+            args: Prisma.AuthenticationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>[]
           }
           upsert: {
-            args: Prisma.CodeUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CodePayload>
+            args: Prisma.AuthenticationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthenticationPayload>
           }
           aggregate: {
-            args: Prisma.CodeAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCode>
+            args: Prisma.AuthenticationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAuthentication>
           }
           groupBy: {
-            args: Prisma.CodeGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CodeGroupByOutputType>[]
+            args: Prisma.AuthenticationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AuthenticationGroupByOutputType>[]
           }
           count: {
-            args: Prisma.CodeCountArgs<ExtArgs>
-            result: $Utils.Optional<CodeCountAggregateOutputType> | number
+            args: Prisma.AuthenticationCountArgs<ExtArgs>
+            result: $Utils.Optional<AuthenticationCountAggregateOutputType> | number
           }
         }
       }
@@ -2132,7 +2132,7 @@ export namespace Prisma {
     email?: EmailOmit
     phone?: PhoneOmit
     socialLinkeds?: SocialLinkedsOmit
-    code?: CodeOmit
+    authentication?: AuthenticationOmit
     session?: SessionOmit
   }
 
@@ -2316,10 +2316,10 @@ export namespace Prisma {
     sentFriendRequests: number
     receivedFriendRequests: number
     posts: number
+    session: number
     comments: number
     reactions: number
-    code: number
-    session: number
+    auth: number
     notifications: number
     notificationActions: number
   }
@@ -2333,10 +2333,10 @@ export namespace Prisma {
     sentFriendRequests?: boolean | UserCountOutputTypeCountSentFriendRequestsArgs
     receivedFriendRequests?: boolean | UserCountOutputTypeCountReceivedFriendRequestsArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
+    session?: boolean | UserCountOutputTypeCountSessionArgs
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
     reactions?: boolean | UserCountOutputTypeCountReactionsArgs
-    code?: boolean | UserCountOutputTypeCountCodeArgs
-    session?: boolean | UserCountOutputTypeCountSessionArgs
+    auth?: boolean | UserCountOutputTypeCountAuthArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     notificationActions?: boolean | UserCountOutputTypeCountNotificationActionsArgs
   }
@@ -2411,6 +2411,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentWhereInput
   }
@@ -2425,15 +2432,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CodeWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
+  export type UserCountOutputTypeCountAuthArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuthenticationWhereInput
   }
 
   /**
@@ -8660,10 +8660,10 @@ export namespace Prisma {
     sentFriendRequests?: boolean | User$sentFriendRequestsArgs<ExtArgs>
     receivedFriendRequests?: boolean | User$receivedFriendRequestsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    session?: boolean | User$sessionArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
     reactions?: boolean | User$reactionsArgs<ExtArgs>
-    code?: boolean | User$codeArgs<ExtArgs>
-    session?: boolean | User$sessionArgs<ExtArgs>
+    auth?: boolean | User$authArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     notificationActions?: boolean | User$notificationActionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -8757,10 +8757,10 @@ export namespace Prisma {
     sentFriendRequests?: boolean | User$sentFriendRequestsArgs<ExtArgs>
     receivedFriendRequests?: boolean | User$receivedFriendRequestsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
+    session?: boolean | User$sessionArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
     reactions?: boolean | User$reactionsArgs<ExtArgs>
-    code?: boolean | User$codeArgs<ExtArgs>
-    session?: boolean | User$sessionArgs<ExtArgs>
+    auth?: boolean | User$authArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     notificationActions?: boolean | User$notificationActionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -8787,10 +8787,10 @@ export namespace Prisma {
       sentFriendRequests: Prisma.$FriendshipPayload<ExtArgs>[]
       receivedFriendRequests: Prisma.$FriendshipPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
+      session: Prisma.$SessionPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
       reactions: Prisma.$ReactionPayload<ExtArgs>[]
-      code: Prisma.$CodePayload<ExtArgs>[]
-      session: Prisma.$SessionPayload<ExtArgs>[]
+      auth: Prisma.$AuthenticationPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       notificationActions: Prisma.$NotificationPayload<ExtArgs>[]
     }
@@ -9220,10 +9220,10 @@ export namespace Prisma {
     sentFriendRequests<T extends User$sentFriendRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$sentFriendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     receivedFriendRequests<T extends User$receivedFriendRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$receivedFriendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    session<T extends User$sessionArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reactions<T extends User$reactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    code<T extends User$codeArgs<ExtArgs> = {}>(args?: Subset<T, User$codeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    session<T extends User$sessionArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    auth<T extends User$authArgs<ExtArgs> = {}>(args?: Subset<T, User$authArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notificationActions<T extends User$notificationActionsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationActionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -9892,6 +9892,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.session
+   */
+  export type User$sessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
    * User.comments
    */
   export type User$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9940,51 +9964,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.code
+   * User.auth
    */
-  export type User$codeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$authArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
-    where?: CodeWhereInput
-    orderBy?: CodeOrderByWithRelationInput | CodeOrderByWithRelationInput[]
-    cursor?: CodeWhereUniqueInput
+    include?: AuthenticationInclude<ExtArgs> | null
+    where?: AuthenticationWhereInput
+    orderBy?: AuthenticationOrderByWithRelationInput | AuthenticationOrderByWithRelationInput[]
+    cursor?: AuthenticationWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: CodeScalarFieldEnum | CodeScalarFieldEnum[]
-  }
-
-  /**
-   * User.session
-   */
-  export type User$sessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Session
-     */
-    omit?: SessionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
-    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
-    cursor?: SessionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+    distinct?: AuthenticationScalarFieldEnum | AuthenticationScalarFieldEnum[]
   }
 
   /**
@@ -15464,33 +15464,35 @@ export namespace Prisma {
 
 
   /**
-   * Model Code
+   * Model Authentication
    */
 
-  export type AggregateCode = {
-    _count: CodeCountAggregateOutputType | null
-    _min: CodeMinAggregateOutputType | null
-    _max: CodeMaxAggregateOutputType | null
+  export type AggregateAuthentication = {
+    _count: AuthenticationCountAggregateOutputType | null
+    _min: AuthenticationMinAggregateOutputType | null
+    _max: AuthenticationMaxAggregateOutputType | null
   }
 
-  export type CodeMinAggregateOutputType = {
+  export type AuthenticationMinAggregateOutputType = {
+    code: string | null
     expiresAt: Date | null
-    type: $Enums.TypeCode | null
+    type: $Enums.AuthType | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type CodeMaxAggregateOutputType = {
+  export type AuthenticationMaxAggregateOutputType = {
+    code: string | null
     expiresAt: Date | null
-    type: $Enums.TypeCode | null
+    type: $Enums.AuthType | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type CodeCountAggregateOutputType = {
-    tokens: number
+  export type AuthenticationCountAggregateOutputType = {
+    code: number
     expiresAt: number
     type: number
     userId: number
@@ -15500,7 +15502,8 @@ export namespace Prisma {
   }
 
 
-  export type CodeMinAggregateInputType = {
+  export type AuthenticationMinAggregateInputType = {
+    code?: true
     expiresAt?: true
     type?: true
     userId?: true
@@ -15508,7 +15511,8 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type CodeMaxAggregateInputType = {
+  export type AuthenticationMaxAggregateInputType = {
+    code?: true
     expiresAt?: true
     type?: true
     userId?: true
@@ -15516,8 +15520,8 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type CodeCountAggregateInputType = {
-    tokens?: true
+  export type AuthenticationCountAggregateInputType = {
+    code?: true
     expiresAt?: true
     type?: true
     userId?: true
@@ -15526,136 +15530,136 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type CodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Code to aggregate.
+     * Filter which Authentication to aggregate.
      */
-    where?: CodeWhereInput
+    where?: AuthenticationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Codes to fetch.
+     * Determine the order of Authentications to fetch.
      */
-    orderBy?: CodeOrderByWithRelationInput | CodeOrderByWithRelationInput[]
+    orderBy?: AuthenticationOrderByWithRelationInput | AuthenticationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: CodeWhereUniqueInput
+    cursor?: AuthenticationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Codes from the position of the cursor.
+     * Take `±n` Authentications from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Codes.
+     * Skip the first `n` Authentications.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Codes
+     * Count returned Authentications
     **/
-    _count?: true | CodeCountAggregateInputType
+    _count?: true | AuthenticationCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: CodeMinAggregateInputType
+    _min?: AuthenticationMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: CodeMaxAggregateInputType
+    _max?: AuthenticationMaxAggregateInputType
   }
 
-  export type GetCodeAggregateType<T extends CodeAggregateArgs> = {
-        [P in keyof T & keyof AggregateCode]: P extends '_count' | 'count'
+  export type GetAuthenticationAggregateType<T extends AuthenticationAggregateArgs> = {
+        [P in keyof T & keyof AggregateAuthentication]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateCode[P]>
-      : GetScalarType<T[P], AggregateCode[P]>
+        : GetScalarType<T[P], AggregateAuthentication[P]>
+      : GetScalarType<T[P], AggregateAuthentication[P]>
   }
 
 
 
 
-  export type CodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CodeWhereInput
-    orderBy?: CodeOrderByWithAggregationInput | CodeOrderByWithAggregationInput[]
-    by: CodeScalarFieldEnum[] | CodeScalarFieldEnum
-    having?: CodeScalarWhereWithAggregatesInput
+  export type AuthenticationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuthenticationWhereInput
+    orderBy?: AuthenticationOrderByWithAggregationInput | AuthenticationOrderByWithAggregationInput[]
+    by: AuthenticationScalarFieldEnum[] | AuthenticationScalarFieldEnum
+    having?: AuthenticationScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: CodeCountAggregateInputType | true
-    _min?: CodeMinAggregateInputType
-    _max?: CodeMaxAggregateInputType
+    _count?: AuthenticationCountAggregateInputType | true
+    _min?: AuthenticationMinAggregateInputType
+    _max?: AuthenticationMaxAggregateInputType
   }
 
-  export type CodeGroupByOutputType = {
-    tokens: string[]
+  export type AuthenticationGroupByOutputType = {
+    code: string
     expiresAt: Date | null
-    type: $Enums.TypeCode
+    type: $Enums.AuthType
     userId: string
     createdAt: Date
     updatedAt: Date | null
-    _count: CodeCountAggregateOutputType | null
-    _min: CodeMinAggregateOutputType | null
-    _max: CodeMaxAggregateOutputType | null
+    _count: AuthenticationCountAggregateOutputType | null
+    _min: AuthenticationMinAggregateOutputType | null
+    _max: AuthenticationMaxAggregateOutputType | null
   }
 
-  type GetCodeGroupByPayload<T extends CodeGroupByArgs> = Prisma.PrismaPromise<
+  type GetAuthenticationGroupByPayload<T extends AuthenticationGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<CodeGroupByOutputType, T['by']> &
+      PickEnumerable<AuthenticationGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof CodeGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof AuthenticationGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], CodeGroupByOutputType[P]>
-            : GetScalarType<T[P], CodeGroupByOutputType[P]>
+              : GetScalarType<T[P], AuthenticationGroupByOutputType[P]>
+            : GetScalarType<T[P], AuthenticationGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type CodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    tokens?: boolean
+  export type AuthenticationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    code?: boolean
     expiresAt?: boolean
     type?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["code"]>
+  }, ExtArgs["result"]["authentication"]>
 
-  export type CodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    tokens?: boolean
+  export type AuthenticationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    code?: boolean
     expiresAt?: boolean
     type?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["code"]>
+  }, ExtArgs["result"]["authentication"]>
 
-  export type CodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    tokens?: boolean
+  export type AuthenticationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    code?: boolean
     expiresAt?: boolean
     type?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["code"]>
+  }, ExtArgs["result"]["authentication"]>
 
-  export type CodeSelectScalar = {
-    tokens?: boolean
+  export type AuthenticationSelectScalar = {
+    code?: boolean
     expiresAt?: boolean
     type?: boolean
     userId?: boolean
@@ -15663,160 +15667,160 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type CodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tokens" | "expiresAt" | "type" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["code"]>
-  export type CodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"code" | "expiresAt" | "type" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["authentication"]>
+  export type AuthenticationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type CodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type CodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $CodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Code"
+  export type $AuthenticationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Authentication"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      tokens: string[]
+      code: string
       expiresAt: Date | null
-      type: $Enums.TypeCode
+      type: $Enums.AuthType
       userId: string
       createdAt: Date
       updatedAt: Date | null
-    }, ExtArgs["result"]["code"]>
+    }, ExtArgs["result"]["authentication"]>
     composites: {}
   }
 
-  type CodeGetPayload<S extends boolean | null | undefined | CodeDefaultArgs> = $Result.GetResult<Prisma.$CodePayload, S>
+  type AuthenticationGetPayload<S extends boolean | null | undefined | AuthenticationDefaultArgs> = $Result.GetResult<Prisma.$AuthenticationPayload, S>
 
-  type CodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit' | 'relationLoadStrategy'> & {
-      select?: CodeCountAggregateInputType | true
+  type AuthenticationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AuthenticationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit' | 'relationLoadStrategy'> & {
+      select?: AuthenticationCountAggregateInputType | true
     }
 
-  export interface CodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Code'], meta: { name: 'Code' } }
+  export interface AuthenticationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Authentication'], meta: { name: 'Authentication' } }
     /**
-     * Find zero or one Code that matches the filter.
-     * @param {CodeFindUniqueArgs} args - Arguments to find a Code
+     * Find zero or one Authentication that matches the filter.
+     * @param {AuthenticationFindUniqueArgs} args - Arguments to find a Authentication
      * @example
-     * // Get one Code
-     * const code = await prisma.code.findUnique({
+     * // Get one Authentication
+     * const authentication = await prisma.authentication.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends CodeFindUniqueArgs>(args: SelectSubset<T, CodeFindUniqueArgs<ExtArgs>>): Prisma__CodeClient<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends AuthenticationFindUniqueArgs>(args: SelectSubset<T, AuthenticationFindUniqueArgs<ExtArgs>>): Prisma__AuthenticationClient<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Code that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Authentication that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {CodeFindUniqueOrThrowArgs} args - Arguments to find a Code
+     * @param {AuthenticationFindUniqueOrThrowArgs} args - Arguments to find a Authentication
      * @example
-     * // Get one Code
-     * const code = await prisma.code.findUniqueOrThrow({
+     * // Get one Authentication
+     * const authentication = await prisma.authentication.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CodeFindUniqueOrThrowArgs>(args: SelectSubset<T, CodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CodeClient<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends AuthenticationFindUniqueOrThrowArgs>(args: SelectSubset<T, AuthenticationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AuthenticationClient<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Code that matches the filter.
+     * Find the first Authentication that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CodeFindFirstArgs} args - Arguments to find a Code
+     * @param {AuthenticationFindFirstArgs} args - Arguments to find a Authentication
      * @example
-     * // Get one Code
-     * const code = await prisma.code.findFirst({
+     * // Get one Authentication
+     * const authentication = await prisma.authentication.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends CodeFindFirstArgs>(args?: SelectSubset<T, CodeFindFirstArgs<ExtArgs>>): Prisma__CodeClient<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends AuthenticationFindFirstArgs>(args?: SelectSubset<T, AuthenticationFindFirstArgs<ExtArgs>>): Prisma__AuthenticationClient<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Code that matches the filter or
+     * Find the first Authentication that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CodeFindFirstOrThrowArgs} args - Arguments to find a Code
+     * @param {AuthenticationFindFirstOrThrowArgs} args - Arguments to find a Authentication
      * @example
-     * // Get one Code
-     * const code = await prisma.code.findFirstOrThrow({
+     * // Get one Authentication
+     * const authentication = await prisma.authentication.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends CodeFindFirstOrThrowArgs>(args?: SelectSubset<T, CodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__CodeClient<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends AuthenticationFindFirstOrThrowArgs>(args?: SelectSubset<T, AuthenticationFindFirstOrThrowArgs<ExtArgs>>): Prisma__AuthenticationClient<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Codes that matches the filter.
+     * Find zero or more Authentications that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {AuthenticationFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Codes
-     * const codes = await prisma.code.findMany()
+     * // Get all Authentications
+     * const authentications = await prisma.authentication.findMany()
      * 
-     * // Get first 10 Codes
-     * const codes = await prisma.code.findMany({ take: 10 })
+     * // Get first 10 Authentications
+     * const authentications = await prisma.authentication.findMany({ take: 10 })
      * 
-     * // Only select the `tokens`
-     * const codeWithTokensOnly = await prisma.code.findMany({ select: { tokens: true } })
+     * // Only select the `code`
+     * const authenticationWithCodeOnly = await prisma.authentication.findMany({ select: { code: true } })
      * 
      */
-    findMany<T extends CodeFindManyArgs>(args?: SelectSubset<T, CodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends AuthenticationFindManyArgs>(args?: SelectSubset<T, AuthenticationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Code.
-     * @param {CodeCreateArgs} args - Arguments to create a Code.
+     * Create a Authentication.
+     * @param {AuthenticationCreateArgs} args - Arguments to create a Authentication.
      * @example
-     * // Create one Code
-     * const Code = await prisma.code.create({
+     * // Create one Authentication
+     * const Authentication = await prisma.authentication.create({
      *   data: {
-     *     // ... data to create a Code
+     *     // ... data to create a Authentication
      *   }
      * })
      * 
      */
-    create<T extends CodeCreateArgs>(args: SelectSubset<T, CodeCreateArgs<ExtArgs>>): Prisma__CodeClient<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends AuthenticationCreateArgs>(args: SelectSubset<T, AuthenticationCreateArgs<ExtArgs>>): Prisma__AuthenticationClient<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Codes.
-     * @param {CodeCreateManyArgs} args - Arguments to create many Codes.
+     * Create many Authentications.
+     * @param {AuthenticationCreateManyArgs} args - Arguments to create many Authentications.
      * @example
-     * // Create many Codes
-     * const code = await prisma.code.createMany({
+     * // Create many Authentications
+     * const authentication = await prisma.authentication.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends CodeCreateManyArgs>(args?: SelectSubset<T, CodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends AuthenticationCreateManyArgs>(args?: SelectSubset<T, AuthenticationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Codes and returns the data saved in the database.
-     * @param {CodeCreateManyAndReturnArgs} args - Arguments to create many Codes.
+     * Create many Authentications and returns the data saved in the database.
+     * @param {AuthenticationCreateManyAndReturnArgs} args - Arguments to create many Authentications.
      * @example
-     * // Create many Codes
-     * const code = await prisma.code.createManyAndReturn({
+     * // Create many Authentications
+     * const authentication = await prisma.authentication.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Codes and only return the `tokens`
-     * const codeWithTokensOnly = await prisma.code.createManyAndReturn({
-     *   select: { tokens: true },
+     * // Create many Authentications and only return the `code`
+     * const authenticationWithCodeOnly = await prisma.authentication.createManyAndReturn({
+     *   select: { code: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -15825,28 +15829,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CodeCreateManyAndReturnArgs>(args?: SelectSubset<T, CodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends AuthenticationCreateManyAndReturnArgs>(args?: SelectSubset<T, AuthenticationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Code.
-     * @param {CodeDeleteArgs} args - Arguments to delete one Code.
+     * Delete a Authentication.
+     * @param {AuthenticationDeleteArgs} args - Arguments to delete one Authentication.
      * @example
-     * // Delete one Code
-     * const Code = await prisma.code.delete({
+     * // Delete one Authentication
+     * const Authentication = await prisma.authentication.delete({
      *   where: {
-     *     // ... filter to delete one Code
+     *     // ... filter to delete one Authentication
      *   }
      * })
      * 
      */
-    delete<T extends CodeDeleteArgs>(args: SelectSubset<T, CodeDeleteArgs<ExtArgs>>): Prisma__CodeClient<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends AuthenticationDeleteArgs>(args: SelectSubset<T, AuthenticationDeleteArgs<ExtArgs>>): Prisma__AuthenticationClient<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Code.
-     * @param {CodeUpdateArgs} args - Arguments to update one Code.
+     * Update one Authentication.
+     * @param {AuthenticationUpdateArgs} args - Arguments to update one Authentication.
      * @example
-     * // Update one Code
-     * const code = await prisma.code.update({
+     * // Update one Authentication
+     * const authentication = await prisma.authentication.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -15856,30 +15860,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CodeUpdateArgs>(args: SelectSubset<T, CodeUpdateArgs<ExtArgs>>): Prisma__CodeClient<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends AuthenticationUpdateArgs>(args: SelectSubset<T, AuthenticationUpdateArgs<ExtArgs>>): Prisma__AuthenticationClient<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Codes.
-     * @param {CodeDeleteManyArgs} args - Arguments to filter Codes to delete.
+     * Delete zero or more Authentications.
+     * @param {AuthenticationDeleteManyArgs} args - Arguments to filter Authentications to delete.
      * @example
-     * // Delete a few Codes
-     * const { count } = await prisma.code.deleteMany({
+     * // Delete a few Authentications
+     * const { count } = await prisma.authentication.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends CodeDeleteManyArgs>(args?: SelectSubset<T, CodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends AuthenticationDeleteManyArgs>(args?: SelectSubset<T, AuthenticationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Codes.
+     * Update zero or more Authentications.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {AuthenticationUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Codes
-     * const code = await prisma.code.updateMany({
+     * // Update many Authentications
+     * const authentication = await prisma.authentication.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -15889,14 +15893,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends CodeUpdateManyArgs>(args: SelectSubset<T, CodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends AuthenticationUpdateManyArgs>(args: SelectSubset<T, AuthenticationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Codes and returns the data updated in the database.
-     * @param {CodeUpdateManyAndReturnArgs} args - Arguments to update many Codes.
+     * Update zero or more Authentications and returns the data updated in the database.
+     * @param {AuthenticationUpdateManyAndReturnArgs} args - Arguments to update many Authentications.
      * @example
-     * // Update many Codes
-     * const code = await prisma.code.updateManyAndReturn({
+     * // Update many Authentications
+     * const authentication = await prisma.authentication.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -15905,9 +15909,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Codes and only return the `tokens`
-     * const codeWithTokensOnly = await prisma.code.updateManyAndReturn({
-     *   select: { tokens: true },
+     * // Update zero or more Authentications and only return the `code`
+     * const authenticationWithCodeOnly = await prisma.authentication.updateManyAndReturn({
+     *   select: { code: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -15919,56 +15923,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CodeUpdateManyAndReturnArgs>(args: SelectSubset<T, CodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends AuthenticationUpdateManyAndReturnArgs>(args: SelectSubset<T, AuthenticationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Code.
-     * @param {CodeUpsertArgs} args - Arguments to update or create a Code.
+     * Create or update one Authentication.
+     * @param {AuthenticationUpsertArgs} args - Arguments to update or create a Authentication.
      * @example
-     * // Update or create a Code
-     * const code = await prisma.code.upsert({
+     * // Update or create a Authentication
+     * const authentication = await prisma.authentication.upsert({
      *   create: {
-     *     // ... data to create a Code
+     *     // ... data to create a Authentication
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Code we want to update
+     *     // ... the filter for the Authentication we want to update
      *   }
      * })
      */
-    upsert<T extends CodeUpsertArgs>(args: SelectSubset<T, CodeUpsertArgs<ExtArgs>>): Prisma__CodeClient<$Result.GetResult<Prisma.$CodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends AuthenticationUpsertArgs>(args: SelectSubset<T, AuthenticationUpsertArgs<ExtArgs>>): Prisma__AuthenticationClient<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Codes.
+     * Count the number of Authentications.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CodeCountArgs} args - Arguments to filter Codes to count.
+     * @param {AuthenticationCountArgs} args - Arguments to filter Authentications to count.
      * @example
-     * // Count the number of Codes
-     * const count = await prisma.code.count({
+     * // Count the number of Authentications
+     * const count = await prisma.authentication.count({
      *   where: {
-     *     // ... the filter for the Codes we want to count
+     *     // ... the filter for the Authentications we want to count
      *   }
      * })
     **/
-    count<T extends CodeCountArgs>(
-      args?: Subset<T, CodeCountArgs>,
+    count<T extends AuthenticationCountArgs>(
+      args?: Subset<T, AuthenticationCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], CodeCountAggregateOutputType>
+          : GetScalarType<T['select'], AuthenticationCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Code.
+     * Allows you to perform aggregations operations on a Authentication.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {AuthenticationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -15988,13 +15992,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CodeAggregateArgs>(args: Subset<T, CodeAggregateArgs>): Prisma.PrismaPromise<GetCodeAggregateType<T>>
+    aggregate<T extends AuthenticationAggregateArgs>(args: Subset<T, AuthenticationAggregateArgs>): Prisma.PrismaPromise<GetAuthenticationAggregateType<T>>
 
     /**
-     * Group by Code.
+     * Group by Authentication.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CodeGroupByArgs} args - Group by arguments.
+     * @param {AuthenticationGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -16009,14 +16013,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends CodeGroupByArgs,
+      T extends AuthenticationGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CodeGroupByArgs['orderBy'] }
-        : { orderBy?: CodeGroupByArgs['orderBy'] },
+        ? { orderBy: AuthenticationGroupByArgs['orderBy'] }
+        : { orderBy?: AuthenticationGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -16065,20 +16069,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, AuthenticationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAuthenticationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Code model
+   * Fields of the Authentication model
    */
-  readonly fields: CodeFieldRefs;
+  readonly fields: AuthenticationFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Code.
+   * The delegate class that acts as a "Promise-like" for Authentication.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__AuthenticationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -16107,435 +16111,435 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Code model
+   * Fields of the Authentication model
    */
-  interface CodeFieldRefs {
-    readonly tokens: FieldRef<"Code", 'String[]'>
-    readonly expiresAt: FieldRef<"Code", 'DateTime'>
-    readonly type: FieldRef<"Code", 'TypeCode'>
-    readonly userId: FieldRef<"Code", 'String'>
-    readonly createdAt: FieldRef<"Code", 'DateTime'>
-    readonly updatedAt: FieldRef<"Code", 'DateTime'>
+  interface AuthenticationFieldRefs {
+    readonly code: FieldRef<"Authentication", 'String'>
+    readonly expiresAt: FieldRef<"Authentication", 'DateTime'>
+    readonly type: FieldRef<"Authentication", 'AuthType'>
+    readonly userId: FieldRef<"Authentication", 'String'>
+    readonly createdAt: FieldRef<"Authentication", 'DateTime'>
+    readonly updatedAt: FieldRef<"Authentication", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Code findUnique
+   * Authentication findUnique
    */
-  export type CodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * Filter, which Code to fetch.
+     * Filter, which Authentication to fetch.
      */
-    where: CodeWhereUniqueInput
+    where: AuthenticationWhereUniqueInput
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code findUniqueOrThrow
+   * Authentication findUniqueOrThrow
    */
-  export type CodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * Filter, which Code to fetch.
+     * Filter, which Authentication to fetch.
      */
-    where: CodeWhereUniqueInput
+    where: AuthenticationWhereUniqueInput
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code findFirst
+   * Authentication findFirst
    */
-  export type CodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * Filter, which Code to fetch.
+     * Filter, which Authentication to fetch.
      */
-    where?: CodeWhereInput
+    where?: AuthenticationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Codes to fetch.
+     * Determine the order of Authentications to fetch.
      */
-    orderBy?: CodeOrderByWithRelationInput | CodeOrderByWithRelationInput[]
+    orderBy?: AuthenticationOrderByWithRelationInput | AuthenticationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Codes.
+     * Sets the position for searching for Authentications.
      */
-    cursor?: CodeWhereUniqueInput
+    cursor?: AuthenticationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Codes from the position of the cursor.
+     * Take `±n` Authentications from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Codes.
+     * Skip the first `n` Authentications.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Codes.
+     * Filter by unique combinations of Authentications.
      */
-    distinct?: CodeScalarFieldEnum | CodeScalarFieldEnum[]
+    distinct?: AuthenticationScalarFieldEnum | AuthenticationScalarFieldEnum[]
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code findFirstOrThrow
+   * Authentication findFirstOrThrow
    */
-  export type CodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * Filter, which Code to fetch.
+     * Filter, which Authentication to fetch.
      */
-    where?: CodeWhereInput
+    where?: AuthenticationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Codes to fetch.
+     * Determine the order of Authentications to fetch.
      */
-    orderBy?: CodeOrderByWithRelationInput | CodeOrderByWithRelationInput[]
+    orderBy?: AuthenticationOrderByWithRelationInput | AuthenticationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Codes.
+     * Sets the position for searching for Authentications.
      */
-    cursor?: CodeWhereUniqueInput
+    cursor?: AuthenticationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Codes from the position of the cursor.
+     * Take `±n` Authentications from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Codes.
+     * Skip the first `n` Authentications.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Codes.
+     * Filter by unique combinations of Authentications.
      */
-    distinct?: CodeScalarFieldEnum | CodeScalarFieldEnum[]
+    distinct?: AuthenticationScalarFieldEnum | AuthenticationScalarFieldEnum[]
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code findMany
+   * Authentication findMany
    */
-  export type CodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * Filter, which Codes to fetch.
+     * Filter, which Authentications to fetch.
      */
-    where?: CodeWhereInput
+    where?: AuthenticationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Codes to fetch.
+     * Determine the order of Authentications to fetch.
      */
-    orderBy?: CodeOrderByWithRelationInput | CodeOrderByWithRelationInput[]
+    orderBy?: AuthenticationOrderByWithRelationInput | AuthenticationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Codes.
+     * Sets the position for listing Authentications.
      */
-    cursor?: CodeWhereUniqueInput
+    cursor?: AuthenticationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Codes from the position of the cursor.
+     * Take `±n` Authentications from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Codes.
+     * Skip the first `n` Authentications.
      */
     skip?: number
-    distinct?: CodeScalarFieldEnum | CodeScalarFieldEnum[]
+    distinct?: AuthenticationScalarFieldEnum | AuthenticationScalarFieldEnum[]
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code create
+   * Authentication create
    */
-  export type CodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * The data needed to create a Code.
+     * The data needed to create a Authentication.
      */
-    data: XOR<CodeCreateInput, CodeUncheckedCreateInput>
+    data: XOR<AuthenticationCreateInput, AuthenticationUncheckedCreateInput>
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code createMany
+   * Authentication createMany
    */
-  export type CodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Codes.
+     * The data used to create many Authentications.
      */
-    data: CodeCreateManyInput | CodeCreateManyInput[]
+    data: AuthenticationCreateManyInput | AuthenticationCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Code createManyAndReturn
+   * Authentication createManyAndReturn
    */
-  export type CodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelectCreateManyAndReturn<ExtArgs> | null
+    select?: AuthenticationSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
-     * The data used to create many Codes.
+     * The data used to create many Authentications.
      */
-    data: CodeCreateManyInput | CodeCreateManyInput[]
+    data: AuthenticationCreateManyInput | AuthenticationCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: AuthenticationIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Code update
+   * Authentication update
    */
-  export type CodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * The data needed to update a Code.
+     * The data needed to update a Authentication.
      */
-    data: XOR<CodeUpdateInput, CodeUncheckedUpdateInput>
+    data: XOR<AuthenticationUpdateInput, AuthenticationUncheckedUpdateInput>
     /**
-     * Choose, which Code to update.
+     * Choose, which Authentication to update.
      */
-    where: CodeWhereUniqueInput
+    where: AuthenticationWhereUniqueInput
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code updateMany
+   * Authentication updateMany
    */
-  export type CodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Codes.
+     * The data used to update Authentications.
      */
-    data: XOR<CodeUpdateManyMutationInput, CodeUncheckedUpdateManyInput>
+    data: XOR<AuthenticationUpdateManyMutationInput, AuthenticationUncheckedUpdateManyInput>
     /**
-     * Filter which Codes to update
+     * Filter which Authentications to update
      */
-    where?: CodeWhereInput
+    where?: AuthenticationWhereInput
     /**
-     * Limit how many Codes to update.
+     * Limit how many Authentications to update.
      */
     limit?: number
   }
 
   /**
-   * Code updateManyAndReturn
+   * Authentication updateManyAndReturn
    */
-  export type CodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: AuthenticationSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
-     * The data used to update Codes.
+     * The data used to update Authentications.
      */
-    data: XOR<CodeUpdateManyMutationInput, CodeUncheckedUpdateManyInput>
+    data: XOR<AuthenticationUpdateManyMutationInput, AuthenticationUncheckedUpdateManyInput>
     /**
-     * Filter which Codes to update
+     * Filter which Authentications to update
      */
-    where?: CodeWhereInput
+    where?: AuthenticationWhereInput
     /**
-     * Limit how many Codes to update.
+     * Limit how many Authentications to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: AuthenticationIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Code upsert
+   * Authentication upsert
    */
-  export type CodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * The filter to search for the Code to update in case it exists.
+     * The filter to search for the Authentication to update in case it exists.
      */
-    where: CodeWhereUniqueInput
+    where: AuthenticationWhereUniqueInput
     /**
-     * In case the Code found by the `where` argument doesn't exist, create a new Code with this data.
+     * In case the Authentication found by the `where` argument doesn't exist, create a new Authentication with this data.
      */
-    create: XOR<CodeCreateInput, CodeUncheckedCreateInput>
+    create: XOR<AuthenticationCreateInput, AuthenticationUncheckedCreateInput>
     /**
-     * In case the Code was found with the provided `where` argument, update it with this data.
+     * In case the Authentication was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<CodeUpdateInput, CodeUncheckedUpdateInput>
+    update: XOR<AuthenticationUpdateInput, AuthenticationUncheckedUpdateInput>
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code delete
+   * Authentication delete
    */
-  export type CodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
     /**
-     * Filter which Code to delete.
+     * Filter which Authentication to delete.
      */
-    where: CodeWhereUniqueInput
+    where: AuthenticationWhereUniqueInput
     relationLoadStrategy?: RelationLoadStrategy
   }
 
   /**
-   * Code deleteMany
+   * Authentication deleteMany
    */
-  export type CodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Codes to delete
+     * Filter which Authentications to delete
      */
-    where?: CodeWhereInput
+    where?: AuthenticationWhereInput
     /**
-     * Limit how many Codes to delete.
+     * Limit how many Authentications to delete.
      */
     limit?: number
   }
 
   /**
-   * Code without action
+   * Authentication without action
    */
-  export type CodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthenticationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Code
+     * Select specific fields to fetch from the Authentication
      */
-    select?: CodeSelect<ExtArgs> | null
+    select?: AuthenticationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Code
+     * Omit specific fields from the Authentication
      */
-    omit?: CodeOmit<ExtArgs> | null
+    omit?: AuthenticationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: CodeInclude<ExtArgs> | null
+    include?: AuthenticationInclude<ExtArgs> | null
   }
 
 
@@ -17855,8 +17859,8 @@ export namespace Prisma {
   export type SocialLinkedsScalarFieldEnum = (typeof SocialLinkedsScalarFieldEnum)[keyof typeof SocialLinkedsScalarFieldEnum]
 
 
-  export const CodeScalarFieldEnum: {
-    tokens: 'tokens',
+  export const AuthenticationScalarFieldEnum: {
+    code: 'code',
     expiresAt: 'expiresAt',
     type: 'type',
     userId: 'userId',
@@ -17864,7 +17868,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type CodeScalarFieldEnum = (typeof CodeScalarFieldEnum)[keyof typeof CodeScalarFieldEnum]
+  export type AuthenticationScalarFieldEnum = (typeof AuthenticationScalarFieldEnum)[keyof typeof AuthenticationScalarFieldEnum]
 
 
   export const SessionScalarFieldEnum: {
@@ -18189,16 +18193,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TypeCode'
+   * Reference to a field of type 'AuthType'
    */
-  export type EnumTypeCodeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeCode'>
+  export type EnumAuthTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthType'>
     
 
 
   /**
-   * Reference to a field of type 'TypeCode[]'
+   * Reference to a field of type 'AuthType[]'
    */
-  export type ListEnumTypeCodeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeCode[]'>
+  export type ListEnumAuthTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthType[]'>
     
 
 
@@ -18692,10 +18696,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipListRelationFilter
     receivedFriendRequests?: FriendshipListRelationFilter
     posts?: PostListRelationFilter
+    session?: SessionListRelationFilter
     comments?: CommentListRelationFilter
     reactions?: ReactionListRelationFilter
-    code?: CodeListRelationFilter
-    session?: SessionListRelationFilter
+    auth?: AuthenticationListRelationFilter
     notifications?: NotificationListRelationFilter
     notificationActions?: NotificationListRelationFilter
   }
@@ -18732,10 +18736,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipOrderByRelationAggregateInput
     receivedFriendRequests?: FriendshipOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
+    session?: SessionOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
     reactions?: ReactionOrderByRelationAggregateInput
-    code?: CodeOrderByRelationAggregateInput
-    session?: SessionOrderByRelationAggregateInput
+    auth?: AuthenticationOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
     notificationActions?: NotificationOrderByRelationAggregateInput
   }
@@ -18775,10 +18779,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipListRelationFilter
     receivedFriendRequests?: FriendshipListRelationFilter
     posts?: PostListRelationFilter
+    session?: SessionListRelationFilter
     comments?: CommentListRelationFilter
     reactions?: ReactionListRelationFilter
-    code?: CodeListRelationFilter
-    session?: SessionListRelationFilter
+    auth?: AuthenticationListRelationFilter
     notifications?: NotificationListRelationFilter
     notificationActions?: NotificationListRelationFilter
   }, "id" | "profileId" | "primaryEmailId" | "primaryPhoneId" | "username">
@@ -19116,21 +19120,21 @@ export namespace Prisma {
     userId?: UuidWithAggregatesFilter<"SocialLinkeds"> | string
   }
 
-  export type CodeWhereInput = {
-    AND?: CodeWhereInput | CodeWhereInput[]
-    OR?: CodeWhereInput[]
-    NOT?: CodeWhereInput | CodeWhereInput[]
-    tokens?: StringNullableListFilter<"Code">
-    expiresAt?: DateTimeNullableFilter<"Code"> | Date | string | null
-    type?: EnumTypeCodeFilter<"Code"> | $Enums.TypeCode
-    userId?: UuidFilter<"Code"> | string
-    createdAt?: DateTimeFilter<"Code"> | Date | string
-    updatedAt?: DateTimeNullableFilter<"Code"> | Date | string | null
+  export type AuthenticationWhereInput = {
+    AND?: AuthenticationWhereInput | AuthenticationWhereInput[]
+    OR?: AuthenticationWhereInput[]
+    NOT?: AuthenticationWhereInput | AuthenticationWhereInput[]
+    code?: StringFilter<"Authentication"> | string
+    expiresAt?: DateTimeNullableFilter<"Authentication"> | Date | string | null
+    type?: EnumAuthTypeFilter<"Authentication"> | $Enums.AuthType
+    userId?: UuidFilter<"Authentication"> | string
+    createdAt?: DateTimeFilter<"Authentication"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Authentication"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type CodeOrderByWithRelationInput = {
-    tokens?: SortOrder
+  export type AuthenticationOrderByWithRelationInput = {
+    code?: SortOrder
     expiresAt?: SortOrderInput | SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -19139,42 +19143,42 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
   }
 
-  export type CodeWhereUniqueInput = Prisma.AtLeast<{
-    id?: CodeIdCompoundUniqueInput
-    AND?: CodeWhereInput | CodeWhereInput[]
-    OR?: CodeWhereInput[]
-    NOT?: CodeWhereInput | CodeWhereInput[]
-    tokens?: StringNullableListFilter<"Code">
-    expiresAt?: DateTimeNullableFilter<"Code"> | Date | string | null
-    type?: EnumTypeCodeFilter<"Code"> | $Enums.TypeCode
-    userId?: UuidFilter<"Code"> | string
-    createdAt?: DateTimeFilter<"Code"> | Date | string
-    updatedAt?: DateTimeNullableFilter<"Code"> | Date | string | null
+  export type AuthenticationWhereUniqueInput = Prisma.AtLeast<{
+    id?: AuthenticationIdCompoundUniqueInput
+    AND?: AuthenticationWhereInput | AuthenticationWhereInput[]
+    OR?: AuthenticationWhereInput[]
+    NOT?: AuthenticationWhereInput | AuthenticationWhereInput[]
+    code?: StringFilter<"Authentication"> | string
+    expiresAt?: DateTimeNullableFilter<"Authentication"> | Date | string | null
+    type?: EnumAuthTypeFilter<"Authentication"> | $Enums.AuthType
+    userId?: UuidFilter<"Authentication"> | string
+    createdAt?: DateTimeFilter<"Authentication"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Authentication"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type CodeOrderByWithAggregationInput = {
-    tokens?: SortOrder
+  export type AuthenticationOrderByWithAggregationInput = {
+    code?: SortOrder
     expiresAt?: SortOrderInput | SortOrder
     type?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrderInput | SortOrder
-    _count?: CodeCountOrderByAggregateInput
-    _max?: CodeMaxOrderByAggregateInput
-    _min?: CodeMinOrderByAggregateInput
+    _count?: AuthenticationCountOrderByAggregateInput
+    _max?: AuthenticationMaxOrderByAggregateInput
+    _min?: AuthenticationMinOrderByAggregateInput
   }
 
-  export type CodeScalarWhereWithAggregatesInput = {
-    AND?: CodeScalarWhereWithAggregatesInput | CodeScalarWhereWithAggregatesInput[]
-    OR?: CodeScalarWhereWithAggregatesInput[]
-    NOT?: CodeScalarWhereWithAggregatesInput | CodeScalarWhereWithAggregatesInput[]
-    tokens?: StringNullableListFilter<"Code">
-    expiresAt?: DateTimeNullableWithAggregatesFilter<"Code"> | Date | string | null
-    type?: EnumTypeCodeWithAggregatesFilter<"Code"> | $Enums.TypeCode
-    userId?: UuidWithAggregatesFilter<"Code"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Code"> | Date | string
-    updatedAt?: DateTimeNullableWithAggregatesFilter<"Code"> | Date | string | null
+  export type AuthenticationScalarWhereWithAggregatesInput = {
+    AND?: AuthenticationScalarWhereWithAggregatesInput | AuthenticationScalarWhereWithAggregatesInput[]
+    OR?: AuthenticationScalarWhereWithAggregatesInput[]
+    NOT?: AuthenticationScalarWhereWithAggregatesInput | AuthenticationScalarWhereWithAggregatesInput[]
+    code?: StringWithAggregatesFilter<"Authentication"> | string
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"Authentication"> | Date | string | null
+    type?: EnumAuthTypeWithAggregatesFilter<"Authentication"> | $Enums.AuthType
+    userId?: UuidWithAggregatesFilter<"Authentication"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Authentication"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"Authentication"> | Date | string | null
   }
 
   export type SessionWhereInput = {
@@ -19763,10 +19767,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -19801,10 +19805,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -19839,10 +19843,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -19877,10 +19881,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -20222,63 +20226,63 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type CodeCreateInput = {
-    tokens?: CodeCreatetokensInput | string[]
+  export type AuthenticationCreateInput = {
+    code: string
     expiresAt?: Date | string | null
-    type: $Enums.TypeCode
+    type: $Enums.AuthType
     createdAt?: Date | string
     updatedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutCodeInput
+    user: UserCreateNestedOneWithoutAuthInput
   }
 
-  export type CodeUncheckedCreateInput = {
-    tokens?: CodeCreatetokensInput | string[]
+  export type AuthenticationUncheckedCreateInput = {
+    code: string
     expiresAt?: Date | string | null
-    type: $Enums.TypeCode
+    type: $Enums.AuthType
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string | null
   }
 
-  export type CodeUpdateInput = {
-    tokens?: CodeUpdatetokensInput | string[]
+  export type AuthenticationUpdateInput = {
+    code?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
+    type?: EnumAuthTypeFieldUpdateOperationsInput | $Enums.AuthType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutCodeNestedInput
+    user?: UserUpdateOneRequiredWithoutAuthNestedInput
   }
 
-  export type CodeUncheckedUpdateInput = {
-    tokens?: CodeUpdatetokensInput | string[]
+  export type AuthenticationUncheckedUpdateInput = {
+    code?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
+    type?: EnumAuthTypeFieldUpdateOperationsInput | $Enums.AuthType
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type CodeCreateManyInput = {
-    tokens?: CodeCreatetokensInput | string[]
+  export type AuthenticationCreateManyInput = {
+    code: string
     expiresAt?: Date | string | null
-    type: $Enums.TypeCode
+    type: $Enums.AuthType
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string | null
   }
 
-  export type CodeUpdateManyMutationInput = {
-    tokens?: CodeUpdatetokensInput | string[]
+  export type AuthenticationUpdateManyMutationInput = {
+    code?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
+    type?: EnumAuthTypeFieldUpdateOperationsInput | $Enums.AuthType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type CodeUncheckedUpdateManyInput = {
-    tokens?: CodeUpdatetokensInput | string[]
+  export type AuthenticationUncheckedUpdateManyInput = {
+    code?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
+    type?: EnumAuthTypeFieldUpdateOperationsInput | $Enums.AuthType
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21099,16 +21103,16 @@ export namespace Prisma {
     none?: PostWhereInput
   }
 
-  export type CodeListRelationFilter = {
-    every?: CodeWhereInput
-    some?: CodeWhereInput
-    none?: CodeWhereInput
-  }
-
   export type SessionListRelationFilter = {
     every?: SessionWhereInput
     some?: SessionWhereInput
     none?: SessionWhereInput
+  }
+
+  export type AuthenticationListRelationFilter = {
+    every?: AuthenticationWhereInput
+    some?: AuthenticationWhereInput
+    none?: AuthenticationWhereInput
   }
 
   export type NotificationListRelationFilter = {
@@ -21141,11 +21145,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type CodeOrderByRelationAggregateInput = {
+  export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type SessionOrderByRelationAggregateInput = {
+  export type AuthenticationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21415,20 +21419,20 @@ export namespace Prisma {
     _max?: NestedEnumPlatformFilter<$PrismaModel>
   }
 
-  export type EnumTypeCodeFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeCode | EnumTypeCodeFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeCode[] | ListEnumTypeCodeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeCode[] | ListEnumTypeCodeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeCodeFilter<$PrismaModel> | $Enums.TypeCode
+  export type EnumAuthTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuthType | EnumAuthTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AuthType[] | ListEnumAuthTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuthType[] | ListEnumAuthTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuthTypeFilter<$PrismaModel> | $Enums.AuthType
   }
 
-  export type CodeIdCompoundUniqueInput = {
+  export type AuthenticationIdCompoundUniqueInput = {
     userId: string
-    type: $Enums.TypeCode
+    type: $Enums.AuthType
   }
 
-  export type CodeCountOrderByAggregateInput = {
-    tokens?: SortOrder
+  export type AuthenticationCountOrderByAggregateInput = {
+    code?: SortOrder
     expiresAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -21436,7 +21440,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type CodeMaxOrderByAggregateInput = {
+  export type AuthenticationMaxOrderByAggregateInput = {
+    code?: SortOrder
     expiresAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -21444,7 +21449,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type CodeMinOrderByAggregateInput = {
+  export type AuthenticationMinOrderByAggregateInput = {
+    code?: SortOrder
     expiresAt?: SortOrder
     type?: SortOrder
     userId?: SortOrder
@@ -21452,14 +21458,14 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type EnumTypeCodeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeCode | EnumTypeCodeFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeCode[] | ListEnumTypeCodeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeCode[] | ListEnumTypeCodeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeCodeWithAggregatesFilter<$PrismaModel> | $Enums.TypeCode
+  export type EnumAuthTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuthType | EnumAuthTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AuthType[] | ListEnumAuthTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuthType[] | ListEnumAuthTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuthTypeWithAggregatesFilter<$PrismaModel> | $Enums.AuthType
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeCodeFilter<$PrismaModel>
-    _max?: NestedEnumTypeCodeFilter<$PrismaModel>
+    _min?: NestedEnumAuthTypeFilter<$PrismaModel>
+    _max?: NestedEnumAuthTypeFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -21957,6 +21963,13 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
   export type CommentCreateNestedManyWithoutAuthorInput = {
     create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
@@ -21971,18 +21984,11 @@ export namespace Prisma {
     connect?: ReactionWhereUniqueInput | ReactionWhereUniqueInput[]
   }
 
-  export type CodeCreateNestedManyWithoutUserInput = {
-    create?: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput> | CodeCreateWithoutUserInput[] | CodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CodeCreateOrConnectWithoutUserInput | CodeCreateOrConnectWithoutUserInput[]
-    createMany?: CodeCreateManyUserInputEnvelope
-    connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-  }
-
-  export type SessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  export type AuthenticationCreateNestedManyWithoutUserInput = {
+    create?: XOR<AuthenticationCreateWithoutUserInput, AuthenticationUncheckedCreateWithoutUserInput> | AuthenticationCreateWithoutUserInput[] | AuthenticationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuthenticationCreateOrConnectWithoutUserInput | AuthenticationCreateOrConnectWithoutUserInput[]
+    createMany?: AuthenticationCreateManyUserInputEnvelope
+    connect?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
   }
 
   export type NotificationCreateNestedManyWithoutRecipientInput = {
@@ -22055,6 +22061,13 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
   export type CommentUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
@@ -22069,18 +22082,11 @@ export namespace Prisma {
     connect?: ReactionWhereUniqueInput | ReactionWhereUniqueInput[]
   }
 
-  export type CodeUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput> | CodeCreateWithoutUserInput[] | CodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CodeCreateOrConnectWithoutUserInput | CodeCreateOrConnectWithoutUserInput[]
-    createMany?: CodeCreateManyUserInputEnvelope
-    connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-  }
-
-  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  export type AuthenticationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AuthenticationCreateWithoutUserInput, AuthenticationUncheckedCreateWithoutUserInput> | AuthenticationCreateWithoutUserInput[] | AuthenticationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuthenticationCreateOrConnectWithoutUserInput | AuthenticationCreateOrConnectWithoutUserInput[]
+    createMany?: AuthenticationCreateManyUserInputEnvelope
+    connect?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
   }
 
   export type NotificationUncheckedCreateNestedManyWithoutRecipientInput = {
@@ -22250,6 +22256,20 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
   export type CommentUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
@@ -22278,32 +22298,18 @@ export namespace Prisma {
     deleteMany?: ReactionScalarWhereInput | ReactionScalarWhereInput[]
   }
 
-  export type CodeUpdateManyWithoutUserNestedInput = {
-    create?: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput> | CodeCreateWithoutUserInput[] | CodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CodeCreateOrConnectWithoutUserInput | CodeCreateOrConnectWithoutUserInput[]
-    upsert?: CodeUpsertWithWhereUniqueWithoutUserInput | CodeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: CodeCreateManyUserInputEnvelope
-    set?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    disconnect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    delete?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    update?: CodeUpdateWithWhereUniqueWithoutUserInput | CodeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: CodeUpdateManyWithWhereWithoutUserInput | CodeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: CodeScalarWhereInput | CodeScalarWhereInput[]
-  }
-
-  export type SessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  export type AuthenticationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AuthenticationCreateWithoutUserInput, AuthenticationUncheckedCreateWithoutUserInput> | AuthenticationCreateWithoutUserInput[] | AuthenticationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuthenticationCreateOrConnectWithoutUserInput | AuthenticationCreateOrConnectWithoutUserInput[]
+    upsert?: AuthenticationUpsertWithWhereUniqueWithoutUserInput | AuthenticationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AuthenticationCreateManyUserInputEnvelope
+    set?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
+    disconnect?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
+    delete?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
+    connect?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
+    update?: AuthenticationUpdateWithWhereUniqueWithoutUserInput | AuthenticationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AuthenticationUpdateManyWithWhereWithoutUserInput | AuthenticationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AuthenticationScalarWhereInput | AuthenticationScalarWhereInput[]
   }
 
   export type NotificationUpdateManyWithoutRecipientNestedInput = {
@@ -22446,6 +22452,20 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
   export type CommentUncheckedUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
@@ -22474,32 +22494,18 @@ export namespace Prisma {
     deleteMany?: ReactionScalarWhereInput | ReactionScalarWhereInput[]
   }
 
-  export type CodeUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput> | CodeCreateWithoutUserInput[] | CodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: CodeCreateOrConnectWithoutUserInput | CodeCreateOrConnectWithoutUserInput[]
-    upsert?: CodeUpsertWithWhereUniqueWithoutUserInput | CodeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: CodeCreateManyUserInputEnvelope
-    set?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    disconnect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    delete?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    connect?: CodeWhereUniqueInput | CodeWhereUniqueInput[]
-    update?: CodeUpdateWithWhereUniqueWithoutUserInput | CodeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: CodeUpdateManyWithWhereWithoutUserInput | CodeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: CodeScalarWhereInput | CodeScalarWhereInput[]
-  }
-
-  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  export type AuthenticationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AuthenticationCreateWithoutUserInput, AuthenticationUncheckedCreateWithoutUserInput> | AuthenticationCreateWithoutUserInput[] | AuthenticationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuthenticationCreateOrConnectWithoutUserInput | AuthenticationCreateOrConnectWithoutUserInput[]
+    upsert?: AuthenticationUpsertWithWhereUniqueWithoutUserInput | AuthenticationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AuthenticationCreateManyUserInputEnvelope
+    set?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
+    disconnect?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
+    delete?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
+    connect?: AuthenticationWhereUniqueInput | AuthenticationWhereUniqueInput[]
+    update?: AuthenticationUpdateWithWhereUniqueWithoutUserInput | AuthenticationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AuthenticationUpdateManyWithWhereWithoutUserInput | AuthenticationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AuthenticationScalarWhereInput | AuthenticationScalarWhereInput[]
   }
 
   export type NotificationUncheckedUpdateManyWithoutRecipientNestedInput = {
@@ -22708,31 +22714,22 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSocialLinkedsInput, UserUpdateWithoutSocialLinkedsInput>, UserUncheckedUpdateWithoutSocialLinkedsInput>
   }
 
-  export type CodeCreatetokensInput = {
-    set: string[]
-  }
-
-  export type UserCreateNestedOneWithoutCodeInput = {
-    create?: XOR<UserCreateWithoutCodeInput, UserUncheckedCreateWithoutCodeInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCodeInput
+  export type UserCreateNestedOneWithoutAuthInput = {
+    create?: XOR<UserCreateWithoutAuthInput, UserUncheckedCreateWithoutAuthInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAuthInput
     connect?: UserWhereUniqueInput
   }
 
-  export type CodeUpdatetokensInput = {
-    set?: string[]
-    push?: string | string[]
+  export type EnumAuthTypeFieldUpdateOperationsInput = {
+    set?: $Enums.AuthType
   }
 
-  export type EnumTypeCodeFieldUpdateOperationsInput = {
-    set?: $Enums.TypeCode
-  }
-
-  export type UserUpdateOneRequiredWithoutCodeNestedInput = {
-    create?: XOR<UserCreateWithoutCodeInput, UserUncheckedCreateWithoutCodeInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCodeInput
-    upsert?: UserUpsertWithoutCodeInput
+  export type UserUpdateOneRequiredWithoutAuthNestedInput = {
+    create?: XOR<UserCreateWithoutAuthInput, UserUncheckedCreateWithoutAuthInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAuthInput
+    upsert?: UserUpsertWithoutAuthInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCodeInput, UserUpdateWithoutCodeInput>, UserUncheckedUpdateWithoutCodeInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuthInput, UserUpdateWithoutAuthInput>, UserUncheckedUpdateWithoutAuthInput>
   }
 
   export type UserCreateNestedOneWithoutSessionInput = {
@@ -23200,21 +23197,21 @@ export namespace Prisma {
     _max?: NestedEnumPlatformFilter<$PrismaModel>
   }
 
-  export type NestedEnumTypeCodeFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeCode | EnumTypeCodeFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeCode[] | ListEnumTypeCodeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeCode[] | ListEnumTypeCodeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeCodeFilter<$PrismaModel> | $Enums.TypeCode
+  export type NestedEnumAuthTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuthType | EnumAuthTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AuthType[] | ListEnumAuthTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuthType[] | ListEnumAuthTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuthTypeFilter<$PrismaModel> | $Enums.AuthType
   }
 
-  export type NestedEnumTypeCodeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeCode | EnumTypeCodeFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeCode[] | ListEnumTypeCodeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeCode[] | ListEnumTypeCodeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeCodeWithAggregatesFilter<$PrismaModel> | $Enums.TypeCode
+  export type NestedEnumAuthTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuthType | EnumAuthTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AuthType[] | ListEnumAuthTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuthType[] | ListEnumAuthTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuthTypeWithAggregatesFilter<$PrismaModel> | $Enums.AuthType
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeCodeFilter<$PrismaModel>
-    _max?: NestedEnumTypeCodeFilter<$PrismaModel>
+    _min?: NestedEnumAuthTypeFilter<$PrismaModel>
+    _max?: NestedEnumAuthTypeFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -23247,10 +23244,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
 
@@ -23284,10 +23281,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
 
@@ -23326,10 +23323,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
   }
 
@@ -23363,10 +23360,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
   }
 
@@ -23416,10 +23413,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
 
@@ -23453,10 +23450,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
 
@@ -23501,10 +23498,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
   }
 
@@ -23538,10 +23535,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   }
 
@@ -23574,10 +23571,10 @@ export namespace Prisma {
     receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -23611,10 +23608,10 @@ export namespace Prisma {
     receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -23722,10 +23719,10 @@ export namespace Prisma {
     receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -23759,10 +23756,10 @@ export namespace Prisma {
     receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -23854,9 +23851,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
-    reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
     session?: SessionCreateNestedManyWithoutUserInput
+    reactions?: ReactionCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -23891,9 +23888,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
-    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
     session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -24062,9 +24059,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
-    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
     session?: SessionUpdateManyWithoutUserNestedInput
+    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -24099,9 +24096,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
     session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -24240,9 +24237,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
-    comments?: CommentCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
     session?: SessionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -24277,9 +24274,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
-    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
     session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -24390,9 +24387,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
-    comments?: CommentUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
     session?: SessionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -24427,9 +24424,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
     session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -24750,6 +24747,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SessionCreateWithoutUserInput = {
+    id?: string
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    lastLoginAt?: Date | string | null
+    refreshTokenHashed?: string | null
+    deviceName?: string | null
+    userAgent?: string | null
+    ipAddress?: string | null
+    revoked?: boolean
+  }
+
+  export type SessionUncheckedCreateWithoutUserInput = {
+    id?: string
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    lastLoginAt?: Date | string | null
+    refreshTokenHashed?: string | null
+    deviceName?: string | null
+    userAgent?: string | null
+    ipAddress?: string | null
+    revoked?: boolean
+  }
+
+  export type SessionCreateOrConnectWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CommentCreateWithoutAuthorInput = {
     id?: string
     createdAt?: Date | string
@@ -24808,63 +24839,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CodeCreateWithoutUserInput = {
-    tokens?: CodeCreatetokensInput | string[]
+  export type AuthenticationCreateWithoutUserInput = {
+    code: string
     expiresAt?: Date | string | null
-    type: $Enums.TypeCode
+    type: $Enums.AuthType
     createdAt?: Date | string
     updatedAt?: Date | string | null
   }
 
-  export type CodeUncheckedCreateWithoutUserInput = {
-    tokens?: CodeCreatetokensInput | string[]
+  export type AuthenticationUncheckedCreateWithoutUserInput = {
+    code: string
     expiresAt?: Date | string | null
-    type: $Enums.TypeCode
+    type: $Enums.AuthType
     createdAt?: Date | string
     updatedAt?: Date | string | null
   }
 
-  export type CodeCreateOrConnectWithoutUserInput = {
-    where: CodeWhereUniqueInput
-    create: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput>
+  export type AuthenticationCreateOrConnectWithoutUserInput = {
+    where: AuthenticationWhereUniqueInput
+    create: XOR<AuthenticationCreateWithoutUserInput, AuthenticationUncheckedCreateWithoutUserInput>
   }
 
-  export type CodeCreateManyUserInputEnvelope = {
-    data: CodeCreateManyUserInput | CodeCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type SessionCreateWithoutUserInput = {
-    id?: string
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
-    lastLoginAt?: Date | string | null
-    refreshTokenHashed?: string | null
-    deviceName?: string | null
-    userAgent?: string | null
-    ipAddress?: string | null
-    revoked?: boolean
-  }
-
-  export type SessionUncheckedCreateWithoutUserInput = {
-    id?: string
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
-    lastLoginAt?: Date | string | null
-    refreshTokenHashed?: string | null
-    deviceName?: string | null
-    userAgent?: string | null
-    ipAddress?: string | null
-    revoked?: boolean
-  }
-
-  export type SessionCreateOrConnectWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionCreateManyUserInputEnvelope = {
-    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+  export type AuthenticationCreateManyUserInputEnvelope = {
+    data: AuthenticationCreateManyUserInput | AuthenticationCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -25229,6 +25226,38 @@ export namespace Prisma {
     medias?: StringNullableListFilter<"Post">
   }
 
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: UuidFilter<"Session"> | string
+    expiresAt?: DateTimeNullableFilter<"Session"> | Date | string | null
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastLoginAt?: DateTimeNullableFilter<"Session"> | Date | string | null
+    refreshTokenHashed?: StringNullableFilter<"Session"> | string | null
+    deviceName?: StringNullableFilter<"Session"> | string | null
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    userId?: UuidFilter<"Session"> | string
+    revoked?: BoolFilter<"Session"> | boolean
+  }
+
   export type CommentUpsertWithWhereUniqueWithoutAuthorInput = {
     where: CommentWhereUniqueInput
     update: XOR<CommentUpdateWithoutAuthorInput, CommentUncheckedUpdateWithoutAuthorInput>
@@ -25261,64 +25290,32 @@ export namespace Prisma {
     data: XOR<ReactionUpdateManyMutationInput, ReactionUncheckedUpdateManyWithoutAuthorInput>
   }
 
-  export type CodeUpsertWithWhereUniqueWithoutUserInput = {
-    where: CodeWhereUniqueInput
-    update: XOR<CodeUpdateWithoutUserInput, CodeUncheckedUpdateWithoutUserInput>
-    create: XOR<CodeCreateWithoutUserInput, CodeUncheckedCreateWithoutUserInput>
+  export type AuthenticationUpsertWithWhereUniqueWithoutUserInput = {
+    where: AuthenticationWhereUniqueInput
+    update: XOR<AuthenticationUpdateWithoutUserInput, AuthenticationUncheckedUpdateWithoutUserInput>
+    create: XOR<AuthenticationCreateWithoutUserInput, AuthenticationUncheckedCreateWithoutUserInput>
   }
 
-  export type CodeUpdateWithWhereUniqueWithoutUserInput = {
-    where: CodeWhereUniqueInput
-    data: XOR<CodeUpdateWithoutUserInput, CodeUncheckedUpdateWithoutUserInput>
+  export type AuthenticationUpdateWithWhereUniqueWithoutUserInput = {
+    where: AuthenticationWhereUniqueInput
+    data: XOR<AuthenticationUpdateWithoutUserInput, AuthenticationUncheckedUpdateWithoutUserInput>
   }
 
-  export type CodeUpdateManyWithWhereWithoutUserInput = {
-    where: CodeScalarWhereInput
-    data: XOR<CodeUpdateManyMutationInput, CodeUncheckedUpdateManyWithoutUserInput>
+  export type AuthenticationUpdateManyWithWhereWithoutUserInput = {
+    where: AuthenticationScalarWhereInput
+    data: XOR<AuthenticationUpdateManyMutationInput, AuthenticationUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type CodeScalarWhereInput = {
-    AND?: CodeScalarWhereInput | CodeScalarWhereInput[]
-    OR?: CodeScalarWhereInput[]
-    NOT?: CodeScalarWhereInput | CodeScalarWhereInput[]
-    tokens?: StringNullableListFilter<"Code">
-    expiresAt?: DateTimeNullableFilter<"Code"> | Date | string | null
-    type?: EnumTypeCodeFilter<"Code"> | $Enums.TypeCode
-    userId?: UuidFilter<"Code"> | string
-    createdAt?: DateTimeFilter<"Code"> | Date | string
-    updatedAt?: DateTimeNullableFilter<"Code"> | Date | string | null
-  }
-
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type SessionScalarWhereInput = {
-    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    OR?: SessionScalarWhereInput[]
-    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    id?: UuidFilter<"Session"> | string
-    expiresAt?: DateTimeNullableFilter<"Session"> | Date | string | null
-    createdAt?: DateTimeFilter<"Session"> | Date | string
-    lastLoginAt?: DateTimeNullableFilter<"Session"> | Date | string | null
-    refreshTokenHashed?: StringNullableFilter<"Session"> | string | null
-    deviceName?: StringNullableFilter<"Session"> | string | null
-    userAgent?: StringNullableFilter<"Session"> | string | null
-    ipAddress?: StringNullableFilter<"Session"> | string | null
-    userId?: UuidFilter<"Session"> | string
-    revoked?: BoolFilter<"Session"> | boolean
+  export type AuthenticationScalarWhereInput = {
+    AND?: AuthenticationScalarWhereInput | AuthenticationScalarWhereInput[]
+    OR?: AuthenticationScalarWhereInput[]
+    NOT?: AuthenticationScalarWhereInput | AuthenticationScalarWhereInput[]
+    code?: StringFilter<"Authentication"> | string
+    expiresAt?: DateTimeNullableFilter<"Authentication"> | Date | string | null
+    type?: EnumAuthTypeFilter<"Authentication"> | $Enums.AuthType
+    userId?: UuidFilter<"Authentication"> | string
+    createdAt?: DateTimeFilter<"Authentication"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"Authentication"> | Date | string | null
   }
 
   export type NotificationUpsertWithWhereUniqueWithoutRecipientInput = {
@@ -25410,10 +25407,10 @@ export namespace Prisma {
     receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -25447,10 +25444,10 @@ export namespace Prisma {
     receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -25489,10 +25486,10 @@ export namespace Prisma {
     receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -25526,10 +25523,10 @@ export namespace Prisma {
     receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -25579,10 +25576,10 @@ export namespace Prisma {
     receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -25616,10 +25613,10 @@ export namespace Prisma {
     receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -25664,10 +25661,10 @@ export namespace Prisma {
     receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -25701,10 +25698,10 @@ export namespace Prisma {
     receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -25738,10 +25735,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -25775,10 +25772,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -25817,10 +25814,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -25854,10 +25851,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -25907,10 +25904,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -25944,10 +25941,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -25992,10 +25989,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -26029,10 +26026,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -26066,10 +26063,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -26103,10 +26100,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -26145,10 +26142,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -26182,10 +26179,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -26235,10 +26232,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -26272,10 +26269,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -26320,10 +26317,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -26357,10 +26354,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -26394,10 +26391,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -26431,10 +26428,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -26473,10 +26470,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -26510,10 +26507,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -26563,10 +26560,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -26600,10 +26597,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -26648,10 +26645,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -26685,10 +26682,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -26722,10 +26719,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
-    session?: SessionCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -26759,10 +26756,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -26812,10 +26809,10 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -26849,15 +26846,15 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
 
-  export type UserCreateWithoutCodeInput = {
+  export type UserCreateWithoutAuthInput = {
     id?: string
     profileId: string
     createdAt?: Date | string
@@ -26887,14 +26884,14 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
     posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    session?: SessionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
 
-  export type UserUncheckedCreateWithoutCodeInput = {
+  export type UserUncheckedCreateWithoutAuthInput = {
     id?: string
     profileId: string
     createdAt?: Date | string
@@ -26924,30 +26921,30 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
 
-  export type UserCreateOrConnectWithoutCodeInput = {
+  export type UserCreateOrConnectWithoutAuthInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutCodeInput, UserUncheckedCreateWithoutCodeInput>
+    create: XOR<UserCreateWithoutAuthInput, UserUncheckedCreateWithoutAuthInput>
   }
 
-  export type UserUpsertWithoutCodeInput = {
-    update: XOR<UserUpdateWithoutCodeInput, UserUncheckedUpdateWithoutCodeInput>
-    create: XOR<UserCreateWithoutCodeInput, UserUncheckedCreateWithoutCodeInput>
+  export type UserUpsertWithoutAuthInput = {
+    update: XOR<UserUpdateWithoutAuthInput, UserUncheckedUpdateWithoutAuthInput>
+    create: XOR<UserCreateWithoutAuthInput, UserUncheckedCreateWithoutAuthInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutCodeInput = {
+  export type UserUpdateToOneWithWhereWithoutAuthInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutCodeInput, UserUncheckedUpdateWithoutCodeInput>
+    data: XOR<UserUpdateWithoutAuthInput, UserUncheckedUpdateWithoutAuthInput>
   }
 
-  export type UserUpdateWithoutCodeInput = {
+  export type UserUpdateWithoutAuthInput = {
     id?: StringFieldUpdateOperationsInput | string
     profileId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26977,14 +26974,14 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
     posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutCodeInput = {
+  export type UserUncheckedUpdateWithoutAuthInput = {
     id?: StringFieldUpdateOperationsInput | string
     profileId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27014,9 +27011,9 @@ export namespace Prisma {
     sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -27053,7 +27050,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    code?: CodeCreateNestedManyWithoutUserInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
   }
@@ -27090,7 +27087,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    code?: CodeUncheckedCreateNestedManyWithoutUserInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
   }
@@ -27143,7 +27140,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    code?: CodeUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
   }
@@ -27180,7 +27177,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    code?: CodeUncheckedUpdateManyWithoutUserNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
   }
@@ -27388,6 +27385,18 @@ export namespace Prisma {
     medias?: PostCreatemediasInput | string[]
   }
 
+  export type SessionCreateManyUserInput = {
+    id?: string
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    lastLoginAt?: Date | string | null
+    refreshTokenHashed?: string | null
+    deviceName?: string | null
+    userAgent?: string | null
+    ipAddress?: string | null
+    revoked?: boolean
+  }
+
   export type CommentCreateManyAuthorInput = {
     id?: string
     postId: string
@@ -27405,24 +27414,12 @@ export namespace Prisma {
     commentId?: string | null
   }
 
-  export type CodeCreateManyUserInput = {
-    tokens?: CodeCreatetokensInput | string[]
+  export type AuthenticationCreateManyUserInput = {
+    code: string
     expiresAt?: Date | string | null
-    type: $Enums.TypeCode
+    type: $Enums.AuthType
     createdAt?: Date | string
     updatedAt?: Date | string | null
-  }
-
-  export type SessionCreateManyUserInput = {
-    id?: string
-    expiresAt?: Date | string | null
-    createdAt?: Date | string
-    lastLoginAt?: Date | string | null
-    refreshTokenHashed?: string | null
-    deviceName?: string | null
-    userAgent?: string | null
-    ipAddress?: string | null
-    revoked?: boolean
   }
 
   export type NotificationCreateManyRecipientInput = {
@@ -27658,6 +27655,42 @@ export namespace Prisma {
     medias?: PostUpdatemediasInput | string[]
   }
 
+  export type SessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type CommentUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27713,64 +27746,28 @@ export namespace Prisma {
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type CodeUpdateWithoutUserInput = {
-    tokens?: CodeUpdatetokensInput | string[]
+  export type AuthenticationUpdateWithoutUserInput = {
+    code?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
+    type?: EnumAuthTypeFieldUpdateOperationsInput | $Enums.AuthType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type CodeUncheckedUpdateWithoutUserInput = {
-    tokens?: CodeUpdatetokensInput | string[]
+  export type AuthenticationUncheckedUpdateWithoutUserInput = {
+    code?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
+    type?: EnumAuthTypeFieldUpdateOperationsInput | $Enums.AuthType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type CodeUncheckedUpdateManyWithoutUserInput = {
-    tokens?: CodeUpdatetokensInput | string[]
+  export type AuthenticationUncheckedUpdateManyWithoutUserInput = {
+    code?: StringFieldUpdateOperationsInput | string
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    type?: EnumTypeCodeFieldUpdateOperationsInput | $Enums.TypeCode
+    type?: EnumAuthTypeFieldUpdateOperationsInput | $Enums.AuthType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type SessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
-    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    revoked?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type SessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
-    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    revoked?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type SessionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    refreshTokenHashed?: NullableStringFieldUpdateOperationsInput | string | null
-    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    revoked?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type NotificationUpdateWithoutRecipientInput = {

@@ -28,7 +28,7 @@ export class WsAuthGuard implements CanActivate {
       client.data.user = user;
 
       return true;
-    } catch (error) {
+    } catch {
       throw new WsException('Unauthorized');
     }
   }

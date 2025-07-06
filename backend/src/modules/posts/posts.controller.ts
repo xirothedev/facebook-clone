@@ -24,8 +24,8 @@ export class PostsController {
   @Get()
   @ApiOperation({ summary: 'Get all posts with pagination and filtering' })
   @ApiResponse({ status: 200, description: 'Posts retrieved successfully' })
-  findAll(@Query() query: QueryPostDto, @Req() req: Request) {
-    return this.postsService.findAll(query, req);
+  findAll(@Query() query: QueryPostDto) {
+    return this.postsService.findAll(query);
   }
 
   @Get(':id')
@@ -41,8 +41,8 @@ export class PostsController {
   @ApiOperation({ summary: 'Get posts by user ID' })
   @ApiParam({ name: 'userId', description: 'User ID' })
   @ApiResponse({ status: 200, description: 'User posts retrieved successfully' })
-  findByUser(@Param('userId') userId: string, @Query() query: QueryPostDto, @Req() req: Request) {
-    return this.postsService.findByUser(userId, query, req);
+  findByUser(@Param('userId') userId: string, @Query() query: QueryPostDto) {
+    return this.postsService.findByUser(userId, query);
   }
 
   @Get('@me')

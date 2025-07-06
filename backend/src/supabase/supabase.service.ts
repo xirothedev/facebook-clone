@@ -63,8 +63,6 @@ export class SupabaseService implements OnModuleInit {
         this.logger.log(`File uploaded successfully to ${path}`);
       }
 
-      console.log(data)
-
       return { data, error };
     } catch (error) {
       this.logger.error("Upload exception for bucket:", error);
