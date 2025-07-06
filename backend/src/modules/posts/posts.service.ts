@@ -25,8 +25,8 @@ export class PostsService {
       if (error) {
         throw new InternalServerErrorException(`Failed to upload file: ${file.originalname}`);
       }
-      const { data } = this.supabaseService.getPublicUrl(path);
-      mediaUrls.push(data.publicUrl);
+      const url = this.supabaseService.getPublicUrl(path);
+      mediaUrls.push(url);
     }
 
     const post = await this.prismaService.post.create({
@@ -250,8 +250,8 @@ export class PostsService {
         if (error) {
           throw new InternalServerErrorException(`Failed to upload file: ${file.originalname}`);
         }
-        const { data } = this.supabaseService.getPublicUrl(path);
-        mediaUrls.push(data.publicUrl);
+        const url = this.supabaseService.getPublicUrl(path);
+        mediaUrls.push(url);
       }
     }
 
