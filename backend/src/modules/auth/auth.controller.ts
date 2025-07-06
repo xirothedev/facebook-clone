@@ -9,14 +9,13 @@ import { RegisterUser } from './dto/register-auth.dto';
 import { AuthCookieGuard } from '@/common/guards/auth-cookie.guard';
 import { TokenService } from './token.service';
 
-
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly prismaService: PrismaService,
     private readonly tokenService: TokenService
-  ) { }
+  ) {}
 
   @Post('register')
   async registerUser(@Body() data: RegisterUser) {
@@ -37,8 +36,8 @@ export class AuthController {
 
   @Post("login")
   async login(@Body() data: LoginAuth, @Res() res: Response, @Req() req: Request) {
-    const result = await this.authService.login(data, res, req);
-    return res.json(result);
+    const result = await this.authService.login(data, res, req)
+    return res.json(result)
   }
 
   @Delete("logout")

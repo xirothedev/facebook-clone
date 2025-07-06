@@ -4,15 +4,15 @@ import { Module, forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { EmailModule } from 'src/email/email.module';
+import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { LoginAttemptService } from './loginAttempt.service';
 import { TokenService } from './token.service';
-import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [
-    EmailModule,RedisModule,ConfigModule,UsersModule,
+    EmailModule, RedisModule, ConfigModule, UsersModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -27,4 +27,4 @@ import { UsersModule } from '../users/users.module';
   providers: [AuthService, TokenService, LoginAttemptService, AuthCookieStrategy],
   exports: [AuthService],
 })
-export class AuthModule {}
+export class AuthModule { }

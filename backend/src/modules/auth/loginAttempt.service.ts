@@ -4,8 +4,8 @@ import { RedisService } from 'src/redis/redis.service';
 @Injectable()
 export class LoginAttemptService {
   private readonly MAX_ATTEMPTS = 5;
-  private readonly ATTEMPT_WINDOW = 5 * 60; // 5 phút
-  private readonly LOCK_DURATION = 15 * 60; // 15 phút
+  private readonly ATTEMPT_WINDOW = 5 * 60; // 5p
+  private readonly LOCK_DURATION = 15 * 60; // 15p
 
   constructor(private readonly redisService: RedisService) {}
 

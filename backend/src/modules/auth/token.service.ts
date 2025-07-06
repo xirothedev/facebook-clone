@@ -2,15 +2,14 @@ import { PrismaService } from "@/prisma/prisma.service";
 import { ForbiddenException, Inject, Injectable, UnauthorizedException, forwardRef } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
+import { hash, verify } from "argon2";
 import { randomInt } from 'crypto';
+import { Request } from 'express';
 import { JwtPayload } from "./auth.interface";
 import { AuthService } from "./auth.service";
-import { verify,hash } from "argon2";
-import { Request } from 'express'
 
 @Injectable()
 export class TokenService {
-
     constructor(
         private readonly jwtService: JwtService,
         @Inject(forwardRef(() => AuthService))
@@ -99,7 +98,7 @@ export class TokenService {
         const detailAgentUser =  this.authService.getDataUser(req)
 
         // only hashed refreshToken must be saved into the session
-        await this.storeRefreshToken(userId, await hash(tokens.refreshToken), session.id, detailAgentUser )
+        await this.storeRefreshToken(userId, await hash(tokens.refreshToken), session.id, detailAgentUser)
         
         return tokens
     }
