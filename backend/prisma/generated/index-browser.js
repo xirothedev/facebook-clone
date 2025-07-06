@@ -199,6 +199,7 @@ exports.Prisma.UserScalarFieldEnum = {
   updateAt: 'updateAt',
   status: 'status',
   flags: 'flags',
+  roles: 'roles',
   primaryEmailId: 'primaryEmailId',
   primaryPhoneId: 'primaryPhoneId',
   hashedPassword: 'hashedPassword',
@@ -398,6 +399,11 @@ exports.UserFlag = exports.$Enums.UserFlag = {
   ACTIVE: 'ACTIVE',
   OFFLINE: 'OFFLINE',
   HIDDEN: 'HIDDEN'
+};
+
+exports.UserRole = exports.$Enums.UserRole = {
+  admin: 'admin',
+  user: 'user'
 };
 
 exports.Status = exports.$Enums.Status = {

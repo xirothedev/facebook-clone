@@ -5,6 +5,7 @@ model User {
   updateAt  DateTime      @updatedAt
   status    StatusAccount @default(ACTIVE)
   flags     UserFlag[]
+  roles     UserRole[]
 
   // email
   primaryEmailId String  @unique @db.Uuid
@@ -154,6 +155,11 @@ enum UserFlag {
   HIDDEN
 }
 
+enum UserRole {
+  admin
+  user
+}
+
 enum RelationType {
   FARTHER
   MORTHER
@@ -207,9 +213,9 @@ enum Platform {
 
 enum StatusAccount {
   ACTIVE
-  DISABLE //Bị khóa do vi phạm chính sách
-  RESTRICTED //Bị hạn chế tính năng
-  CHECKPOINT //Cần xác minh danh tính
+  DISABLE // Bị khóa do vi phạm chính sách
+  RESTRICTED // Bị hạn chế tính năng
+  CHECKPOINT // Cần xác minh danh tính
   BANNED //	Khóa vĩnh viễn
   DEACTIVATED // tạm thời vô hiệu hóa thủ công
 }

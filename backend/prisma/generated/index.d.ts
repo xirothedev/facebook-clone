@@ -202,6 +202,14 @@ export const UserFlag: {
 export type UserFlag = (typeof UserFlag)[keyof typeof UserFlag]
 
 
+export const UserRole: {
+  admin: 'admin',
+  user: 'user'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
 export const RelationType: {
   FARTHER: 'FARTHER',
   MORTHER: 'MORTHER',
@@ -313,6 +321,10 @@ export const TypeCode: typeof $Enums.TypeCode
 export type UserFlag = $Enums.UserFlag
 
 export const UserFlag: typeof $Enums.UserFlag
+
+export type UserRole = $Enums.UserRole
+
+export const UserRole: typeof $Enums.UserRole
 
 export type RelationType = $Enums.RelationType
 
@@ -8417,6 +8429,7 @@ export namespace Prisma {
     updateAt: number
     status: number
     flags: number
+    roles: number
     primaryEmailId: number
     primaryPhoneId: number
     hashedPassword: number
@@ -8484,6 +8497,7 @@ export namespace Prisma {
     updateAt?: true
     status?: true
     flags?: true
+    roles?: true
     primaryEmailId?: true
     primaryPhoneId?: true
     hashedPassword?: true
@@ -8580,6 +8594,7 @@ export namespace Prisma {
     updateAt: Date
     status: $Enums.StatusAccount
     flags: $Enums.UserFlag[]
+    roles: $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId: string | null
     hashedPassword: string
@@ -8620,6 +8635,7 @@ export namespace Prisma {
     updateAt?: boolean
     status?: boolean
     flags?: boolean
+    roles?: boolean
     primaryEmailId?: boolean
     primaryPhoneId?: boolean
     hashedPassword?: boolean
@@ -8660,6 +8676,7 @@ export namespace Prisma {
     updateAt?: boolean
     status?: boolean
     flags?: boolean
+    roles?: boolean
     primaryEmailId?: boolean
     primaryPhoneId?: boolean
     hashedPassword?: boolean
@@ -8685,6 +8702,7 @@ export namespace Prisma {
     updateAt?: boolean
     status?: boolean
     flags?: boolean
+    roles?: boolean
     primaryEmailId?: boolean
     primaryPhoneId?: boolean
     hashedPassword?: boolean
@@ -8710,6 +8728,7 @@ export namespace Prisma {
     updateAt?: boolean
     status?: boolean
     flags?: boolean
+    roles?: boolean
     primaryEmailId?: boolean
     primaryPhoneId?: boolean
     hashedPassword?: boolean
@@ -8726,7 +8745,7 @@ export namespace Prisma {
     bannerUrl?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "createdAt" | "updateAt" | "status" | "flags" | "primaryEmailId" | "primaryPhoneId" | "hashedPassword" | "displayName" | "username" | "gender" | "pronoun" | "birthday" | "biography" | "websites" | "language" | "deletedAt" | "avatarUrl" | "bannerUrl", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "profileId" | "createdAt" | "updateAt" | "status" | "flags" | "roles" | "primaryEmailId" | "primaryPhoneId" | "hashedPassword" | "displayName" | "username" | "gender" | "pronoun" | "birthday" | "biography" | "websites" | "language" | "deletedAt" | "avatarUrl" | "bannerUrl", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     primaryEmail?: boolean | EmailDefaultArgs<ExtArgs>
     subEmails?: boolean | User$subEmailsArgs<ExtArgs>
@@ -8782,6 +8801,7 @@ export namespace Prisma {
       updateAt: Date
       status: $Enums.StatusAccount
       flags: $Enums.UserFlag[]
+      roles: $Enums.UserRole[]
       primaryEmailId: string
       primaryPhoneId: string | null
       hashedPassword: string
@@ -9241,6 +9261,7 @@ export namespace Prisma {
     readonly updateAt: FieldRef<"User", 'DateTime'>
     readonly status: FieldRef<"User", 'StatusAccount'>
     readonly flags: FieldRef<"User", 'UserFlag[]'>
+    readonly roles: FieldRef<"User", 'UserRole[]'>
     readonly primaryEmailId: FieldRef<"User", 'String'>
     readonly primaryPhoneId: FieldRef<"User", 'String'>
     readonly hashedPassword: FieldRef<"User", 'String'>
@@ -17761,6 +17782,7 @@ export namespace Prisma {
     updateAt: 'updateAt',
     status: 'status',
     flags: 'flags',
+    roles: 'roles',
     primaryEmailId: 'primaryEmailId',
     primaryPhoneId: 'primaryPhoneId',
     hashedPassword: 'hashedPassword',
@@ -18093,6 +18115,20 @@ export namespace Prisma {
    * Reference to a field of type 'UserFlag'
    */
   export type EnumUserFlagFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserFlag'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole'
+   */
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
     
 
 
@@ -18631,6 +18667,7 @@ export namespace Prisma {
     updateAt?: DateTimeFilter<"User"> | Date | string
     status?: EnumStatusAccountFilter<"User"> | $Enums.StatusAccount
     flags?: EnumUserFlagNullableListFilter<"User">
+    roles?: EnumUserRoleNullableListFilter<"User">
     primaryEmailId?: UuidFilter<"User"> | string
     primaryPhoneId?: UuidNullableFilter<"User"> | string | null
     hashedPassword?: StringFilter<"User"> | string
@@ -18670,6 +18707,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     status?: SortOrder
     flags?: SortOrder
+    roles?: SortOrder
     primaryEmailId?: SortOrder
     primaryPhoneId?: SortOrderInput | SortOrder
     hashedPassword?: SortOrder
@@ -18715,6 +18753,7 @@ export namespace Prisma {
     updateAt?: DateTimeFilter<"User"> | Date | string
     status?: EnumStatusAccountFilter<"User"> | $Enums.StatusAccount
     flags?: EnumUserFlagNullableListFilter<"User">
+    roles?: EnumUserRoleNullableListFilter<"User">
     hashedPassword?: StringFilter<"User"> | string
     displayName?: StringFilter<"User"> | string
     gender?: EnumGenderFilter<"User"> | $Enums.Gender
@@ -18751,6 +18790,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     status?: SortOrder
     flags?: SortOrder
+    roles?: SortOrder
     primaryEmailId?: SortOrder
     primaryPhoneId?: SortOrderInput | SortOrder
     hashedPassword?: SortOrder
@@ -18780,6 +18820,7 @@ export namespace Prisma {
     updateAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     status?: EnumStatusAccountWithAggregatesFilter<"User"> | $Enums.StatusAccount
     flags?: EnumUserFlagNullableListFilter<"User">
+    roles?: EnumUserRoleNullableListFilter<"User">
     primaryEmailId?: UuidWithAggregatesFilter<"User"> | string
     primaryPhoneId?: UuidNullableWithAggregatesFilter<"User"> | string | null
     hashedPassword?: StringWithAggregatesFilter<"User"> | string
@@ -19699,6 +19740,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -19736,6 +19778,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -19773,6 +19816,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19810,6 +19854,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -19847,6 +19892,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -19870,6 +19916,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19891,6 +19938,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -20990,6 +21038,14 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type EnumUserRoleNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
+    has?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type EnumGenderFilter<$PrismaModel = never> = {
     equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
     in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
@@ -21104,6 +21160,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     status?: SortOrder
     flags?: SortOrder
+    roles?: SortOrder
     primaryEmailId?: SortOrder
     primaryPhoneId?: SortOrder
     hashedPassword?: SortOrder
@@ -21824,6 +21881,10 @@ export namespace Prisma {
     set: $Enums.UserFlag[]
   }
 
+  export type UserCreaterolesInput = {
+    set: $Enums.UserRole[]
+  }
+
   export type UserCreatewebsitesInput = {
     set: string[]
   }
@@ -22043,6 +22104,11 @@ export namespace Prisma {
   export type UserUpdateflagsInput = {
     set?: $Enums.UserFlag[]
     push?: $Enums.UserFlag | $Enums.UserFlag[]
+  }
+
+  export type UserUpdaterolesInput = {
+    set?: $Enums.UserRole[]
+    push?: $Enums.UserRole | $Enums.UserRole[]
   }
 
   export type EnumGenderFieldUpdateOperationsInput = {
@@ -23158,6 +23224,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -23194,6 +23261,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -23235,6 +23303,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -23271,6 +23340,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -23323,6 +23393,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23359,6 +23430,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -23406,6 +23478,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23442,6 +23515,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -23478,6 +23552,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -23514,6 +23589,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -23624,6 +23700,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23660,6 +23737,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -23753,6 +23831,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -23789,6 +23868,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -23959,6 +24039,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23995,6 +24076,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -24135,6 +24217,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -24171,6 +24254,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -24283,6 +24367,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24319,6 +24404,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -25302,6 +25388,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -25338,6 +25425,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -25379,6 +25467,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -25415,6 +25504,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -25467,6 +25557,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25503,6 +25594,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -25550,6 +25642,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25586,6 +25679,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -25622,6 +25716,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -25658,6 +25753,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -25699,6 +25795,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -25735,6 +25832,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -25787,6 +25885,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25823,6 +25922,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -25870,6 +25970,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25906,6 +26007,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -25942,6 +26044,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -25978,6 +26081,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryPhoneId?: string | null
     hashedPassword: string
     displayName: string
@@ -26019,6 +26123,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -26055,6 +26160,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -26107,6 +26213,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26143,6 +26250,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
@@ -26190,6 +26298,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26226,6 +26335,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -26262,6 +26372,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -26298,6 +26409,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     hashedPassword: string
     displayName: string
@@ -26339,6 +26451,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -26375,6 +26488,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -26427,6 +26541,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26463,6 +26578,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
@@ -26510,6 +26626,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26546,6 +26663,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -26582,6 +26700,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -26618,6 +26737,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -26670,6 +26790,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26706,6 +26827,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -26742,6 +26864,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -26778,6 +26901,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -26830,6 +26954,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26866,6 +26991,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
@@ -26902,6 +27028,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     hashedPassword: string
     displayName: string
     username?: string | null
@@ -26938,6 +27065,7 @@ export namespace Prisma {
     updateAt?: Date | string
     status?: $Enums.StatusAccount
     flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
     primaryEmailId: string
     primaryPhoneId?: string | null
     hashedPassword: string
@@ -26990,6 +27118,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     hashedPassword?: StringFieldUpdateOperationsInput | string
     displayName?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27026,6 +27155,7 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
     flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
     primaryEmailId?: StringFieldUpdateOperationsInput | string
     primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
     hashedPassword?: StringFieldUpdateOperationsInput | string
