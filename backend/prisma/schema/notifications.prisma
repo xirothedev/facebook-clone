@@ -1,0 +1,115 @@
+model Notification {
+  id        String    @id @default(uuid()) @db.Uuid()
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  readAt    DateTime?
+  deletedAt DateTime?
+
+  // Recipient of the notification
+  recipientId String @db.Uuid
+  recipient   User   @relation("UserNotifications", fields: [recipientId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  // Actor who triggered the notification (can be null for system notifications)
+  actorId String? @db.Uuid
+  actor   User?   @relation("UserNotificationActions", fields: [actorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  // Notification type and content
+  type     NotificationType
+  title    String
+  message  String
+  status   NotificationStatus   @default(UNREAD)
+  priority NotificationPriority @default(NORMAL)
+
+  // Related content references (optional)
+  postId          String?
+  commentId       String?
+  reactionId      String?
+  friendRequestId String? // For friendship notifications
+
+  // Additional data for rich notifications
+  imageUrl  String?
+  actionUrl String? // URL to navigate when notification is clicked
+  metadata  Json? // Additional data like reaction type, comment preview, etc.
+
+  // Grouping and aggregation
+  groupId    String? // For grouping similar notifications
+  isGrouped  Boolean @default(false)
+  groupCount Int     @default(1)
+
+  // Indexes for performance
+  @@index([recipientId, status])
+  @@index([recipientId, createdAt])
+  @@index([type, createdAt])
+  @@index([groupId])
+}
+
+// Notification types similar to Facebook
+enum NotificationType {
+  // Social interactions
+  POST_LIKE
+  POST_COMMENT
+  POST_SHARE
+  COMMENT_LIKE
+  COMMENT_REPLY
+
+  // Friendship
+  FRIEND_REQUEST
+  FRIEND_REQUEST_ACCEPTED
+  FRIEND_SUGGESTION
+
+  // Profile interactions
+  PROFILE_VIEW
+  PROFILE_UPDATE
+  BIRTHDAY_REMINDER
+
+  // Group activities
+  GROUP_INVITE
+  GROUP_POST
+  GROUP_EVENT
+
+  // Page activities
+  PAGE_LIKE
+  PAGE_POST
+  PAGE_EVENT
+
+  // Event activities
+  EVENT_INVITE
+  EVENT_UPDATE
+  EVENT_REMINDER
+
+  // Marketplace
+  MARKETPLACE_LISTING
+  MARKETPLACE_MESSAGE
+
+  // System notifications
+  SECURITY_ALERT
+  ACCOUNT_UPDATE
+  POLICY_UPDATE
+  MAINTENANCE
+
+  // Live and stories
+  LIVE_STREAM
+  STORY_MENTION
+  STORY_REACTION
+
+  // Memories
+  MEMORY_REMINDER
+  PHOTO_TAG
+  PHOTO_APPROVAL
+}
+
+// Notification status
+enum NotificationStatus {
+  UNREAD
+  READ
+  ARCHIVED
+  DELETED
+}
+
+// Notification priority for sorting and highlighting
+enum NotificationPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}

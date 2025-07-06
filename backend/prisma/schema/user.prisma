@@ -44,11 +44,13 @@ model User {
   bannerUrl String?
 
   // relations
-  posts     Post[]
-  comments  Comment[]
-  reactions Reaction[]
-  code      Code[]
-  session   Session[]
+  posts               Post[]
+  comments            Comment[]
+  reactions           Reaction[]
+  code                Code[]
+  session             Session[]
+  notifications       Notification[] @relation("UserNotifications")
+  notificationActions Notification[] @relation("UserNotificationActions")
 }
 
 model Friendship {

@@ -19,6 +19,7 @@ import { RedisModule } from './redis/redis.module'
 import { SupabaseModule } from './supabase/supabase.module'
 import { APP_GUARD } from '@nestjs/core'
 import { AuthCookieGuard } from './common/guards/auth-cookie.guard'
+import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { AuthCookieGuard } from './common/guards/auth-cookie.guard'
     PostsModule,
     MediaModule,
     RedisModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService,
