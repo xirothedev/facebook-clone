@@ -16,8 +16,9 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
-import { NotificationStatus, UserRole } from 'prisma/generated';
+import { UserRole } from 'prisma/generated';
 import { CreateNotificationDto } from './dto/create-notification.dto';
+import { FindAllNotificationsDto } from './dto/find-all-notifications.dto';
 import { UpdateNotificationDto } from './dto/update-notification.dto';
 import { NotificationsService } from './notifications.service';
 
@@ -31,23 +32,11 @@ export class NotificationsController {
   @ApiOperation({ summary: 'Get user notifications' })
   @ApiResponse({ status: 200, description: 'Notifications retrieved successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @ApiQuery({ name: 'status', required: false, enum: NotificationStatus })
-  @ApiQuery({ name: 'type', required: false, type: String })
-  @ApiQuery({ name: 'limit', required: false, type: Number })
-  @ApiQuery({ name: 'offset', required: false, type: Number })
   getNotifications(
     @Req() req: Request,
-    @Query('status') status?: NotificationStatus,
-    @Query('type') type?: string,
-    @Query('limit') limit?: number,
-    @Query('offset') offset?: number
+    @Query() query: FindAllNotificationsDto
   ) {
-    return this.notificationsService.findAll(req?.user?.id, {
-      status,
-      type,
-      limit: limit ? parseInt(limit.toString()) : undefined,
-      offset: offset ? parseInt(offset.toString()) : undefined
-    });
+    return this.notificationsService.findAll(req?.user?.id, query);
   }
 
   @Get('stats')
@@ -89,7 +78,7 @@ export class NotificationsController {
   @ApiResponse({ status: 200, description: 'Notification retrieved successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Notification not found' })
-  async getNotification(@Req() req: Request, @Param('id') id: string) {
+  getNotification(@Req() req: Request, @Param('id') id: string) {
     return this.notificationsService.findOne(id, req?.user?.id);
   }
 
@@ -99,9 +88,8 @@ export class NotificationsController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Forbidden - Admin only' })
   @UseGuards(RolesGuard)
-  @Roles(UserRole.admin)
-  async createNotification(
-    @Req() req: Request,
+  @Roles(UserRole.ADMINISTRATOR)
+  createNotification(
     @Body() createNotificationDto: CreateNotificationDto
   ) {
     return this.notificationsService.create(createNotificationDto);
@@ -112,7 +100,7 @@ export class NotificationsController {
   @ApiResponse({ status: 200, description: 'Notification updated successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Notification not found' })
-  async updateNotification(
+  updateNotification(
     @Req() req: Request,
     @Param('id') id: string,
     @Body() updateNotificationDto: UpdateNotificationDto
@@ -121,28 +109,24 @@ export class NotificationsController {
   }
 
   @Put(':id/read')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Mark notification as read' })
   @ApiResponse({ status: 200, description: 'Notification marked as read' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Notification not found' })
-  async markAsRead(@Req() req, @Param('id') id: string) {
-    const userId = req.user.id;
-    const result = await this.notificationsService.markAsRead(id, userId);
-    return result;
+  markAsRead(@Req() req: Request, @Param('id') id: string) {
+    return this.notificationsService.markAsRead(id, req?.user?.id);
   }
 
   @Put('mark-all-read')
-  @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Mark all notifications as read' })
   @ApiResponse({ status: 200, description: 'All notifications marked as read' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async markAllAsRead(@Req() req: Request) {
+  markAllAsRead(@Req() req: Request) {
     return this.notificationsService.markAllAsRead(req?.user?.id);
   }
 
   @Put(':id/archive')
-  @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Archive notification' })
   @ApiResponse({ status: 200, description: 'Notification archived successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -152,9 +136,9 @@ export class NotificationsController {
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete notification' })
-  @ApiResponse({ status: 200, description: 'Notification deleted successfully' })
+  @ApiResponse({ status: 204, description: 'Notification deleted successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Notification not found' })
   deleteNotification(@Req() req: Request, @Param('id') id: string) {
@@ -179,7 +163,6 @@ export class NotificationsController {
   }
 
   @Put(':id/ungroup')
-  @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Ungroup notification' })
   @ApiResponse({ status: 200, description: 'Notification ungrouped successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })

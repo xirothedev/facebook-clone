@@ -1,11 +1,45 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { NotificationEvent } from '../events/notification.events';
 import { NotificationType, NotificationPriority } from 'prisma/generated';
+import { WebSocketServer } from '@nestjs/websockets';
+import { Server } from 'socket.io';
 
 @Injectable()
 export class NotificationEventEmitterService {
+  @WebSocketServer()
+  server: Server;
+
+  private logger = new Logger(NotificationEventEmitterService.name)
+
   constructor(private readonly eventEmitter: EventEmitter2) { }
+
+  emitNewNotification(userId: string, notification: any) {
+    try {
+      this.server.to(`user:${userId}`).emit('newNotification', notification);
+      this.logger.log(`Emitted new notification to user ${userId}`);
+    } catch (error) {
+      this.logger.error(`Error emitting new notification: ${error.message}`);
+    }
+  }
+
+  emitNotificationUpdate(userId: string, notification: any) {
+    try {
+      this.server.to(`user:${userId}`).emit('notificationUpdate', notification);
+      this.logger.log(`Emitted notification update to user ${userId}`);
+    } catch (error) {
+      this.logger.error(`Error emitting notification update: ${error.message}`);
+    }
+  }
+
+  emitUnreadCountUpdate(userId: string, unreadCount: number) {
+    try {
+      this.server.to(`user:${userId}`).emit('unreadCount', unreadCount);
+      this.logger.log(`Emitted unread count update to user ${userId}: ${unreadCount}`);
+    } catch (error) {
+      this.logger.error(`Error emitting unread count update: ${error.message}`);
+    }
+  }
 
   async emitNotificationEvent(event: NotificationEvent): Promise<void> {
     this.eventEmitter.emit('notification.created', event);

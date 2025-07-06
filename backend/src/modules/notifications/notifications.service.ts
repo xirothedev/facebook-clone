@@ -1,9 +1,11 @@
-import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
-import { NotificationStatus } from 'prisma/generated';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
+import { RedisService } from '@/redis/redis.service';
+import { Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { NotificationStatus, Prisma } from 'prisma/generated';
 import { CreateNotificationDto } from './dto/create-notification.dto';
+import { FindAllNotificationsDto } from './dto/find-all-notifications.dto';
 import { UpdateNotificationDto } from './dto/update-notification.dto';
-import { NotificationsGateway } from './notifications.gateway';
+import { NotificationEventEmitterService } from './services/notification-event-emitter.service';
 import { NotificationGroupingService } from './services/notification-grouping.service';
 
 @Injectable()
@@ -11,76 +13,60 @@ export class NotificationsService {
   private readonly logger = new Logger(NotificationsService.name);
 
   constructor(
-    private readonly prisma: PrismaService,
+    private readonly prismaService: PrismaService,
+    private readonly redisService: RedisService,
     private readonly notificationGroupingService: NotificationGroupingService,
-    // @Inject(forwardRef(() => NotificationsGateway))
-    private readonly notificationsGateway: NotificationsGateway
+    private readonly notificationEventEmitterService: NotificationEventEmitterService
   ) { }
 
     async create(createNotificationDto: CreateNotificationDto) {
     try {
       // Use grouping service to create notification with grouping logic
-      const notification = await this.notificationGroupingService.createNotificationWithGrouping({
-        recipientId: createNotificationDto.recipientId,
-        actorId: createNotificationDto.actorId,
-        type: createNotificationDto.type,
-        title: createNotificationDto.title,
-        message: createNotificationDto.message,
-        priority: createNotificationDto.priority,
-        postId: createNotificationDto.postId,
-        commentId: createNotificationDto.commentId,
-        reactionId: createNotificationDto.reactionId,
-        friendRequestId: createNotificationDto.friendRequestId,
-        imageUrl: createNotificationDto.imageUrl,
-        actionUrl: createNotificationDto.actionUrl,
-        metadata: createNotificationDto.metadata
-      });
+      const notification = await this.notificationGroupingService.createNotificationWithGrouping(createNotificationDto);
 
       this.logger.log(`Created notification ${notification.id} for user ${notification.recipientId}`);
 
-      const isOnline = await this.notificationsGateway.isUserOnline(notification.recipientId);
+      const isSubscribed = await this.isUserSubscribed(notification.recipientId);
       
-      if (isOnline) {
+      if (isSubscribed) {
         // Emit real-time notification
-        this.notificationsGateway.emitNewNotification(notification.recipientId, notification);
+        this.notificationEventEmitterService.emitNewNotification(notification.recipientId, notification);
         
         // Update unread count
         const unreadCount = await this.getUnreadCount(notification.recipientId);
-        this.notificationsGateway.emitUnreadCountUpdate(notification.recipientId, unreadCount);
+        this.notificationEventEmitterService.emitUnreadCountUpdate(notification.recipientId, unreadCount);
       } else {
-        this.logger.log(`User ${notification.recipientId} is offline, notification stored for later delivery`);
+        this.logger.log(`User ${notification.recipientId} is ${!isSubscribed ? 'subscribed' : 'not subscribed'}, notification stored for later delivery`);
       }
 
-      return notification;
+      return {
+        message: "Created notification successfully",
+        data: notification
+      };
     } catch (error) {
       this.logger.error(`Error creating notification: ${error.message}`);
       throw error;
     }
   }
 
-  async findAll(userId?: string, options?: {
-    status?: NotificationStatus;
-    type?: string;
-    limit?: number;
-    offset?: number;
-  }) {
+  async findAll(userId?: string, query?: FindAllNotificationsDto) {
     try {
-      const where: any = {
+      const where: Prisma.NotificationWhereInput = {
         recipientId: userId,
         status: {
           not: NotificationStatus.DELETED
         }
       };
 
-      if (options?.status) {
-        where.status = options.status;
+      if (query?.status) {
+        where.status = query.status;
       }
 
-      if (options?.type) {
-        where.type = options.type;
+      if (query?.type) {
+        where.type = query.type;
       }
 
-      const notifications = await this.prisma.notification.findMany({
+      const notifications = await this.prismaService.notification.findMany({
         where,
         include: {
           recipient: {
@@ -103,11 +89,14 @@ export class NotificationsService {
         orderBy: {
           createdAt: 'desc'
         },
-        take: options?.limit || 50,
-        skip: options?.offset || 0
+        take: query?.limit || 50,
+        skip: query?.skip || 0
       });
 
-      return notifications;
+      return {
+        message: `Found ${notifications.length} notifications`,
+        data: notifications
+      };
     } catch (error) {
       this.logger.error(`Error fetching notifications: ${error.message}`);
       throw error;
@@ -120,7 +109,7 @@ export class NotificationsService {
     }
 
     try {
-      const notification = await this.prisma.notification.findFirst({
+      const notification = await this.prismaService.notification.findFirst({
         where: {
           id,
           recipientId: userId,
@@ -149,10 +138,13 @@ export class NotificationsService {
       });
 
       if (!notification) {
-        throw new Error('Notification not found');
+        throw new NotFoundException('Notification not found');
       }
 
-      return notification;
+      return {
+        message: "Found notification",
+        data: notification
+      };
     } catch (error) {
       this.logger.error(`Error fetching notification: ${error.message}`);
       throw error;
@@ -166,7 +158,7 @@ export class NotificationsService {
 
     try {
       // Verify ownership
-      const existingNotification = await this.prisma.notification.findFirst({
+      const existingNotification = await this.prismaService.notification.findFirst({
         where: {
           id,
           recipientId: userId
@@ -174,10 +166,10 @@ export class NotificationsService {
       });
 
       if (!existingNotification) {
-        throw new Error('Notification not found or access denied');
+        throw new NotFoundException('Notification not found');
       }
 
-      const notification = await this.prisma.notification.update({
+      const notification = await this.prismaService.notification.update({
         where: { id },
         data: updateNotificationDto,
         include: {
@@ -203,9 +195,12 @@ export class NotificationsService {
       this.logger.log(`Updated notification ${id}`);
 
       // Emit real-time update
-      this.notificationsGateway.emitNotificationUpdate(notification.recipientId, notification);
+      this.notificationEventEmitterService.emitNotificationUpdate(notification.recipientId, notification);
 
-      return notification;
+      return {
+        message: "Updated notification",
+        data: notification
+      };
     } catch (error) {
       this.logger.error(`Error updating notification: ${error.message}`);
       throw error;
@@ -218,7 +213,7 @@ export class NotificationsService {
     }
 
     try {
-      const notification = await this.prisma.notification.updateMany({
+      const notification = await this.prismaService.notification.updateMany({
         where: {
           id,
           recipientId: userId,
@@ -233,16 +228,12 @@ export class NotificationsService {
       });
 
       if (notification.count === 0) {
-        throw new Error('Notification not found or access denied');
+        throw new NotFoundException('Notification not found');
       }
 
       this.logger.log(`Marked notification ${id} as read`);
 
-      // Update unread count for the user
-      const unreadCount = await this.getUnreadCount(userId);
-      this.notificationsGateway.emitUnreadCountUpdate(userId, unreadCount);
-
-      return { success: true };
+      return { message: "Success" };
     } catch (error) {
       this.logger.error(`Error marking notification as read: ${error.message}`);
       throw error;
@@ -255,7 +246,7 @@ export class NotificationsService {
     }
 
     try {
-      const result = await this.prisma.notification.updateMany({
+      const result = await this.prismaService.notification.updateMany({
         where: {
           recipientId: userId,
           status: NotificationStatus.UNREAD
@@ -268,11 +259,7 @@ export class NotificationsService {
 
       this.logger.log(`Marked ${result.count} notifications as read for user ${userId}`);
 
-      // Update unread count for the user
-      const unreadCount = await this.getUnreadCount(userId);
-      this.notificationsGateway.emitUnreadCountUpdate(userId, unreadCount);
-
-      return { success: true, count: result.count };
+      return { message: "Success", count: result.count };
     } catch (error) {
       this.logger.error(`Error marking all notifications as read: ${error.message}`);
       throw error;
@@ -285,7 +272,7 @@ export class NotificationsService {
     }
 
     try {
-      const notification = await this.prisma.notification.updateMany({
+      const notification = await this.prismaService.notification.updateMany({
         where: {
           id,
           recipientId: userId
@@ -297,36 +284,16 @@ export class NotificationsService {
       });
 
       if (notification.count === 0) {
-        throw new Error('Notification not found or access denied');
+        throw new NotFoundException('Notification not found');
       }
 
-      this.logger.log(`Deleted notification ${id}`);
-      return { success: true };
+      return { message: "Success" };
     } catch (error) {
       this.logger.error(`Error deleting notification: ${error.message}`);
       throw error;
     }
   }
 
-  public async getUnreadCount(userId?: string) {
-    if (!userId) {
-      throw new UnauthorizedException('User is not authenticated');
-    }
-
-    try {
-      const count = await this.prisma.notification.count({
-        where: {
-          recipientId: userId,
-          status: NotificationStatus.UNREAD
-        }
-      });
-
-      return count;
-    } catch (error) {
-      this.logger.error(`Error getting unread count: ${error.message}`);
-      throw error;
-    }
-  }
 
   async getNotificationStats(userId?: string) {
     if (!userId) {
@@ -334,8 +301,8 @@ export class NotificationsService {
     }
 
     try {
-      const [total, unread, read, archived] = await this.prisma.$transaction([
-        this.prisma.notification.count({
+      const [total, unread, read, archived] = await this.prismaService.$transaction([
+        this.prismaService.notification.count({
           where: {
             recipientId: userId,
             status: {
@@ -343,19 +310,19 @@ export class NotificationsService {
             }
           }
         }),
-        this.prisma.notification.count({
+        this.prismaService.notification.count({
           where: {
             recipientId: userId,
             status: NotificationStatus.UNREAD
           }
         }),
-        this.prisma.notification.count({
+        this.prismaService.notification.count({
           where: {
             recipientId: userId,
             status: NotificationStatus.READ
           }
         }),
-        this.prisma.notification.count({
+        this.prismaService.notification.count({
           where: {
             recipientId: userId,
             status: NotificationStatus.ARCHIVED
@@ -375,16 +342,13 @@ export class NotificationsService {
     }
   }
 
-  /**
-   * Archive a notification
-   */
   async archive(id: string, userId?: string) {
     if (!userId) {
       throw new UnauthorizedException('User is not authenticated');
     }
 
     try {
-      const notification = await this.prisma.notification.updateMany({
+      const notification = await this.prismaService.notification.updateMany({
         where: {
           id,
           recipientId: userId
@@ -395,7 +359,7 @@ export class NotificationsService {
       });
 
       if (notification.count === 0) {
-        throw new Error('Notification not found or access denied');
+        throw new NotFoundException('Notification not found');
       }
 
       this.logger.log(`Archived notification ${id}`);
@@ -415,7 +379,7 @@ export class NotificationsService {
     }
 
     try {
-      const notifications = await this.prisma.notification.findMany({
+      const notifications = await this.prismaService.notification.findMany({
         where: {
           recipientId: userId,
           type: type as any,
@@ -455,9 +419,6 @@ export class NotificationsService {
     }
   }
 
-  /**
-   * Get grouped notifications for a user
-   */
   async getGroupedNotifications(userId?: string, options?: {
     limit?: number;
     offset?: number;
@@ -469,9 +430,6 @@ export class NotificationsService {
     return this.notificationGroupingService.getGroupedNotifications(userId, options);
   }
 
-  /**
-   * Ungroup a notification
-   */
   async ungroupNotification(notificationId: string, userId?: string) {
     if (!userId) {
       throw new UnauthorizedException('User is not authenticated');
@@ -480,14 +438,70 @@ export class NotificationsService {
     return this.notificationGroupingService.ungroupNotification(notificationId, userId);
   }
 
-  /**
-   * Get notification grouping statistics
-   */
   async getGroupingStats(userId?: string) {
     if (!userId) {
       throw new UnauthorizedException('User is not authenticated');
     }
 
     return this.notificationGroupingService.getGroupingStats(userId);
+  }
+
+  async isUserOnline(userId: string): Promise<boolean> {
+    try {
+      const socketId = await this.redisService.get(`user:${userId}:socket`);
+      return !!socketId;
+    } catch (error) {
+      this.logger.error(`Error checking user online status: ${error.message}`);
+      return false;
+    }
+  }
+
+  async getUserSocketId(userId: string): Promise<string | null> {
+    try {
+      return await this.redisService.get(`user:${userId}:socket`);
+    } catch (error) {
+      this.logger.error(`Error getting user socket ID: ${error.message}`);
+      return null;
+    }
+  }
+
+  async getOnlineUsers(): Promise<string[]> {
+    try {
+      const keys = await this.redisService.getClient().keys('user:*:socket');
+      return keys.map(key => key.replace('user:', '').replace(':socket', ''));
+    } catch (error) {
+      this.logger.error(`Error getting online users: ${error.message}`);
+      return [];
+    }
+  }
+
+  async isUserSubscribed(userId: string): Promise<boolean> {
+    try {
+      const subscribed = await this.redisService.get(`user:${userId}:subscribed`);
+      return !!subscribed;
+    } catch (error) {
+      this.logger.error(`Error checking user subscription status: ${error.message}`);
+      return false; // Assume not subscribed on error
+    }
+  }
+
+  public async getUnreadCount(userId?: string): Promise<number> {
+    if (!userId) {
+      throw new UnauthorizedException('User is not authenticated');
+    }
+
+    try {
+      const count = await this.prismaService.notification.count({
+        where: {
+          recipientId: userId,
+          status: NotificationStatus.UNREAD
+        }
+      });
+
+      return count
+    } catch (error) {
+      this.logger.error(`Error getting unread count: ${error.message}`);
+      throw error;
+    }
   }
 }

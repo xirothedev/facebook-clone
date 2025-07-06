@@ -5,15 +5,18 @@ import { NotificationsService } from './notifications.service';
 import { NotificationEventEmitterService } from './services/notification-event-emitter.service';
 import { NotificationEventListenerService } from './services/notification-event-listener.service';
 import { NotificationGroupingService } from './services/notification-grouping.service';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
+  imports: [AuthModule],
   controllers: [NotificationsController],
   providers: [
     NotificationsService,
     NotificationsGateway,
     NotificationEventEmitterService,
     NotificationEventListenerService,
-    NotificationGroupingService
+    NotificationGroupingService,
+
   ],
   exports: [
     NotificationsService,

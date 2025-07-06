@@ -402,8 +402,8 @@ exports.UserFlag = exports.$Enums.UserFlag = {
 };
 
 exports.UserRole = exports.$Enums.UserRole = {
-  admin: 'admin',
-  user: 'user'
+  ADMINISTRATOR: 'ADMINISTRATOR',
+  USER: 'USER'
 };
 
 exports.Status = exports.$Enums.Status = {

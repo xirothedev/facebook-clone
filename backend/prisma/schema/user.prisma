@@ -156,8 +156,8 @@ enum UserFlag {
 }
 
 enum UserRole {
-  admin
-  user
+  ADMINISTRATOR
+  USER
 }
 
 enum RelationType {

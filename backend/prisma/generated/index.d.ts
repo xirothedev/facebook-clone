@@ -203,8 +203,8 @@ export type UserFlag = (typeof UserFlag)[keyof typeof UserFlag]
 
 
 export const UserRole: {
-  admin: 'admin',
-  user: 'user'
+  ADMINISTRATOR: 'ADMINISTRATOR',
+  USER: 'USER'
 };
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
