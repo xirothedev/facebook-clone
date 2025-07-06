@@ -1,5 +1,4 @@
-import { AuthCookieGuard } from '@/common/guards/auth-cookie.guard';
-import { Req, UseGuards } from '@nestjs/common';
+import { Req } from '@nestjs/common';
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Request } from 'express';
 import { UpdateUserInput } from './dto/update-user.input';
@@ -8,22 +7,24 @@ import { Phone } from './entities/phone.entity';
 import { SocialLinkeds } from './entities/social-linkeds.entity';
 import { UserQL } from './entities/user.entity';
 import { UsersService } from './users.service';
+import { Public } from '@/common/decorators/public.decorator';
 
 @Resolver(() => UserQL)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(AuthCookieGuard)
   @Query(() => UserQL, { name: 'me' })
   findMe(@Req() req: Request) {
     return this.usersService.findMe(req)
   }
 
+  @Public()
   @Query(() => UserQL, { name: 'user' })
   findUser(@Args('id', { type: () => String }) id: string) {
     return this.usersService.findUser(id);
   }
 
+  @Public()
   @Query(() => [UserQL], { name: "users" })
   findUsers(@Args('searchstring', { type: () => String }) searchstring: string) {
     return this.usersService.findUsers(searchstring);

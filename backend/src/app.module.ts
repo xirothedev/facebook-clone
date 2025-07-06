@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { JwtModule } from '@nestjs/jwt'
 import { MulterModule } from '@nestjs/platform-express'
-import { ThrottlerModule } from '@nestjs/throttler'
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
 import { join } from 'node:path'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -17,6 +17,8 @@ import { UsersModule } from './modules/users/users.module'
 import { PrismaModule } from './prisma/prisma.module'
 import { RedisModule } from './redis/redis.module'
 import { SupabaseModule } from './supabase/supabase.module'
+import { APP_GUARD } from '@nestjs/core'
+import { AuthCookieGuard } from './common/guards/auth-cookie.guard'
 
 @Module({
   imports: [
@@ -72,6 +74,15 @@ import { SupabaseModule } from './supabase/supabase.module'
     RedisModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthCookieGuard,
+    },
+  ],
 })
 export class AppModule { }

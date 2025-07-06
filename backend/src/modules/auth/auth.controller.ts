@@ -8,6 +8,7 @@ import { LoginAuth } from './dto/login-auth.dto';
 import { RegisterUser } from './dto/register-auth.dto';
 import { AuthCookieGuard } from '@/common/guards/auth-cookie.guard';
 import { TokenService } from './token.service';
+import { Public } from "@/common/decorators/public.decorator"
 
 @Controller('auth')
 export class AuthController {
@@ -17,6 +18,7 @@ export class AuthController {
     private readonly tokenService: TokenService
   ) {}
 
+  @Public()
   @Post('register')
   async registerUser(@Body() data: RegisterUser) {
     return this.authService.registerUser(data)
@@ -28,12 +30,14 @@ export class AuthController {
     return this.authService.changePassword(data, req)
   }
 
+  @Public()
   @Post("refresh-token")
   @UseGuards(AuthCookieGuard)
   async refreshToken(req: Request, @Body('refreshToken') refreshToken: string) {
     return this.tokenService.refreshToken(req,refreshToken)
   }
 
+  @Public()
   @Post("login")
   async login(@Body() data: LoginAuth, @Res() res: Response, @Req() req: Request) {
     const result = await this.authService.login(data, res, req)
@@ -45,11 +49,13 @@ export class AuthController {
     return this.authService.logout(res, sessionId)
   }
 
+  @Public()
   @Get('forgot-password')
   async forgotPassword(@Query("email") email: string) {
     return this.authService.forgotPassword(email)
   }
 
+  @Public()
   @Patch('verify-token-forgot-password')
   async verifyTokenForgotPassword(@Body() data: ForgotPasswordDto) {
     return this.authService.verifyTokenForgotPassword(data)
@@ -62,6 +68,7 @@ export class AuthController {
   }
 
   // test
+  @Public()
   @Get('getList')
   async getList() {
     return await this.prismaService.user.findMany()
