@@ -318,4 +318,5 @@ enum StatusAccount {
   RESTRICTED //Bị hạn chế tính năng
   CHECKPOINT //Cần xác minh danh tính
   BANNED //	Khóa vĩnh viễn
+  DEACTIVATED // tạm thời vô hiệu hóa thủ công
 }

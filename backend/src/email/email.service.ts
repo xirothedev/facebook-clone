@@ -126,4 +126,18 @@ export class EmailService {
 
         await this.transporter.sendMail(mailOptions)
     }
+
+    async sendNotificationDisableAccount(toEmail: string) {
+
+        const source = await this.getTemplate("notificationDisableAccount")
+        const subject = "Disable Account"
+        
+        const mailOptions = {
+            to: toEmail,
+            subject,
+            source
+        }
+
+        await this.transporter.sendMail(mailOptions)
+    }
 }
