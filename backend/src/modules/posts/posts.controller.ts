@@ -1,34 +1,33 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, Req, UploadedFiles } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { MediasInterceptor } from '@/common/interceptors/media.interceptor';
+import { Request } from 'express';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private readonly postsService: PostsService) {}
+  constructor(private readonly postsService: PostsService) { }
 
   @Post()
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.postsService.findAll();
+  @UseInterceptors(MediasInterceptor("medias"))
+  create(@Req() req: Request, @Body() body: CreatePostDto, @UploadedFiles() medias: Express.Multer.File[],) {
+    return this.postsService.create(req, body, medias);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postsService.findOne(+id);
+  findById(@Param('id') id: string) {
+    return this.postsService.findById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(+id, updatePostDto);
+  @UseInterceptors(MediasInterceptor("medias"))
+  update(@Param('id') id: string, @Req() req: Request, @Body() updatePostDto: UpdatePostDto, @UploadedFiles() medias: Express.Multer.File[]) {
+    return this.postsService.update(id, req, updatePostDto, medias);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postsService.remove(+id);
+  remove(@Param('id') id: string, @Req() req: Request) {
+    return this.postsService.remove(id, req);
   }
 }

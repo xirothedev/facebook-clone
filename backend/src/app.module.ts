@@ -1,20 +1,22 @@
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { HttpModule } from '@nestjs/axios'
 import { Module } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { GraphQLModule } from '@nestjs/graphql'
+import { JwtModule } from '@nestjs/jwt'
+import { MulterModule } from '@nestjs/platform-express'
+import { ThrottlerModule } from '@nestjs/throttler'
+import { join } from 'node:path'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { MediaModule } from './media/media.module'
 import { AuthModule } from './modules/auth/auth.module'
-import { UsersModule } from './modules/users/users.module'
 import { PostsModule } from './modules/posts/posts.module'
-import { ConfigModule, ConfigService } from '@nestjs/config'
+import { UsersModule } from './modules/users/users.module'
 import { PrismaModule } from './prisma/prisma.module'
-import { MediaModule } from './media/media.module';
-import { GraphQLModule } from '@nestjs/graphql'
-import { join } from 'node:path'
-import { ThrottlerModule } from '@nestjs/throttler'
-import { JwtModule } from '@nestjs/jwt'
-import { HttpModule } from '@nestjs/axios'
-import { RedisModule } from './redis/redis.module';
+import { RedisModule } from './redis/redis.module'
+import { SupabaseModule } from './supabase/supabase.module'
 
 @Module({
   imports: [
@@ -49,9 +51,19 @@ import { RedisModule } from './redis/redis.module';
         },
       }),
     }),
+    MulterModule.register({
+      // storage: diskStorage({
+      //   destination: join(process.cwd(), 'uploads'),
+      //   filename: (_req, file, cb) => {
+      //     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`
+      //     cb(null, `${uniqueSuffix}-${file.originalname}`)
+      //   },
+      // }),
+    }),
     // Global modules
     HttpModule,
     PrismaModule,
+    SupabaseModule,
     // Modules
     AuthModule,
     UsersModule,
@@ -62,4 +74,4 @@ import { RedisModule } from './redis/redis.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
