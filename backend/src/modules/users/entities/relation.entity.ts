@@ -1,25 +1,25 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field } from "@nestjs/graphql";
 
 @ObjectType()
 export class Relation {
-  @Field()
-  sourceUserId: string;
+	@Field()
+	sourceUserId: string;
 
-  @Field()
-  targetUserId: string;
+	@Field()
+	targetUserId: string;
 
-  @Field()
-  type: string;
+	@Field()
+	type: string;
 
-  @Field()
-  status: string;
+	@Field()
+	status: string;
 
-  @Field()
-  scope: string;
+	@Field()
+	scope: string;
 
-  @Field()
-  createdAt: Date;
+	@Field()
+	createdAt: Date;
 
-  @Field()
-  updatedAt: Date;
-} 
+	@Field()
+	updatedAt: Date;
+}

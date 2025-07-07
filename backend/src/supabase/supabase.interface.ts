@@ -1,10 +1,7 @@
-import {
-  SupabaseClientOptions
-} from "@supabase/supabase-js";
-
+import { SupabaseClientOptions } from "@supabase/supabase-js";
 
 export interface SupabaseConfig {
-  url: string;
-  key: string;
-  options?: SupabaseClientOptions<any>;
+	url: string;
+	key: string;
+	options?: SupabaseClientOptions<any>;
 }

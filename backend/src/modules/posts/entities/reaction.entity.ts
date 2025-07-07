@@ -1,7 +1,7 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from "@nestjs/graphql";
 
 @ObjectType()
 export class Reaction {
-  @Field(() => ID)
-  id: string;
-} 
+	@Field(() => ID)
+	id: string;
+}
