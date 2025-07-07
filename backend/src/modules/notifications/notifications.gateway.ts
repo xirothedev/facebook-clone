@@ -29,12 +29,28 @@ export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisco
   constructor(
     private readonly notificationsService: NotificationsService,
     private readonly redisService: RedisService
-  ) { }
+  ) {
+    // Mock socket
+    if (process.env.NODE_ENV === 'development') {
+      setInterval(() => {
+        console.log("Mock event emited")
+        const userId = "be7abadb-dcb8-49b4-a2e2-2ae838223012";
+        // Tạo notification giả
+        const notification = {
+          id: Date.now(),
+          message: `Mock notification for user ${userId} at ${new Date().toLocaleTimeString()}`,
+          createdAt: new Date(),
+        };
+        // Gửi tới room cá nhân của user
+        this.server.to(`user:${userId}`).emit('newNotification', notification);
+      }, 1000);
+    }
+  }
 
   async handleConnection(client: Socket) {
     try {
       // Extract user ID from socket (set by WsAuthGuard)
-      const userId = client.data.user?.id;
+      const userId = process.env.NODE_ENV === "development" ? "be7abadb-dcb8-49b4-a2e2-2ae838223012" : client.data.user?.id;
 
       if (!userId) {
         this.logger.warn('Client connected without user ID');
@@ -125,6 +141,8 @@ export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisco
 
   @SubscribeMessage('getSubscriptionStatus')
   async getSubscriptionStatus(@ConnectedSocket() client: Socket) {
+    console.log(client.data)
+
     try {
       const userId = client.data.user?.id;
 

@@ -38,6 +38,7 @@ export class AuthController {
   }
 
   @Public()
+  @HttpCode(HttpStatus.OK)
   @Post("login")
   async login(@Body() data: LoginAuth, @Res() res: Response, @Req() req: Request) {
     const result = await this.authService.login(data, res, req)
