@@ -1,4 +1,5 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateCommentDto } from './create-comment.dto';
+import { Comment } from 'prisma/generated';
 
-export class UpdateCommentDto extends PartialType(CreateCommentDto) {}
+export class UpdateCommentDto implements Partial<Comment> {
+  content?: string
+}

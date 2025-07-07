@@ -176,6 +176,7 @@ exports.Prisma.PostScalarFieldEnum = {
 exports.Prisma.CommentScalarFieldEnum = {
   id: 'id',
   authorId: 'authorId',
+  content: 'content',
   postId: 'postId',
   parentId: 'parentId',
   createdAt: 'createdAt',
@@ -188,6 +189,7 @@ exports.Prisma.CommentScalarFieldEnum = {
 exports.Prisma.ReactionScalarFieldEnum = {
   id: 'id',
   authorId: 'authorId',
+  type: 'type',
   postId: 'postId',
   commentId: 'commentId'
 };
@@ -376,6 +378,16 @@ exports.CommentStatus = exports.$Enums.CommentStatus = {
   HIDDEN: 'HIDDEN',
   DELETED: 'DELETED',
   PENDING: 'PENDING'
+};
+
+exports.ReactionType = exports.$Enums.ReactionType = {
+  LIKE: 'LIKE',
+  LOVE: 'LOVE',
+  CARE: 'CARE',
+  HAHA: 'HAHA',
+  WOW: 'WOW',
+  SAD: 'SAD',
+  ANGRY: 'ANGRY'
 };
 
 exports.StatusAccount = exports.$Enums.StatusAccount = {
