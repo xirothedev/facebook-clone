@@ -1,7 +1,8 @@
 import { MediasInterceptor } from '@/common/interceptors/media.interceptor';
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseEnumPipe, Patch, Post, Query, Req, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
+import { ReactionType } from 'prisma/generated';
 import { CreatePostDto } from './dto/create-post.dto';
 import { QueryPostDto } from './dto/query-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -74,14 +75,18 @@ export class PostsController {
     return this.postsService.remove(id, req);
   }
 
-  @Post(':id/like')
+  @Post(':id/reaction')
   @ApiOperation({ summary: 'Like a post' })
   @ApiParam({ name: 'id', description: 'Post ID' })
   @ApiResponse({ status: 201, description: 'Post liked successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 404, description: 'Post not found' })
-  likePost(@Param('id') id: string, @Req() req: Request) {
-    return this.postsService.likePost(id, req);
+  reactionPost(
+    @Param('id') id: string,
+    @Req() req: Request,
+    @Body('type', new ParseEnumPipe(ReactionType)) type: ReactionType
+  ) {
+    return this.postsService.reactionPost(id, req, type);
   }
 
   @Delete(':id/like')

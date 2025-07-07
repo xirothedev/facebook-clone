@@ -5,6 +5,7 @@ import { QueryPostDto } from './dto/query-post.dto';
 import { Request } from 'express';
 import { PrismaService } from '@/prisma/prisma.service';
 import { SupabaseService } from '@/supabase/supabase.service';
+import { ReactionType } from 'prisma/generated';
 
 @Injectable()
 export class PostsService {
@@ -78,7 +79,6 @@ export class PostsService {
       status: 'DISPLAY' // Only return active posts
     };
 
-    // Add search filter
     if (search) {
       where.content = {
         contains: search,
@@ -86,20 +86,16 @@ export class PostsService {
       };
     }
 
-    // Add scope filter
     if (scope) {
       where.scope = scope;
     }
 
-    // Add author filter
     if (authorId) {
       where.authorId = authorId;
     }
 
-    // Get total count for pagination
     const total = await this.prismaService.post.count({ where });
 
-    // Get posts with pagination
     const posts = await this.prismaService.post.findMany({
       where,
       skip,
@@ -309,7 +305,7 @@ export class PostsService {
     };
   }
 
-  async likePost(id: string, req: Request) {
+  async reactionPost(id: string, req: Request, type: ReactionType) {
     if (!req.user) {
       throw new UnauthorizedException('User is not authenticated');
     }
@@ -338,7 +334,8 @@ export class PostsService {
     const reaction = await this.prismaService.reaction.create({
       data: {
         postId: id,
-        authorId: req.user.id
+        authorId: req.user.id,
+        type
       },
       include: {
         author: true

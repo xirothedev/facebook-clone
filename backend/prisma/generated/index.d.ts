@@ -181,6 +181,19 @@ export const PostStatus: {
 export type PostStatus = (typeof PostStatus)[keyof typeof PostStatus]
 
 
+export const ReactionType: {
+  LIKE: 'LIKE',
+  LOVE: 'LOVE',
+  CARE: 'CARE',
+  HAHA: 'HAHA',
+  WOW: 'WOW',
+  SAD: 'SAD',
+  ANGRY: 'ANGRY'
+};
+
+export type ReactionType = (typeof ReactionType)[keyof typeof ReactionType]
+
+
 export const AuthType: {
   VERIFICATION: 'VERIFICATION',
   RESET_PASSWORD: 'RESET_PASSWORD',
@@ -313,6 +326,10 @@ export const CommentStatus: typeof $Enums.CommentStatus
 export type PostStatus = $Enums.PostStatus
 
 export const PostStatus: typeof $Enums.PostStatus
+
+export type ReactionType = $Enums.ReactionType
+
+export const ReactionType: typeof $Enums.ReactionType
 
 export type AuthType = $Enums.AuthType
 
@@ -6067,6 +6084,7 @@ export namespace Prisma {
   export type CommentMinAggregateOutputType = {
     id: string | null
     authorId: string | null
+    content: string | null
     postId: string | null
     parentId: string | null
     createdAt: Date | null
@@ -6078,6 +6096,7 @@ export namespace Prisma {
   export type CommentMaxAggregateOutputType = {
     id: string | null
     authorId: string | null
+    content: string | null
     postId: string | null
     parentId: string | null
     createdAt: Date | null
@@ -6089,6 +6108,7 @@ export namespace Prisma {
   export type CommentCountAggregateOutputType = {
     id: number
     authorId: number
+    content: number
     postId: number
     parentId: number
     createdAt: number
@@ -6103,6 +6123,7 @@ export namespace Prisma {
   export type CommentMinAggregateInputType = {
     id?: true
     authorId?: true
+    content?: true
     postId?: true
     parentId?: true
     createdAt?: true
@@ -6114,6 +6135,7 @@ export namespace Prisma {
   export type CommentMaxAggregateInputType = {
     id?: true
     authorId?: true
+    content?: true
     postId?: true
     parentId?: true
     createdAt?: true
@@ -6125,6 +6147,7 @@ export namespace Prisma {
   export type CommentCountAggregateInputType = {
     id?: true
     authorId?: true
+    content?: true
     postId?: true
     parentId?: true
     createdAt?: true
@@ -6210,12 +6233,13 @@ export namespace Prisma {
   export type CommentGroupByOutputType = {
     id: string
     authorId: string
+    content: string
     postId: string
     parentId: string | null
     createdAt: Date
     updateAt: Date
     deletedAt: Date | null
-    updateHistories: string[]
+    updateHistories: JsonValue[]
     status: $Enums.CommentStatus
     _count: CommentCountAggregateOutputType | null
     _min: CommentMinAggregateOutputType | null
@@ -6239,6 +6263,7 @@ export namespace Prisma {
   export type CommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     authorId?: boolean
+    content?: boolean
     postId?: boolean
     parentId?: boolean
     createdAt?: boolean
@@ -6257,6 +6282,7 @@ export namespace Prisma {
   export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     authorId?: boolean
+    content?: boolean
     postId?: boolean
     parentId?: boolean
     createdAt?: boolean
@@ -6272,6 +6298,7 @@ export namespace Prisma {
   export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     authorId?: boolean
+    content?: boolean
     postId?: boolean
     parentId?: boolean
     createdAt?: boolean
@@ -6287,6 +6314,7 @@ export namespace Prisma {
   export type CommentSelectScalar = {
     id?: boolean
     authorId?: boolean
+    content?: boolean
     postId?: boolean
     parentId?: boolean
     createdAt?: boolean
@@ -6296,7 +6324,7 @@ export namespace Prisma {
     status?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "postId" | "parentId" | "createdAt" | "updateAt" | "deletedAt" | "updateHistories" | "status", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "content" | "postId" | "parentId" | "createdAt" | "updateAt" | "deletedAt" | "updateHistories" | "status", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
@@ -6328,12 +6356,13 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       authorId: string
+      content: string
       postId: string
       parentId: string | null
       createdAt: Date
       updateAt: Date
       deletedAt: Date | null
-      updateHistories: string[]
+      updateHistories: Prisma.JsonValue[]
       status: $Enums.CommentStatus
     }, ExtArgs["result"]["comment"]>
     composites: {}
@@ -6765,12 +6794,13 @@ export namespace Prisma {
   interface CommentFieldRefs {
     readonly id: FieldRef<"Comment", 'String'>
     readonly authorId: FieldRef<"Comment", 'String'>
+    readonly content: FieldRef<"Comment", 'String'>
     readonly postId: FieldRef<"Comment", 'String'>
     readonly parentId: FieldRef<"Comment", 'String'>
     readonly createdAt: FieldRef<"Comment", 'DateTime'>
     readonly updateAt: FieldRef<"Comment", 'DateTime'>
     readonly deletedAt: FieldRef<"Comment", 'DateTime'>
-    readonly updateHistories: FieldRef<"Comment", 'String[]'>
+    readonly updateHistories: FieldRef<"Comment", 'Json[]'>
     readonly status: FieldRef<"Comment", 'CommentStatus'>
   }
     
@@ -7275,6 +7305,7 @@ export namespace Prisma {
   export type ReactionMinAggregateOutputType = {
     id: string | null
     authorId: string | null
+    type: $Enums.ReactionType | null
     postId: string | null
     commentId: string | null
   }
@@ -7282,6 +7313,7 @@ export namespace Prisma {
   export type ReactionMaxAggregateOutputType = {
     id: string | null
     authorId: string | null
+    type: $Enums.ReactionType | null
     postId: string | null
     commentId: string | null
   }
@@ -7289,6 +7321,7 @@ export namespace Prisma {
   export type ReactionCountAggregateOutputType = {
     id: number
     authorId: number
+    type: number
     postId: number
     commentId: number
     _all: number
@@ -7298,6 +7331,7 @@ export namespace Prisma {
   export type ReactionMinAggregateInputType = {
     id?: true
     authorId?: true
+    type?: true
     postId?: true
     commentId?: true
   }
@@ -7305,6 +7339,7 @@ export namespace Prisma {
   export type ReactionMaxAggregateInputType = {
     id?: true
     authorId?: true
+    type?: true
     postId?: true
     commentId?: true
   }
@@ -7312,6 +7347,7 @@ export namespace Prisma {
   export type ReactionCountAggregateInputType = {
     id?: true
     authorId?: true
+    type?: true
     postId?: true
     commentId?: true
     _all?: true
@@ -7392,6 +7428,7 @@ export namespace Prisma {
   export type ReactionGroupByOutputType = {
     id: string
     authorId: string
+    type: $Enums.ReactionType
     postId: string | null
     commentId: string | null
     _count: ReactionCountAggregateOutputType | null
@@ -7416,6 +7453,7 @@ export namespace Prisma {
   export type ReactionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     authorId?: boolean
+    type?: boolean
     postId?: boolean
     commentId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -7426,6 +7464,7 @@ export namespace Prisma {
   export type ReactionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     authorId?: boolean
+    type?: boolean
     postId?: boolean
     commentId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -7436,6 +7475,7 @@ export namespace Prisma {
   export type ReactionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     authorId?: boolean
+    type?: boolean
     postId?: boolean
     commentId?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -7446,11 +7486,12 @@ export namespace Prisma {
   export type ReactionSelectScalar = {
     id?: boolean
     authorId?: boolean
+    type?: boolean
     postId?: boolean
     commentId?: boolean
   }
 
-  export type ReactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "postId" | "commentId", ExtArgs["result"]["reaction"]>
+  export type ReactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "type" | "postId" | "commentId", ExtArgs["result"]["reaction"]>
   export type ReactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | Reaction$postArgs<ExtArgs>
@@ -7477,6 +7518,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       authorId: string
+      type: $Enums.ReactionType
       postId: string | null
       commentId: string | null
     }, ExtArgs["result"]["reaction"]>
@@ -7907,6 +7949,7 @@ export namespace Prisma {
   interface ReactionFieldRefs {
     readonly id: FieldRef<"Reaction", 'String'>
     readonly authorId: FieldRef<"Reaction", 'String'>
+    readonly type: FieldRef<"Reaction", 'ReactionType'>
     readonly postId: FieldRef<"Reaction", 'String'>
     readonly commentId: FieldRef<"Reaction", 'String'>
   }
@@ -17757,6 +17800,7 @@ export namespace Prisma {
   export const CommentScalarFieldEnum: {
     id: 'id',
     authorId: 'authorId',
+    content: 'content',
     postId: 'postId',
     parentId: 'parentId',
     createdAt: 'createdAt',
@@ -17772,6 +17816,7 @@ export namespace Prisma {
   export const ReactionScalarFieldEnum: {
     id: 'id',
     authorId: 'authorId',
+    type: 'type',
     postId: 'postId',
     commentId: 'commentId'
   };
@@ -18081,6 +18126,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json[]'
+   */
+  export type ListJsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json[]'>
+    
+
+
+  /**
    * Reference to a field of type 'CommentStatus'
    */
   export type EnumCommentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CommentStatus'>
@@ -18091,6 +18143,20 @@ export namespace Prisma {
    * Reference to a field of type 'CommentStatus[]'
    */
   export type ListEnumCommentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CommentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReactionType'
+   */
+  export type EnumReactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReactionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReactionType[]'
+   */
+  export type ListEnumReactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReactionType[]'>
     
 
 
@@ -18524,12 +18590,13 @@ export namespace Prisma {
     NOT?: CommentWhereInput | CommentWhereInput[]
     id?: StringFilter<"Comment"> | string
     authorId?: UuidFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
     postId?: StringFilter<"Comment"> | string
     parentId?: StringNullableFilter<"Comment"> | string | null
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updateAt?: DateTimeFilter<"Comment"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Comment"> | Date | string | null
-    updateHistories?: StringNullableListFilter<"Comment">
+    updateHistories?: JsonNullableListFilter<"Comment">
     status?: EnumCommentStatusFilter<"Comment"> | $Enums.CommentStatus
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
@@ -18541,6 +18608,7 @@ export namespace Prisma {
   export type CommentOrderByWithRelationInput = {
     id?: SortOrder
     authorId?: SortOrder
+    content?: SortOrder
     postId?: SortOrder
     parentId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -18561,12 +18629,13 @@ export namespace Prisma {
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
     authorId?: UuidFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
     postId?: StringFilter<"Comment"> | string
     parentId?: StringNullableFilter<"Comment"> | string | null
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updateAt?: DateTimeFilter<"Comment"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Comment"> | Date | string | null
-    updateHistories?: StringNullableListFilter<"Comment">
+    updateHistories?: JsonNullableListFilter<"Comment">
     status?: EnumCommentStatusFilter<"Comment"> | $Enums.CommentStatus
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
@@ -18578,6 +18647,7 @@ export namespace Prisma {
   export type CommentOrderByWithAggregationInput = {
     id?: SortOrder
     authorId?: SortOrder
+    content?: SortOrder
     postId?: SortOrder
     parentId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -18596,12 +18666,13 @@ export namespace Prisma {
     NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Comment"> | string
     authorId?: UuidWithAggregatesFilter<"Comment"> | string
+    content?: StringWithAggregatesFilter<"Comment"> | string
     postId?: StringWithAggregatesFilter<"Comment"> | string
     parentId?: StringNullableWithAggregatesFilter<"Comment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     updateAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Comment"> | Date | string | null
-    updateHistories?: StringNullableListFilter<"Comment">
+    updateHistories?: JsonNullableListFilter<"Comment">
     status?: EnumCommentStatusWithAggregatesFilter<"Comment"> | $Enums.CommentStatus
   }
 
@@ -18611,6 +18682,7 @@ export namespace Prisma {
     NOT?: ReactionWhereInput | ReactionWhereInput[]
     id?: StringFilter<"Reaction"> | string
     authorId?: UuidFilter<"Reaction"> | string
+    type?: EnumReactionTypeFilter<"Reaction"> | $Enums.ReactionType
     postId?: StringNullableFilter<"Reaction"> | string | null
     commentId?: StringNullableFilter<"Reaction"> | string | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -18621,6 +18693,7 @@ export namespace Prisma {
   export type ReactionOrderByWithRelationInput = {
     id?: SortOrder
     authorId?: SortOrder
+    type?: SortOrder
     postId?: SortOrderInput | SortOrder
     commentId?: SortOrderInput | SortOrder
     author?: UserOrderByWithRelationInput
@@ -18634,6 +18707,7 @@ export namespace Prisma {
     OR?: ReactionWhereInput[]
     NOT?: ReactionWhereInput | ReactionWhereInput[]
     authorId?: UuidFilter<"Reaction"> | string
+    type?: EnumReactionTypeFilter<"Reaction"> | $Enums.ReactionType
     postId?: StringNullableFilter<"Reaction"> | string | null
     commentId?: StringNullableFilter<"Reaction"> | string | null
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -18644,6 +18718,7 @@ export namespace Prisma {
   export type ReactionOrderByWithAggregationInput = {
     id?: SortOrder
     authorId?: SortOrder
+    type?: SortOrder
     postId?: SortOrderInput | SortOrder
     commentId?: SortOrderInput | SortOrder
     _count?: ReactionCountOrderByAggregateInput
@@ -18657,6 +18732,7 @@ export namespace Prisma {
     NOT?: ReactionScalarWhereWithAggregatesInput | ReactionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Reaction"> | string
     authorId?: UuidWithAggregatesFilter<"Reaction"> | string
+    type?: EnumReactionTypeWithAggregatesFilter<"Reaction"> | $Enums.ReactionType
     postId?: StringNullableWithAggregatesFilter<"Reaction"> | string | null
     commentId?: StringNullableWithAggregatesFilter<"Reaction"> | string | null
   }
@@ -19604,10 +19680,11 @@ export namespace Prisma {
 
   export type CommentCreateInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
     post: PostCreateNestedOneWithoutCommentsInput
@@ -19619,12 +19696,13 @@ export namespace Prisma {
   export type CommentUncheckedCreateInput = {
     id?: string
     authorId: string
+    content: string
     postId: string
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
     reations?: ReactionUncheckedCreateNestedManyWithoutCommentInput
@@ -19632,10 +19710,11 @@ export namespace Prisma {
 
   export type CommentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
@@ -19647,12 +19726,13 @@ export namespace Prisma {
   export type CommentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
     reations?: ReactionUncheckedUpdateManyWithoutCommentNestedInput
@@ -19661,38 +19741,42 @@ export namespace Prisma {
   export type CommentCreateManyInput = {
     id?: string
     authorId: string
+    content: string
     postId: string
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
   }
 
   export type CommentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
 
   export type CommentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
 
   export type ReactionCreateInput = {
     id?: string
+    type: $Enums.ReactionType
     author: UserCreateNestedOneWithoutReactionsInput
     post?: PostCreateNestedOneWithoutReactionsInput
     comment?: CommentCreateNestedOneWithoutReationsInput
@@ -19701,12 +19785,14 @@ export namespace Prisma {
   export type ReactionUncheckedCreateInput = {
     id?: string
     authorId: string
+    type: $Enums.ReactionType
     postId?: string | null
     commentId?: string | null
   }
 
   export type ReactionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     author?: UserUpdateOneRequiredWithoutReactionsNestedInput
     post?: PostUpdateOneWithoutReactionsNestedInput
     comment?: CommentUpdateOneWithoutReationsNestedInput
@@ -19715,6 +19801,7 @@ export namespace Prisma {
   export type ReactionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -19722,17 +19809,20 @@ export namespace Prisma {
   export type ReactionCreateManyInput = {
     id?: string
     authorId: string
+    type: $Enums.ReactionType
     postId?: string | null
     commentId?: string | null
   }
 
   export type ReactionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
   }
 
   export type ReactionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -20939,6 +21029,20 @@ export namespace Prisma {
     _min?: NestedEnumPostStatusFilter<$PrismaModel>
     _max?: NestedEnumPostStatusFilter<$PrismaModel>
   }
+  export type JsonNullableListFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableListFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableListFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableListFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableListFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableListFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel> | null
+    has?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    hasEvery?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel>
+    hasSome?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
 
   export type EnumCommentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.CommentStatus | EnumCommentStatusFieldRefInput<$PrismaModel>
@@ -20960,6 +21064,7 @@ export namespace Prisma {
   export type CommentCountOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
+    content?: SortOrder
     postId?: SortOrder
     parentId?: SortOrder
     createdAt?: SortOrder
@@ -20972,6 +21077,7 @@ export namespace Prisma {
   export type CommentMaxOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
+    content?: SortOrder
     postId?: SortOrder
     parentId?: SortOrder
     createdAt?: SortOrder
@@ -20983,6 +21089,7 @@ export namespace Prisma {
   export type CommentMinOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
+    content?: SortOrder
     postId?: SortOrder
     parentId?: SortOrder
     createdAt?: SortOrder
@@ -21001,6 +21108,13 @@ export namespace Prisma {
     _max?: NestedEnumCommentStatusFilter<$PrismaModel>
   }
 
+  export type EnumReactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReactionType | EnumReactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReactionTypeFilter<$PrismaModel> | $Enums.ReactionType
+  }
+
   export type PostNullableScalarRelationFilter = {
     is?: PostWhereInput | null
     isNot?: PostWhereInput | null
@@ -21009,6 +21123,7 @@ export namespace Prisma {
   export type ReactionCountOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
+    type?: SortOrder
     postId?: SortOrder
     commentId?: SortOrder
   }
@@ -21016,6 +21131,7 @@ export namespace Prisma {
   export type ReactionMaxOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
+    type?: SortOrder
     postId?: SortOrder
     commentId?: SortOrder
   }
@@ -21023,8 +21139,19 @@ export namespace Prisma {
   export type ReactionMinOrderByAggregateInput = {
     id?: SortOrder
     authorId?: SortOrder
+    type?: SortOrder
     postId?: SortOrder
     commentId?: SortOrder
+  }
+
+  export type EnumReactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReactionType | EnumReactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumReactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumReactionTypeFilter<$PrismaModel>
   }
 
   export type EnumStatusAccountFilter<$PrismaModel = never> = {
@@ -21697,7 +21824,7 @@ export namespace Prisma {
   }
 
   export type CommentCreateupdateHistoriesInput = {
-    set: string[]
+    set: InputJsonValue[]
   }
 
   export type UserCreateNestedOneWithoutCommentsInput = {
@@ -21747,8 +21874,8 @@ export namespace Prisma {
   }
 
   export type CommentUpdateupdateHistoriesInput = {
-    set?: string[]
-    push?: string | string[]
+    set?: InputJsonValue[]
+    push?: InputJsonValue | InputJsonValue[]
   }
 
   export type EnumCommentStatusFieldUpdateOperationsInput = {
@@ -21853,6 +21980,10 @@ export namespace Prisma {
     create?: XOR<CommentCreateWithoutReationsInput, CommentUncheckedCreateWithoutReationsInput>
     connectOrCreate?: CommentCreateOrConnectWithoutReationsInput
     connect?: CommentWhereUniqueInput
+  }
+
+  export type EnumReactionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ReactionType
   }
 
   export type UserUpdateOneRequiredWithoutReactionsNestedInput = {
@@ -23112,6 +23243,23 @@ export namespace Prisma {
     _max?: NestedEnumCommentStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumReactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReactionType | EnumReactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReactionTypeFilter<$PrismaModel> | $Enums.ReactionType
+  }
+
+  export type NestedEnumReactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReactionType | EnumReactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumReactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumReactionTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumStatusAccountFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusAccount | EnumStatusAccountFieldRefInput<$PrismaModel>
     in?: $Enums.StatusAccount[] | ListEnumStatusAccountFieldRefInput<$PrismaModel>
@@ -23623,6 +23771,7 @@ export namespace Prisma {
 
   export type ReactionCreateWithoutPostInput = {
     id?: string
+    type: $Enums.ReactionType
     author: UserCreateNestedOneWithoutReactionsInput
     comment?: CommentCreateNestedOneWithoutReationsInput
   }
@@ -23630,6 +23779,7 @@ export namespace Prisma {
   export type ReactionUncheckedCreateWithoutPostInput = {
     id?: string
     authorId: string
+    type: $Enums.ReactionType
     commentId?: string | null
   }
 
@@ -23645,10 +23795,11 @@ export namespace Prisma {
 
   export type CommentCreateWithoutPostInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
     parent?: CommentCreateNestedOneWithoutRepliesInput
@@ -23659,11 +23810,12 @@ export namespace Prisma {
   export type CommentUncheckedCreateWithoutPostInput = {
     id?: string
     authorId: string
+    content: string
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
     reations?: ReactionUncheckedCreateNestedManyWithoutCommentInput
@@ -23786,6 +23938,7 @@ export namespace Prisma {
     NOT?: ReactionScalarWhereInput | ReactionScalarWhereInput[]
     id?: StringFilter<"Reaction"> | string
     authorId?: UuidFilter<"Reaction"> | string
+    type?: EnumReactionTypeFilter<"Reaction"> | $Enums.ReactionType
     postId?: StringNullableFilter<"Reaction"> | string | null
     commentId?: StringNullableFilter<"Reaction"> | string | null
   }
@@ -23812,12 +23965,13 @@ export namespace Prisma {
     NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
     id?: StringFilter<"Comment"> | string
     authorId?: UuidFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
     postId?: StringFilter<"Comment"> | string
     parentId?: StringNullableFilter<"Comment"> | string | null
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updateAt?: DateTimeFilter<"Comment"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Comment"> | Date | string | null
-    updateHistories?: StringNullableListFilter<"Comment">
+    updateHistories?: JsonNullableListFilter<"Comment">
     status?: EnumCommentStatusFilter<"Comment"> | $Enums.CommentStatus
   }
 
@@ -23931,10 +24085,11 @@ export namespace Prisma {
 
   export type CommentCreateWithoutRepliesInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
     post: PostCreateNestedOneWithoutCommentsInput
@@ -23945,12 +24100,13 @@ export namespace Prisma {
   export type CommentUncheckedCreateWithoutRepliesInput = {
     id?: string
     authorId: string
+    content: string
     postId: string
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     reations?: ReactionUncheckedCreateNestedManyWithoutCommentInput
   }
@@ -23962,10 +24118,11 @@ export namespace Prisma {
 
   export type CommentCreateWithoutParentInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
     post: PostCreateNestedOneWithoutCommentsInput
@@ -23976,11 +24133,12 @@ export namespace Prisma {
   export type CommentUncheckedCreateWithoutParentInput = {
     id?: string
     authorId: string
+    content: string
     postId: string
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
     reations?: ReactionUncheckedCreateNestedManyWithoutCommentInput
@@ -23998,6 +24156,7 @@ export namespace Prisma {
 
   export type ReactionCreateWithoutCommentInput = {
     id?: string
+    type: $Enums.ReactionType
     author: UserCreateNestedOneWithoutReactionsInput
     post?: PostCreateNestedOneWithoutReactionsInput
   }
@@ -24005,6 +24164,7 @@ export namespace Prisma {
   export type ReactionUncheckedCreateWithoutCommentInput = {
     id?: string
     authorId: string
+    type: $Enums.ReactionType
     postId?: string | null
   }
 
@@ -24151,10 +24311,11 @@ export namespace Prisma {
 
   export type CommentUpdateWithoutRepliesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
@@ -24165,12 +24326,13 @@ export namespace Prisma {
   export type CommentUncheckedUpdateWithoutRepliesInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     reations?: ReactionUncheckedUpdateManyWithoutCommentNestedInput
   }
@@ -24317,10 +24479,11 @@ export namespace Prisma {
 
   export type CommentCreateWithoutReationsInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     author: UserCreateNestedOneWithoutCommentsInput
     post: PostCreateNestedOneWithoutCommentsInput
@@ -24331,12 +24494,13 @@ export namespace Prisma {
   export type CommentUncheckedCreateWithoutReationsInput = {
     id?: string
     authorId: string
+    content: string
     postId: string
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
   }
@@ -24479,10 +24643,11 @@ export namespace Prisma {
 
   export type CommentUpdateWithoutReationsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
@@ -24493,12 +24658,13 @@ export namespace Prisma {
   export type CommentUncheckedUpdateWithoutReationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
   }
@@ -24783,10 +24949,11 @@ export namespace Prisma {
 
   export type CommentCreateWithoutAuthorInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     post: PostCreateNestedOneWithoutCommentsInput
     parent?: CommentCreateNestedOneWithoutRepliesInput
@@ -24796,12 +24963,13 @@ export namespace Prisma {
 
   export type CommentUncheckedCreateWithoutAuthorInput = {
     id?: string
+    content: string
     postId: string
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
     replies?: CommentUncheckedCreateNestedManyWithoutParentInput
     reations?: ReactionUncheckedCreateNestedManyWithoutCommentInput
@@ -24819,12 +24987,14 @@ export namespace Prisma {
 
   export type ReactionCreateWithoutAuthorInput = {
     id?: string
+    type: $Enums.ReactionType
     post?: PostCreateNestedOneWithoutReactionsInput
     comment?: CommentCreateNestedOneWithoutReationsInput
   }
 
   export type ReactionUncheckedCreateWithoutAuthorInput = {
     id?: string
+    type: $Enums.ReactionType
     postId?: string | null
     commentId?: string | null
   }
@@ -27185,22 +27355,25 @@ export namespace Prisma {
   export type ReactionCreateManyPostInput = {
     id?: string
     authorId: string
+    type: $Enums.ReactionType
     commentId?: string | null
   }
 
   export type CommentCreateManyPostInput = {
     id?: string
     authorId: string
+    content: string
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
   }
 
   export type ReactionUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     author?: UserUpdateOneRequiredWithoutReactionsNestedInput
     comment?: CommentUpdateOneWithoutReationsNestedInput
   }
@@ -27208,21 +27381,24 @@ export namespace Prisma {
   export type ReactionUncheckedUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReactionUncheckedUpdateManyWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CommentUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
     parent?: CommentUpdateOneWithoutRepliesNestedInput
@@ -27233,11 +27409,12 @@ export namespace Prisma {
   export type CommentUncheckedUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
     reations?: ReactionUncheckedUpdateManyWithoutCommentNestedInput
@@ -27246,37 +27423,41 @@ export namespace Prisma {
   export type CommentUncheckedUpdateManyWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
 
   export type CommentCreateManyParentInput = {
     id?: string
     authorId: string
+    content: string
     postId: string
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
   }
 
   export type ReactionCreateManyCommentInput = {
     id?: string
     authorId: string
+    type: $Enums.ReactionType
     postId?: string | null
   }
 
   export type CommentUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     author?: UserUpdateOneRequiredWithoutCommentsNestedInput
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
@@ -27287,11 +27468,12 @@ export namespace Prisma {
   export type CommentUncheckedUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
     reations?: ReactionUncheckedUpdateManyWithoutCommentNestedInput
@@ -27300,16 +27482,18 @@ export namespace Prisma {
   export type CommentUncheckedUpdateManyWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
 
   export type ReactionUpdateWithoutCommentInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     author?: UserUpdateOneRequiredWithoutReactionsNestedInput
     post?: PostUpdateOneWithoutReactionsNestedInput
   }
@@ -27317,12 +27501,14 @@ export namespace Prisma {
   export type ReactionUncheckedUpdateWithoutCommentInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     postId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReactionUncheckedUpdateManyWithoutCommentInput = {
     id?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     postId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -27399,17 +27585,19 @@ export namespace Prisma {
 
   export type CommentCreateManyAuthorInput = {
     id?: string
+    content: string
     postId: string
     parentId?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
     deletedAt?: Date | string | null
-    updateHistories?: CommentCreateupdateHistoriesInput | string[]
+    updateHistories?: CommentCreateupdateHistoriesInput | InputJsonValue[]
     status: $Enums.CommentStatus
   }
 
   export type ReactionCreateManyAuthorInput = {
     id?: string
+    type: $Enums.ReactionType
     postId?: string | null
     commentId?: string | null
   }
@@ -27693,10 +27881,11 @@ export namespace Prisma {
 
   export type CommentUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
     parent?: CommentUpdateOneWithoutRepliesNestedInput
@@ -27706,12 +27895,13 @@ export namespace Prisma {
 
   export type CommentUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
     reations?: ReactionUncheckedUpdateManyWithoutCommentNestedInput
@@ -27719,29 +27909,33 @@ export namespace Prisma {
 
   export type CommentUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     postId?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateHistories?: CommentUpdateupdateHistoriesInput | string[]
+    updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
   }
 
   export type ReactionUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     post?: PostUpdateOneWithoutReactionsNestedInput
     comment?: CommentUpdateOneWithoutReationsNestedInput
   }
 
   export type ReactionUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReactionUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
