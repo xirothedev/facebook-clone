@@ -3,6 +3,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { HttpModule } from '@nestjs/axios'
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 import { GraphQLModule } from '@nestjs/graphql'
 import { JwtModule } from '@nestjs/jwt'
 import { MulterModule } from '@nestjs/platform-express'
@@ -19,6 +20,8 @@ import { RedisModule } from './redis/redis.module'
 import { SupabaseModule } from './supabase/supabase.module'
 import { APP_GUARD } from '@nestjs/core'
 import { AuthCookieGuard } from './common/guards/auth-cookie.guard'
+import { NotificationsModule } from './modules/notifications/notifications.module'
+import { CommentModule } from './modules/comment/comment.module';
 
 @Module({
   imports: [
@@ -26,6 +29,7 @@ import { AuthCookieGuard } from './common/guards/auth-cookie.guard'
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    EventEmitterModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
@@ -72,9 +76,12 @@ import { AuthCookieGuard } from './common/guards/auth-cookie.guard'
     PostsModule,
     MediaModule,
     RedisModule,
+    NotificationsModule,
+    CommentModule,
   ],
   controllers: [AppController],
-  providers: [AppService,
+  providers: [
+    AppService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
@@ -85,4 +92,4 @@ import { AuthCookieGuard } from './common/guards/auth-cookie.guard'
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

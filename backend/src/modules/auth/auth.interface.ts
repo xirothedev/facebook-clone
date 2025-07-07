@@ -1,4 +1,4 @@
-import { User } from "prisma/generated";
+import { Email, User } from "prisma/generated";
 
 export interface JwtPayload {
   sub: string;
@@ -10,6 +10,11 @@ export type FindUserResult = User | User[] | null;
 
 // Type cho user không có password
 export interface UserWithoutPassword extends Omit<User, "hashedPassword"> { }
+
+// Type cho user với primary email và không có password
+export interface UserWithPrimaryEmailAndWithoutPassword extends UserWithoutPassword {
+  primaryEmail: Email
+}
 
 // Type cho response của auth operations
 export interface AuthResponse<T = any> {

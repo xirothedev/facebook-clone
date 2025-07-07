@@ -137,6 +137,31 @@ exports.Prisma.RelationLoadStrategy = {
   join: 'join'
 };
 
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  readAt: 'readAt',
+  deletedAt: 'deletedAt',
+  recipientId: 'recipientId',
+  actorId: 'actorId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  status: 'status',
+  priority: 'priority',
+  postId: 'postId',
+  commentId: 'commentId',
+  reactionId: 'reactionId',
+  friendRequestId: 'friendRequestId',
+  imageUrl: 'imageUrl',
+  actionUrl: 'actionUrl',
+  metadata: 'metadata',
+  groupId: 'groupId',
+  isGrouped: 'isGrouped',
+  groupCount: 'groupCount'
+};
+
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   authorId: 'authorId',
@@ -174,6 +199,7 @@ exports.Prisma.UserScalarFieldEnum = {
   updateAt: 'updateAt',
   status: 'status',
   flags: 'flags',
+  roles: 'roles',
   primaryEmailId: 'primaryEmailId',
   primaryPhoneId: 'primaryPhoneId',
   hashedPassword: 'hashedPassword',
@@ -228,8 +254,8 @@ exports.Prisma.SocialLinkedsScalarFieldEnum = {
   userId: 'userId'
 };
 
-exports.Prisma.CodeScalarFieldEnum = {
-  tokens: 'tokens',
+exports.Prisma.AuthenticationScalarFieldEnum = {
+  code: 'code',
   expiresAt: 'expiresAt',
   type: 'type',
   userId: 'userId',
@@ -255,9 +281,20 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -269,6 +306,55 @@ exports.ResourceType = exports.$Enums.ResourceType = {
   video: 'video',
   raw: 'raw',
   auto: 'auto'
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  POST_LIKE: 'POST_LIKE',
+  POST_COMMENT: 'POST_COMMENT',
+  POST_SHARE: 'POST_SHARE',
+  COMMENT_LIKE: 'COMMENT_LIKE',
+  COMMENT_REPLY: 'COMMENT_REPLY',
+  FRIEND_REQUEST: 'FRIEND_REQUEST',
+  FRIEND_REQUEST_ACCEPTED: 'FRIEND_REQUEST_ACCEPTED',
+  FRIEND_SUGGESTION: 'FRIEND_SUGGESTION',
+  PROFILE_VIEW: 'PROFILE_VIEW',
+  PROFILE_UPDATE: 'PROFILE_UPDATE',
+  BIRTHDAY_REMINDER: 'BIRTHDAY_REMINDER',
+  GROUP_INVITE: 'GROUP_INVITE',
+  GROUP_POST: 'GROUP_POST',
+  GROUP_EVENT: 'GROUP_EVENT',
+  PAGE_LIKE: 'PAGE_LIKE',
+  PAGE_POST: 'PAGE_POST',
+  PAGE_EVENT: 'PAGE_EVENT',
+  EVENT_INVITE: 'EVENT_INVITE',
+  EVENT_UPDATE: 'EVENT_UPDATE',
+  EVENT_REMINDER: 'EVENT_REMINDER',
+  MARKETPLACE_LISTING: 'MARKETPLACE_LISTING',
+  MARKETPLACE_MESSAGE: 'MARKETPLACE_MESSAGE',
+  SECURITY_ALERT: 'SECURITY_ALERT',
+  ACCOUNT_UPDATE: 'ACCOUNT_UPDATE',
+  POLICY_UPDATE: 'POLICY_UPDATE',
+  MAINTENANCE: 'MAINTENANCE',
+  LIVE_STREAM: 'LIVE_STREAM',
+  STORY_MENTION: 'STORY_MENTION',
+  STORY_REACTION: 'STORY_REACTION',
+  MEMORY_REMINDER: 'MEMORY_REMINDER',
+  PHOTO_TAG: 'PHOTO_TAG',
+  PHOTO_APPROVAL: 'PHOTO_APPROVAL'
+};
+
+exports.NotificationStatus = exports.$Enums.NotificationStatus = {
+  UNREAD: 'UNREAD',
+  READ: 'READ',
+  ARCHIVED: 'ARCHIVED',
+  DELETED: 'DELETED'
+};
+
+exports.NotificationPriority = exports.$Enums.NotificationPriority = {
+  LOW: 'LOW',
+  NORMAL: 'NORMAL',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
 };
 
 exports.Scope = exports.$Enums.Scope = {
@@ -313,6 +399,11 @@ exports.UserFlag = exports.$Enums.UserFlag = {
   ACTIVE: 'ACTIVE',
   OFFLINE: 'OFFLINE',
   HIDDEN: 'HIDDEN'
+};
+
+exports.UserRole = exports.$Enums.UserRole = {
+  ADMINISTRATOR: 'ADMINISTRATOR',
+  USER: 'USER'
 };
 
 exports.Status = exports.$Enums.Status = {
@@ -360,15 +451,16 @@ exports.Platform = exports.$Enums.Platform = {
   OCULUS: 'OCULUS'
 };
 
-exports.TypeCode = exports.$Enums.TypeCode = {
+exports.AuthType = exports.$Enums.AuthType = {
   VERIFICATION: 'VERIFICATION',
-  RESETPASSWORD: 'RESETPASSWORD',
+  RESET_PASSWORD: 'RESET_PASSWORD',
   REACTIVE: 'REACTIVE',
   RECOVERY: 'RECOVERY'
 };
 
 exports.Prisma.ModelName = {
   Media: 'Media',
+  Notification: 'Notification',
   Post: 'Post',
   Comment: 'Comment',
   Reaction: 'Reaction',
@@ -378,7 +470,7 @@ exports.Prisma.ModelName = {
   Email: 'Email',
   Phone: 'Phone',
   SocialLinkeds: 'SocialLinkeds',
-  Code: 'Code',
+  Authentication: 'Authentication',
   Session: 'Session'
 };
 

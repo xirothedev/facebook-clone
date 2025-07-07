@@ -1,5 +1,5 @@
 import { Cookies } from '@/common/decorators/cookie.decorator';
-import { Body, Controller, Delete, Get, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Patch, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from './auth.service';
@@ -38,6 +38,7 @@ export class AuthController {
   }
 
   @Public()
+  @HttpCode(HttpStatus.OK)
   @Post("login")
   async login(@Body() data: LoginAuth, @Res() res: Response, @Req() req: Request) {
     const result = await this.authService.login(data, res, req)
@@ -51,6 +52,7 @@ export class AuthController {
 
   @Public()
   @Get('forgot-password')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async forgotPassword(@Query("email") email: string) {
     return this.authService.forgotPassword(email)
   }

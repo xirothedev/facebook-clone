@@ -5,8 +5,7 @@ import {
   SupabaseClient
 } from '@supabase/supabase-js';
 import {
-  SupabaseConfig,
-  SupabaseStorageResponse
+  SupabaseConfig
 } from './supabase.interface';
 
 const BUCKET_NAME = "cdn"
@@ -25,7 +24,10 @@ export class SupabaseService implements OnModuleInit {
         auth: {
           autoRefreshToken: true,
           persistSession: true,
-          detectSessionInUrl: true
+          detectSessionInUrl: true,
+          // debug(message, ...args) {
+          //   console.log(message, ...args)
+          // },
         }
       }
     };
@@ -47,9 +49,9 @@ export class SupabaseService implements OnModuleInit {
 
   async uploadFile(
     path: string,
-    file: File | Buffer,
+    file: Buffer | File,
     options?: { contentType?: string }
-  ): Promise<SupabaseStorageResponse> {
+  ): Promise<{ data: any; error: any }> {
     try {
       const { data, error } = await this.supabase.storage
         .from(BUCKET_NAME)
@@ -85,12 +87,8 @@ export class SupabaseService implements OnModuleInit {
     }
   }
 
-  getPublicUrl(path: string): { data: { publicUrl: string } } {
-    const { data } = this.supabase.storage
-      .from(BUCKET_NAME)
-      .getPublicUrl(path);
-
-    return { data };
+  getPublicUrl(path: string): string {
+    return `${this.config.url}/storage/v1/object/public/cdn/${path}`
   }
 
   async deleteFile(path: string): Promise<{ data: any, error: any }> {

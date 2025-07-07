@@ -15,6 +15,6 @@ export class CreatePostDto implements Partial<Omit<Post, "medias">> {
   scope: Scope
 
   @ApiProperty({ type: 'string', format: 'binary', isArray: true, description: 'List of media files to be attached to the post.' })
-  @IsNotEmpty({ message: "Media files are required", each: true })
+  // @IsNotEmpty({ message: "Media files are required", each: true })
   medias: Express.Multer.File[]
 }

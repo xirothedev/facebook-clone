@@ -43,10 +43,11 @@ export class Snowflake {
       this.sequence = 0;
     }
     this.lastTimestamp = timestamp;
-    const id =
-      ((timestamp - Snowflake.EPOCH) << (Snowflake.WORKER_ID_BITS + Snowflake.SEQUENCE_BITS)) |
-      (this.workerId << Snowflake.SEQUENCE_BITS) |
-      this.sequence;
+    // Use BigInt for all calculations
+    const timestampPart = BigInt(timestamp - Snowflake.EPOCH) << BigInt(Snowflake.WORKER_ID_BITS + Snowflake.SEQUENCE_BITS);
+    const workerIdPart = BigInt(this.workerId) << BigInt(Snowflake.SEQUENCE_BITS);
+    const sequencePart = BigInt(this.sequence);
+    const id = timestampPart | workerIdPart | sequencePart;
     // Return as string to avoid JS number precision issues
     return id.toString();
   }

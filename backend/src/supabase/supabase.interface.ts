@@ -8,8 +8,3 @@ export interface SupabaseConfig {
   key: string;
   options?: SupabaseClientOptions<any>;
 }
-
-export interface SupabaseStorageResponse {
-  data: { path: string } | null;
-  error: any;
-}

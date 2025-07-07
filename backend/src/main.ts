@@ -41,8 +41,8 @@ const corsConfig = {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: corsConfig })
 
-  app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalInterceptors(new ResponseInterceptor())
 
   // Swagger
   const documentFactory = () => SwaggerModule.createDocument(app, swaggerConfig)

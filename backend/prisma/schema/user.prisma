@@ -5,6 +5,7 @@ model User {
   updateAt  DateTime      @updatedAt
   status    StatusAccount @default(ACTIVE)
   flags     UserFlag[]
+  roles     UserRole[]
 
   // email
   primaryEmailId String  @unique @db.Uuid
@@ -44,11 +45,13 @@ model User {
   bannerUrl String?
 
   // relations
-  posts     Post[]
-  comments  Comment[]
-  reactions Reaction[]
-  code      Code[]
-  session   Session[]
+  posts               Post[]
+  session             Session[]
+  comments            Comment[]
+  reactions           Reaction[]
+  auth                Authentication[]
+  notifications       Notification[]   @relation("UserNotifications")
+  notificationActions Notification[]   @relation("UserNotificationActions")
 }
 
 model Friendship {
@@ -106,11 +109,11 @@ model SocialLinkeds {
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model Code {
-  tokens    String[]
+model Authentication {
+  code      String
   expiresAt DateTime? @db.Timestamptz
 
-  type   TypeCode
+  type   AuthType
   userId String   @db.Uuid
   user   User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
@@ -136,12 +139,11 @@ model Session {
   @@index([userId])
 }
 
-enum TypeCode {
+enum AuthType {
   VERIFICATION
-  RESETPASSWORD
+  RESET_PASSWORD
   REACTIVE
   RECOVERY
-  // TWOFACODE
 }
 
 enum UserFlag {
@@ -150,6 +152,11 @@ enum UserFlag {
   ACTIVE
   OFFLINE
   HIDDEN
+}
+
+enum UserRole {
+  ADMINISTRATOR
+  USER
 }
 
 enum RelationType {
@@ -205,9 +212,9 @@ enum Platform {
 
 enum StatusAccount {
   ACTIVE
-  DISABLE //Bị khóa do vi phạm chính sách
-  RESTRICTED //Bị hạn chế tính năng
-  CHECKPOINT //Cần xác minh danh tính
+  DISABLE // Bị khóa do vi phạm chính sách
+  RESTRICTED // Bị hạn chế tính năng
+  CHECKPOINT // Cần xác minh danh tính
   BANNED //	Khóa vĩnh viễn
   DEACTIVATED // tạm thời vô hiệu hóa thủ công
 }
