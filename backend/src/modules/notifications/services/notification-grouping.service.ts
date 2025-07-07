@@ -1,7 +1,7 @@
-import { PrismaService } from "@/prisma/prisma.service";
+import type { PrismaService } from "@/prisma/prisma.service";
 import { Injectable, Logger } from "@nestjs/common";
-import { Notification, NotificationPriority, NotificationStatus } from "prisma/generated";
-import { NotificationData } from "../notifications.interface";
+import { type Notification, NotificationPriority, NotificationStatus } from "prisma/generated";
+import type { NotificationData } from "../notifications.interface";
 
 @Injectable()
 export class NotificationGroupingService {

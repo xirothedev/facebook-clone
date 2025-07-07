@@ -1,4 +1,4 @@
-import { PipeTransform, Injectable, BadRequestException } from "@nestjs/common";
+import { type PipeTransform, Injectable, BadRequestException } from "@nestjs/common";
 import { FileTypeValidator } from "@nestjs/common";
 
 const fileTypeRegex = /\/(jpg|jpeg|png|webp)$/;

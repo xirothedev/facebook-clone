@@ -1,4 +1,4 @@
-import { Comment } from "prisma/generated";
+import type { Comment } from "prisma/generated";
 import { IsString, IsNotEmpty, IsOptional, Length } from "class-validator";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 

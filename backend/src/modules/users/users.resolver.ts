@@ -1,12 +1,12 @@
 import { Req } from "@nestjs/common";
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
-import { Request } from "express";
-import { UpdateUserInput } from "./dto/update-user.input";
+import type { Request } from "express";
+import type { UpdateUserInput } from "./dto/update-user.input";
 import { Email } from "./entities/email.entity";
 import { Phone } from "./entities/phone.entity";
 import { SocialLinkeds } from "./entities/social-linkeds.entity";
 import { UserQL } from "./entities/user.entity";
-import { UsersService } from "./users.service";
+import type { UsersService } from "./users.service";
 import { Public } from "@/common/decorators/public.decorator";
 
 @Resolver(() => UserQL)

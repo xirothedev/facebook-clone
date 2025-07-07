@@ -13,14 +13,14 @@ import {
 	Res,
 	UseGuards,
 } from "@nestjs/common";
-import { Request, Response } from "express";
-import { PrismaService } from "src/prisma/prisma.service";
-import { AuthService } from "./auth.service";
-import { ChangePasswordDto, ForgotPasswordDto } from "./dto/change-password.dto";
-import { LoginAuth } from "./dto/login-auth.dto";
-import { RegisterUser } from "./dto/register-auth.dto";
+import type { Request, Response } from "express";
+import type { PrismaService } from "src/prisma/prisma.service";
+import type { AuthService } from "./auth.service";
+import type { ChangePasswordDto, ForgotPasswordDto } from "./dto/change-password.dto";
+import type { LoginAuth } from "./dto/login-auth.dto";
+import type { RegisterUser } from "./dto/register-auth.dto";
 import { AuthCookieGuard } from "@/common/guards/auth-cookie.guard";
-import { TokenService } from "./token.service";
+import type { TokenService } from "./token.service";
 import { Public } from "@/common/decorators/public.decorator";
 
 @Controller("auth")

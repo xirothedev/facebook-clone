@@ -1,4 +1,4 @@
-import { NotificationType, NotificationStatus, NotificationPriority } from "prisma/generated";
+import type { NotificationType, NotificationStatus, NotificationPriority } from "prisma/generated";
 
 export class Notification {
 	id: string;

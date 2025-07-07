@@ -14,12 +14,12 @@ import {
 	UseInterceptors,
 } from "@nestjs/common";
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { Request } from "express";
+import type { Request } from "express";
 import { ReactionType } from "prisma/generated";
-import { CreatePostDto } from "./dto/create-post.dto";
-import { QueryPostDto } from "./dto/query-post.dto";
-import { UpdatePostDto } from "./dto/update-post.dto";
-import { PostsService } from "./posts.service";
+import type { CreatePostDto } from "./dto/create-post.dto";
+import type { QueryPostDto } from "./dto/query-post.dto";
+import type { UpdatePostDto } from "./dto/update-post.dto";
+import type { PostsService } from "./posts.service";
 
 @ApiTags("Posts")
 @Controller("posts")

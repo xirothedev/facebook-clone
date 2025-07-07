@@ -1,11 +1,11 @@
-import { PrismaService } from "@/prisma/prisma.service";
+import type { PrismaService } from "@/prisma/prisma.service";
 import { ForbiddenException, Inject, Injectable, UnauthorizedException, forwardRef } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { JwtService } from "@nestjs/jwt";
+import type { ConfigService } from "@nestjs/config";
+import type { JwtService } from "@nestjs/jwt";
 import { hash, verify } from "argon2";
 import { randomInt } from "crypto";
-import { Request } from "express";
-import { JwtPayload } from "./auth.interface";
+import type { Request } from "express";
+import type { JwtPayload } from "./auth.interface";
 import { AuthService } from "./auth.service";
 
 @Injectable()

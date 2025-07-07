@@ -1,4 +1,4 @@
-import { NotificationPriority, NotificationType } from "prisma/generated";
+import type { NotificationPriority, NotificationType } from "prisma/generated";
 
 // Base notification event interface
 export interface BaseNotificationEvent {

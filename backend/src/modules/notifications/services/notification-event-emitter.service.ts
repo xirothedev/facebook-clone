@@ -1,9 +1,9 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { EventEmitter2 } from "@nestjs/event-emitter";
-import { NotificationEvent } from "../events/notification.events";
+import type { EventEmitter2 } from "@nestjs/event-emitter";
+import type { NotificationEvent } from "../events/notification.events";
 import { NotificationType, NotificationPriority } from "prisma/generated";
 import { WebSocketServer } from "@nestjs/websockets";
-import { Server } from "socket.io";
+import type { Server } from "socket.io";
 
 @Injectable()
 export class NotificationEventEmitterService {

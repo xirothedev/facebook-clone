@@ -1,4 +1,4 @@
-import { SupabaseClientOptions } from "@supabase/supabase-js";
+import type { SupabaseClientOptions } from "@supabase/supabase-js";
 
 export interface SupabaseConfig {
 	url: string;

@@ -1,6 +1,6 @@
 import { Field, ID, InputType } from "@nestjs/graphql";
-import { UserQL } from "../entities/user.entity";
-import { Gender } from "prisma/generated";
+import type { UserQL } from "../entities/user.entity";
+import type { Gender } from "prisma/generated";
 
 @InputType()
 export class UpdateUserInput implements Partial<UserQL> {

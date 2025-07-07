@@ -1,12 +1,12 @@
-import { PrismaService } from "@/prisma/prisma.service";
-import { RedisService } from "@/redis/redis.service";
+import type { PrismaService } from "@/prisma/prisma.service";
+import type { RedisService } from "@/redis/redis.service";
 import { Injectable, Logger, NotFoundException, UnauthorizedException } from "@nestjs/common";
-import { NotificationStatus, Prisma } from "prisma/generated";
-import { CreateNotificationDto } from "./dto/create-notification.dto";
-import { FindAllNotificationsDto } from "./dto/find-all-notifications.dto";
-import { UpdateNotificationDto } from "./dto/update-notification.dto";
-import { NotificationEventEmitterService } from "./services/notification-event-emitter.service";
-import { NotificationGroupingService } from "./services/notification-grouping.service";
+import { NotificationStatus, type Prisma } from "prisma/generated";
+import type { CreateNotificationDto } from "./dto/create-notification.dto";
+import type { FindAllNotificationsDto } from "./dto/find-all-notifications.dto";
+import type { UpdateNotificationDto } from "./dto/update-notification.dto";
+import type { NotificationEventEmitterService } from "./services/notification-event-emitter.service";
+import type { NotificationGroupingService } from "./services/notification-grouping.service";
 
 @Injectable()
 export class NotificationsService {

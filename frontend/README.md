@@ -55,19 +55,19 @@ This repository serves as a starter template for Next.js 15 projects. It include
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/xirothedev/next-15-template.git
-   cd next-15-template
-   ```
+    ```bash
+    git clone https://github.com/xirothedev/next-15-template.git
+    cd next-15-template
+    ```
 2. **Install dependencies:**
-   ```bash
-   pnpm install
-   ```
+    ```bash
+    pnpm install
+    ```
 3. **Run the development server:**
-   ```bash
-   pnpm dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) to view the app.
+    ```bash
+    pnpm dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) to view the app.
 
 ---
 

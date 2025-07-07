@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req } from "@nestjs/common";
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { Request } from "express";
-import { CommentService } from "./comment.service";
-import { CreateCommentDto } from "./dto/create-comment.dto";
-import { UpdateCommentDto } from "./dto/update-comment.dto";
+import type { Request } from "express";
+import type { CommentService } from "./comment.service";
+import type { CreateCommentDto } from "./dto/create-comment.dto";
+import type { UpdateCommentDto } from "./dto/update-comment.dto";
 
 @ApiTags("Comments")
 @Controller("comment")

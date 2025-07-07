@@ -1,6 +1,6 @@
 import { Optional } from "@nestjs/common";
 import { IsEnum, IsNotEmpty, IsString } from "class-validator";
-import { Post, Scope } from "prisma/generated";
+import { type Post, Scope } from "prisma/generated";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class CreatePostDto implements Partial<Omit<Post, "medias">> {

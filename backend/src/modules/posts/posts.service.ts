@@ -1,11 +1,11 @@
 import { Injectable, InternalServerErrorException, UnauthorizedException, NotFoundException } from "@nestjs/common";
-import { CreatePostDto } from "./dto/create-post.dto";
-import { UpdatePostDto } from "./dto/update-post.dto";
-import { QueryPostDto } from "./dto/query-post.dto";
-import { Request } from "express";
-import { PrismaService } from "@/prisma/prisma.service";
-import { SupabaseService } from "@/supabase/supabase.service";
-import { ReactionType } from "prisma/generated";
+import type { CreatePostDto } from "./dto/create-post.dto";
+import type { UpdatePostDto } from "./dto/update-post.dto";
+import type { QueryPostDto } from "./dto/query-post.dto";
+import type { Request } from "express";
+import type { PrismaService } from "@/prisma/prisma.service";
+import type { SupabaseService } from "@/supabase/supabase.service";
+import type { ReactionType } from "prisma/generated";
 
 @Injectable()
 export class PostsService {

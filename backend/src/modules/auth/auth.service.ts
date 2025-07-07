@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { PrismaService } from "@/prisma/prisma.service";
-import { RedisService } from "@/redis/redis.service";
+import type { PrismaService } from "@/prisma/prisma.service";
+import type { RedisService } from "@/redis/redis.service";
 import { Snowflake } from "@/utils/snowflake";
 import {
 	ConflictException,
@@ -11,16 +11,16 @@ import {
 	UnauthorizedException,
 	forwardRef,
 } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { JwtService } from "@nestjs/jwt";
+import type { ConfigService } from "@nestjs/config";
+import type { JwtService } from "@nestjs/jwt";
 import { argon2id, hash, verify } from "argon2";
-import { CookieOptions, Request, Response } from "express";
-import { EmailService } from "src/email/email.service";
+import type { CookieOptions, Request, Response } from "express";
+import type { EmailService } from "src/email/email.service";
 import { UAParser } from "ua-parser-js";
-import { UsersService } from "../users/users.service";
-import { UserWithPrimaryEmailAndWithoutPassword } from "./auth.interface";
-import { ChangePasswordDto, ForgotPasswordDto } from "./dto/change-password.dto";
-import { RegisterUser } from "./dto/register-auth.dto";
+import type { UsersService } from "../users/users.service";
+import type { UserWithPrimaryEmailAndWithoutPassword } from "./auth.interface";
+import type { ChangePasswordDto, ForgotPasswordDto } from "./dto/change-password.dto";
+import type { RegisterUser } from "./dto/register-auth.dto";
 import { TokenService } from "./token.service";
 
 const MAX_AVAILABLE_TIME = 5 * 60_000;

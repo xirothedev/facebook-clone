@@ -1,4 +1,4 @@
-import { Email, User } from "prisma/generated";
+import type { Email, User } from "prisma/generated";
 
 export interface JwtPayload {
 	sub: string;

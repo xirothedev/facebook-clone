@@ -1,5 +1,5 @@
-import { NotificationPriority, NotificationType } from "prisma/generated";
-import { InputJsonValue } from "prisma/generated/runtime/library";
+import type { NotificationPriority, NotificationType } from "prisma/generated";
+import type { InputJsonValue } from "prisma/generated/runtime/library";
 
 export interface NotificationData {
 	recipientId: string;

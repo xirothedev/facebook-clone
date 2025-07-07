@@ -15,12 +15,12 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { Request } from "express";
+import type { Request } from "express";
 import { UserRole } from "prisma/generated";
-import { CreateNotificationDto } from "./dto/create-notification.dto";
-import { FindAllNotificationsDto } from "./dto/find-all-notifications.dto";
-import { UpdateNotificationDto } from "./dto/update-notification.dto";
-import { NotificationsService } from "./notifications.service";
+import type { CreateNotificationDto } from "./dto/create-notification.dto";
+import type { FindAllNotificationsDto } from "./dto/find-all-notifications.dto";
+import type { UpdateNotificationDto } from "./dto/update-notification.dto";
+import type { NotificationsService } from "./notifications.service";
 
 @ApiTags("notifications")
 @Controller("notifications")
