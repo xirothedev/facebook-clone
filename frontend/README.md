@@ -41,7 +41,7 @@ This repository serves as a starter template for Next.js 15 projects. It include
 - [TypeScript](https://www.typescriptlang.org/)
 - [pnpm](https://pnpm.io/) (package manager)
 - [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
-- [Tailwind CSS](https://tailwindcss.com/) *(optional, remove if not used)*
+- [Tailwind CSS](https://tailwindcss.com/) _(optional, remove if not used)_
 
 ---
 
@@ -78,7 +78,7 @@ This repository serves as a starter template for Next.js 15 projects. It include
 - `pnpm start` — Start the production server
 - `pnpm lint` — Run ESLint for code quality
 - `pnpm format` — Format code with Prettier
-- `pnpm test` — Run tests *(if test setup is included)*
+- `pnpm test` — Run tests _(if test setup is included)_
 
 ---
 

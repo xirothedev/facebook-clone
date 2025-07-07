@@ -1,4 +1,4 @@
-name: 'Bug Report'
+name: "Bug Report"
 description: Submit a bug to help us improve the project
 labels: [bug]
 body:
@@ -65,4 +65,4 @@ body:
       description: Any other information that may help us handle the bug better.
       placeholder: E.g. Error logs, related links, ...
     validations:
-      required: false 
+      required: false

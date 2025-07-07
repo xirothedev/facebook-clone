@@ -1,7 +1,7 @@
 export default function Blockquote({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	<blockquote className="mt-6 border-l-2 pl-6 italic">{children}</blockquote>;
+  <blockquote className="mt-6 border-l-2 pl-6 italic">{children}</blockquote>;
 }

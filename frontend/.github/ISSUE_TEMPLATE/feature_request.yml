@@ -1,4 +1,4 @@
-name: 'Feature Request'
+name: "Feature Request"
 description: Suggest an idea or new feature for the project
 labels: [enhancement]
 body:
@@ -46,4 +46,4 @@ body:
       description: Any other information that may help us better understand your suggestion.
       placeholder: E.g. Reference links, mockups, ...
     validations:
-      required: false 
+      required: false
