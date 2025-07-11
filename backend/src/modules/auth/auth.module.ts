@@ -9,6 +9,7 @@ import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { LoginAttemptService } from "./loginAttempt.service";
 import { TokenService } from "./token.service";
+import { SettingModule } from "../setting/setting.module";
 
 @Module({
 	imports: [
@@ -16,6 +17,7 @@ import { TokenService } from "./token.service";
 		RedisModule,
 		ConfigModule,
 		UsersModule,
+		SettingModule,
 		JwtModule.registerAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],

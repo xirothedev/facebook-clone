@@ -22,6 +22,7 @@ import { APP_GUARD } from "@nestjs/core";
 import { AuthCookieGuard } from "./common/guards/auth-cookie.guard";
 import { NotificationsModule } from "./modules/notifications/notifications.module";
 import { CommentModule } from "./modules/comment/comment.module";
+import { SettingModule } from "./modules/setting/setting.module";
 
 @Module({
 	imports: [
@@ -78,6 +79,7 @@ import { CommentModule } from "./modules/comment/comment.module";
 		RedisModule,
 		NotificationsModule,
 		CommentModule,
+		SettingModule,
 	],
 	controllers: [AppController],
 	providers: [

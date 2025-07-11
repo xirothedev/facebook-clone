@@ -39,6 +39,16 @@ export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
  */
 export type Reaction = $Result.DefaultSelection<Prisma.$ReactionPayload>
 /**
+ * Model Preference
+ * 
+ */
+export type Preference = $Result.DefaultSelection<Prisma.$PreferencePayload>
+/**
+ * Model AudienceAndVisibility
+ * 
+ */
+export type AudienceAndVisibility = $Result.DefaultSelection<Prisma.$AudienceAndVisibilityPayload>
+/**
  * Model User
  * 
  */
@@ -194,6 +204,77 @@ export const ReactionType: {
 export type ReactionType = (typeof ReactionType)[keyof typeof ReactionType]
 
 
+export const PreferenceType: {
+  NOTIFICATION: 'NOTIFICATION',
+  REACTION: 'REACTION',
+  ACCESSIBILITY: 'ACCESSIBILITY',
+  LANGUAGE: 'LANGUAGE',
+  DARKMODE: 'DARKMODE'
+};
+
+export type PreferenceType = (typeof PreferenceType)[keyof typeof PreferenceType]
+
+
+export const ReactionTarget: {
+  OTHER_PEOPLE: 'OTHER_PEOPLE',
+  MYSELF: 'MYSELF'
+};
+
+export type ReactionTarget = (typeof ReactionTarget)[keyof typeof ReactionTarget]
+
+
+export const VideoQuality: {
+  DEFAULT: 'DEFAULT',
+  SDONLY: 'SDONLY',
+  HDIFAVAILABLE: 'HDIFAVAILABLE'
+};
+
+export type VideoQuality = (typeof VideoQuality)[keyof typeof VideoQuality]
+
+
+export const CoLor: {
+  BLACK: 'BLACK',
+  BLUE: 'BLUE',
+  GREEN: 'GREEN',
+  CYAN: 'CYAN',
+  RED: 'RED',
+  MAGENTA: 'MAGENTA',
+  WHITE: 'WHITE',
+  YELLOW: 'YELLOW'
+};
+
+export type CoLor = (typeof CoLor)[keyof typeof CoLor]
+
+
+export const SendFriendRequest: {
+  EVERYONE: 'EVERYONE',
+  FRIENDSOFFRIENDS: 'FRIENDSOFFRIENDS'
+};
+
+export type SendFriendRequest = (typeof SendFriendRequest)[keyof typeof SendFriendRequest]
+
+
+export const Audience: {
+  PUBLIC: 'PUBLIC',
+  FRIENDS: 'FRIENDS',
+  FRIENDSEXCEPT: 'FRIENDSEXCEPT',
+  SPECIFICFRIENDS: 'SPECIFICFRIENDS',
+  ONLYME: 'ONLYME',
+  CUSTOM: 'CUSTOM'
+};
+
+export type Audience = (typeof Audience)[keyof typeof Audience]
+
+
+export const TypeSendMessage: {
+  CHATS: 'CHATS',
+  MESSAGEREQUESTS: 'MESSAGEREQUESTS',
+  DONNOTRECEIVE: 'DONNOTRECEIVE'
+};
+
+export type TypeSendMessage = (typeof TypeSendMessage)[keyof typeof TypeSendMessage]
+
+
 export const AuthType: {
   VERIFICATION: 'VERIFICATION',
   RESET_PASSWORD: 'RESET_PASSWORD',
@@ -330,6 +411,34 @@ export const PostStatus: typeof $Enums.PostStatus
 export type ReactionType = $Enums.ReactionType
 
 export const ReactionType: typeof $Enums.ReactionType
+
+export type PreferenceType = $Enums.PreferenceType
+
+export const PreferenceType: typeof $Enums.PreferenceType
+
+export type ReactionTarget = $Enums.ReactionTarget
+
+export const ReactionTarget: typeof $Enums.ReactionTarget
+
+export type VideoQuality = $Enums.VideoQuality
+
+export const VideoQuality: typeof $Enums.VideoQuality
+
+export type CoLor = $Enums.CoLor
+
+export const CoLor: typeof $Enums.CoLor
+
+export type SendFriendRequest = $Enums.SendFriendRequest
+
+export const SendFriendRequest: typeof $Enums.SendFriendRequest
+
+export type Audience = $Enums.Audience
+
+export const Audience: typeof $Enums.Audience
+
+export type TypeSendMessage = $Enums.TypeSendMessage
+
+export const TypeSendMessage: typeof $Enums.TypeSendMessage
 
 export type AuthType = $Enums.AuthType
 
@@ -537,6 +646,26 @@ export class PrismaClient<
     * ```
     */
   get reaction(): Prisma.ReactionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.preference`: Exposes CRUD operations for the **Preference** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Preferences
+    * const preferences = await prisma.preference.findMany()
+    * ```
+    */
+  get preference(): Prisma.PreferenceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.audienceAndVisibility`: Exposes CRUD operations for the **AudienceAndVisibility** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AudienceAndVisibilities
+    * const audienceAndVisibilities = await prisma.audienceAndVisibility.findMany()
+    * ```
+    */
+  get audienceAndVisibility(): Prisma.AudienceAndVisibilityDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -1062,6 +1191,8 @@ export namespace Prisma {
     Post: 'Post',
     Comment: 'Comment',
     Reaction: 'Reaction',
+    Preference: 'Preference',
+    AudienceAndVisibility: 'AudienceAndVisibility',
     User: 'User',
     Friendship: 'Friendship',
     Relation: 'Relation',
@@ -1088,7 +1219,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "media" | "notification" | "post" | "comment" | "reaction" | "user" | "friendship" | "relation" | "email" | "phone" | "socialLinkeds" | "authentication" | "session"
+      modelProps: "media" | "notification" | "post" | "comment" | "reaction" | "preference" | "audienceAndVisibility" | "user" | "friendship" | "relation" | "email" | "phone" | "socialLinkeds" | "authentication" | "session"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1459,6 +1590,154 @@ export namespace Prisma {
           count: {
             args: Prisma.ReactionCountArgs<ExtArgs>
             result: $Utils.Optional<ReactionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Preference: {
+        payload: Prisma.$PreferencePayload<ExtArgs>
+        fields: Prisma.PreferenceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PreferenceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PreferenceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>
+          }
+          findFirst: {
+            args: Prisma.PreferenceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PreferenceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>
+          }
+          findMany: {
+            args: Prisma.PreferenceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>[]
+          }
+          create: {
+            args: Prisma.PreferenceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>
+          }
+          createMany: {
+            args: Prisma.PreferenceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PreferenceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>[]
+          }
+          delete: {
+            args: Prisma.PreferenceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>
+          }
+          update: {
+            args: Prisma.PreferenceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>
+          }
+          deleteMany: {
+            args: Prisma.PreferenceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PreferenceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PreferenceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>[]
+          }
+          upsert: {
+            args: Prisma.PreferenceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PreferencePayload>
+          }
+          aggregate: {
+            args: Prisma.PreferenceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePreference>
+          }
+          groupBy: {
+            args: Prisma.PreferenceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PreferenceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PreferenceCountArgs<ExtArgs>
+            result: $Utils.Optional<PreferenceCountAggregateOutputType> | number
+          }
+        }
+      }
+      AudienceAndVisibility: {
+        payload: Prisma.$AudienceAndVisibilityPayload<ExtArgs>
+        fields: Prisma.AudienceAndVisibilityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AudienceAndVisibilityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AudienceAndVisibilityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>
+          }
+          findFirst: {
+            args: Prisma.AudienceAndVisibilityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AudienceAndVisibilityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>
+          }
+          findMany: {
+            args: Prisma.AudienceAndVisibilityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>[]
+          }
+          create: {
+            args: Prisma.AudienceAndVisibilityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>
+          }
+          createMany: {
+            args: Prisma.AudienceAndVisibilityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AudienceAndVisibilityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>[]
+          }
+          delete: {
+            args: Prisma.AudienceAndVisibilityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>
+          }
+          update: {
+            args: Prisma.AudienceAndVisibilityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>
+          }
+          deleteMany: {
+            args: Prisma.AudienceAndVisibilityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AudienceAndVisibilityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AudienceAndVisibilityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>[]
+          }
+          upsert: {
+            args: Prisma.AudienceAndVisibilityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceAndVisibilityPayload>
+          }
+          aggregate: {
+            args: Prisma.AudienceAndVisibilityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAudienceAndVisibility>
+          }
+          groupBy: {
+            args: Prisma.AudienceAndVisibilityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AudienceAndVisibilityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AudienceAndVisibilityCountArgs<ExtArgs>
+            result: $Utils.Optional<AudienceAndVisibilityCountAggregateOutputType> | number
           }
         }
       }
@@ -2143,6 +2422,8 @@ export namespace Prisma {
     post?: PostOmit
     comment?: CommentOmit
     reaction?: ReactionOmit
+    preference?: PreferenceOmit
+    audienceAndVisibility?: AudienceAndVisibilityOmit
     user?: UserOmit
     friendship?: FriendshipOmit
     relation?: RelationOmit
@@ -2321,6 +2602,55 @@ export namespace Prisma {
 
 
   /**
+   * Count Type AudienceAndVisibilityCountOutputType
+   */
+
+  export type AudienceAndVisibilityCountOutputType = {
+    restrictedList: number
+    blockedProfilesOrPages: number
+    blockMessages: number
+  }
+
+  export type AudienceAndVisibilityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    restrictedList?: boolean | AudienceAndVisibilityCountOutputTypeCountRestrictedListArgs
+    blockedProfilesOrPages?: boolean | AudienceAndVisibilityCountOutputTypeCountBlockedProfilesOrPagesArgs
+    blockMessages?: boolean | AudienceAndVisibilityCountOutputTypeCountBlockMessagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AudienceAndVisibilityCountOutputType without action
+   */
+  export type AudienceAndVisibilityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibilityCountOutputType
+     */
+    select?: AudienceAndVisibilityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AudienceAndVisibilityCountOutputType without action
+   */
+  export type AudienceAndVisibilityCountOutputTypeCountRestrictedListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * AudienceAndVisibilityCountOutputType without action
+   */
+  export type AudienceAndVisibilityCountOutputTypeCountBlockedProfilesOrPagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+  /**
+   * AudienceAndVisibilityCountOutputType without action
+   */
+  export type AudienceAndVisibilityCountOutputTypeCountBlockMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+
+  /**
    * Count Type UserCountOutputType
    */
 
@@ -2339,6 +2669,10 @@ export namespace Prisma {
     auth: number
     notifications: number
     notificationActions: number
+    Preference: number
+    restrictedBy: number
+    blockedBy: number
+    blockedMessagesBy: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2356,6 +2690,10 @@ export namespace Prisma {
     auth?: boolean | UserCountOutputTypeCountAuthArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     notificationActions?: boolean | UserCountOutputTypeCountNotificationActionsArgs
+    Preference?: boolean | UserCountOutputTypeCountPreferenceArgs
+    restrictedBy?: boolean | UserCountOutputTypeCountRestrictedByArgs
+    blockedBy?: boolean | UserCountOutputTypeCountBlockedByArgs
+    blockedMessagesBy?: boolean | UserCountOutputTypeCountBlockedMessagesByArgs
   }
 
   // Custom InputTypes
@@ -2465,6 +2803,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNotificationActionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPreferenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PreferenceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRestrictedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AudienceAndVisibilityWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBlockedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AudienceAndVisibilityWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBlockedMessagesByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AudienceAndVisibilityWhereInput
   }
 
 
@@ -8414,6 +8780,2888 @@ export namespace Prisma {
 
 
   /**
+   * Model Preference
+   */
+
+  export type AggregatePreference = {
+    _count: PreferenceCountAggregateOutputType | null
+    _avg: PreferenceAvgAggregateOutputType | null
+    _sum: PreferenceSumAggregateOutputType | null
+    _min: PreferenceMinAggregateOutputType | null
+    _max: PreferenceMaxAggregateOutputType | null
+  }
+
+  export type PreferenceAvgAggregateOutputType = {
+    backGroundOpacity: number | null
+    textSize: number | null
+  }
+
+  export type PreferenceSumAggregateOutputType = {
+    backGroundOpacity: number | null
+    textSize: number | null
+  }
+
+  export type PreferenceMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    type: $Enums.PreferenceType | null
+    notificationType: $Enums.NotificationType | null
+    push: boolean | null
+    email: boolean | null
+    sms: boolean | null
+    reactionTarget: $Enums.ReactionTarget | null
+    hidden: boolean | null
+    reduceMotion: boolean | null
+    screenReader: boolean | null
+    languageCode: string | null
+    timezone: string | null
+    locale: string | null
+    darkModeEnabled: boolean | null
+    videoQuality: $Enums.VideoQuality | null
+    autoPlayAnimations: boolean | null
+    alwaysShowCaptions: boolean | null
+    quietMode: boolean | null
+    backGroundColor: $Enums.CoLor | null
+    backGroundOpacity: number | null
+    textColor: $Enums.CoLor | null
+    textSize: number | null
+  }
+
+  export type PreferenceMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    type: $Enums.PreferenceType | null
+    notificationType: $Enums.NotificationType | null
+    push: boolean | null
+    email: boolean | null
+    sms: boolean | null
+    reactionTarget: $Enums.ReactionTarget | null
+    hidden: boolean | null
+    reduceMotion: boolean | null
+    screenReader: boolean | null
+    languageCode: string | null
+    timezone: string | null
+    locale: string | null
+    darkModeEnabled: boolean | null
+    videoQuality: $Enums.VideoQuality | null
+    autoPlayAnimations: boolean | null
+    alwaysShowCaptions: boolean | null
+    quietMode: boolean | null
+    backGroundColor: $Enums.CoLor | null
+    backGroundOpacity: number | null
+    textColor: $Enums.CoLor | null
+    textSize: number | null
+  }
+
+  export type PreferenceCountAggregateOutputType = {
+    id: number
+    userId: number
+    type: number
+    notificationType: number
+    push: number
+    email: number
+    sms: number
+    reactionTarget: number
+    hidden: number
+    reduceMotion: number
+    screenReader: number
+    languageCode: number
+    timezone: number
+    locale: number
+    darkModeEnabled: number
+    videoQuality: number
+    autoPlayAnimations: number
+    alwaysShowCaptions: number
+    quietMode: number
+    backGroundColor: number
+    backGroundOpacity: number
+    textColor: number
+    textSize: number
+    _all: number
+  }
+
+
+  export type PreferenceAvgAggregateInputType = {
+    backGroundOpacity?: true
+    textSize?: true
+  }
+
+  export type PreferenceSumAggregateInputType = {
+    backGroundOpacity?: true
+    textSize?: true
+  }
+
+  export type PreferenceMinAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    notificationType?: true
+    push?: true
+    email?: true
+    sms?: true
+    reactionTarget?: true
+    hidden?: true
+    reduceMotion?: true
+    screenReader?: true
+    languageCode?: true
+    timezone?: true
+    locale?: true
+    darkModeEnabled?: true
+    videoQuality?: true
+    autoPlayAnimations?: true
+    alwaysShowCaptions?: true
+    quietMode?: true
+    backGroundColor?: true
+    backGroundOpacity?: true
+    textColor?: true
+    textSize?: true
+  }
+
+  export type PreferenceMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    notificationType?: true
+    push?: true
+    email?: true
+    sms?: true
+    reactionTarget?: true
+    hidden?: true
+    reduceMotion?: true
+    screenReader?: true
+    languageCode?: true
+    timezone?: true
+    locale?: true
+    darkModeEnabled?: true
+    videoQuality?: true
+    autoPlayAnimations?: true
+    alwaysShowCaptions?: true
+    quietMode?: true
+    backGroundColor?: true
+    backGroundOpacity?: true
+    textColor?: true
+    textSize?: true
+  }
+
+  export type PreferenceCountAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    notificationType?: true
+    push?: true
+    email?: true
+    sms?: true
+    reactionTarget?: true
+    hidden?: true
+    reduceMotion?: true
+    screenReader?: true
+    languageCode?: true
+    timezone?: true
+    locale?: true
+    darkModeEnabled?: true
+    videoQuality?: true
+    autoPlayAnimations?: true
+    alwaysShowCaptions?: true
+    quietMode?: true
+    backGroundColor?: true
+    backGroundOpacity?: true
+    textColor?: true
+    textSize?: true
+    _all?: true
+  }
+
+  export type PreferenceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Preference to aggregate.
+     */
+    where?: PreferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Preferences to fetch.
+     */
+    orderBy?: PreferenceOrderByWithRelationInput | PreferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PreferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Preferences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Preferences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Preferences
+    **/
+    _count?: true | PreferenceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PreferenceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PreferenceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PreferenceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PreferenceMaxAggregateInputType
+  }
+
+  export type GetPreferenceAggregateType<T extends PreferenceAggregateArgs> = {
+        [P in keyof T & keyof AggregatePreference]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePreference[P]>
+      : GetScalarType<T[P], AggregatePreference[P]>
+  }
+
+
+
+
+  export type PreferenceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PreferenceWhereInput
+    orderBy?: PreferenceOrderByWithAggregationInput | PreferenceOrderByWithAggregationInput[]
+    by: PreferenceScalarFieldEnum[] | PreferenceScalarFieldEnum
+    having?: PreferenceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PreferenceCountAggregateInputType | true
+    _avg?: PreferenceAvgAggregateInputType
+    _sum?: PreferenceSumAggregateInputType
+    _min?: PreferenceMinAggregateInputType
+    _max?: PreferenceMaxAggregateInputType
+  }
+
+  export type PreferenceGroupByOutputType = {
+    id: string
+    userId: string
+    type: $Enums.PreferenceType
+    notificationType: $Enums.NotificationType | null
+    push: boolean | null
+    email: boolean | null
+    sms: boolean | null
+    reactionTarget: $Enums.ReactionTarget | null
+    hidden: boolean | null
+    reduceMotion: boolean | null
+    screenReader: boolean | null
+    languageCode: string | null
+    timezone: string | null
+    locale: string | null
+    darkModeEnabled: boolean | null
+    videoQuality: $Enums.VideoQuality
+    autoPlayAnimations: boolean
+    alwaysShowCaptions: boolean
+    quietMode: boolean
+    backGroundColor: $Enums.CoLor
+    backGroundOpacity: number
+    textColor: $Enums.CoLor
+    textSize: number
+    _count: PreferenceCountAggregateOutputType | null
+    _avg: PreferenceAvgAggregateOutputType | null
+    _sum: PreferenceSumAggregateOutputType | null
+    _min: PreferenceMinAggregateOutputType | null
+    _max: PreferenceMaxAggregateOutputType | null
+  }
+
+  type GetPreferenceGroupByPayload<T extends PreferenceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PreferenceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PreferenceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PreferenceGroupByOutputType[P]>
+            : GetScalarType<T[P], PreferenceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PreferenceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    notificationType?: boolean
+    push?: boolean
+    email?: boolean
+    sms?: boolean
+    reactionTarget?: boolean
+    hidden?: boolean
+    reduceMotion?: boolean
+    screenReader?: boolean
+    languageCode?: boolean
+    timezone?: boolean
+    locale?: boolean
+    darkModeEnabled?: boolean
+    videoQuality?: boolean
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: boolean
+    backGroundOpacity?: boolean
+    textColor?: boolean
+    textSize?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["preference"]>
+
+  export type PreferenceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    notificationType?: boolean
+    push?: boolean
+    email?: boolean
+    sms?: boolean
+    reactionTarget?: boolean
+    hidden?: boolean
+    reduceMotion?: boolean
+    screenReader?: boolean
+    languageCode?: boolean
+    timezone?: boolean
+    locale?: boolean
+    darkModeEnabled?: boolean
+    videoQuality?: boolean
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: boolean
+    backGroundOpacity?: boolean
+    textColor?: boolean
+    textSize?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["preference"]>
+
+  export type PreferenceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    notificationType?: boolean
+    push?: boolean
+    email?: boolean
+    sms?: boolean
+    reactionTarget?: boolean
+    hidden?: boolean
+    reduceMotion?: boolean
+    screenReader?: boolean
+    languageCode?: boolean
+    timezone?: boolean
+    locale?: boolean
+    darkModeEnabled?: boolean
+    videoQuality?: boolean
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: boolean
+    backGroundOpacity?: boolean
+    textColor?: boolean
+    textSize?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["preference"]>
+
+  export type PreferenceSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    notificationType?: boolean
+    push?: boolean
+    email?: boolean
+    sms?: boolean
+    reactionTarget?: boolean
+    hidden?: boolean
+    reduceMotion?: boolean
+    screenReader?: boolean
+    languageCode?: boolean
+    timezone?: boolean
+    locale?: boolean
+    darkModeEnabled?: boolean
+    videoQuality?: boolean
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: boolean
+    backGroundOpacity?: boolean
+    textColor?: boolean
+    textSize?: boolean
+  }
+
+  export type PreferenceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "notificationType" | "push" | "email" | "sms" | "reactionTarget" | "hidden" | "reduceMotion" | "screenReader" | "languageCode" | "timezone" | "locale" | "darkModeEnabled" | "videoQuality" | "autoPlayAnimations" | "alwaysShowCaptions" | "quietMode" | "backGroundColor" | "backGroundOpacity" | "textColor" | "textSize", ExtArgs["result"]["preference"]>
+  export type PreferenceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PreferenceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PreferenceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PreferencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Preference"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      type: $Enums.PreferenceType
+      notificationType: $Enums.NotificationType | null
+      push: boolean | null
+      email: boolean | null
+      sms: boolean | null
+      reactionTarget: $Enums.ReactionTarget | null
+      hidden: boolean | null
+      reduceMotion: boolean | null
+      screenReader: boolean | null
+      languageCode: string | null
+      timezone: string | null
+      locale: string | null
+      darkModeEnabled: boolean | null
+      videoQuality: $Enums.VideoQuality
+      autoPlayAnimations: boolean
+      alwaysShowCaptions: boolean
+      quietMode: boolean
+      backGroundColor: $Enums.CoLor
+      backGroundOpacity: number
+      textColor: $Enums.CoLor
+      textSize: number
+    }, ExtArgs["result"]["preference"]>
+    composites: {}
+  }
+
+  type PreferenceGetPayload<S extends boolean | null | undefined | PreferenceDefaultArgs> = $Result.GetResult<Prisma.$PreferencePayload, S>
+
+  type PreferenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PreferenceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit' | 'relationLoadStrategy'> & {
+      select?: PreferenceCountAggregateInputType | true
+    }
+
+  export interface PreferenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Preference'], meta: { name: 'Preference' } }
+    /**
+     * Find zero or one Preference that matches the filter.
+     * @param {PreferenceFindUniqueArgs} args - Arguments to find a Preference
+     * @example
+     * // Get one Preference
+     * const preference = await prisma.preference.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PreferenceFindUniqueArgs>(args: SelectSubset<T, PreferenceFindUniqueArgs<ExtArgs>>): Prisma__PreferenceClient<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Preference that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PreferenceFindUniqueOrThrowArgs} args - Arguments to find a Preference
+     * @example
+     * // Get one Preference
+     * const preference = await prisma.preference.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PreferenceFindUniqueOrThrowArgs>(args: SelectSubset<T, PreferenceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PreferenceClient<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Preference that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreferenceFindFirstArgs} args - Arguments to find a Preference
+     * @example
+     * // Get one Preference
+     * const preference = await prisma.preference.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PreferenceFindFirstArgs>(args?: SelectSubset<T, PreferenceFindFirstArgs<ExtArgs>>): Prisma__PreferenceClient<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Preference that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreferenceFindFirstOrThrowArgs} args - Arguments to find a Preference
+     * @example
+     * // Get one Preference
+     * const preference = await prisma.preference.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PreferenceFindFirstOrThrowArgs>(args?: SelectSubset<T, PreferenceFindFirstOrThrowArgs<ExtArgs>>): Prisma__PreferenceClient<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Preferences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreferenceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Preferences
+     * const preferences = await prisma.preference.findMany()
+     * 
+     * // Get first 10 Preferences
+     * const preferences = await prisma.preference.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const preferenceWithIdOnly = await prisma.preference.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PreferenceFindManyArgs>(args?: SelectSubset<T, PreferenceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Preference.
+     * @param {PreferenceCreateArgs} args - Arguments to create a Preference.
+     * @example
+     * // Create one Preference
+     * const Preference = await prisma.preference.create({
+     *   data: {
+     *     // ... data to create a Preference
+     *   }
+     * })
+     * 
+     */
+    create<T extends PreferenceCreateArgs>(args: SelectSubset<T, PreferenceCreateArgs<ExtArgs>>): Prisma__PreferenceClient<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Preferences.
+     * @param {PreferenceCreateManyArgs} args - Arguments to create many Preferences.
+     * @example
+     * // Create many Preferences
+     * const preference = await prisma.preference.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PreferenceCreateManyArgs>(args?: SelectSubset<T, PreferenceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Preferences and returns the data saved in the database.
+     * @param {PreferenceCreateManyAndReturnArgs} args - Arguments to create many Preferences.
+     * @example
+     * // Create many Preferences
+     * const preference = await prisma.preference.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Preferences and only return the `id`
+     * const preferenceWithIdOnly = await prisma.preference.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PreferenceCreateManyAndReturnArgs>(args?: SelectSubset<T, PreferenceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Preference.
+     * @param {PreferenceDeleteArgs} args - Arguments to delete one Preference.
+     * @example
+     * // Delete one Preference
+     * const Preference = await prisma.preference.delete({
+     *   where: {
+     *     // ... filter to delete one Preference
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PreferenceDeleteArgs>(args: SelectSubset<T, PreferenceDeleteArgs<ExtArgs>>): Prisma__PreferenceClient<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Preference.
+     * @param {PreferenceUpdateArgs} args - Arguments to update one Preference.
+     * @example
+     * // Update one Preference
+     * const preference = await prisma.preference.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PreferenceUpdateArgs>(args: SelectSubset<T, PreferenceUpdateArgs<ExtArgs>>): Prisma__PreferenceClient<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Preferences.
+     * @param {PreferenceDeleteManyArgs} args - Arguments to filter Preferences to delete.
+     * @example
+     * // Delete a few Preferences
+     * const { count } = await prisma.preference.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PreferenceDeleteManyArgs>(args?: SelectSubset<T, PreferenceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Preferences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreferenceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Preferences
+     * const preference = await prisma.preference.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PreferenceUpdateManyArgs>(args: SelectSubset<T, PreferenceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Preferences and returns the data updated in the database.
+     * @param {PreferenceUpdateManyAndReturnArgs} args - Arguments to update many Preferences.
+     * @example
+     * // Update many Preferences
+     * const preference = await prisma.preference.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Preferences and only return the `id`
+     * const preferenceWithIdOnly = await prisma.preference.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PreferenceUpdateManyAndReturnArgs>(args: SelectSubset<T, PreferenceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Preference.
+     * @param {PreferenceUpsertArgs} args - Arguments to update or create a Preference.
+     * @example
+     * // Update or create a Preference
+     * const preference = await prisma.preference.upsert({
+     *   create: {
+     *     // ... data to create a Preference
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Preference we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PreferenceUpsertArgs>(args: SelectSubset<T, PreferenceUpsertArgs<ExtArgs>>): Prisma__PreferenceClient<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Preferences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreferenceCountArgs} args - Arguments to filter Preferences to count.
+     * @example
+     * // Count the number of Preferences
+     * const count = await prisma.preference.count({
+     *   where: {
+     *     // ... the filter for the Preferences we want to count
+     *   }
+     * })
+    **/
+    count<T extends PreferenceCountArgs>(
+      args?: Subset<T, PreferenceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PreferenceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Preference.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreferenceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PreferenceAggregateArgs>(args: Subset<T, PreferenceAggregateArgs>): Prisma.PrismaPromise<GetPreferenceAggregateType<T>>
+
+    /**
+     * Group by Preference.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PreferenceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PreferenceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PreferenceGroupByArgs['orderBy'] }
+        : { orderBy?: PreferenceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PreferenceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPreferenceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Preference model
+   */
+  readonly fields: PreferenceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Preference.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PreferenceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Preference model
+   */
+  interface PreferenceFieldRefs {
+    readonly id: FieldRef<"Preference", 'String'>
+    readonly userId: FieldRef<"Preference", 'String'>
+    readonly type: FieldRef<"Preference", 'PreferenceType'>
+    readonly notificationType: FieldRef<"Preference", 'NotificationType'>
+    readonly push: FieldRef<"Preference", 'Boolean'>
+    readonly email: FieldRef<"Preference", 'Boolean'>
+    readonly sms: FieldRef<"Preference", 'Boolean'>
+    readonly reactionTarget: FieldRef<"Preference", 'ReactionTarget'>
+    readonly hidden: FieldRef<"Preference", 'Boolean'>
+    readonly reduceMotion: FieldRef<"Preference", 'Boolean'>
+    readonly screenReader: FieldRef<"Preference", 'Boolean'>
+    readonly languageCode: FieldRef<"Preference", 'String'>
+    readonly timezone: FieldRef<"Preference", 'String'>
+    readonly locale: FieldRef<"Preference", 'String'>
+    readonly darkModeEnabled: FieldRef<"Preference", 'Boolean'>
+    readonly videoQuality: FieldRef<"Preference", 'VideoQuality'>
+    readonly autoPlayAnimations: FieldRef<"Preference", 'Boolean'>
+    readonly alwaysShowCaptions: FieldRef<"Preference", 'Boolean'>
+    readonly quietMode: FieldRef<"Preference", 'Boolean'>
+    readonly backGroundColor: FieldRef<"Preference", 'CoLor'>
+    readonly backGroundOpacity: FieldRef<"Preference", 'Float'>
+    readonly textColor: FieldRef<"Preference", 'CoLor'>
+    readonly textSize: FieldRef<"Preference", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Preference findUnique
+   */
+  export type PreferenceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Preference to fetch.
+     */
+    where: PreferenceWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference findUniqueOrThrow
+   */
+  export type PreferenceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Preference to fetch.
+     */
+    where: PreferenceWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference findFirst
+   */
+  export type PreferenceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Preference to fetch.
+     */
+    where?: PreferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Preferences to fetch.
+     */
+    orderBy?: PreferenceOrderByWithRelationInput | PreferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Preferences.
+     */
+    cursor?: PreferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Preferences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Preferences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Preferences.
+     */
+    distinct?: PreferenceScalarFieldEnum | PreferenceScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference findFirstOrThrow
+   */
+  export type PreferenceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Preference to fetch.
+     */
+    where?: PreferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Preferences to fetch.
+     */
+    orderBy?: PreferenceOrderByWithRelationInput | PreferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Preferences.
+     */
+    cursor?: PreferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Preferences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Preferences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Preferences.
+     */
+    distinct?: PreferenceScalarFieldEnum | PreferenceScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference findMany
+   */
+  export type PreferenceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Preferences to fetch.
+     */
+    where?: PreferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Preferences to fetch.
+     */
+    orderBy?: PreferenceOrderByWithRelationInput | PreferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Preferences.
+     */
+    cursor?: PreferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Preferences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Preferences.
+     */
+    skip?: number
+    distinct?: PreferenceScalarFieldEnum | PreferenceScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference create
+   */
+  export type PreferenceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Preference.
+     */
+    data: XOR<PreferenceCreateInput, PreferenceUncheckedCreateInput>
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference createMany
+   */
+  export type PreferenceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Preferences.
+     */
+    data: PreferenceCreateManyInput | PreferenceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Preference createManyAndReturn
+   */
+  export type PreferenceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * The data used to create many Preferences.
+     */
+    data: PreferenceCreateManyInput | PreferenceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Preference update
+   */
+  export type PreferenceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Preference.
+     */
+    data: XOR<PreferenceUpdateInput, PreferenceUncheckedUpdateInput>
+    /**
+     * Choose, which Preference to update.
+     */
+    where: PreferenceWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference updateMany
+   */
+  export type PreferenceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Preferences.
+     */
+    data: XOR<PreferenceUpdateManyMutationInput, PreferenceUncheckedUpdateManyInput>
+    /**
+     * Filter which Preferences to update
+     */
+    where?: PreferenceWhereInput
+    /**
+     * Limit how many Preferences to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Preference updateManyAndReturn
+   */
+  export type PreferenceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * The data used to update Preferences.
+     */
+    data: XOR<PreferenceUpdateManyMutationInput, PreferenceUncheckedUpdateManyInput>
+    /**
+     * Filter which Preferences to update
+     */
+    where?: PreferenceWhereInput
+    /**
+     * Limit how many Preferences to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Preference upsert
+   */
+  export type PreferenceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Preference to update in case it exists.
+     */
+    where: PreferenceWhereUniqueInput
+    /**
+     * In case the Preference found by the `where` argument doesn't exist, create a new Preference with this data.
+     */
+    create: XOR<PreferenceCreateInput, PreferenceUncheckedCreateInput>
+    /**
+     * In case the Preference was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PreferenceUpdateInput, PreferenceUncheckedUpdateInput>
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference delete
+   */
+  export type PreferenceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    /**
+     * Filter which Preference to delete.
+     */
+    where: PreferenceWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * Preference deleteMany
+   */
+  export type PreferenceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Preferences to delete
+     */
+    where?: PreferenceWhereInput
+    /**
+     * Limit how many Preferences to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Preference without action
+   */
+  export type PreferenceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AudienceAndVisibility
+   */
+
+  export type AggregateAudienceAndVisibility = {
+    _count: AudienceAndVisibilityCountAggregateOutputType | null
+    _min: AudienceAndVisibilityMinAggregateOutputType | null
+    _max: AudienceAndVisibilityMaxAggregateOutputType | null
+  }
+
+  export type AudienceAndVisibilityMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    whoCanSendFriendRequest: $Enums.SendFriendRequest | null
+    whoCanSeeListFriends: $Enums.Audience | null
+    peopleWithYourEmailAddress: $Enums.Audience | null
+    peopleWithYourPhoneNumber: $Enums.Audience | null
+    searchAccountByLink: boolean | null
+    forFriendsOfFriendRequest: $Enums.TypeSendMessage | null
+    forPeopleMultialGroup: $Enums.TypeSendMessage | null
+    forPageFollow: $Enums.TypeSendMessage | null
+    forOtherPeople: $Enums.TypeSendMessage | null
+    whoCanseeYourFuturePosts: $Enums.Audience | null
+    limitWhoCanSeePastPost: boolean | null
+    allCommentSummariesOnPosts: boolean | null
+    whoCanSeeYourStories: $Enums.Audience | null
+    allowOtherShareYourStories: boolean | null
+    archivingStories: boolean | null
+    allowOtherShareaYourReels: boolean | null
+    whoCanSeeYourReels: $Enums.Audience | null
+    whoCanFollowMe: $Enums.Audience | null
+    whoCanSeeYourFollowers: $Enums.Audience | null
+    whoCanSeeSomethingYouFollow: $Enums.Audience | null
+    whoCanCommentYourPosts: $Enums.Audience | null
+    publicPostNotification: $Enums.Audience | null
+    publicProfileInfo: $Enums.Audience | null
+    showMostRelevantCommentsFirst: boolean | null
+    offFacebookPreviews: boolean | null
+    hideSomethingOnYourProfile: string | null
+    whoCanPostYourProfile: $Enums.Audience | null
+    whoCanSeeWhatOtherPostOnYourProfile: $Enums.Audience | null
+    allowOtherShareYourPostsToTheirStories: boolean | null
+    whoCanSeePostsYouTagOnYourProfile: $Enums.Audience | null
+    whoYouWannaToTagAndNotRead: $Enums.Audience | null
+    reviewPeopleAddToYourPostBeforePublish: boolean | null
+    reviewPostBeforePublish: boolean | null
+  }
+
+  export type AudienceAndVisibilityMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    whoCanSendFriendRequest: $Enums.SendFriendRequest | null
+    whoCanSeeListFriends: $Enums.Audience | null
+    peopleWithYourEmailAddress: $Enums.Audience | null
+    peopleWithYourPhoneNumber: $Enums.Audience | null
+    searchAccountByLink: boolean | null
+    forFriendsOfFriendRequest: $Enums.TypeSendMessage | null
+    forPeopleMultialGroup: $Enums.TypeSendMessage | null
+    forPageFollow: $Enums.TypeSendMessage | null
+    forOtherPeople: $Enums.TypeSendMessage | null
+    whoCanseeYourFuturePosts: $Enums.Audience | null
+    limitWhoCanSeePastPost: boolean | null
+    allCommentSummariesOnPosts: boolean | null
+    whoCanSeeYourStories: $Enums.Audience | null
+    allowOtherShareYourStories: boolean | null
+    archivingStories: boolean | null
+    allowOtherShareaYourReels: boolean | null
+    whoCanSeeYourReels: $Enums.Audience | null
+    whoCanFollowMe: $Enums.Audience | null
+    whoCanSeeYourFollowers: $Enums.Audience | null
+    whoCanSeeSomethingYouFollow: $Enums.Audience | null
+    whoCanCommentYourPosts: $Enums.Audience | null
+    publicPostNotification: $Enums.Audience | null
+    publicProfileInfo: $Enums.Audience | null
+    showMostRelevantCommentsFirst: boolean | null
+    offFacebookPreviews: boolean | null
+    hideSomethingOnYourProfile: string | null
+    whoCanPostYourProfile: $Enums.Audience | null
+    whoCanSeeWhatOtherPostOnYourProfile: $Enums.Audience | null
+    allowOtherShareYourPostsToTheirStories: boolean | null
+    whoCanSeePostsYouTagOnYourProfile: $Enums.Audience | null
+    whoYouWannaToTagAndNotRead: $Enums.Audience | null
+    reviewPeopleAddToYourPostBeforePublish: boolean | null
+    reviewPostBeforePublish: boolean | null
+  }
+
+  export type AudienceAndVisibilityCountAggregateOutputType = {
+    id: number
+    userId: number
+    whoCanSendFriendRequest: number
+    whoCanSeeListFriends: number
+    peopleWithYourEmailAddress: number
+    peopleWithYourPhoneNumber: number
+    searchAccountByLink: number
+    forFriendsOfFriendRequest: number
+    forPeopleMultialGroup: number
+    forPageFollow: number
+    forOtherPeople: number
+    whoCanseeYourFuturePosts: number
+    limitWhoCanSeePastPost: number
+    allCommentSummariesOnPosts: number
+    whoCanSeeYourStories: number
+    allowOtherShareYourStories: number
+    archivingStories: number
+    allowOtherShareaYourReels: number
+    whoCanSeeYourReels: number
+    whoCanFollowMe: number
+    whoCanSeeYourFollowers: number
+    whoCanSeeSomethingYouFollow: number
+    whoCanCommentYourPosts: number
+    publicPostNotification: number
+    publicProfileInfo: number
+    showMostRelevantCommentsFirst: number
+    offFacebookPreviews: number
+    hideSomethingOnYourProfile: number
+    whoCanPostYourProfile: number
+    whoCanSeeWhatOtherPostOnYourProfile: number
+    allowOtherShareYourPostsToTheirStories: number
+    whoCanSeePostsYouTagOnYourProfile: number
+    whoYouWannaToTagAndNotRead: number
+    reviewPeopleAddToYourPostBeforePublish: number
+    reviewPostBeforePublish: number
+    _all: number
+  }
+
+
+  export type AudienceAndVisibilityMinAggregateInputType = {
+    id?: true
+    userId?: true
+    whoCanSendFriendRequest?: true
+    whoCanSeeListFriends?: true
+    peopleWithYourEmailAddress?: true
+    peopleWithYourPhoneNumber?: true
+    searchAccountByLink?: true
+    forFriendsOfFriendRequest?: true
+    forPeopleMultialGroup?: true
+    forPageFollow?: true
+    forOtherPeople?: true
+    whoCanseeYourFuturePosts?: true
+    limitWhoCanSeePastPost?: true
+    allCommentSummariesOnPosts?: true
+    whoCanSeeYourStories?: true
+    allowOtherShareYourStories?: true
+    archivingStories?: true
+    allowOtherShareaYourReels?: true
+    whoCanSeeYourReels?: true
+    whoCanFollowMe?: true
+    whoCanSeeYourFollowers?: true
+    whoCanSeeSomethingYouFollow?: true
+    whoCanCommentYourPosts?: true
+    publicPostNotification?: true
+    publicProfileInfo?: true
+    showMostRelevantCommentsFirst?: true
+    offFacebookPreviews?: true
+    hideSomethingOnYourProfile?: true
+    whoCanPostYourProfile?: true
+    whoCanSeeWhatOtherPostOnYourProfile?: true
+    allowOtherShareYourPostsToTheirStories?: true
+    whoCanSeePostsYouTagOnYourProfile?: true
+    whoYouWannaToTagAndNotRead?: true
+    reviewPeopleAddToYourPostBeforePublish?: true
+    reviewPostBeforePublish?: true
+  }
+
+  export type AudienceAndVisibilityMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    whoCanSendFriendRequest?: true
+    whoCanSeeListFriends?: true
+    peopleWithYourEmailAddress?: true
+    peopleWithYourPhoneNumber?: true
+    searchAccountByLink?: true
+    forFriendsOfFriendRequest?: true
+    forPeopleMultialGroup?: true
+    forPageFollow?: true
+    forOtherPeople?: true
+    whoCanseeYourFuturePosts?: true
+    limitWhoCanSeePastPost?: true
+    allCommentSummariesOnPosts?: true
+    whoCanSeeYourStories?: true
+    allowOtherShareYourStories?: true
+    archivingStories?: true
+    allowOtherShareaYourReels?: true
+    whoCanSeeYourReels?: true
+    whoCanFollowMe?: true
+    whoCanSeeYourFollowers?: true
+    whoCanSeeSomethingYouFollow?: true
+    whoCanCommentYourPosts?: true
+    publicPostNotification?: true
+    publicProfileInfo?: true
+    showMostRelevantCommentsFirst?: true
+    offFacebookPreviews?: true
+    hideSomethingOnYourProfile?: true
+    whoCanPostYourProfile?: true
+    whoCanSeeWhatOtherPostOnYourProfile?: true
+    allowOtherShareYourPostsToTheirStories?: true
+    whoCanSeePostsYouTagOnYourProfile?: true
+    whoYouWannaToTagAndNotRead?: true
+    reviewPeopleAddToYourPostBeforePublish?: true
+    reviewPostBeforePublish?: true
+  }
+
+  export type AudienceAndVisibilityCountAggregateInputType = {
+    id?: true
+    userId?: true
+    whoCanSendFriendRequest?: true
+    whoCanSeeListFriends?: true
+    peopleWithYourEmailAddress?: true
+    peopleWithYourPhoneNumber?: true
+    searchAccountByLink?: true
+    forFriendsOfFriendRequest?: true
+    forPeopleMultialGroup?: true
+    forPageFollow?: true
+    forOtherPeople?: true
+    whoCanseeYourFuturePosts?: true
+    limitWhoCanSeePastPost?: true
+    allCommentSummariesOnPosts?: true
+    whoCanSeeYourStories?: true
+    allowOtherShareYourStories?: true
+    archivingStories?: true
+    allowOtherShareaYourReels?: true
+    whoCanSeeYourReels?: true
+    whoCanFollowMe?: true
+    whoCanSeeYourFollowers?: true
+    whoCanSeeSomethingYouFollow?: true
+    whoCanCommentYourPosts?: true
+    publicPostNotification?: true
+    publicProfileInfo?: true
+    showMostRelevantCommentsFirst?: true
+    offFacebookPreviews?: true
+    hideSomethingOnYourProfile?: true
+    whoCanPostYourProfile?: true
+    whoCanSeeWhatOtherPostOnYourProfile?: true
+    allowOtherShareYourPostsToTheirStories?: true
+    whoCanSeePostsYouTagOnYourProfile?: true
+    whoYouWannaToTagAndNotRead?: true
+    reviewPeopleAddToYourPostBeforePublish?: true
+    reviewPostBeforePublish?: true
+    _all?: true
+  }
+
+  export type AudienceAndVisibilityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AudienceAndVisibility to aggregate.
+     */
+    where?: AudienceAndVisibilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceAndVisibilities to fetch.
+     */
+    orderBy?: AudienceAndVisibilityOrderByWithRelationInput | AudienceAndVisibilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AudienceAndVisibilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceAndVisibilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceAndVisibilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AudienceAndVisibilities
+    **/
+    _count?: true | AudienceAndVisibilityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AudienceAndVisibilityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AudienceAndVisibilityMaxAggregateInputType
+  }
+
+  export type GetAudienceAndVisibilityAggregateType<T extends AudienceAndVisibilityAggregateArgs> = {
+        [P in keyof T & keyof AggregateAudienceAndVisibility]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAudienceAndVisibility[P]>
+      : GetScalarType<T[P], AggregateAudienceAndVisibility[P]>
+  }
+
+
+
+
+  export type AudienceAndVisibilityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AudienceAndVisibilityWhereInput
+    orderBy?: AudienceAndVisibilityOrderByWithAggregationInput | AudienceAndVisibilityOrderByWithAggregationInput[]
+    by: AudienceAndVisibilityScalarFieldEnum[] | AudienceAndVisibilityScalarFieldEnum
+    having?: AudienceAndVisibilityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AudienceAndVisibilityCountAggregateInputType | true
+    _min?: AudienceAndVisibilityMinAggregateInputType
+    _max?: AudienceAndVisibilityMaxAggregateInputType
+  }
+
+  export type AudienceAndVisibilityGroupByOutputType = {
+    id: string
+    userId: string
+    whoCanSendFriendRequest: $Enums.SendFriendRequest
+    whoCanSeeListFriends: $Enums.Audience
+    peopleWithYourEmailAddress: $Enums.Audience
+    peopleWithYourPhoneNumber: $Enums.Audience
+    searchAccountByLink: boolean
+    forFriendsOfFriendRequest: $Enums.TypeSendMessage
+    forPeopleMultialGroup: $Enums.TypeSendMessage
+    forPageFollow: $Enums.TypeSendMessage
+    forOtherPeople: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts: $Enums.Audience
+    limitWhoCanSeePastPost: boolean
+    allCommentSummariesOnPosts: boolean
+    whoCanSeeYourStories: $Enums.Audience
+    allowOtherShareYourStories: boolean
+    archivingStories: boolean
+    allowOtherShareaYourReels: boolean
+    whoCanSeeYourReels: $Enums.Audience
+    whoCanFollowMe: $Enums.Audience
+    whoCanSeeYourFollowers: $Enums.Audience
+    whoCanSeeSomethingYouFollow: $Enums.Audience
+    whoCanCommentYourPosts: $Enums.Audience
+    publicPostNotification: $Enums.Audience
+    publicProfileInfo: $Enums.Audience
+    showMostRelevantCommentsFirst: boolean
+    offFacebookPreviews: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories: boolean
+    whoCanSeePostsYouTagOnYourProfile: $Enums.Audience
+    whoYouWannaToTagAndNotRead: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish: boolean
+    reviewPostBeforePublish: boolean
+    _count: AudienceAndVisibilityCountAggregateOutputType | null
+    _min: AudienceAndVisibilityMinAggregateOutputType | null
+    _max: AudienceAndVisibilityMaxAggregateOutputType | null
+  }
+
+  type GetAudienceAndVisibilityGroupByPayload<T extends AudienceAndVisibilityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AudienceAndVisibilityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AudienceAndVisibilityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AudienceAndVisibilityGroupByOutputType[P]>
+            : GetScalarType<T[P], AudienceAndVisibilityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AudienceAndVisibilitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    whoCanSendFriendRequest?: boolean
+    whoCanSeeListFriends?: boolean
+    peopleWithYourEmailAddress?: boolean
+    peopleWithYourPhoneNumber?: boolean
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: boolean
+    forPeopleMultialGroup?: boolean
+    forPageFollow?: boolean
+    forOtherPeople?: boolean
+    whoCanseeYourFuturePosts?: boolean
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: boolean
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: boolean
+    whoCanFollowMe?: boolean
+    whoCanSeeYourFollowers?: boolean
+    whoCanSeeSomethingYouFollow?: boolean
+    whoCanCommentYourPosts?: boolean
+    publicPostNotification?: boolean
+    publicProfileInfo?: boolean
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile?: boolean
+    whoCanPostYourProfile?: boolean
+    whoCanSeeWhatOtherPostOnYourProfile?: boolean
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: boolean
+    whoYouWannaToTagAndNotRead?: boolean
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    restrictedList?: boolean | AudienceAndVisibility$restrictedListArgs<ExtArgs>
+    blockedProfilesOrPages?: boolean | AudienceAndVisibility$blockedProfilesOrPagesArgs<ExtArgs>
+    blockMessages?: boolean | AudienceAndVisibility$blockMessagesArgs<ExtArgs>
+    _count?: boolean | AudienceAndVisibilityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceAndVisibility"]>
+
+  export type AudienceAndVisibilitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    whoCanSendFriendRequest?: boolean
+    whoCanSeeListFriends?: boolean
+    peopleWithYourEmailAddress?: boolean
+    peopleWithYourPhoneNumber?: boolean
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: boolean
+    forPeopleMultialGroup?: boolean
+    forPageFollow?: boolean
+    forOtherPeople?: boolean
+    whoCanseeYourFuturePosts?: boolean
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: boolean
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: boolean
+    whoCanFollowMe?: boolean
+    whoCanSeeYourFollowers?: boolean
+    whoCanSeeSomethingYouFollow?: boolean
+    whoCanCommentYourPosts?: boolean
+    publicPostNotification?: boolean
+    publicProfileInfo?: boolean
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile?: boolean
+    whoCanPostYourProfile?: boolean
+    whoCanSeeWhatOtherPostOnYourProfile?: boolean
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: boolean
+    whoYouWannaToTagAndNotRead?: boolean
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceAndVisibility"]>
+
+  export type AudienceAndVisibilitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    whoCanSendFriendRequest?: boolean
+    whoCanSeeListFriends?: boolean
+    peopleWithYourEmailAddress?: boolean
+    peopleWithYourPhoneNumber?: boolean
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: boolean
+    forPeopleMultialGroup?: boolean
+    forPageFollow?: boolean
+    forOtherPeople?: boolean
+    whoCanseeYourFuturePosts?: boolean
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: boolean
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: boolean
+    whoCanFollowMe?: boolean
+    whoCanSeeYourFollowers?: boolean
+    whoCanSeeSomethingYouFollow?: boolean
+    whoCanCommentYourPosts?: boolean
+    publicPostNotification?: boolean
+    publicProfileInfo?: boolean
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile?: boolean
+    whoCanPostYourProfile?: boolean
+    whoCanSeeWhatOtherPostOnYourProfile?: boolean
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: boolean
+    whoYouWannaToTagAndNotRead?: boolean
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceAndVisibility"]>
+
+  export type AudienceAndVisibilitySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    whoCanSendFriendRequest?: boolean
+    whoCanSeeListFriends?: boolean
+    peopleWithYourEmailAddress?: boolean
+    peopleWithYourPhoneNumber?: boolean
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: boolean
+    forPeopleMultialGroup?: boolean
+    forPageFollow?: boolean
+    forOtherPeople?: boolean
+    whoCanseeYourFuturePosts?: boolean
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: boolean
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: boolean
+    whoCanFollowMe?: boolean
+    whoCanSeeYourFollowers?: boolean
+    whoCanSeeSomethingYouFollow?: boolean
+    whoCanCommentYourPosts?: boolean
+    publicPostNotification?: boolean
+    publicProfileInfo?: boolean
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile?: boolean
+    whoCanPostYourProfile?: boolean
+    whoCanSeeWhatOtherPostOnYourProfile?: boolean
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: boolean
+    whoYouWannaToTagAndNotRead?: boolean
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+  }
+
+  export type AudienceAndVisibilityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "whoCanSendFriendRequest" | "whoCanSeeListFriends" | "peopleWithYourEmailAddress" | "peopleWithYourPhoneNumber" | "searchAccountByLink" | "forFriendsOfFriendRequest" | "forPeopleMultialGroup" | "forPageFollow" | "forOtherPeople" | "whoCanseeYourFuturePosts" | "limitWhoCanSeePastPost" | "allCommentSummariesOnPosts" | "whoCanSeeYourStories" | "allowOtherShareYourStories" | "archivingStories" | "allowOtherShareaYourReels" | "whoCanSeeYourReels" | "whoCanFollowMe" | "whoCanSeeYourFollowers" | "whoCanSeeSomethingYouFollow" | "whoCanCommentYourPosts" | "publicPostNotification" | "publicProfileInfo" | "showMostRelevantCommentsFirst" | "offFacebookPreviews" | "hideSomethingOnYourProfile" | "whoCanPostYourProfile" | "whoCanSeeWhatOtherPostOnYourProfile" | "allowOtherShareYourPostsToTheirStories" | "whoCanSeePostsYouTagOnYourProfile" | "whoYouWannaToTagAndNotRead" | "reviewPeopleAddToYourPostBeforePublish" | "reviewPostBeforePublish", ExtArgs["result"]["audienceAndVisibility"]>
+  export type AudienceAndVisibilityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    restrictedList?: boolean | AudienceAndVisibility$restrictedListArgs<ExtArgs>
+    blockedProfilesOrPages?: boolean | AudienceAndVisibility$blockedProfilesOrPagesArgs<ExtArgs>
+    blockMessages?: boolean | AudienceAndVisibility$blockMessagesArgs<ExtArgs>
+    _count?: boolean | AudienceAndVisibilityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AudienceAndVisibilityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AudienceAndVisibilityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AudienceAndVisibilityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AudienceAndVisibility"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      restrictedList: Prisma.$UserPayload<ExtArgs>[]
+      blockedProfilesOrPages: Prisma.$UserPayload<ExtArgs>[]
+      blockMessages: Prisma.$UserPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      whoCanSendFriendRequest: $Enums.SendFriendRequest
+      whoCanSeeListFriends: $Enums.Audience
+      peopleWithYourEmailAddress: $Enums.Audience
+      peopleWithYourPhoneNumber: $Enums.Audience
+      searchAccountByLink: boolean
+      forFriendsOfFriendRequest: $Enums.TypeSendMessage
+      forPeopleMultialGroup: $Enums.TypeSendMessage
+      forPageFollow: $Enums.TypeSendMessage
+      forOtherPeople: $Enums.TypeSendMessage
+      whoCanseeYourFuturePosts: $Enums.Audience
+      limitWhoCanSeePastPost: boolean
+      allCommentSummariesOnPosts: boolean
+      whoCanSeeYourStories: $Enums.Audience
+      allowOtherShareYourStories: boolean
+      archivingStories: boolean
+      allowOtherShareaYourReels: boolean
+      whoCanSeeYourReels: $Enums.Audience
+      whoCanFollowMe: $Enums.Audience
+      whoCanSeeYourFollowers: $Enums.Audience
+      whoCanSeeSomethingYouFollow: $Enums.Audience
+      whoCanCommentYourPosts: $Enums.Audience
+      publicPostNotification: $Enums.Audience
+      publicProfileInfo: $Enums.Audience
+      showMostRelevantCommentsFirst: boolean
+      offFacebookPreviews: boolean
+      hideSomethingOnYourProfile: string
+      whoCanPostYourProfile: $Enums.Audience
+      whoCanSeeWhatOtherPostOnYourProfile: $Enums.Audience
+      allowOtherShareYourPostsToTheirStories: boolean
+      whoCanSeePostsYouTagOnYourProfile: $Enums.Audience
+      whoYouWannaToTagAndNotRead: $Enums.Audience
+      reviewPeopleAddToYourPostBeforePublish: boolean
+      reviewPostBeforePublish: boolean
+    }, ExtArgs["result"]["audienceAndVisibility"]>
+    composites: {}
+  }
+
+  type AudienceAndVisibilityGetPayload<S extends boolean | null | undefined | AudienceAndVisibilityDefaultArgs> = $Result.GetResult<Prisma.$AudienceAndVisibilityPayload, S>
+
+  type AudienceAndVisibilityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AudienceAndVisibilityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit' | 'relationLoadStrategy'> & {
+      select?: AudienceAndVisibilityCountAggregateInputType | true
+    }
+
+  export interface AudienceAndVisibilityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AudienceAndVisibility'], meta: { name: 'AudienceAndVisibility' } }
+    /**
+     * Find zero or one AudienceAndVisibility that matches the filter.
+     * @param {AudienceAndVisibilityFindUniqueArgs} args - Arguments to find a AudienceAndVisibility
+     * @example
+     * // Get one AudienceAndVisibility
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AudienceAndVisibilityFindUniqueArgs>(args: SelectSubset<T, AudienceAndVisibilityFindUniqueArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AudienceAndVisibility that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AudienceAndVisibilityFindUniqueOrThrowArgs} args - Arguments to find a AudienceAndVisibility
+     * @example
+     * // Get one AudienceAndVisibility
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AudienceAndVisibilityFindUniqueOrThrowArgs>(args: SelectSubset<T, AudienceAndVisibilityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AudienceAndVisibility that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceAndVisibilityFindFirstArgs} args - Arguments to find a AudienceAndVisibility
+     * @example
+     * // Get one AudienceAndVisibility
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AudienceAndVisibilityFindFirstArgs>(args?: SelectSubset<T, AudienceAndVisibilityFindFirstArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AudienceAndVisibility that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceAndVisibilityFindFirstOrThrowArgs} args - Arguments to find a AudienceAndVisibility
+     * @example
+     * // Get one AudienceAndVisibility
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AudienceAndVisibilityFindFirstOrThrowArgs>(args?: SelectSubset<T, AudienceAndVisibilityFindFirstOrThrowArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AudienceAndVisibilities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceAndVisibilityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AudienceAndVisibilities
+     * const audienceAndVisibilities = await prisma.audienceAndVisibility.findMany()
+     * 
+     * // Get first 10 AudienceAndVisibilities
+     * const audienceAndVisibilities = await prisma.audienceAndVisibility.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const audienceAndVisibilityWithIdOnly = await prisma.audienceAndVisibility.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AudienceAndVisibilityFindManyArgs>(args?: SelectSubset<T, AudienceAndVisibilityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AudienceAndVisibility.
+     * @param {AudienceAndVisibilityCreateArgs} args - Arguments to create a AudienceAndVisibility.
+     * @example
+     * // Create one AudienceAndVisibility
+     * const AudienceAndVisibility = await prisma.audienceAndVisibility.create({
+     *   data: {
+     *     // ... data to create a AudienceAndVisibility
+     *   }
+     * })
+     * 
+     */
+    create<T extends AudienceAndVisibilityCreateArgs>(args: SelectSubset<T, AudienceAndVisibilityCreateArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AudienceAndVisibilities.
+     * @param {AudienceAndVisibilityCreateManyArgs} args - Arguments to create many AudienceAndVisibilities.
+     * @example
+     * // Create many AudienceAndVisibilities
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AudienceAndVisibilityCreateManyArgs>(args?: SelectSubset<T, AudienceAndVisibilityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AudienceAndVisibilities and returns the data saved in the database.
+     * @param {AudienceAndVisibilityCreateManyAndReturnArgs} args - Arguments to create many AudienceAndVisibilities.
+     * @example
+     * // Create many AudienceAndVisibilities
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AudienceAndVisibilities and only return the `id`
+     * const audienceAndVisibilityWithIdOnly = await prisma.audienceAndVisibility.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AudienceAndVisibilityCreateManyAndReturnArgs>(args?: SelectSubset<T, AudienceAndVisibilityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AudienceAndVisibility.
+     * @param {AudienceAndVisibilityDeleteArgs} args - Arguments to delete one AudienceAndVisibility.
+     * @example
+     * // Delete one AudienceAndVisibility
+     * const AudienceAndVisibility = await prisma.audienceAndVisibility.delete({
+     *   where: {
+     *     // ... filter to delete one AudienceAndVisibility
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AudienceAndVisibilityDeleteArgs>(args: SelectSubset<T, AudienceAndVisibilityDeleteArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AudienceAndVisibility.
+     * @param {AudienceAndVisibilityUpdateArgs} args - Arguments to update one AudienceAndVisibility.
+     * @example
+     * // Update one AudienceAndVisibility
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AudienceAndVisibilityUpdateArgs>(args: SelectSubset<T, AudienceAndVisibilityUpdateArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AudienceAndVisibilities.
+     * @param {AudienceAndVisibilityDeleteManyArgs} args - Arguments to filter AudienceAndVisibilities to delete.
+     * @example
+     * // Delete a few AudienceAndVisibilities
+     * const { count } = await prisma.audienceAndVisibility.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AudienceAndVisibilityDeleteManyArgs>(args?: SelectSubset<T, AudienceAndVisibilityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AudienceAndVisibilities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceAndVisibilityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AudienceAndVisibilities
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AudienceAndVisibilityUpdateManyArgs>(args: SelectSubset<T, AudienceAndVisibilityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AudienceAndVisibilities and returns the data updated in the database.
+     * @param {AudienceAndVisibilityUpdateManyAndReturnArgs} args - Arguments to update many AudienceAndVisibilities.
+     * @example
+     * // Update many AudienceAndVisibilities
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AudienceAndVisibilities and only return the `id`
+     * const audienceAndVisibilityWithIdOnly = await prisma.audienceAndVisibility.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AudienceAndVisibilityUpdateManyAndReturnArgs>(args: SelectSubset<T, AudienceAndVisibilityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AudienceAndVisibility.
+     * @param {AudienceAndVisibilityUpsertArgs} args - Arguments to update or create a AudienceAndVisibility.
+     * @example
+     * // Update or create a AudienceAndVisibility
+     * const audienceAndVisibility = await prisma.audienceAndVisibility.upsert({
+     *   create: {
+     *     // ... data to create a AudienceAndVisibility
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AudienceAndVisibility we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AudienceAndVisibilityUpsertArgs>(args: SelectSubset<T, AudienceAndVisibilityUpsertArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AudienceAndVisibilities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceAndVisibilityCountArgs} args - Arguments to filter AudienceAndVisibilities to count.
+     * @example
+     * // Count the number of AudienceAndVisibilities
+     * const count = await prisma.audienceAndVisibility.count({
+     *   where: {
+     *     // ... the filter for the AudienceAndVisibilities we want to count
+     *   }
+     * })
+    **/
+    count<T extends AudienceAndVisibilityCountArgs>(
+      args?: Subset<T, AudienceAndVisibilityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AudienceAndVisibilityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AudienceAndVisibility.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceAndVisibilityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AudienceAndVisibilityAggregateArgs>(args: Subset<T, AudienceAndVisibilityAggregateArgs>): Prisma.PrismaPromise<GetAudienceAndVisibilityAggregateType<T>>
+
+    /**
+     * Group by AudienceAndVisibility.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceAndVisibilityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AudienceAndVisibilityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AudienceAndVisibilityGroupByArgs['orderBy'] }
+        : { orderBy?: AudienceAndVisibilityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AudienceAndVisibilityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAudienceAndVisibilityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AudienceAndVisibility model
+   */
+  readonly fields: AudienceAndVisibilityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AudienceAndVisibility.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AudienceAndVisibilityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    restrictedList<T extends AudienceAndVisibility$restrictedListArgs<ExtArgs> = {}>(args?: Subset<T, AudienceAndVisibility$restrictedListArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blockedProfilesOrPages<T extends AudienceAndVisibility$blockedProfilesOrPagesArgs<ExtArgs> = {}>(args?: Subset<T, AudienceAndVisibility$blockedProfilesOrPagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blockMessages<T extends AudienceAndVisibility$blockMessagesArgs<ExtArgs> = {}>(args?: Subset<T, AudienceAndVisibility$blockMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AudienceAndVisibility model
+   */
+  interface AudienceAndVisibilityFieldRefs {
+    readonly id: FieldRef<"AudienceAndVisibility", 'String'>
+    readonly userId: FieldRef<"AudienceAndVisibility", 'String'>
+    readonly whoCanSendFriendRequest: FieldRef<"AudienceAndVisibility", 'SendFriendRequest'>
+    readonly whoCanSeeListFriends: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly peopleWithYourEmailAddress: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly peopleWithYourPhoneNumber: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly searchAccountByLink: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly forFriendsOfFriendRequest: FieldRef<"AudienceAndVisibility", 'TypeSendMessage'>
+    readonly forPeopleMultialGroup: FieldRef<"AudienceAndVisibility", 'TypeSendMessage'>
+    readonly forPageFollow: FieldRef<"AudienceAndVisibility", 'TypeSendMessage'>
+    readonly forOtherPeople: FieldRef<"AudienceAndVisibility", 'TypeSendMessage'>
+    readonly whoCanseeYourFuturePosts: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly limitWhoCanSeePastPost: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly allCommentSummariesOnPosts: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly whoCanSeeYourStories: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly allowOtherShareYourStories: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly archivingStories: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly allowOtherShareaYourReels: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly whoCanSeeYourReels: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly whoCanFollowMe: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly whoCanSeeYourFollowers: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly whoCanSeeSomethingYouFollow: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly whoCanCommentYourPosts: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly publicPostNotification: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly publicProfileInfo: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly showMostRelevantCommentsFirst: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly offFacebookPreviews: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly hideSomethingOnYourProfile: FieldRef<"AudienceAndVisibility", 'String'>
+    readonly whoCanPostYourProfile: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly whoCanSeeWhatOtherPostOnYourProfile: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly allowOtherShareYourPostsToTheirStories: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly whoCanSeePostsYouTagOnYourProfile: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly whoYouWannaToTagAndNotRead: FieldRef<"AudienceAndVisibility", 'Audience'>
+    readonly reviewPeopleAddToYourPostBeforePublish: FieldRef<"AudienceAndVisibility", 'Boolean'>
+    readonly reviewPostBeforePublish: FieldRef<"AudienceAndVisibility", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AudienceAndVisibility findUnique
+   */
+  export type AudienceAndVisibilityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceAndVisibility to fetch.
+     */
+    where: AudienceAndVisibilityWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility findUniqueOrThrow
+   */
+  export type AudienceAndVisibilityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceAndVisibility to fetch.
+     */
+    where: AudienceAndVisibilityWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility findFirst
+   */
+  export type AudienceAndVisibilityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceAndVisibility to fetch.
+     */
+    where?: AudienceAndVisibilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceAndVisibilities to fetch.
+     */
+    orderBy?: AudienceAndVisibilityOrderByWithRelationInput | AudienceAndVisibilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AudienceAndVisibilities.
+     */
+    cursor?: AudienceAndVisibilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceAndVisibilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceAndVisibilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AudienceAndVisibilities.
+     */
+    distinct?: AudienceAndVisibilityScalarFieldEnum | AudienceAndVisibilityScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility findFirstOrThrow
+   */
+  export type AudienceAndVisibilityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceAndVisibility to fetch.
+     */
+    where?: AudienceAndVisibilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceAndVisibilities to fetch.
+     */
+    orderBy?: AudienceAndVisibilityOrderByWithRelationInput | AudienceAndVisibilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AudienceAndVisibilities.
+     */
+    cursor?: AudienceAndVisibilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceAndVisibilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceAndVisibilities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AudienceAndVisibilities.
+     */
+    distinct?: AudienceAndVisibilityScalarFieldEnum | AudienceAndVisibilityScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility findMany
+   */
+  export type AudienceAndVisibilityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceAndVisibilities to fetch.
+     */
+    where?: AudienceAndVisibilityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceAndVisibilities to fetch.
+     */
+    orderBy?: AudienceAndVisibilityOrderByWithRelationInput | AudienceAndVisibilityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AudienceAndVisibilities.
+     */
+    cursor?: AudienceAndVisibilityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceAndVisibilities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceAndVisibilities.
+     */
+    skip?: number
+    distinct?: AudienceAndVisibilityScalarFieldEnum | AudienceAndVisibilityScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility create
+   */
+  export type AudienceAndVisibilityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AudienceAndVisibility.
+     */
+    data: XOR<AudienceAndVisibilityCreateInput, AudienceAndVisibilityUncheckedCreateInput>
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility createMany
+   */
+  export type AudienceAndVisibilityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AudienceAndVisibilities.
+     */
+    data: AudienceAndVisibilityCreateManyInput | AudienceAndVisibilityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AudienceAndVisibility createManyAndReturn
+   */
+  export type AudienceAndVisibilityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * The data used to create many AudienceAndVisibilities.
+     */
+    data: AudienceAndVisibilityCreateManyInput | AudienceAndVisibilityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AudienceAndVisibility update
+   */
+  export type AudienceAndVisibilityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AudienceAndVisibility.
+     */
+    data: XOR<AudienceAndVisibilityUpdateInput, AudienceAndVisibilityUncheckedUpdateInput>
+    /**
+     * Choose, which AudienceAndVisibility to update.
+     */
+    where: AudienceAndVisibilityWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility updateMany
+   */
+  export type AudienceAndVisibilityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AudienceAndVisibilities.
+     */
+    data: XOR<AudienceAndVisibilityUpdateManyMutationInput, AudienceAndVisibilityUncheckedUpdateManyInput>
+    /**
+     * Filter which AudienceAndVisibilities to update
+     */
+    where?: AudienceAndVisibilityWhereInput
+    /**
+     * Limit how many AudienceAndVisibilities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AudienceAndVisibility updateManyAndReturn
+   */
+  export type AudienceAndVisibilityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * The data used to update AudienceAndVisibilities.
+     */
+    data: XOR<AudienceAndVisibilityUpdateManyMutationInput, AudienceAndVisibilityUncheckedUpdateManyInput>
+    /**
+     * Filter which AudienceAndVisibilities to update
+     */
+    where?: AudienceAndVisibilityWhereInput
+    /**
+     * Limit how many AudienceAndVisibilities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AudienceAndVisibility upsert
+   */
+  export type AudienceAndVisibilityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AudienceAndVisibility to update in case it exists.
+     */
+    where: AudienceAndVisibilityWhereUniqueInput
+    /**
+     * In case the AudienceAndVisibility found by the `where` argument doesn't exist, create a new AudienceAndVisibility with this data.
+     */
+    create: XOR<AudienceAndVisibilityCreateInput, AudienceAndVisibilityUncheckedCreateInput>
+    /**
+     * In case the AudienceAndVisibility was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AudienceAndVisibilityUpdateInput, AudienceAndVisibilityUncheckedUpdateInput>
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility delete
+   */
+  export type AudienceAndVisibilityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    /**
+     * Filter which AudienceAndVisibility to delete.
+     */
+    where: AudienceAndVisibilityWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * AudienceAndVisibility deleteMany
+   */
+  export type AudienceAndVisibilityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AudienceAndVisibilities to delete
+     */
+    where?: AudienceAndVisibilityWhereInput
+    /**
+     * Limit how many AudienceAndVisibilities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AudienceAndVisibility.restrictedList
+   */
+  export type AudienceAndVisibility$restrictedListArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceAndVisibility.blockedProfilesOrPages
+   */
+  export type AudienceAndVisibility$blockedProfilesOrPagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceAndVisibility.blockMessages
+   */
+  export type AudienceAndVisibility$blockMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceAndVisibility without action
+   */
+  export type AudienceAndVisibilityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model User
    */
 
@@ -8709,6 +11957,11 @@ export namespace Prisma {
     auth?: boolean | User$authArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     notificationActions?: boolean | User$notificationActionsArgs<ExtArgs>
+    Preference?: boolean | User$PreferenceArgs<ExtArgs>
+    audienceAndVisibility?: boolean | User$audienceAndVisibilityArgs<ExtArgs>
+    restrictedBy?: boolean | User$restrictedByArgs<ExtArgs>
+    blockedBy?: boolean | User$blockedByArgs<ExtArgs>
+    blockedMessagesBy?: boolean | User$blockedMessagesByArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -8806,6 +12059,11 @@ export namespace Prisma {
     auth?: boolean | User$authArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     notificationActions?: boolean | User$notificationActionsArgs<ExtArgs>
+    Preference?: boolean | User$PreferenceArgs<ExtArgs>
+    audienceAndVisibility?: boolean | User$audienceAndVisibilityArgs<ExtArgs>
+    restrictedBy?: boolean | User$restrictedByArgs<ExtArgs>
+    blockedBy?: boolean | User$blockedByArgs<ExtArgs>
+    blockedMessagesBy?: boolean | User$blockedMessagesByArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8836,6 +12094,11 @@ export namespace Prisma {
       auth: Prisma.$AuthenticationPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       notificationActions: Prisma.$NotificationPayload<ExtArgs>[]
+      Preference: Prisma.$PreferencePayload<ExtArgs>[]
+      audienceAndVisibility: Prisma.$AudienceAndVisibilityPayload<ExtArgs> | null
+      restrictedBy: Prisma.$AudienceAndVisibilityPayload<ExtArgs>[]
+      blockedBy: Prisma.$AudienceAndVisibilityPayload<ExtArgs>[]
+      blockedMessagesBy: Prisma.$AudienceAndVisibilityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9269,6 +12532,11 @@ export namespace Prisma {
     auth<T extends User$authArgs<ExtArgs> = {}>(args?: Subset<T, User$authArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notificationActions<T extends User$notificationActionsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationActionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Preference<T extends User$PreferenceArgs<ExtArgs> = {}>(args?: Subset<T, User$PreferenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PreferencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    audienceAndVisibility<T extends User$audienceAndVisibilityArgs<ExtArgs> = {}>(args?: Subset<T, User$audienceAndVisibilityArgs<ExtArgs>>): Prisma__AudienceAndVisibilityClient<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    restrictedBy<T extends User$restrictedByArgs<ExtArgs> = {}>(args?: Subset<T, User$restrictedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blockedBy<T extends User$blockedByArgs<ExtArgs> = {}>(args?: Subset<T, User$blockedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    blockedMessagesBy<T extends User$blockedMessagesByArgs<ExtArgs> = {}>(args?: Subset<T, User$blockedMessagesByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10076,6 +13344,121 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * User.Preference
+   */
+  export type User$PreferenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Preference
+     */
+    select?: PreferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Preference
+     */
+    omit?: PreferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PreferenceInclude<ExtArgs> | null
+    where?: PreferenceWhereInput
+    orderBy?: PreferenceOrderByWithRelationInput | PreferenceOrderByWithRelationInput[]
+    cursor?: PreferenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PreferenceScalarFieldEnum | PreferenceScalarFieldEnum[]
+  }
+
+  /**
+   * User.audienceAndVisibility
+   */
+  export type User$audienceAndVisibilityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    where?: AudienceAndVisibilityWhereInput
+  }
+
+  /**
+   * User.restrictedBy
+   */
+  export type User$restrictedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    where?: AudienceAndVisibilityWhereInput
+    orderBy?: AudienceAndVisibilityOrderByWithRelationInput | AudienceAndVisibilityOrderByWithRelationInput[]
+    cursor?: AudienceAndVisibilityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AudienceAndVisibilityScalarFieldEnum | AudienceAndVisibilityScalarFieldEnum[]
+  }
+
+  /**
+   * User.blockedBy
+   */
+  export type User$blockedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    where?: AudienceAndVisibilityWhereInput
+    orderBy?: AudienceAndVisibilityOrderByWithRelationInput | AudienceAndVisibilityOrderByWithRelationInput[]
+    cursor?: AudienceAndVisibilityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AudienceAndVisibilityScalarFieldEnum | AudienceAndVisibilityScalarFieldEnum[]
+  }
+
+  /**
+   * User.blockedMessagesBy
+   */
+  export type User$blockedMessagesByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceAndVisibility
+     */
+    select?: AudienceAndVisibilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceAndVisibility
+     */
+    omit?: AudienceAndVisibilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceAndVisibilityInclude<ExtArgs> | null
+    where?: AudienceAndVisibilityWhereInput
+    orderBy?: AudienceAndVisibilityOrderByWithRelationInput | AudienceAndVisibilityOrderByWithRelationInput[]
+    cursor?: AudienceAndVisibilityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AudienceAndVisibilityScalarFieldEnum | AudienceAndVisibilityScalarFieldEnum[]
   }
 
   /**
@@ -17824,6 +21207,76 @@ export namespace Prisma {
   export type ReactionScalarFieldEnum = (typeof ReactionScalarFieldEnum)[keyof typeof ReactionScalarFieldEnum]
 
 
+  export const PreferenceScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    type: 'type',
+    notificationType: 'notificationType',
+    push: 'push',
+    email: 'email',
+    sms: 'sms',
+    reactionTarget: 'reactionTarget',
+    hidden: 'hidden',
+    reduceMotion: 'reduceMotion',
+    screenReader: 'screenReader',
+    languageCode: 'languageCode',
+    timezone: 'timezone',
+    locale: 'locale',
+    darkModeEnabled: 'darkModeEnabled',
+    videoQuality: 'videoQuality',
+    autoPlayAnimations: 'autoPlayAnimations',
+    alwaysShowCaptions: 'alwaysShowCaptions',
+    quietMode: 'quietMode',
+    backGroundColor: 'backGroundColor',
+    backGroundOpacity: 'backGroundOpacity',
+    textColor: 'textColor',
+    textSize: 'textSize'
+  };
+
+  export type PreferenceScalarFieldEnum = (typeof PreferenceScalarFieldEnum)[keyof typeof PreferenceScalarFieldEnum]
+
+
+  export const AudienceAndVisibilityScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    whoCanSendFriendRequest: 'whoCanSendFriendRequest',
+    whoCanSeeListFriends: 'whoCanSeeListFriends',
+    peopleWithYourEmailAddress: 'peopleWithYourEmailAddress',
+    peopleWithYourPhoneNumber: 'peopleWithYourPhoneNumber',
+    searchAccountByLink: 'searchAccountByLink',
+    forFriendsOfFriendRequest: 'forFriendsOfFriendRequest',
+    forPeopleMultialGroup: 'forPeopleMultialGroup',
+    forPageFollow: 'forPageFollow',
+    forOtherPeople: 'forOtherPeople',
+    whoCanseeYourFuturePosts: 'whoCanseeYourFuturePosts',
+    limitWhoCanSeePastPost: 'limitWhoCanSeePastPost',
+    allCommentSummariesOnPosts: 'allCommentSummariesOnPosts',
+    whoCanSeeYourStories: 'whoCanSeeYourStories',
+    allowOtherShareYourStories: 'allowOtherShareYourStories',
+    archivingStories: 'archivingStories',
+    allowOtherShareaYourReels: 'allowOtherShareaYourReels',
+    whoCanSeeYourReels: 'whoCanSeeYourReels',
+    whoCanFollowMe: 'whoCanFollowMe',
+    whoCanSeeYourFollowers: 'whoCanSeeYourFollowers',
+    whoCanSeeSomethingYouFollow: 'whoCanSeeSomethingYouFollow',
+    whoCanCommentYourPosts: 'whoCanCommentYourPosts',
+    publicPostNotification: 'publicPostNotification',
+    publicProfileInfo: 'publicProfileInfo',
+    showMostRelevantCommentsFirst: 'showMostRelevantCommentsFirst',
+    offFacebookPreviews: 'offFacebookPreviews',
+    hideSomethingOnYourProfile: 'hideSomethingOnYourProfile',
+    whoCanPostYourProfile: 'whoCanPostYourProfile',
+    whoCanSeeWhatOtherPostOnYourProfile: 'whoCanSeeWhatOtherPostOnYourProfile',
+    allowOtherShareYourPostsToTheirStories: 'allowOtherShareYourPostsToTheirStories',
+    whoCanSeePostsYouTagOnYourProfile: 'whoCanSeePostsYouTagOnYourProfile',
+    whoYouWannaToTagAndNotRead: 'whoYouWannaToTagAndNotRead',
+    reviewPeopleAddToYourPostBeforePublish: 'reviewPeopleAddToYourPostBeforePublish',
+    reviewPostBeforePublish: 'reviewPostBeforePublish'
+  };
+
+  export type AudienceAndVisibilityScalarFieldEnum = (typeof AudienceAndVisibilityScalarFieldEnum)[keyof typeof AudienceAndVisibilityScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     profileId: 'profileId',
@@ -18161,6 +21614,118 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'PreferenceType'
+   */
+  export type EnumPreferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreferenceType'>
+    
+
+
+  /**
+   * Reference to a field of type 'PreferenceType[]'
+   */
+  export type ListEnumPreferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreferenceType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReactionTarget'
+   */
+  export type EnumReactionTargetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReactionTarget'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReactionTarget[]'
+   */
+  export type ListEnumReactionTargetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReactionTarget[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'VideoQuality'
+   */
+  export type EnumVideoQualityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VideoQuality'>
+    
+
+
+  /**
+   * Reference to a field of type 'VideoQuality[]'
+   */
+  export type ListEnumVideoQualityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VideoQuality[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CoLor'
+   */
+  export type EnumCoLorFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CoLor'>
+    
+
+
+  /**
+   * Reference to a field of type 'CoLor[]'
+   */
+  export type ListEnumCoLorFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CoLor[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SendFriendRequest'
+   */
+  export type EnumSendFriendRequestFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SendFriendRequest'>
+    
+
+
+  /**
+   * Reference to a field of type 'SendFriendRequest[]'
+   */
+  export type ListEnumSendFriendRequestFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SendFriendRequest[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Audience'
+   */
+  export type EnumAudienceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Audience'>
+    
+
+
+  /**
+   * Reference to a field of type 'Audience[]'
+   */
+  export type ListEnumAudienceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Audience[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TypeSendMessage'
+   */
+  export type EnumTypeSendMessageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeSendMessage'>
+    
+
+
+  /**
+   * Reference to a field of type 'TypeSendMessage[]'
+   */
+  export type ListEnumTypeSendMessageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeSendMessage[]'>
+    
+
+
+  /**
    * Reference to a field of type 'StatusAccount'
    */
   export type EnumStatusAccountFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusAccount'>
@@ -18269,20 +21834,6 @@ export namespace Prisma {
    * Reference to a field of type 'AuthType[]'
    */
   export type ListEnumAuthTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -18737,6 +22288,372 @@ export namespace Prisma {
     commentId?: StringNullableWithAggregatesFilter<"Reaction"> | string | null
   }
 
+  export type PreferenceWhereInput = {
+    AND?: PreferenceWhereInput | PreferenceWhereInput[]
+    OR?: PreferenceWhereInput[]
+    NOT?: PreferenceWhereInput | PreferenceWhereInput[]
+    id?: StringFilter<"Preference"> | string
+    userId?: UuidFilter<"Preference"> | string
+    type?: EnumPreferenceTypeFilter<"Preference"> | $Enums.PreferenceType
+    notificationType?: EnumNotificationTypeNullableFilter<"Preference"> | $Enums.NotificationType | null
+    push?: BoolNullableFilter<"Preference"> | boolean | null
+    email?: BoolNullableFilter<"Preference"> | boolean | null
+    sms?: BoolNullableFilter<"Preference"> | boolean | null
+    reactionTarget?: EnumReactionTargetNullableFilter<"Preference"> | $Enums.ReactionTarget | null
+    hidden?: BoolNullableFilter<"Preference"> | boolean | null
+    reduceMotion?: BoolNullableFilter<"Preference"> | boolean | null
+    screenReader?: BoolNullableFilter<"Preference"> | boolean | null
+    languageCode?: StringNullableFilter<"Preference"> | string | null
+    timezone?: StringNullableFilter<"Preference"> | string | null
+    locale?: StringNullableFilter<"Preference"> | string | null
+    darkModeEnabled?: BoolNullableFilter<"Preference"> | boolean | null
+    videoQuality?: EnumVideoQualityFilter<"Preference"> | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFilter<"Preference"> | boolean
+    alwaysShowCaptions?: BoolFilter<"Preference"> | boolean
+    quietMode?: BoolFilter<"Preference"> | boolean
+    backGroundColor?: EnumCoLorFilter<"Preference"> | $Enums.CoLor
+    backGroundOpacity?: FloatFilter<"Preference"> | number
+    textColor?: EnumCoLorFilter<"Preference"> | $Enums.CoLor
+    textSize?: FloatFilter<"Preference"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PreferenceOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    notificationType?: SortOrderInput | SortOrder
+    push?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    sms?: SortOrderInput | SortOrder
+    reactionTarget?: SortOrderInput | SortOrder
+    hidden?: SortOrderInput | SortOrder
+    reduceMotion?: SortOrderInput | SortOrder
+    screenReader?: SortOrderInput | SortOrder
+    languageCode?: SortOrderInput | SortOrder
+    timezone?: SortOrderInput | SortOrder
+    locale?: SortOrderInput | SortOrder
+    darkModeEnabled?: SortOrderInput | SortOrder
+    videoQuality?: SortOrder
+    autoPlayAnimations?: SortOrder
+    alwaysShowCaptions?: SortOrder
+    quietMode?: SortOrder
+    backGroundColor?: SortOrder
+    backGroundOpacity?: SortOrder
+    textColor?: SortOrder
+    textSize?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PreferenceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    userId_notificationType?: PreferenceUserIdNotificationTypeCompoundUniqueInput
+    userId_reactionTarget?: PreferenceUserIdReactionTargetCompoundUniqueInput
+    userId_videoQuality?: PreferenceUserIdVideoQualityCompoundUniqueInput
+    AND?: PreferenceWhereInput | PreferenceWhereInput[]
+    OR?: PreferenceWhereInput[]
+    NOT?: PreferenceWhereInput | PreferenceWhereInput[]
+    type?: EnumPreferenceTypeFilter<"Preference"> | $Enums.PreferenceType
+    notificationType?: EnumNotificationTypeNullableFilter<"Preference"> | $Enums.NotificationType | null
+    push?: BoolNullableFilter<"Preference"> | boolean | null
+    email?: BoolNullableFilter<"Preference"> | boolean | null
+    sms?: BoolNullableFilter<"Preference"> | boolean | null
+    reactionTarget?: EnumReactionTargetNullableFilter<"Preference"> | $Enums.ReactionTarget | null
+    hidden?: BoolNullableFilter<"Preference"> | boolean | null
+    reduceMotion?: BoolNullableFilter<"Preference"> | boolean | null
+    screenReader?: BoolNullableFilter<"Preference"> | boolean | null
+    languageCode?: StringNullableFilter<"Preference"> | string | null
+    timezone?: StringNullableFilter<"Preference"> | string | null
+    locale?: StringNullableFilter<"Preference"> | string | null
+    darkModeEnabled?: BoolNullableFilter<"Preference"> | boolean | null
+    videoQuality?: EnumVideoQualityFilter<"Preference"> | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFilter<"Preference"> | boolean
+    alwaysShowCaptions?: BoolFilter<"Preference"> | boolean
+    quietMode?: BoolFilter<"Preference"> | boolean
+    backGroundColor?: EnumCoLorFilter<"Preference"> | $Enums.CoLor
+    backGroundOpacity?: FloatFilter<"Preference"> | number
+    textColor?: EnumCoLorFilter<"Preference"> | $Enums.CoLor
+    textSize?: FloatFilter<"Preference"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId" | "userId_notificationType" | "userId_reactionTarget" | "userId_videoQuality">
+
+  export type PreferenceOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    notificationType?: SortOrderInput | SortOrder
+    push?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    sms?: SortOrderInput | SortOrder
+    reactionTarget?: SortOrderInput | SortOrder
+    hidden?: SortOrderInput | SortOrder
+    reduceMotion?: SortOrderInput | SortOrder
+    screenReader?: SortOrderInput | SortOrder
+    languageCode?: SortOrderInput | SortOrder
+    timezone?: SortOrderInput | SortOrder
+    locale?: SortOrderInput | SortOrder
+    darkModeEnabled?: SortOrderInput | SortOrder
+    videoQuality?: SortOrder
+    autoPlayAnimations?: SortOrder
+    alwaysShowCaptions?: SortOrder
+    quietMode?: SortOrder
+    backGroundColor?: SortOrder
+    backGroundOpacity?: SortOrder
+    textColor?: SortOrder
+    textSize?: SortOrder
+    _count?: PreferenceCountOrderByAggregateInput
+    _avg?: PreferenceAvgOrderByAggregateInput
+    _max?: PreferenceMaxOrderByAggregateInput
+    _min?: PreferenceMinOrderByAggregateInput
+    _sum?: PreferenceSumOrderByAggregateInput
+  }
+
+  export type PreferenceScalarWhereWithAggregatesInput = {
+    AND?: PreferenceScalarWhereWithAggregatesInput | PreferenceScalarWhereWithAggregatesInput[]
+    OR?: PreferenceScalarWhereWithAggregatesInput[]
+    NOT?: PreferenceScalarWhereWithAggregatesInput | PreferenceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Preference"> | string
+    userId?: UuidWithAggregatesFilter<"Preference"> | string
+    type?: EnumPreferenceTypeWithAggregatesFilter<"Preference"> | $Enums.PreferenceType
+    notificationType?: EnumNotificationTypeNullableWithAggregatesFilter<"Preference"> | $Enums.NotificationType | null
+    push?: BoolNullableWithAggregatesFilter<"Preference"> | boolean | null
+    email?: BoolNullableWithAggregatesFilter<"Preference"> | boolean | null
+    sms?: BoolNullableWithAggregatesFilter<"Preference"> | boolean | null
+    reactionTarget?: EnumReactionTargetNullableWithAggregatesFilter<"Preference"> | $Enums.ReactionTarget | null
+    hidden?: BoolNullableWithAggregatesFilter<"Preference"> | boolean | null
+    reduceMotion?: BoolNullableWithAggregatesFilter<"Preference"> | boolean | null
+    screenReader?: BoolNullableWithAggregatesFilter<"Preference"> | boolean | null
+    languageCode?: StringNullableWithAggregatesFilter<"Preference"> | string | null
+    timezone?: StringNullableWithAggregatesFilter<"Preference"> | string | null
+    locale?: StringNullableWithAggregatesFilter<"Preference"> | string | null
+    darkModeEnabled?: BoolNullableWithAggregatesFilter<"Preference"> | boolean | null
+    videoQuality?: EnumVideoQualityWithAggregatesFilter<"Preference"> | $Enums.VideoQuality
+    autoPlayAnimations?: BoolWithAggregatesFilter<"Preference"> | boolean
+    alwaysShowCaptions?: BoolWithAggregatesFilter<"Preference"> | boolean
+    quietMode?: BoolWithAggregatesFilter<"Preference"> | boolean
+    backGroundColor?: EnumCoLorWithAggregatesFilter<"Preference"> | $Enums.CoLor
+    backGroundOpacity?: FloatWithAggregatesFilter<"Preference"> | number
+    textColor?: EnumCoLorWithAggregatesFilter<"Preference"> | $Enums.CoLor
+    textSize?: FloatWithAggregatesFilter<"Preference"> | number
+  }
+
+  export type AudienceAndVisibilityWhereInput = {
+    AND?: AudienceAndVisibilityWhereInput | AudienceAndVisibilityWhereInput[]
+    OR?: AudienceAndVisibilityWhereInput[]
+    NOT?: AudienceAndVisibilityWhereInput | AudienceAndVisibilityWhereInput[]
+    id?: StringFilter<"AudienceAndVisibility"> | string
+    userId?: UuidFilter<"AudienceAndVisibility"> | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFilter<"AudienceAndVisibility"> | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    searchAccountByLink?: BoolFilter<"AudienceAndVisibility"> | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFilter<"AudienceAndVisibility"> | boolean
+    allCommentSummariesOnPosts?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeeYourStories?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    allowOtherShareYourStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    archivingStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    allowOtherShareaYourReels?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeeYourReels?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    publicPostNotification?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFilter<"AudienceAndVisibility"> | boolean
+    offFacebookPreviews?: BoolFilter<"AudienceAndVisibility"> | boolean
+    hideSomethingOnYourProfile?: StringFilter<"AudienceAndVisibility"> | string
+    whoCanPostYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFilter<"AudienceAndVisibility"> | boolean
+    reviewPostBeforePublish?: BoolFilter<"AudienceAndVisibility"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    restrictedList?: UserListRelationFilter
+    blockedProfilesOrPages?: UserListRelationFilter
+    blockMessages?: UserListRelationFilter
+  }
+
+  export type AudienceAndVisibilityOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    whoCanSendFriendRequest?: SortOrder
+    whoCanSeeListFriends?: SortOrder
+    peopleWithYourEmailAddress?: SortOrder
+    peopleWithYourPhoneNumber?: SortOrder
+    searchAccountByLink?: SortOrder
+    forFriendsOfFriendRequest?: SortOrder
+    forPeopleMultialGroup?: SortOrder
+    forPageFollow?: SortOrder
+    forOtherPeople?: SortOrder
+    whoCanseeYourFuturePosts?: SortOrder
+    limitWhoCanSeePastPost?: SortOrder
+    allCommentSummariesOnPosts?: SortOrder
+    whoCanSeeYourStories?: SortOrder
+    allowOtherShareYourStories?: SortOrder
+    archivingStories?: SortOrder
+    allowOtherShareaYourReels?: SortOrder
+    whoCanSeeYourReels?: SortOrder
+    whoCanFollowMe?: SortOrder
+    whoCanSeeYourFollowers?: SortOrder
+    whoCanSeeSomethingYouFollow?: SortOrder
+    whoCanCommentYourPosts?: SortOrder
+    publicPostNotification?: SortOrder
+    publicProfileInfo?: SortOrder
+    showMostRelevantCommentsFirst?: SortOrder
+    offFacebookPreviews?: SortOrder
+    hideSomethingOnYourProfile?: SortOrder
+    whoCanPostYourProfile?: SortOrder
+    whoCanSeeWhatOtherPostOnYourProfile?: SortOrder
+    allowOtherShareYourPostsToTheirStories?: SortOrder
+    whoCanSeePostsYouTagOnYourProfile?: SortOrder
+    whoYouWannaToTagAndNotRead?: SortOrder
+    reviewPeopleAddToYourPostBeforePublish?: SortOrder
+    reviewPostBeforePublish?: SortOrder
+    user?: UserOrderByWithRelationInput
+    restrictedList?: UserOrderByRelationAggregateInput
+    blockedProfilesOrPages?: UserOrderByRelationAggregateInput
+    blockMessages?: UserOrderByRelationAggregateInput
+  }
+
+  export type AudienceAndVisibilityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    userId_whoCanSeeListFriends?: AudienceAndVisibilityUserIdWhoCanSeeListFriendsCompoundUniqueInput
+    userId_whoCanSendFriendRequest?: AudienceAndVisibilityUserIdWhoCanSendFriendRequestCompoundUniqueInput
+    AND?: AudienceAndVisibilityWhereInput | AudienceAndVisibilityWhereInput[]
+    OR?: AudienceAndVisibilityWhereInput[]
+    NOT?: AudienceAndVisibilityWhereInput | AudienceAndVisibilityWhereInput[]
+    whoCanSendFriendRequest?: EnumSendFriendRequestFilter<"AudienceAndVisibility"> | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    searchAccountByLink?: BoolFilter<"AudienceAndVisibility"> | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFilter<"AudienceAndVisibility"> | boolean
+    allCommentSummariesOnPosts?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeeYourStories?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    allowOtherShareYourStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    archivingStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    allowOtherShareaYourReels?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeeYourReels?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    publicPostNotification?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFilter<"AudienceAndVisibility"> | boolean
+    offFacebookPreviews?: BoolFilter<"AudienceAndVisibility"> | boolean
+    hideSomethingOnYourProfile?: StringFilter<"AudienceAndVisibility"> | string
+    whoCanPostYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFilter<"AudienceAndVisibility"> | boolean
+    reviewPostBeforePublish?: BoolFilter<"AudienceAndVisibility"> | boolean
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    restrictedList?: UserListRelationFilter
+    blockedProfilesOrPages?: UserListRelationFilter
+    blockMessages?: UserListRelationFilter
+  }, "id" | "userId" | "userId_whoCanSeeListFriends" | "userId_whoCanSendFriendRequest">
+
+  export type AudienceAndVisibilityOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    whoCanSendFriendRequest?: SortOrder
+    whoCanSeeListFriends?: SortOrder
+    peopleWithYourEmailAddress?: SortOrder
+    peopleWithYourPhoneNumber?: SortOrder
+    searchAccountByLink?: SortOrder
+    forFriendsOfFriendRequest?: SortOrder
+    forPeopleMultialGroup?: SortOrder
+    forPageFollow?: SortOrder
+    forOtherPeople?: SortOrder
+    whoCanseeYourFuturePosts?: SortOrder
+    limitWhoCanSeePastPost?: SortOrder
+    allCommentSummariesOnPosts?: SortOrder
+    whoCanSeeYourStories?: SortOrder
+    allowOtherShareYourStories?: SortOrder
+    archivingStories?: SortOrder
+    allowOtherShareaYourReels?: SortOrder
+    whoCanSeeYourReels?: SortOrder
+    whoCanFollowMe?: SortOrder
+    whoCanSeeYourFollowers?: SortOrder
+    whoCanSeeSomethingYouFollow?: SortOrder
+    whoCanCommentYourPosts?: SortOrder
+    publicPostNotification?: SortOrder
+    publicProfileInfo?: SortOrder
+    showMostRelevantCommentsFirst?: SortOrder
+    offFacebookPreviews?: SortOrder
+    hideSomethingOnYourProfile?: SortOrder
+    whoCanPostYourProfile?: SortOrder
+    whoCanSeeWhatOtherPostOnYourProfile?: SortOrder
+    allowOtherShareYourPostsToTheirStories?: SortOrder
+    whoCanSeePostsYouTagOnYourProfile?: SortOrder
+    whoYouWannaToTagAndNotRead?: SortOrder
+    reviewPeopleAddToYourPostBeforePublish?: SortOrder
+    reviewPostBeforePublish?: SortOrder
+    _count?: AudienceAndVisibilityCountOrderByAggregateInput
+    _max?: AudienceAndVisibilityMaxOrderByAggregateInput
+    _min?: AudienceAndVisibilityMinOrderByAggregateInput
+  }
+
+  export type AudienceAndVisibilityScalarWhereWithAggregatesInput = {
+    AND?: AudienceAndVisibilityScalarWhereWithAggregatesInput | AudienceAndVisibilityScalarWhereWithAggregatesInput[]
+    OR?: AudienceAndVisibilityScalarWhereWithAggregatesInput[]
+    NOT?: AudienceAndVisibilityScalarWhereWithAggregatesInput | AudienceAndVisibilityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AudienceAndVisibility"> | string
+    userId?: UuidWithAggregatesFilter<"AudienceAndVisibility"> | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    searchAccountByLink?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    allCommentSummariesOnPosts?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeeYourStories?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    allowOtherShareYourStories?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    archivingStories?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    allowOtherShareaYourReels?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeeYourReels?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    publicPostNotification?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    publicProfileInfo?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    offFacebookPreviews?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    hideSomethingOnYourProfile?: StringWithAggregatesFilter<"AudienceAndVisibility"> | string
+    whoCanPostYourProfile?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceWithAggregatesFilter<"AudienceAndVisibility"> | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+    reviewPostBeforePublish?: BoolWithAggregatesFilter<"AudienceAndVisibility"> | boolean
+  }
+
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -18778,6 +22695,11 @@ export namespace Prisma {
     auth?: AuthenticationListRelationFilter
     notifications?: NotificationListRelationFilter
     notificationActions?: NotificationListRelationFilter
+    Preference?: PreferenceListRelationFilter
+    audienceAndVisibility?: XOR<AudienceAndVisibilityNullableScalarRelationFilter, AudienceAndVisibilityWhereInput> | null
+    restrictedBy?: AudienceAndVisibilityListRelationFilter
+    blockedBy?: AudienceAndVisibilityListRelationFilter
+    blockedMessagesBy?: AudienceAndVisibilityListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -18818,6 +22740,11 @@ export namespace Prisma {
     auth?: AuthenticationOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
     notificationActions?: NotificationOrderByRelationAggregateInput
+    Preference?: PreferenceOrderByRelationAggregateInput
+    audienceAndVisibility?: AudienceAndVisibilityOrderByWithRelationInput
+    restrictedBy?: AudienceAndVisibilityOrderByRelationAggregateInput
+    blockedBy?: AudienceAndVisibilityOrderByRelationAggregateInput
+    blockedMessagesBy?: AudienceAndVisibilityOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -18861,6 +22788,11 @@ export namespace Prisma {
     auth?: AuthenticationListRelationFilter
     notifications?: NotificationListRelationFilter
     notificationActions?: NotificationListRelationFilter
+    Preference?: PreferenceListRelationFilter
+    audienceAndVisibility?: XOR<AudienceAndVisibilityNullableScalarRelationFilter, AudienceAndVisibilityWhereInput> | null
+    restrictedBy?: AudienceAndVisibilityListRelationFilter
+    blockedBy?: AudienceAndVisibilityListRelationFilter
+    blockedMessagesBy?: AudienceAndVisibilityListRelationFilter
   }, "id" | "profileId" | "primaryEmailId" | "primaryPhoneId" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -19827,6 +23759,464 @@ export namespace Prisma {
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type PreferenceCreateInput = {
+    id?: string
+    type: $Enums.PreferenceType
+    notificationType?: $Enums.NotificationType | null
+    push?: boolean | null
+    email?: boolean | null
+    sms?: boolean | null
+    reactionTarget?: $Enums.ReactionTarget | null
+    hidden?: boolean | null
+    reduceMotion?: boolean | null
+    screenReader?: boolean | null
+    languageCode?: string | null
+    timezone?: string | null
+    locale?: string | null
+    darkModeEnabled?: boolean | null
+    videoQuality?: $Enums.VideoQuality
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: $Enums.CoLor
+    backGroundOpacity?: number
+    textColor?: $Enums.CoLor
+    textSize?: number
+    user: UserCreateNestedOneWithoutPreferenceInput
+  }
+
+  export type PreferenceUncheckedCreateInput = {
+    id?: string
+    userId: string
+    type: $Enums.PreferenceType
+    notificationType?: $Enums.NotificationType | null
+    push?: boolean | null
+    email?: boolean | null
+    sms?: boolean | null
+    reactionTarget?: $Enums.ReactionTarget | null
+    hidden?: boolean | null
+    reduceMotion?: boolean | null
+    screenReader?: boolean | null
+    languageCode?: string | null
+    timezone?: string | null
+    locale?: string | null
+    darkModeEnabled?: boolean | null
+    videoQuality?: $Enums.VideoQuality
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: $Enums.CoLor
+    backGroundOpacity?: number
+    textColor?: $Enums.CoLor
+    textSize?: number
+  }
+
+  export type PreferenceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPreferenceTypeFieldUpdateOperationsInput | $Enums.PreferenceType
+    notificationType?: NullableEnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType | null
+    push?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    email?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sms?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reactionTarget?: NullableEnumReactionTargetFieldUpdateOperationsInput | $Enums.ReactionTarget | null
+    hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reduceMotion?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    screenReader?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    languageCode?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    darkModeEnabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    videoQuality?: EnumVideoQualityFieldUpdateOperationsInput | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFieldUpdateOperationsInput | boolean
+    alwaysShowCaptions?: BoolFieldUpdateOperationsInput | boolean
+    quietMode?: BoolFieldUpdateOperationsInput | boolean
+    backGroundColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    backGroundOpacity?: FloatFieldUpdateOperationsInput | number
+    textColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    textSize?: FloatFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutPreferenceNestedInput
+  }
+
+  export type PreferenceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumPreferenceTypeFieldUpdateOperationsInput | $Enums.PreferenceType
+    notificationType?: NullableEnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType | null
+    push?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    email?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sms?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reactionTarget?: NullableEnumReactionTargetFieldUpdateOperationsInput | $Enums.ReactionTarget | null
+    hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reduceMotion?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    screenReader?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    languageCode?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    darkModeEnabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    videoQuality?: EnumVideoQualityFieldUpdateOperationsInput | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFieldUpdateOperationsInput | boolean
+    alwaysShowCaptions?: BoolFieldUpdateOperationsInput | boolean
+    quietMode?: BoolFieldUpdateOperationsInput | boolean
+    backGroundColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    backGroundOpacity?: FloatFieldUpdateOperationsInput | number
+    textColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    textSize?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type PreferenceCreateManyInput = {
+    id?: string
+    userId: string
+    type: $Enums.PreferenceType
+    notificationType?: $Enums.NotificationType | null
+    push?: boolean | null
+    email?: boolean | null
+    sms?: boolean | null
+    reactionTarget?: $Enums.ReactionTarget | null
+    hidden?: boolean | null
+    reduceMotion?: boolean | null
+    screenReader?: boolean | null
+    languageCode?: string | null
+    timezone?: string | null
+    locale?: string | null
+    darkModeEnabled?: boolean | null
+    videoQuality?: $Enums.VideoQuality
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: $Enums.CoLor
+    backGroundOpacity?: number
+    textColor?: $Enums.CoLor
+    textSize?: number
+  }
+
+  export type PreferenceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPreferenceTypeFieldUpdateOperationsInput | $Enums.PreferenceType
+    notificationType?: NullableEnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType | null
+    push?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    email?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sms?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reactionTarget?: NullableEnumReactionTargetFieldUpdateOperationsInput | $Enums.ReactionTarget | null
+    hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reduceMotion?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    screenReader?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    languageCode?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    darkModeEnabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    videoQuality?: EnumVideoQualityFieldUpdateOperationsInput | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFieldUpdateOperationsInput | boolean
+    alwaysShowCaptions?: BoolFieldUpdateOperationsInput | boolean
+    quietMode?: BoolFieldUpdateOperationsInput | boolean
+    backGroundColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    backGroundOpacity?: FloatFieldUpdateOperationsInput | number
+    textColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    textSize?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type PreferenceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumPreferenceTypeFieldUpdateOperationsInput | $Enums.PreferenceType
+    notificationType?: NullableEnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType | null
+    push?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    email?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sms?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reactionTarget?: NullableEnumReactionTargetFieldUpdateOperationsInput | $Enums.ReactionTarget | null
+    hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reduceMotion?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    screenReader?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    languageCode?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    darkModeEnabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    videoQuality?: EnumVideoQualityFieldUpdateOperationsInput | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFieldUpdateOperationsInput | boolean
+    alwaysShowCaptions?: BoolFieldUpdateOperationsInput | boolean
+    quietMode?: BoolFieldUpdateOperationsInput | boolean
+    backGroundColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    backGroundOpacity?: FloatFieldUpdateOperationsInput | number
+    textColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    textSize?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type AudienceAndVisibilityCreateInput = {
+    id?: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    user: UserCreateNestedOneWithoutAudienceAndVisibilityInput
+    restrictedList?: UserCreateNestedManyWithoutRestrictedByInput
+    blockedProfilesOrPages?: UserCreateNestedManyWithoutBlockedByInput
+    blockMessages?: UserCreateNestedManyWithoutBlockedMessagesByInput
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateInput = {
+    id?: string
+    userId: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    restrictedList?: UserUncheckedCreateNestedManyWithoutRestrictedByInput
+    blockedProfilesOrPages?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockMessages?: UserUncheckedCreateNestedManyWithoutBlockedMessagesByInput
+  }
+
+  export type AudienceAndVisibilityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutAudienceAndVisibilityNestedInput
+    restrictedList?: UserUpdateManyWithoutRestrictedByNestedInput
+    blockedProfilesOrPages?: UserUpdateManyWithoutBlockedByNestedInput
+    blockMessages?: UserUpdateManyWithoutBlockedMessagesByNestedInput
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    restrictedList?: UserUncheckedUpdateManyWithoutRestrictedByNestedInput
+    blockedProfilesOrPages?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockMessages?: UserUncheckedUpdateManyWithoutBlockedMessagesByNestedInput
+  }
+
+  export type AudienceAndVisibilityCreateManyInput = {
+    id?: string
+    userId: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+  }
+
+  export type AudienceAndVisibilityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type UserCreateInput = {
     id?: string
     profileId: string
@@ -19863,6 +24253,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -19901,6 +24296,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUpdateInput = {
@@ -19939,6 +24339,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -19977,6 +24382,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -21154,6 +25564,419 @@ export namespace Prisma {
     _max?: NestedEnumReactionTypeFilter<$PrismaModel>
   }
 
+  export type EnumPreferenceTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PreferenceType | EnumPreferenceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PreferenceType[] | ListEnumPreferenceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PreferenceType[] | ListEnumPreferenceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPreferenceTypeFilter<$PrismaModel> | $Enums.PreferenceType
+  }
+
+  export type EnumNotificationTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumNotificationTypeNullableFilter<$PrismaModel> | $Enums.NotificationType | null
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type EnumReactionTargetNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReactionTarget | EnumReactionTargetFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ReactionTarget[] | ListEnumReactionTargetFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ReactionTarget[] | ListEnumReactionTargetFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumReactionTargetNullableFilter<$PrismaModel> | $Enums.ReactionTarget | null
+  }
+
+  export type EnumVideoQualityFilter<$PrismaModel = never> = {
+    equals?: $Enums.VideoQuality | EnumVideoQualityFieldRefInput<$PrismaModel>
+    in?: $Enums.VideoQuality[] | ListEnumVideoQualityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VideoQuality[] | ListEnumVideoQualityFieldRefInput<$PrismaModel>
+    not?: NestedEnumVideoQualityFilter<$PrismaModel> | $Enums.VideoQuality
+  }
+
+  export type EnumCoLorFilter<$PrismaModel = never> = {
+    equals?: $Enums.CoLor | EnumCoLorFieldRefInput<$PrismaModel>
+    in?: $Enums.CoLor[] | ListEnumCoLorFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CoLor[] | ListEnumCoLorFieldRefInput<$PrismaModel>
+    not?: NestedEnumCoLorFilter<$PrismaModel> | $Enums.CoLor
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type PreferenceUserIdNotificationTypeCompoundUniqueInput = {
+    userId: string
+    notificationType: $Enums.NotificationType
+  }
+
+  export type PreferenceUserIdReactionTargetCompoundUniqueInput = {
+    userId: string
+    reactionTarget: $Enums.ReactionTarget
+  }
+
+  export type PreferenceUserIdVideoQualityCompoundUniqueInput = {
+    userId: string
+    videoQuality: $Enums.VideoQuality
+  }
+
+  export type PreferenceCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    notificationType?: SortOrder
+    push?: SortOrder
+    email?: SortOrder
+    sms?: SortOrder
+    reactionTarget?: SortOrder
+    hidden?: SortOrder
+    reduceMotion?: SortOrder
+    screenReader?: SortOrder
+    languageCode?: SortOrder
+    timezone?: SortOrder
+    locale?: SortOrder
+    darkModeEnabled?: SortOrder
+    videoQuality?: SortOrder
+    autoPlayAnimations?: SortOrder
+    alwaysShowCaptions?: SortOrder
+    quietMode?: SortOrder
+    backGroundColor?: SortOrder
+    backGroundOpacity?: SortOrder
+    textColor?: SortOrder
+    textSize?: SortOrder
+  }
+
+  export type PreferenceAvgOrderByAggregateInput = {
+    backGroundOpacity?: SortOrder
+    textSize?: SortOrder
+  }
+
+  export type PreferenceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    notificationType?: SortOrder
+    push?: SortOrder
+    email?: SortOrder
+    sms?: SortOrder
+    reactionTarget?: SortOrder
+    hidden?: SortOrder
+    reduceMotion?: SortOrder
+    screenReader?: SortOrder
+    languageCode?: SortOrder
+    timezone?: SortOrder
+    locale?: SortOrder
+    darkModeEnabled?: SortOrder
+    videoQuality?: SortOrder
+    autoPlayAnimations?: SortOrder
+    alwaysShowCaptions?: SortOrder
+    quietMode?: SortOrder
+    backGroundColor?: SortOrder
+    backGroundOpacity?: SortOrder
+    textColor?: SortOrder
+    textSize?: SortOrder
+  }
+
+  export type PreferenceMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    notificationType?: SortOrder
+    push?: SortOrder
+    email?: SortOrder
+    sms?: SortOrder
+    reactionTarget?: SortOrder
+    hidden?: SortOrder
+    reduceMotion?: SortOrder
+    screenReader?: SortOrder
+    languageCode?: SortOrder
+    timezone?: SortOrder
+    locale?: SortOrder
+    darkModeEnabled?: SortOrder
+    videoQuality?: SortOrder
+    autoPlayAnimations?: SortOrder
+    alwaysShowCaptions?: SortOrder
+    quietMode?: SortOrder
+    backGroundColor?: SortOrder
+    backGroundOpacity?: SortOrder
+    textColor?: SortOrder
+    textSize?: SortOrder
+  }
+
+  export type PreferenceSumOrderByAggregateInput = {
+    backGroundOpacity?: SortOrder
+    textSize?: SortOrder
+  }
+
+  export type EnumPreferenceTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PreferenceType | EnumPreferenceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PreferenceType[] | ListEnumPreferenceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PreferenceType[] | ListEnumPreferenceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPreferenceTypeWithAggregatesFilter<$PrismaModel> | $Enums.PreferenceType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPreferenceTypeFilter<$PrismaModel>
+    _max?: NestedEnumPreferenceTypeFilter<$PrismaModel>
+  }
+
+  export type EnumNotificationTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumNotificationTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTypeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type EnumReactionTargetNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReactionTarget | EnumReactionTargetFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ReactionTarget[] | ListEnumReactionTargetFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ReactionTarget[] | ListEnumReactionTargetFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumReactionTargetNullableWithAggregatesFilter<$PrismaModel> | $Enums.ReactionTarget | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumReactionTargetNullableFilter<$PrismaModel>
+    _max?: NestedEnumReactionTargetNullableFilter<$PrismaModel>
+  }
+
+  export type EnumVideoQualityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VideoQuality | EnumVideoQualityFieldRefInput<$PrismaModel>
+    in?: $Enums.VideoQuality[] | ListEnumVideoQualityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VideoQuality[] | ListEnumVideoQualityFieldRefInput<$PrismaModel>
+    not?: NestedEnumVideoQualityWithAggregatesFilter<$PrismaModel> | $Enums.VideoQuality
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVideoQualityFilter<$PrismaModel>
+    _max?: NestedEnumVideoQualityFilter<$PrismaModel>
+  }
+
+  export type EnumCoLorWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CoLor | EnumCoLorFieldRefInput<$PrismaModel>
+    in?: $Enums.CoLor[] | ListEnumCoLorFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CoLor[] | ListEnumCoLorFieldRefInput<$PrismaModel>
+    not?: NestedEnumCoLorWithAggregatesFilter<$PrismaModel> | $Enums.CoLor
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCoLorFilter<$PrismaModel>
+    _max?: NestedEnumCoLorFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type EnumSendFriendRequestFilter<$PrismaModel = never> = {
+    equals?: $Enums.SendFriendRequest | EnumSendFriendRequestFieldRefInput<$PrismaModel>
+    in?: $Enums.SendFriendRequest[] | ListEnumSendFriendRequestFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SendFriendRequest[] | ListEnumSendFriendRequestFieldRefInput<$PrismaModel>
+    not?: NestedEnumSendFriendRequestFilter<$PrismaModel> | $Enums.SendFriendRequest
+  }
+
+  export type EnumAudienceFilter<$PrismaModel = never> = {
+    equals?: $Enums.Audience | EnumAudienceFieldRefInput<$PrismaModel>
+    in?: $Enums.Audience[] | ListEnumAudienceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Audience[] | ListEnumAudienceFieldRefInput<$PrismaModel>
+    not?: NestedEnumAudienceFilter<$PrismaModel> | $Enums.Audience
+  }
+
+  export type EnumTypeSendMessageFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeSendMessage | EnumTypeSendMessageFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeSendMessage[] | ListEnumTypeSendMessageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeSendMessage[] | ListEnumTypeSendMessageFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeSendMessageFilter<$PrismaModel> | $Enums.TypeSendMessage
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AudienceAndVisibilityUserIdWhoCanSeeListFriendsCompoundUniqueInput = {
+    userId: string
+    whoCanSeeListFriends: $Enums.Audience
+  }
+
+  export type AudienceAndVisibilityUserIdWhoCanSendFriendRequestCompoundUniqueInput = {
+    userId: string
+    whoCanSendFriendRequest: $Enums.SendFriendRequest
+  }
+
+  export type AudienceAndVisibilityCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    whoCanSendFriendRequest?: SortOrder
+    whoCanSeeListFriends?: SortOrder
+    peopleWithYourEmailAddress?: SortOrder
+    peopleWithYourPhoneNumber?: SortOrder
+    searchAccountByLink?: SortOrder
+    forFriendsOfFriendRequest?: SortOrder
+    forPeopleMultialGroup?: SortOrder
+    forPageFollow?: SortOrder
+    forOtherPeople?: SortOrder
+    whoCanseeYourFuturePosts?: SortOrder
+    limitWhoCanSeePastPost?: SortOrder
+    allCommentSummariesOnPosts?: SortOrder
+    whoCanSeeYourStories?: SortOrder
+    allowOtherShareYourStories?: SortOrder
+    archivingStories?: SortOrder
+    allowOtherShareaYourReels?: SortOrder
+    whoCanSeeYourReels?: SortOrder
+    whoCanFollowMe?: SortOrder
+    whoCanSeeYourFollowers?: SortOrder
+    whoCanSeeSomethingYouFollow?: SortOrder
+    whoCanCommentYourPosts?: SortOrder
+    publicPostNotification?: SortOrder
+    publicProfileInfo?: SortOrder
+    showMostRelevantCommentsFirst?: SortOrder
+    offFacebookPreviews?: SortOrder
+    hideSomethingOnYourProfile?: SortOrder
+    whoCanPostYourProfile?: SortOrder
+    whoCanSeeWhatOtherPostOnYourProfile?: SortOrder
+    allowOtherShareYourPostsToTheirStories?: SortOrder
+    whoCanSeePostsYouTagOnYourProfile?: SortOrder
+    whoYouWannaToTagAndNotRead?: SortOrder
+    reviewPeopleAddToYourPostBeforePublish?: SortOrder
+    reviewPostBeforePublish?: SortOrder
+  }
+
+  export type AudienceAndVisibilityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    whoCanSendFriendRequest?: SortOrder
+    whoCanSeeListFriends?: SortOrder
+    peopleWithYourEmailAddress?: SortOrder
+    peopleWithYourPhoneNumber?: SortOrder
+    searchAccountByLink?: SortOrder
+    forFriendsOfFriendRequest?: SortOrder
+    forPeopleMultialGroup?: SortOrder
+    forPageFollow?: SortOrder
+    forOtherPeople?: SortOrder
+    whoCanseeYourFuturePosts?: SortOrder
+    limitWhoCanSeePastPost?: SortOrder
+    allCommentSummariesOnPosts?: SortOrder
+    whoCanSeeYourStories?: SortOrder
+    allowOtherShareYourStories?: SortOrder
+    archivingStories?: SortOrder
+    allowOtherShareaYourReels?: SortOrder
+    whoCanSeeYourReels?: SortOrder
+    whoCanFollowMe?: SortOrder
+    whoCanSeeYourFollowers?: SortOrder
+    whoCanSeeSomethingYouFollow?: SortOrder
+    whoCanCommentYourPosts?: SortOrder
+    publicPostNotification?: SortOrder
+    publicProfileInfo?: SortOrder
+    showMostRelevantCommentsFirst?: SortOrder
+    offFacebookPreviews?: SortOrder
+    hideSomethingOnYourProfile?: SortOrder
+    whoCanPostYourProfile?: SortOrder
+    whoCanSeeWhatOtherPostOnYourProfile?: SortOrder
+    allowOtherShareYourPostsToTheirStories?: SortOrder
+    whoCanSeePostsYouTagOnYourProfile?: SortOrder
+    whoYouWannaToTagAndNotRead?: SortOrder
+    reviewPeopleAddToYourPostBeforePublish?: SortOrder
+    reviewPostBeforePublish?: SortOrder
+  }
+
+  export type AudienceAndVisibilityMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    whoCanSendFriendRequest?: SortOrder
+    whoCanSeeListFriends?: SortOrder
+    peopleWithYourEmailAddress?: SortOrder
+    peopleWithYourPhoneNumber?: SortOrder
+    searchAccountByLink?: SortOrder
+    forFriendsOfFriendRequest?: SortOrder
+    forPeopleMultialGroup?: SortOrder
+    forPageFollow?: SortOrder
+    forOtherPeople?: SortOrder
+    whoCanseeYourFuturePosts?: SortOrder
+    limitWhoCanSeePastPost?: SortOrder
+    allCommentSummariesOnPosts?: SortOrder
+    whoCanSeeYourStories?: SortOrder
+    allowOtherShareYourStories?: SortOrder
+    archivingStories?: SortOrder
+    allowOtherShareaYourReels?: SortOrder
+    whoCanSeeYourReels?: SortOrder
+    whoCanFollowMe?: SortOrder
+    whoCanSeeYourFollowers?: SortOrder
+    whoCanSeeSomethingYouFollow?: SortOrder
+    whoCanCommentYourPosts?: SortOrder
+    publicPostNotification?: SortOrder
+    publicProfileInfo?: SortOrder
+    showMostRelevantCommentsFirst?: SortOrder
+    offFacebookPreviews?: SortOrder
+    hideSomethingOnYourProfile?: SortOrder
+    whoCanPostYourProfile?: SortOrder
+    whoCanSeeWhatOtherPostOnYourProfile?: SortOrder
+    allowOtherShareYourPostsToTheirStories?: SortOrder
+    whoCanSeePostsYouTagOnYourProfile?: SortOrder
+    whoYouWannaToTagAndNotRead?: SortOrder
+    reviewPeopleAddToYourPostBeforePublish?: SortOrder
+    reviewPostBeforePublish?: SortOrder
+  }
+
+  export type EnumSendFriendRequestWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SendFriendRequest | EnumSendFriendRequestFieldRefInput<$PrismaModel>
+    in?: $Enums.SendFriendRequest[] | ListEnumSendFriendRequestFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SendFriendRequest[] | ListEnumSendFriendRequestFieldRefInput<$PrismaModel>
+    not?: NestedEnumSendFriendRequestWithAggregatesFilter<$PrismaModel> | $Enums.SendFriendRequest
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSendFriendRequestFilter<$PrismaModel>
+    _max?: NestedEnumSendFriendRequestFilter<$PrismaModel>
+  }
+
+  export type EnumAudienceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Audience | EnumAudienceFieldRefInput<$PrismaModel>
+    in?: $Enums.Audience[] | ListEnumAudienceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Audience[] | ListEnumAudienceFieldRefInput<$PrismaModel>
+    not?: NestedEnumAudienceWithAggregatesFilter<$PrismaModel> | $Enums.Audience
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAudienceFilter<$PrismaModel>
+    _max?: NestedEnumAudienceFilter<$PrismaModel>
+  }
+
+  export type EnumTypeSendMessageWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeSendMessage | EnumTypeSendMessageFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeSendMessage[] | ListEnumTypeSendMessageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeSendMessage[] | ListEnumTypeSendMessageFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeSendMessageWithAggregatesFilter<$PrismaModel> | $Enums.TypeSendMessage
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeSendMessageFilter<$PrismaModel>
+    _max?: NestedEnumTypeSendMessageFilter<$PrismaModel>
+  }
+
   export type EnumStatusAccountFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusAccount | EnumStatusAccountFieldRefInput<$PrismaModel>
     in?: $Enums.StatusAccount[] | ListEnumStatusAccountFieldRefInput<$PrismaModel>
@@ -21248,6 +26071,23 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
+  export type PreferenceListRelationFilter = {
+    every?: PreferenceWhereInput
+    some?: PreferenceWhereInput
+    none?: PreferenceWhereInput
+  }
+
+  export type AudienceAndVisibilityNullableScalarRelationFilter = {
+    is?: AudienceAndVisibilityWhereInput | null
+    isNot?: AudienceAndVisibilityWhereInput | null
+  }
+
+  export type AudienceAndVisibilityListRelationFilter = {
+    every?: AudienceAndVisibilityWhereInput
+    some?: AudienceAndVisibilityWhereInput
+    none?: AudienceAndVisibilityWhereInput
+  }
+
   export type EmailOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -21281,6 +26121,14 @@ export namespace Prisma {
   }
 
   export type NotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PreferenceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AudienceAndVisibilityOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22014,6 +26862,192 @@ export namespace Prisma {
     update?: XOR<XOR<CommentUpdateToOneWithWhereWithoutReationsInput, CommentUpdateWithoutReationsInput>, CommentUncheckedUpdateWithoutReationsInput>
   }
 
+  export type UserCreateNestedOneWithoutPreferenceInput = {
+    create?: XOR<UserCreateWithoutPreferenceInput, UserUncheckedCreateWithoutPreferenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPreferenceInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumPreferenceTypeFieldUpdateOperationsInput = {
+    set?: $Enums.PreferenceType
+  }
+
+  export type NullableEnumNotificationTypeFieldUpdateOperationsInput = {
+    set?: $Enums.NotificationType | null
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
+  export type NullableEnumReactionTargetFieldUpdateOperationsInput = {
+    set?: $Enums.ReactionTarget | null
+  }
+
+  export type EnumVideoQualityFieldUpdateOperationsInput = {
+    set?: $Enums.VideoQuality
+  }
+
+  export type EnumCoLorFieldUpdateOperationsInput = {
+    set?: $Enums.CoLor
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutPreferenceNestedInput = {
+    create?: XOR<UserCreateWithoutPreferenceInput, UserUncheckedCreateWithoutPreferenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPreferenceInput
+    upsert?: UserUpsertWithoutPreferenceInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPreferenceInput, UserUpdateWithoutPreferenceInput>, UserUncheckedUpdateWithoutPreferenceInput>
+  }
+
+  export type UserCreateNestedOneWithoutAudienceAndVisibilityInput = {
+    create?: XOR<UserCreateWithoutAudienceAndVisibilityInput, UserUncheckedCreateWithoutAudienceAndVisibilityInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAudienceAndVisibilityInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedManyWithoutRestrictedByInput = {
+    create?: XOR<UserCreateWithoutRestrictedByInput, UserUncheckedCreateWithoutRestrictedByInput> | UserCreateWithoutRestrictedByInput[] | UserUncheckedCreateWithoutRestrictedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRestrictedByInput | UserCreateOrConnectWithoutRestrictedByInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutBlockedByInput = {
+    create?: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput> | UserCreateWithoutBlockedByInput[] | UserUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedByInput | UserCreateOrConnectWithoutBlockedByInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutBlockedMessagesByInput = {
+    create?: XOR<UserCreateWithoutBlockedMessagesByInput, UserUncheckedCreateWithoutBlockedMessagesByInput> | UserCreateWithoutBlockedMessagesByInput[] | UserUncheckedCreateWithoutBlockedMessagesByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedMessagesByInput | UserCreateOrConnectWithoutBlockedMessagesByInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutRestrictedByInput = {
+    create?: XOR<UserCreateWithoutRestrictedByInput, UserUncheckedCreateWithoutRestrictedByInput> | UserCreateWithoutRestrictedByInput[] | UserUncheckedCreateWithoutRestrictedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRestrictedByInput | UserCreateOrConnectWithoutRestrictedByInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutBlockedByInput = {
+    create?: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput> | UserCreateWithoutBlockedByInput[] | UserUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedByInput | UserCreateOrConnectWithoutBlockedByInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutBlockedMessagesByInput = {
+    create?: XOR<UserCreateWithoutBlockedMessagesByInput, UserUncheckedCreateWithoutBlockedMessagesByInput> | UserCreateWithoutBlockedMessagesByInput[] | UserUncheckedCreateWithoutBlockedMessagesByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedMessagesByInput | UserCreateOrConnectWithoutBlockedMessagesByInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type EnumSendFriendRequestFieldUpdateOperationsInput = {
+    set?: $Enums.SendFriendRequest
+  }
+
+  export type EnumAudienceFieldUpdateOperationsInput = {
+    set?: $Enums.Audience
+  }
+
+  export type EnumTypeSendMessageFieldUpdateOperationsInput = {
+    set?: $Enums.TypeSendMessage
+  }
+
+  export type UserUpdateOneRequiredWithoutAudienceAndVisibilityNestedInput = {
+    create?: XOR<UserCreateWithoutAudienceAndVisibilityInput, UserUncheckedCreateWithoutAudienceAndVisibilityInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAudienceAndVisibilityInput
+    upsert?: UserUpsertWithoutAudienceAndVisibilityInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAudienceAndVisibilityInput, UserUpdateWithoutAudienceAndVisibilityInput>, UserUncheckedUpdateWithoutAudienceAndVisibilityInput>
+  }
+
+  export type UserUpdateManyWithoutRestrictedByNestedInput = {
+    create?: XOR<UserCreateWithoutRestrictedByInput, UserUncheckedCreateWithoutRestrictedByInput> | UserCreateWithoutRestrictedByInput[] | UserUncheckedCreateWithoutRestrictedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRestrictedByInput | UserCreateOrConnectWithoutRestrictedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutRestrictedByInput | UserUpsertWithWhereUniqueWithoutRestrictedByInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutRestrictedByInput | UserUpdateWithWhereUniqueWithoutRestrictedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutRestrictedByInput | UserUpdateManyWithWhereWithoutRestrictedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutBlockedByNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput> | UserCreateWithoutBlockedByInput[] | UserUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedByInput | UserCreateOrConnectWithoutBlockedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutBlockedByInput | UserUpsertWithWhereUniqueWithoutBlockedByInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutBlockedByInput | UserUpdateWithWhereUniqueWithoutBlockedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutBlockedByInput | UserUpdateManyWithWhereWithoutBlockedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutBlockedMessagesByNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedMessagesByInput, UserUncheckedCreateWithoutBlockedMessagesByInput> | UserCreateWithoutBlockedMessagesByInput[] | UserUncheckedCreateWithoutBlockedMessagesByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedMessagesByInput | UserCreateOrConnectWithoutBlockedMessagesByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutBlockedMessagesByInput | UserUpsertWithWhereUniqueWithoutBlockedMessagesByInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutBlockedMessagesByInput | UserUpdateWithWhereUniqueWithoutBlockedMessagesByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutBlockedMessagesByInput | UserUpdateManyWithWhereWithoutBlockedMessagesByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutRestrictedByNestedInput = {
+    create?: XOR<UserCreateWithoutRestrictedByInput, UserUncheckedCreateWithoutRestrictedByInput> | UserCreateWithoutRestrictedByInput[] | UserUncheckedCreateWithoutRestrictedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutRestrictedByInput | UserCreateOrConnectWithoutRestrictedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutRestrictedByInput | UserUpsertWithWhereUniqueWithoutRestrictedByInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutRestrictedByInput | UserUpdateWithWhereUniqueWithoutRestrictedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutRestrictedByInput | UserUpdateManyWithWhereWithoutRestrictedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutBlockedByNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput> | UserCreateWithoutBlockedByInput[] | UserUncheckedCreateWithoutBlockedByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedByInput | UserCreateOrConnectWithoutBlockedByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutBlockedByInput | UserUpsertWithWhereUniqueWithoutBlockedByInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutBlockedByInput | UserUpdateWithWhereUniqueWithoutBlockedByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutBlockedByInput | UserUpdateManyWithWhereWithoutBlockedByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutBlockedMessagesByNestedInput = {
+    create?: XOR<UserCreateWithoutBlockedMessagesByInput, UserUncheckedCreateWithoutBlockedMessagesByInput> | UserCreateWithoutBlockedMessagesByInput[] | UserUncheckedCreateWithoutBlockedMessagesByInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutBlockedMessagesByInput | UserCreateOrConnectWithoutBlockedMessagesByInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutBlockedMessagesByInput | UserUpsertWithWhereUniqueWithoutBlockedMessagesByInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutBlockedMessagesByInput | UserUpdateWithWhereUniqueWithoutBlockedMessagesByInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutBlockedMessagesByInput | UserUpdateManyWithWhereWithoutBlockedMessagesByInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
   export type UserCreateflagsInput = {
     set: $Enums.UserFlag[]
   }
@@ -22136,6 +27170,37 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
+  export type PreferenceCreateNestedManyWithoutUserInput = {
+    create?: XOR<PreferenceCreateWithoutUserInput, PreferenceUncheckedCreateWithoutUserInput> | PreferenceCreateWithoutUserInput[] | PreferenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PreferenceCreateOrConnectWithoutUserInput | PreferenceCreateOrConnectWithoutUserInput[]
+    createMany?: PreferenceCreateManyUserInputEnvelope
+    connect?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+  }
+
+  export type AudienceAndVisibilityCreateNestedOneWithoutUserInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutUserInput, AudienceAndVisibilityUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutUserInput
+    connect?: AudienceAndVisibilityWhereUniqueInput
+  }
+
+  export type AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutRestrictedListInput, AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput> | AudienceAndVisibilityCreateWithoutRestrictedListInput[] | AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput | AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+  }
+
+  export type AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput> | AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput[] | AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+  }
+
+  export type AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput> | AudienceAndVisibilityCreateWithoutBlockMessagesInput[] | AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput | AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+  }
+
   export type EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput = {
     create?: XOR<EmailCreateWithoutSubEmailsUserInput, EmailUncheckedCreateWithoutSubEmailsUserInput> | EmailCreateWithoutSubEmailsUserInput[] | EmailUncheckedCreateWithoutSubEmailsUserInput[]
     connectOrCreate?: EmailCreateOrConnectWithoutSubEmailsUserInput | EmailCreateOrConnectWithoutSubEmailsUserInput[]
@@ -22232,6 +27297,37 @@ export namespace Prisma {
     connectOrCreate?: NotificationCreateOrConnectWithoutActorInput | NotificationCreateOrConnectWithoutActorInput[]
     createMany?: NotificationCreateManyActorInputEnvelope
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type PreferenceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PreferenceCreateWithoutUserInput, PreferenceUncheckedCreateWithoutUserInput> | PreferenceCreateWithoutUserInput[] | PreferenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PreferenceCreateOrConnectWithoutUserInput | PreferenceCreateOrConnectWithoutUserInput[]
+    createMany?: PreferenceCreateManyUserInputEnvelope
+    connect?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutUserInput, AudienceAndVisibilityUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutUserInput
+    connect?: AudienceAndVisibilityWhereUniqueInput
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutRestrictedListInput, AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput> | AudienceAndVisibilityCreateWithoutRestrictedListInput[] | AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput | AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput> | AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput[] | AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput> | AudienceAndVisibilityCreateWithoutBlockMessagesInput[] | AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput | AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
   }
 
   export type EnumStatusAccountFieldUpdateOperationsInput = {
@@ -22471,6 +27567,69 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
+  export type PreferenceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PreferenceCreateWithoutUserInput, PreferenceUncheckedCreateWithoutUserInput> | PreferenceCreateWithoutUserInput[] | PreferenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PreferenceCreateOrConnectWithoutUserInput | PreferenceCreateOrConnectWithoutUserInput[]
+    upsert?: PreferenceUpsertWithWhereUniqueWithoutUserInput | PreferenceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PreferenceCreateManyUserInputEnvelope
+    set?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+    disconnect?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+    delete?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+    connect?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+    update?: PreferenceUpdateWithWhereUniqueWithoutUserInput | PreferenceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PreferenceUpdateManyWithWhereWithoutUserInput | PreferenceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PreferenceScalarWhereInput | PreferenceScalarWhereInput[]
+  }
+
+  export type AudienceAndVisibilityUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutUserInput, AudienceAndVisibilityUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutUserInput
+    upsert?: AudienceAndVisibilityUpsertWithoutUserInput
+    disconnect?: AudienceAndVisibilityWhereInput | boolean
+    delete?: AudienceAndVisibilityWhereInput | boolean
+    connect?: AudienceAndVisibilityWhereUniqueInput
+    update?: XOR<XOR<AudienceAndVisibilityUpdateToOneWithWhereWithoutUserInput, AudienceAndVisibilityUpdateWithoutUserInput>, AudienceAndVisibilityUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutRestrictedListInput, AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput> | AudienceAndVisibilityCreateWithoutRestrictedListInput[] | AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput | AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput[]
+    upsert?: AudienceAndVisibilityUpsertWithWhereUniqueWithoutRestrictedListInput | AudienceAndVisibilityUpsertWithWhereUniqueWithoutRestrictedListInput[]
+    set?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    disconnect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    delete?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    update?: AudienceAndVisibilityUpdateWithWhereUniqueWithoutRestrictedListInput | AudienceAndVisibilityUpdateWithWhereUniqueWithoutRestrictedListInput[]
+    updateMany?: AudienceAndVisibilityUpdateManyWithWhereWithoutRestrictedListInput | AudienceAndVisibilityUpdateManyWithWhereWithoutRestrictedListInput[]
+    deleteMany?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
+  }
+
+  export type AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput> | AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput[] | AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput[]
+    upsert?: AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockedProfilesOrPagesInput[]
+    set?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    disconnect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    delete?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    update?: AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockedProfilesOrPagesInput[]
+    updateMany?: AudienceAndVisibilityUpdateManyWithWhereWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityUpdateManyWithWhereWithoutBlockedProfilesOrPagesInput[]
+    deleteMany?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
+  }
+
+  export type AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput> | AudienceAndVisibilityCreateWithoutBlockMessagesInput[] | AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput | AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput[]
+    upsert?: AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockMessagesInput | AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockMessagesInput[]
+    set?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    disconnect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    delete?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    update?: AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockMessagesInput | AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockMessagesInput[]
+    updateMany?: AudienceAndVisibilityUpdateManyWithWhereWithoutBlockMessagesInput | AudienceAndVisibilityUpdateManyWithWhereWithoutBlockMessagesInput[]
+    deleteMany?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
+  }
+
   export type EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput = {
     create?: XOR<EmailCreateWithoutSubEmailsUserInput, EmailUncheckedCreateWithoutSubEmailsUserInput> | EmailCreateWithoutSubEmailsUserInput[] | EmailUncheckedCreateWithoutSubEmailsUserInput[]
     connectOrCreate?: EmailCreateOrConnectWithoutSubEmailsUserInput | EmailCreateOrConnectWithoutSubEmailsUserInput[]
@@ -22665,6 +27824,69 @@ export namespace Prisma {
     update?: NotificationUpdateWithWhereUniqueWithoutActorInput | NotificationUpdateWithWhereUniqueWithoutActorInput[]
     updateMany?: NotificationUpdateManyWithWhereWithoutActorInput | NotificationUpdateManyWithWhereWithoutActorInput[]
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type PreferenceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PreferenceCreateWithoutUserInput, PreferenceUncheckedCreateWithoutUserInput> | PreferenceCreateWithoutUserInput[] | PreferenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PreferenceCreateOrConnectWithoutUserInput | PreferenceCreateOrConnectWithoutUserInput[]
+    upsert?: PreferenceUpsertWithWhereUniqueWithoutUserInput | PreferenceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PreferenceCreateManyUserInputEnvelope
+    set?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+    disconnect?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+    delete?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+    connect?: PreferenceWhereUniqueInput | PreferenceWhereUniqueInput[]
+    update?: PreferenceUpdateWithWhereUniqueWithoutUserInput | PreferenceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PreferenceUpdateManyWithWhereWithoutUserInput | PreferenceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PreferenceScalarWhereInput | PreferenceScalarWhereInput[]
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutUserInput, AudienceAndVisibilityUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutUserInput
+    upsert?: AudienceAndVisibilityUpsertWithoutUserInput
+    disconnect?: AudienceAndVisibilityWhereInput | boolean
+    delete?: AudienceAndVisibilityWhereInput | boolean
+    connect?: AudienceAndVisibilityWhereUniqueInput
+    update?: XOR<XOR<AudienceAndVisibilityUpdateToOneWithWhereWithoutUserInput, AudienceAndVisibilityUpdateWithoutUserInput>, AudienceAndVisibilityUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutRestrictedListInput, AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput> | AudienceAndVisibilityCreateWithoutRestrictedListInput[] | AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput | AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput[]
+    upsert?: AudienceAndVisibilityUpsertWithWhereUniqueWithoutRestrictedListInput | AudienceAndVisibilityUpsertWithWhereUniqueWithoutRestrictedListInput[]
+    set?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    disconnect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    delete?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    update?: AudienceAndVisibilityUpdateWithWhereUniqueWithoutRestrictedListInput | AudienceAndVisibilityUpdateWithWhereUniqueWithoutRestrictedListInput[]
+    updateMany?: AudienceAndVisibilityUpdateManyWithWhereWithoutRestrictedListInput | AudienceAndVisibilityUpdateManyWithWhereWithoutRestrictedListInput[]
+    deleteMany?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput> | AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput[] | AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput[]
+    upsert?: AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockedProfilesOrPagesInput[]
+    set?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    disconnect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    delete?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    update?: AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockedProfilesOrPagesInput[]
+    updateMany?: AudienceAndVisibilityUpdateManyWithWhereWithoutBlockedProfilesOrPagesInput | AudienceAndVisibilityUpdateManyWithWhereWithoutBlockedProfilesOrPagesInput[]
+    deleteMany?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput = {
+    create?: XOR<AudienceAndVisibilityCreateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput> | AudienceAndVisibilityCreateWithoutBlockMessagesInput[] | AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput[]
+    connectOrCreate?: AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput | AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput[]
+    upsert?: AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockMessagesInput | AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockMessagesInput[]
+    set?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    disconnect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    delete?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
+    update?: AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockMessagesInput | AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockMessagesInput[]
+    updateMany?: AudienceAndVisibilityUpdateManyWithWhereWithoutBlockMessagesInput | AudienceAndVisibilityUpdateManyWithWhereWithoutBlockMessagesInput[]
+    deleteMany?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSentFriendRequestsInput = {
@@ -23260,6 +28482,171 @@ export namespace Prisma {
     _max?: NestedEnumReactionTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumPreferenceTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PreferenceType | EnumPreferenceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PreferenceType[] | ListEnumPreferenceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PreferenceType[] | ListEnumPreferenceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPreferenceTypeFilter<$PrismaModel> | $Enums.PreferenceType
+  }
+
+  export type NestedEnumNotificationTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumNotificationTypeNullableFilter<$PrismaModel> | $Enums.NotificationType | null
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedEnumReactionTargetNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReactionTarget | EnumReactionTargetFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ReactionTarget[] | ListEnumReactionTargetFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ReactionTarget[] | ListEnumReactionTargetFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumReactionTargetNullableFilter<$PrismaModel> | $Enums.ReactionTarget | null
+  }
+
+  export type NestedEnumVideoQualityFilter<$PrismaModel = never> = {
+    equals?: $Enums.VideoQuality | EnumVideoQualityFieldRefInput<$PrismaModel>
+    in?: $Enums.VideoQuality[] | ListEnumVideoQualityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VideoQuality[] | ListEnumVideoQualityFieldRefInput<$PrismaModel>
+    not?: NestedEnumVideoQualityFilter<$PrismaModel> | $Enums.VideoQuality
+  }
+
+  export type NestedEnumCoLorFilter<$PrismaModel = never> = {
+    equals?: $Enums.CoLor | EnumCoLorFieldRefInput<$PrismaModel>
+    in?: $Enums.CoLor[] | ListEnumCoLorFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CoLor[] | ListEnumCoLorFieldRefInput<$PrismaModel>
+    not?: NestedEnumCoLorFilter<$PrismaModel> | $Enums.CoLor
+  }
+
+  export type NestedEnumPreferenceTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PreferenceType | EnumPreferenceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PreferenceType[] | ListEnumPreferenceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PreferenceType[] | ListEnumPreferenceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPreferenceTypeWithAggregatesFilter<$PrismaModel> | $Enums.PreferenceType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPreferenceTypeFilter<$PrismaModel>
+    _max?: NestedEnumPreferenceTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNotificationTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumNotificationTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumNotificationTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumNotificationTypeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumReactionTargetNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReactionTarget | EnumReactionTargetFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ReactionTarget[] | ListEnumReactionTargetFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ReactionTarget[] | ListEnumReactionTargetFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumReactionTargetNullableWithAggregatesFilter<$PrismaModel> | $Enums.ReactionTarget | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumReactionTargetNullableFilter<$PrismaModel>
+    _max?: NestedEnumReactionTargetNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumVideoQualityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VideoQuality | EnumVideoQualityFieldRefInput<$PrismaModel>
+    in?: $Enums.VideoQuality[] | ListEnumVideoQualityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VideoQuality[] | ListEnumVideoQualityFieldRefInput<$PrismaModel>
+    not?: NestedEnumVideoQualityWithAggregatesFilter<$PrismaModel> | $Enums.VideoQuality
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVideoQualityFilter<$PrismaModel>
+    _max?: NestedEnumVideoQualityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCoLorWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CoLor | EnumCoLorFieldRefInput<$PrismaModel>
+    in?: $Enums.CoLor[] | ListEnumCoLorFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CoLor[] | ListEnumCoLorFieldRefInput<$PrismaModel>
+    not?: NestedEnumCoLorWithAggregatesFilter<$PrismaModel> | $Enums.CoLor
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCoLorFilter<$PrismaModel>
+    _max?: NestedEnumCoLorFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSendFriendRequestFilter<$PrismaModel = never> = {
+    equals?: $Enums.SendFriendRequest | EnumSendFriendRequestFieldRefInput<$PrismaModel>
+    in?: $Enums.SendFriendRequest[] | ListEnumSendFriendRequestFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SendFriendRequest[] | ListEnumSendFriendRequestFieldRefInput<$PrismaModel>
+    not?: NestedEnumSendFriendRequestFilter<$PrismaModel> | $Enums.SendFriendRequest
+  }
+
+  export type NestedEnumAudienceFilter<$PrismaModel = never> = {
+    equals?: $Enums.Audience | EnumAudienceFieldRefInput<$PrismaModel>
+    in?: $Enums.Audience[] | ListEnumAudienceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Audience[] | ListEnumAudienceFieldRefInput<$PrismaModel>
+    not?: NestedEnumAudienceFilter<$PrismaModel> | $Enums.Audience
+  }
+
+  export type NestedEnumTypeSendMessageFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeSendMessage | EnumTypeSendMessageFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeSendMessage[] | ListEnumTypeSendMessageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeSendMessage[] | ListEnumTypeSendMessageFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeSendMessageFilter<$PrismaModel> | $Enums.TypeSendMessage
+  }
+
+  export type NestedEnumSendFriendRequestWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SendFriendRequest | EnumSendFriendRequestFieldRefInput<$PrismaModel>
+    in?: $Enums.SendFriendRequest[] | ListEnumSendFriendRequestFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SendFriendRequest[] | ListEnumSendFriendRequestFieldRefInput<$PrismaModel>
+    not?: NestedEnumSendFriendRequestWithAggregatesFilter<$PrismaModel> | $Enums.SendFriendRequest
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSendFriendRequestFilter<$PrismaModel>
+    _max?: NestedEnumSendFriendRequestFilter<$PrismaModel>
+  }
+
+  export type NestedEnumAudienceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Audience | EnumAudienceFieldRefInput<$PrismaModel>
+    in?: $Enums.Audience[] | ListEnumAudienceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Audience[] | ListEnumAudienceFieldRefInput<$PrismaModel>
+    not?: NestedEnumAudienceWithAggregatesFilter<$PrismaModel> | $Enums.Audience
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAudienceFilter<$PrismaModel>
+    _max?: NestedEnumAudienceFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTypeSendMessageWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeSendMessage | EnumTypeSendMessageFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeSendMessage[] | ListEnumTypeSendMessageFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeSendMessage[] | ListEnumTypeSendMessageFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeSendMessageWithAggregatesFilter<$PrismaModel> | $Enums.TypeSendMessage
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeSendMessageFilter<$PrismaModel>
+    _max?: NestedEnumTypeSendMessageFilter<$PrismaModel>
+  }
+
   export type NestedEnumStatusAccountFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusAccount | EnumStatusAccountFieldRefInput<$PrismaModel>
     in?: $Enums.StatusAccount[] | ListEnumStatusAccountFieldRefInput<$PrismaModel>
@@ -23397,6 +28784,11 @@ export namespace Prisma {
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -23434,6 +28826,11 @@ export namespace Prisma {
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -23476,6 +28873,11 @@ export namespace Prisma {
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutNotificationActionsInput = {
@@ -23513,6 +28915,11 @@ export namespace Prisma {
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutNotificationActionsInput = {
@@ -23566,6 +28973,11 @@ export namespace Prisma {
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -23603,6 +29015,11 @@ export namespace Prisma {
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUpsertWithoutNotificationActionsInput = {
@@ -23651,6 +29068,11 @@ export namespace Prisma {
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationActionsInput = {
@@ -23688,6 +29110,11 @@ export namespace Prisma {
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -23725,6 +29152,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -23762,6 +29194,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -23877,6 +29314,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -23914,6 +29356,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type ReactionUpsertWithWhereUniqueWithoutPostInput = {
@@ -24010,6 +29457,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -24047,6 +29499,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -24224,6 +29681,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -24261,6 +29723,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type PostUpsertWithoutCommentsInput = {
@@ -24404,6 +29871,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutReactionsInput = {
@@ -24441,6 +29913,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutReactionsInput = {
@@ -24556,6 +30033,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReactionsInput = {
@@ -24593,6 +30075,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type PostUpsertWithoutReactionsInput = {
@@ -24667,6 +30154,716 @@ export namespace Prisma {
     updateHistories?: CommentUpdateupdateHistoriesInput | InputJsonValue[]
     status?: EnumCommentStatusFieldUpdateOperationsInput | $Enums.CommentStatus
     replies?: CommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type UserCreateWithoutPreferenceInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    primaryEmail: EmailCreateNestedOneWithoutPrimaryEmailUserInput
+    subEmails?: EmailCreateNestedManyWithoutSubEmailsUserInput
+    primaryPhone?: PhoneCreateNestedOneWithoutPrimaryPhoneUserInput
+    subPhones?: PhoneCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsCreateNestedManyWithoutUserInput
+    sentRelations?: RelationCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
+  }
+
+  export type UserUncheckedCreateWithoutPreferenceInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    primaryEmailId: string
+    primaryPhoneId?: string | null
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    subEmails?: EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput
+    subPhones?: PhoneUncheckedCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsUncheckedCreateNestedManyWithoutUserInput
+    sentRelations?: RelationUncheckedCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
+  }
+
+  export type UserCreateOrConnectWithoutPreferenceInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPreferenceInput, UserUncheckedCreateWithoutPreferenceInput>
+  }
+
+  export type UserUpsertWithoutPreferenceInput = {
+    update: XOR<UserUpdateWithoutPreferenceInput, UserUncheckedUpdateWithoutPreferenceInput>
+    create: XOR<UserCreateWithoutPreferenceInput, UserUncheckedCreateWithoutPreferenceInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPreferenceInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPreferenceInput, UserUncheckedUpdateWithoutPreferenceInput>
+  }
+
+  export type UserUpdateWithoutPreferenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryEmail?: EmailUpdateOneRequiredWithoutPrimaryEmailUserNestedInput
+    subEmails?: EmailUpdateManyWithoutSubEmailsUserNestedInput
+    primaryPhone?: PhoneUpdateOneWithoutPrimaryPhoneUserNestedInput
+    subPhones?: PhoneUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPreferenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    subEmails?: EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput
+    subPhones?: PhoneUncheckedUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUncheckedUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUncheckedUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
+  }
+
+  export type UserCreateWithoutAudienceAndVisibilityInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    primaryEmail: EmailCreateNestedOneWithoutPrimaryEmailUserInput
+    subEmails?: EmailCreateNestedManyWithoutSubEmailsUserInput
+    primaryPhone?: PhoneCreateNestedOneWithoutPrimaryPhoneUserInput
+    subPhones?: PhoneCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsCreateNestedManyWithoutUserInput
+    sentRelations?: RelationCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
+  }
+
+  export type UserUncheckedCreateWithoutAudienceAndVisibilityInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    primaryEmailId: string
+    primaryPhoneId?: string | null
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    subEmails?: EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput
+    subPhones?: PhoneUncheckedCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsUncheckedCreateNestedManyWithoutUserInput
+    sentRelations?: RelationUncheckedCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
+  }
+
+  export type UserCreateOrConnectWithoutAudienceAndVisibilityInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAudienceAndVisibilityInput, UserUncheckedCreateWithoutAudienceAndVisibilityInput>
+  }
+
+  export type UserCreateWithoutRestrictedByInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    primaryEmail: EmailCreateNestedOneWithoutPrimaryEmailUserInput
+    subEmails?: EmailCreateNestedManyWithoutSubEmailsUserInput
+    primaryPhone?: PhoneCreateNestedOneWithoutPrimaryPhoneUserInput
+    subPhones?: PhoneCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsCreateNestedManyWithoutUserInput
+    sentRelations?: RelationCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
+  }
+
+  export type UserUncheckedCreateWithoutRestrictedByInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    primaryEmailId: string
+    primaryPhoneId?: string | null
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    subEmails?: EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput
+    subPhones?: PhoneUncheckedCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsUncheckedCreateNestedManyWithoutUserInput
+    sentRelations?: RelationUncheckedCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
+  }
+
+  export type UserCreateOrConnectWithoutRestrictedByInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRestrictedByInput, UserUncheckedCreateWithoutRestrictedByInput>
+  }
+
+  export type UserCreateWithoutBlockedByInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    primaryEmail: EmailCreateNestedOneWithoutPrimaryEmailUserInput
+    subEmails?: EmailCreateNestedManyWithoutSubEmailsUserInput
+    primaryPhone?: PhoneCreateNestedOneWithoutPrimaryPhoneUserInput
+    subPhones?: PhoneCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsCreateNestedManyWithoutUserInput
+    sentRelations?: RelationCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
+  }
+
+  export type UserUncheckedCreateWithoutBlockedByInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    primaryEmailId: string
+    primaryPhoneId?: string | null
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    subEmails?: EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput
+    subPhones?: PhoneUncheckedCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsUncheckedCreateNestedManyWithoutUserInput
+    sentRelations?: RelationUncheckedCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
+  }
+
+  export type UserCreateOrConnectWithoutBlockedByInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput>
+  }
+
+  export type UserCreateWithoutBlockedMessagesByInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    primaryEmail: EmailCreateNestedOneWithoutPrimaryEmailUserInput
+    subEmails?: EmailCreateNestedManyWithoutSubEmailsUserInput
+    primaryPhone?: PhoneCreateNestedOneWithoutPrimaryPhoneUserInput
+    subPhones?: PhoneCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsCreateNestedManyWithoutUserInput
+    sentRelations?: RelationCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+  }
+
+  export type UserUncheckedCreateWithoutBlockedMessagesByInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    primaryEmailId: string
+    primaryPhoneId?: string | null
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    subEmails?: EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput
+    subPhones?: PhoneUncheckedCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsUncheckedCreateNestedManyWithoutUserInput
+    sentRelations?: RelationUncheckedCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+  }
+
+  export type UserCreateOrConnectWithoutBlockedMessagesByInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBlockedMessagesByInput, UserUncheckedCreateWithoutBlockedMessagesByInput>
+  }
+
+  export type UserUpsertWithoutAudienceAndVisibilityInput = {
+    update: XOR<UserUpdateWithoutAudienceAndVisibilityInput, UserUncheckedUpdateWithoutAudienceAndVisibilityInput>
+    create: XOR<UserCreateWithoutAudienceAndVisibilityInput, UserUncheckedCreateWithoutAudienceAndVisibilityInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAudienceAndVisibilityInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAudienceAndVisibilityInput, UserUncheckedUpdateWithoutAudienceAndVisibilityInput>
+  }
+
+  export type UserUpdateWithoutAudienceAndVisibilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryEmail?: EmailUpdateOneRequiredWithoutPrimaryEmailUserNestedInput
+    subEmails?: EmailUpdateManyWithoutSubEmailsUserNestedInput
+    primaryPhone?: PhoneUpdateOneWithoutPrimaryPhoneUserNestedInput
+    subPhones?: PhoneUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAudienceAndVisibilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    subEmails?: EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput
+    subPhones?: PhoneUncheckedUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUncheckedUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUncheckedUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutRestrictedByInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutRestrictedByInput, UserUncheckedUpdateWithoutRestrictedByInput>
+    create: XOR<UserCreateWithoutRestrictedByInput, UserUncheckedCreateWithoutRestrictedByInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutRestrictedByInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutRestrictedByInput, UserUncheckedUpdateWithoutRestrictedByInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutRestrictedByInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutRestrictedByInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: UuidFilter<"User"> | string
+    profileId?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updateAt?: DateTimeFilter<"User"> | Date | string
+    status?: EnumStatusAccountFilter<"User"> | $Enums.StatusAccount
+    flags?: EnumUserFlagNullableListFilter<"User">
+    roles?: EnumUserRoleNullableListFilter<"User">
+    primaryEmailId?: UuidFilter<"User"> | string
+    primaryPhoneId?: UuidNullableFilter<"User"> | string | null
+    hashedPassword?: StringFilter<"User"> | string
+    displayName?: StringFilter<"User"> | string
+    username?: StringNullableFilter<"User"> | string | null
+    gender?: EnumGenderFilter<"User"> | $Enums.Gender
+    pronoun?: StringNullableFilter<"User"> | string | null
+    birthday?: DateTimeFilter<"User"> | Date | string
+    biography?: StringNullableFilter<"User"> | string | null
+    websites?: StringNullableListFilter<"User">
+    language?: StringNullableFilter<"User"> | string | null
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    avatarUrl?: StringNullableFilter<"User"> | string | null
+    bannerUrl?: StringNullableFilter<"User"> | string | null
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutBlockedByInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutBlockedByInput, UserUncheckedUpdateWithoutBlockedByInput>
+    create: XOR<UserCreateWithoutBlockedByInput, UserUncheckedCreateWithoutBlockedByInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutBlockedByInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutBlockedByInput, UserUncheckedUpdateWithoutBlockedByInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutBlockedByInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutBlockedByInput>
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutBlockedMessagesByInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutBlockedMessagesByInput, UserUncheckedUpdateWithoutBlockedMessagesByInput>
+    create: XOR<UserCreateWithoutBlockedMessagesByInput, UserUncheckedCreateWithoutBlockedMessagesByInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutBlockedMessagesByInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutBlockedMessagesByInput, UserUncheckedUpdateWithoutBlockedMessagesByInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutBlockedMessagesByInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutBlockedMessagesByInput>
   }
 
   export type EmailCreateWithoutPrimaryEmailUserInput = {
@@ -25151,6 +31348,406 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PreferenceCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.PreferenceType
+    notificationType?: $Enums.NotificationType | null
+    push?: boolean | null
+    email?: boolean | null
+    sms?: boolean | null
+    reactionTarget?: $Enums.ReactionTarget | null
+    hidden?: boolean | null
+    reduceMotion?: boolean | null
+    screenReader?: boolean | null
+    languageCode?: string | null
+    timezone?: string | null
+    locale?: string | null
+    darkModeEnabled?: boolean | null
+    videoQuality?: $Enums.VideoQuality
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: $Enums.CoLor
+    backGroundOpacity?: number
+    textColor?: $Enums.CoLor
+    textSize?: number
+  }
+
+  export type PreferenceUncheckedCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.PreferenceType
+    notificationType?: $Enums.NotificationType | null
+    push?: boolean | null
+    email?: boolean | null
+    sms?: boolean | null
+    reactionTarget?: $Enums.ReactionTarget | null
+    hidden?: boolean | null
+    reduceMotion?: boolean | null
+    screenReader?: boolean | null
+    languageCode?: string | null
+    timezone?: string | null
+    locale?: string | null
+    darkModeEnabled?: boolean | null
+    videoQuality?: $Enums.VideoQuality
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: $Enums.CoLor
+    backGroundOpacity?: number
+    textColor?: $Enums.CoLor
+    textSize?: number
+  }
+
+  export type PreferenceCreateOrConnectWithoutUserInput = {
+    where: PreferenceWhereUniqueInput
+    create: XOR<PreferenceCreateWithoutUserInput, PreferenceUncheckedCreateWithoutUserInput>
+  }
+
+  export type PreferenceCreateManyUserInputEnvelope = {
+    data: PreferenceCreateManyUserInput | PreferenceCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AudienceAndVisibilityCreateWithoutUserInput = {
+    id?: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    restrictedList?: UserCreateNestedManyWithoutRestrictedByInput
+    blockedProfilesOrPages?: UserCreateNestedManyWithoutBlockedByInput
+    blockMessages?: UserCreateNestedManyWithoutBlockedMessagesByInput
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateWithoutUserInput = {
+    id?: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    restrictedList?: UserUncheckedCreateNestedManyWithoutRestrictedByInput
+    blockedProfilesOrPages?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockMessages?: UserUncheckedCreateNestedManyWithoutBlockedMessagesByInput
+  }
+
+  export type AudienceAndVisibilityCreateOrConnectWithoutUserInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    create: XOR<AudienceAndVisibilityCreateWithoutUserInput, AudienceAndVisibilityUncheckedCreateWithoutUserInput>
+  }
+
+  export type AudienceAndVisibilityCreateWithoutRestrictedListInput = {
+    id?: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    user: UserCreateNestedOneWithoutAudienceAndVisibilityInput
+    blockedProfilesOrPages?: UserCreateNestedManyWithoutBlockedByInput
+    blockMessages?: UserCreateNestedManyWithoutBlockedMessagesByInput
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput = {
+    id?: string
+    userId: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    blockedProfilesOrPages?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+    blockMessages?: UserUncheckedCreateNestedManyWithoutBlockedMessagesByInput
+  }
+
+  export type AudienceAndVisibilityCreateOrConnectWithoutRestrictedListInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    create: XOR<AudienceAndVisibilityCreateWithoutRestrictedListInput, AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput>
+  }
+
+  export type AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput = {
+    id?: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    user: UserCreateNestedOneWithoutAudienceAndVisibilityInput
+    restrictedList?: UserCreateNestedManyWithoutRestrictedByInput
+    blockMessages?: UserCreateNestedManyWithoutBlockedMessagesByInput
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput = {
+    id?: string
+    userId: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    restrictedList?: UserUncheckedCreateNestedManyWithoutRestrictedByInput
+    blockMessages?: UserUncheckedCreateNestedManyWithoutBlockedMessagesByInput
+  }
+
+  export type AudienceAndVisibilityCreateOrConnectWithoutBlockedProfilesOrPagesInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    create: XOR<AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput>
+  }
+
+  export type AudienceAndVisibilityCreateWithoutBlockMessagesInput = {
+    id?: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    user: UserCreateNestedOneWithoutAudienceAndVisibilityInput
+    restrictedList?: UserCreateNestedManyWithoutRestrictedByInput
+    blockedProfilesOrPages?: UserCreateNestedManyWithoutBlockedByInput
+  }
+
+  export type AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput = {
+    id?: string
+    userId: string
+    whoCanSendFriendRequest?: $Enums.SendFriendRequest
+    whoCanSeeListFriends?: $Enums.Audience
+    peopleWithYourEmailAddress?: $Enums.Audience
+    peopleWithYourPhoneNumber?: $Enums.Audience
+    searchAccountByLink?: boolean
+    forFriendsOfFriendRequest?: $Enums.TypeSendMessage
+    forPeopleMultialGroup?: $Enums.TypeSendMessage
+    forPageFollow?: $Enums.TypeSendMessage
+    forOtherPeople?: $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: $Enums.Audience
+    limitWhoCanSeePastPost?: boolean
+    allCommentSummariesOnPosts?: boolean
+    whoCanSeeYourStories?: $Enums.Audience
+    allowOtherShareYourStories?: boolean
+    archivingStories?: boolean
+    allowOtherShareaYourReels?: boolean
+    whoCanSeeYourReels?: $Enums.Audience
+    whoCanFollowMe?: $Enums.Audience
+    whoCanSeeYourFollowers?: $Enums.Audience
+    whoCanSeeSomethingYouFollow?: $Enums.Audience
+    whoCanCommentYourPosts?: $Enums.Audience
+    publicPostNotification?: $Enums.Audience
+    publicProfileInfo?: $Enums.Audience
+    showMostRelevantCommentsFirst?: boolean
+    offFacebookPreviews?: boolean
+    hideSomethingOnYourProfile: string
+    whoCanPostYourProfile?: $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: boolean
+    whoCanSeePostsYouTagOnYourProfile?: $Enums.Audience
+    whoYouWannaToTagAndNotRead?: $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: boolean
+    reviewPostBeforePublish?: boolean
+    restrictedList?: UserUncheckedCreateNestedManyWithoutRestrictedByInput
+    blockedProfilesOrPages?: UserUncheckedCreateNestedManyWithoutBlockedByInput
+  }
+
+  export type AudienceAndVisibilityCreateOrConnectWithoutBlockMessagesInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    create: XOR<AudienceAndVisibilityCreateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput>
+  }
+
   export type EmailUpsertWithoutPrimaryEmailUserInput = {
     update: XOR<EmailUpdateWithoutPrimaryEmailUserInput, EmailUncheckedUpdateWithoutPrimaryEmailUserInput>
     create: XOR<EmailCreateWithoutPrimaryEmailUserInput, EmailUncheckedCreateWithoutPrimaryEmailUserInput>
@@ -25548,6 +32145,231 @@ export namespace Prisma {
     data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutActorInput>
   }
 
+  export type PreferenceUpsertWithWhereUniqueWithoutUserInput = {
+    where: PreferenceWhereUniqueInput
+    update: XOR<PreferenceUpdateWithoutUserInput, PreferenceUncheckedUpdateWithoutUserInput>
+    create: XOR<PreferenceCreateWithoutUserInput, PreferenceUncheckedCreateWithoutUserInput>
+  }
+
+  export type PreferenceUpdateWithWhereUniqueWithoutUserInput = {
+    where: PreferenceWhereUniqueInput
+    data: XOR<PreferenceUpdateWithoutUserInput, PreferenceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PreferenceUpdateManyWithWhereWithoutUserInput = {
+    where: PreferenceScalarWhereInput
+    data: XOR<PreferenceUpdateManyMutationInput, PreferenceUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PreferenceScalarWhereInput = {
+    AND?: PreferenceScalarWhereInput | PreferenceScalarWhereInput[]
+    OR?: PreferenceScalarWhereInput[]
+    NOT?: PreferenceScalarWhereInput | PreferenceScalarWhereInput[]
+    id?: StringFilter<"Preference"> | string
+    userId?: UuidFilter<"Preference"> | string
+    type?: EnumPreferenceTypeFilter<"Preference"> | $Enums.PreferenceType
+    notificationType?: EnumNotificationTypeNullableFilter<"Preference"> | $Enums.NotificationType | null
+    push?: BoolNullableFilter<"Preference"> | boolean | null
+    email?: BoolNullableFilter<"Preference"> | boolean | null
+    sms?: BoolNullableFilter<"Preference"> | boolean | null
+    reactionTarget?: EnumReactionTargetNullableFilter<"Preference"> | $Enums.ReactionTarget | null
+    hidden?: BoolNullableFilter<"Preference"> | boolean | null
+    reduceMotion?: BoolNullableFilter<"Preference"> | boolean | null
+    screenReader?: BoolNullableFilter<"Preference"> | boolean | null
+    languageCode?: StringNullableFilter<"Preference"> | string | null
+    timezone?: StringNullableFilter<"Preference"> | string | null
+    locale?: StringNullableFilter<"Preference"> | string | null
+    darkModeEnabled?: BoolNullableFilter<"Preference"> | boolean | null
+    videoQuality?: EnumVideoQualityFilter<"Preference"> | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFilter<"Preference"> | boolean
+    alwaysShowCaptions?: BoolFilter<"Preference"> | boolean
+    quietMode?: BoolFilter<"Preference"> | boolean
+    backGroundColor?: EnumCoLorFilter<"Preference"> | $Enums.CoLor
+    backGroundOpacity?: FloatFilter<"Preference"> | number
+    textColor?: EnumCoLorFilter<"Preference"> | $Enums.CoLor
+    textSize?: FloatFilter<"Preference"> | number
+  }
+
+  export type AudienceAndVisibilityUpsertWithoutUserInput = {
+    update: XOR<AudienceAndVisibilityUpdateWithoutUserInput, AudienceAndVisibilityUncheckedUpdateWithoutUserInput>
+    create: XOR<AudienceAndVisibilityCreateWithoutUserInput, AudienceAndVisibilityUncheckedCreateWithoutUserInput>
+    where?: AudienceAndVisibilityWhereInput
+  }
+
+  export type AudienceAndVisibilityUpdateToOneWithWhereWithoutUserInput = {
+    where?: AudienceAndVisibilityWhereInput
+    data: XOR<AudienceAndVisibilityUpdateWithoutUserInput, AudienceAndVisibilityUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AudienceAndVisibilityUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    restrictedList?: UserUpdateManyWithoutRestrictedByNestedInput
+    blockedProfilesOrPages?: UserUpdateManyWithoutBlockedByNestedInput
+    blockMessages?: UserUpdateManyWithoutBlockedMessagesByNestedInput
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    restrictedList?: UserUncheckedUpdateManyWithoutRestrictedByNestedInput
+    blockedProfilesOrPages?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockMessages?: UserUncheckedUpdateManyWithoutBlockedMessagesByNestedInput
+  }
+
+  export type AudienceAndVisibilityUpsertWithWhereUniqueWithoutRestrictedListInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    update: XOR<AudienceAndVisibilityUpdateWithoutRestrictedListInput, AudienceAndVisibilityUncheckedUpdateWithoutRestrictedListInput>
+    create: XOR<AudienceAndVisibilityCreateWithoutRestrictedListInput, AudienceAndVisibilityUncheckedCreateWithoutRestrictedListInput>
+  }
+
+  export type AudienceAndVisibilityUpdateWithWhereUniqueWithoutRestrictedListInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    data: XOR<AudienceAndVisibilityUpdateWithoutRestrictedListInput, AudienceAndVisibilityUncheckedUpdateWithoutRestrictedListInput>
+  }
+
+  export type AudienceAndVisibilityUpdateManyWithWhereWithoutRestrictedListInput = {
+    where: AudienceAndVisibilityScalarWhereInput
+    data: XOR<AudienceAndVisibilityUpdateManyMutationInput, AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListInput>
+  }
+
+  export type AudienceAndVisibilityScalarWhereInput = {
+    AND?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
+    OR?: AudienceAndVisibilityScalarWhereInput[]
+    NOT?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
+    id?: StringFilter<"AudienceAndVisibility"> | string
+    userId?: UuidFilter<"AudienceAndVisibility"> | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFilter<"AudienceAndVisibility"> | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    searchAccountByLink?: BoolFilter<"AudienceAndVisibility"> | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFilter<"AudienceAndVisibility"> | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFilter<"AudienceAndVisibility"> | boolean
+    allCommentSummariesOnPosts?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeeYourStories?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    allowOtherShareYourStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    archivingStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    allowOtherShareaYourReels?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeeYourReels?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    publicPostNotification?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFilter<"AudienceAndVisibility"> | boolean
+    offFacebookPreviews?: BoolFilter<"AudienceAndVisibility"> | boolean
+    hideSomethingOnYourProfile?: StringFilter<"AudienceAndVisibility"> | string
+    whoCanPostYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFilter<"AudienceAndVisibility"> | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFilter<"AudienceAndVisibility"> | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFilter<"AudienceAndVisibility"> | boolean
+    reviewPostBeforePublish?: BoolFilter<"AudienceAndVisibility"> | boolean
+  }
+
+  export type AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockedProfilesOrPagesInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    update: XOR<AudienceAndVisibilityUpdateWithoutBlockedProfilesOrPagesInput, AudienceAndVisibilityUncheckedUpdateWithoutBlockedProfilesOrPagesInput>
+    create: XOR<AudienceAndVisibilityCreateWithoutBlockedProfilesOrPagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockedProfilesOrPagesInput>
+  }
+
+  export type AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockedProfilesOrPagesInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    data: XOR<AudienceAndVisibilityUpdateWithoutBlockedProfilesOrPagesInput, AudienceAndVisibilityUncheckedUpdateWithoutBlockedProfilesOrPagesInput>
+  }
+
+  export type AudienceAndVisibilityUpdateManyWithWhereWithoutBlockedProfilesOrPagesInput = {
+    where: AudienceAndVisibilityScalarWhereInput
+    data: XOR<AudienceAndVisibilityUpdateManyMutationInput, AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesInput>
+  }
+
+  export type AudienceAndVisibilityUpsertWithWhereUniqueWithoutBlockMessagesInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    update: XOR<AudienceAndVisibilityUpdateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedUpdateWithoutBlockMessagesInput>
+    create: XOR<AudienceAndVisibilityCreateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput>
+  }
+
+  export type AudienceAndVisibilityUpdateWithWhereUniqueWithoutBlockMessagesInput = {
+    where: AudienceAndVisibilityWhereUniqueInput
+    data: XOR<AudienceAndVisibilityUpdateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedUpdateWithoutBlockMessagesInput>
+  }
+
+  export type AudienceAndVisibilityUpdateManyWithWhereWithoutBlockMessagesInput = {
+    where: AudienceAndVisibilityScalarWhereInput
+    data: XOR<AudienceAndVisibilityUpdateManyMutationInput, AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesInput>
+  }
+
   export type UserCreateWithoutSentFriendRequestsInput = {
     id?: string
     profileId: string
@@ -25583,6 +32405,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutSentFriendRequestsInput = {
@@ -25620,6 +32447,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutSentFriendRequestsInput = {
@@ -25662,6 +32494,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutReceivedFriendRequestsInput = {
@@ -25699,6 +32536,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutReceivedFriendRequestsInput = {
@@ -25752,6 +32594,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentFriendRequestsInput = {
@@ -25789,6 +32636,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUpsertWithoutReceivedFriendRequestsInput = {
@@ -25837,6 +32689,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedFriendRequestsInput = {
@@ -25874,6 +32731,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserCreateWithoutSentRelationsInput = {
@@ -25911,6 +32773,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutSentRelationsInput = {
@@ -25948,6 +32815,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutSentRelationsInput = {
@@ -25990,6 +32862,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutReceivedRelationsInput = {
@@ -26027,6 +32904,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutReceivedRelationsInput = {
@@ -26080,6 +32962,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentRelationsInput = {
@@ -26117,6 +33004,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUpsertWithoutReceivedRelationsInput = {
@@ -26165,6 +33057,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceivedRelationsInput = {
@@ -26202,6 +33099,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserCreateWithoutPrimaryEmailInput = {
@@ -26239,6 +33141,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutPrimaryEmailInput = {
@@ -26276,6 +33183,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutPrimaryEmailInput = {
@@ -26318,6 +33230,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutSubEmailsInput = {
@@ -26355,6 +33272,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutSubEmailsInput = {
@@ -26408,6 +33330,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPrimaryEmailInput = {
@@ -26445,6 +33372,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUpsertWithoutSubEmailsInput = {
@@ -26493,6 +33425,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubEmailsInput = {
@@ -26530,6 +33467,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserCreateWithoutPrimaryPhoneInput = {
@@ -26567,6 +33509,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutPrimaryPhoneInput = {
@@ -26604,6 +33551,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutPrimaryPhoneInput = {
@@ -26646,6 +33598,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutSubPhonesInput = {
@@ -26683,6 +33640,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutSubPhonesInput = {
@@ -26736,6 +33698,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPrimaryPhoneInput = {
@@ -26773,6 +33740,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUpsertWithoutSubPhonesInput = {
@@ -26821,6 +33793,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubPhonesInput = {
@@ -26858,6 +33835,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserCreateWithoutSocialLinkedsInput = {
@@ -26895,6 +33877,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutSocialLinkedsInput = {
@@ -26932,6 +33919,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutSocialLinkedsInput = {
@@ -26985,6 +33977,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSocialLinkedsInput = {
@@ -27022,6 +34019,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserCreateWithoutAuthInput = {
@@ -27059,6 +34061,11 @@ export namespace Prisma {
     reactions?: ReactionCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutAuthInput = {
@@ -27096,6 +34103,11 @@ export namespace Prisma {
     reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutAuthInput = {
@@ -27149,6 +34161,11 @@ export namespace Prisma {
     reactions?: ReactionUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuthInput = {
@@ -27186,6 +34203,11 @@ export namespace Prisma {
     reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserCreateWithoutSessionInput = {
@@ -27223,6 +34245,11 @@ export namespace Prisma {
     auth?: AuthenticationCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserUncheckedCreateWithoutSessionInput = {
@@ -27260,6 +34287,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
     notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
   }
 
   export type UserCreateOrConnectWithoutSessionInput = {
@@ -27313,6 +34345,11 @@ export namespace Prisma {
     auth?: AuthenticationUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionInput = {
@@ -27350,6 +34387,11 @@ export namespace Prisma {
     auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
     notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
   }
 
   export type ReactionCreateManyPostInput = {
@@ -27512,6 +34554,330 @@ export namespace Prisma {
     postId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type UserUpdateWithoutRestrictedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryEmail?: EmailUpdateOneRequiredWithoutPrimaryEmailUserNestedInput
+    subEmails?: EmailUpdateManyWithoutSubEmailsUserNestedInput
+    primaryPhone?: PhoneUpdateOneWithoutPrimaryPhoneUserNestedInput
+    subPhones?: PhoneUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRestrictedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    subEmails?: EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput
+    subPhones?: PhoneUncheckedUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUncheckedUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUncheckedUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutRestrictedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUpdateWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryEmail?: EmailUpdateOneRequiredWithoutPrimaryEmailUserNestedInput
+    subEmails?: EmailUpdateManyWithoutSubEmailsUserNestedInput
+    primaryPhone?: PhoneUpdateOneWithoutPrimaryPhoneUserNestedInput
+    subPhones?: PhoneUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    subEmails?: EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput
+    subPhones?: PhoneUncheckedUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUncheckedUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUncheckedUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutBlockedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUpdateWithoutBlockedMessagesByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryEmail?: EmailUpdateOneRequiredWithoutPrimaryEmailUserNestedInput
+    subEmails?: EmailUpdateManyWithoutSubEmailsUserNestedInput
+    primaryPhone?: PhoneUpdateOneWithoutPrimaryPhoneUserNestedInput
+    subPhones?: PhoneUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBlockedMessagesByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    subEmails?: EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput
+    subPhones?: PhoneUncheckedUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUncheckedUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUncheckedUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutBlockedMessagesByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type EmailCreateManySubEmailsUserInput = {
     id?: string
     value: string
@@ -27656,6 +35022,31 @@ export namespace Prisma {
     groupId?: string | null
     isGrouped?: boolean
     groupCount?: number
+  }
+
+  export type PreferenceCreateManyUserInput = {
+    id?: string
+    type: $Enums.PreferenceType
+    notificationType?: $Enums.NotificationType | null
+    push?: boolean | null
+    email?: boolean | null
+    sms?: boolean | null
+    reactionTarget?: $Enums.ReactionTarget | null
+    hidden?: boolean | null
+    reduceMotion?: boolean | null
+    screenReader?: boolean | null
+    languageCode?: string | null
+    timezone?: string | null
+    locale?: string | null
+    darkModeEnabled?: boolean | null
+    videoQuality?: $Enums.VideoQuality
+    autoPlayAnimations?: boolean
+    alwaysShowCaptions?: boolean
+    quietMode?: boolean
+    backGroundColor?: $Enums.CoLor
+    backGroundOpacity?: number
+    textColor?: $Enums.CoLor
+    textSize?: number
   }
 
   export type EmailUpdateWithoutSubEmailsUserInput = {
@@ -28106,6 +35497,435 @@ export namespace Prisma {
     groupId?: NullableStringFieldUpdateOperationsInput | string | null
     isGrouped?: BoolFieldUpdateOperationsInput | boolean
     groupCount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PreferenceUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPreferenceTypeFieldUpdateOperationsInput | $Enums.PreferenceType
+    notificationType?: NullableEnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType | null
+    push?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    email?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sms?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reactionTarget?: NullableEnumReactionTargetFieldUpdateOperationsInput | $Enums.ReactionTarget | null
+    hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reduceMotion?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    screenReader?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    languageCode?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    darkModeEnabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    videoQuality?: EnumVideoQualityFieldUpdateOperationsInput | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFieldUpdateOperationsInput | boolean
+    alwaysShowCaptions?: BoolFieldUpdateOperationsInput | boolean
+    quietMode?: BoolFieldUpdateOperationsInput | boolean
+    backGroundColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    backGroundOpacity?: FloatFieldUpdateOperationsInput | number
+    textColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    textSize?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type PreferenceUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPreferenceTypeFieldUpdateOperationsInput | $Enums.PreferenceType
+    notificationType?: NullableEnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType | null
+    push?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    email?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sms?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reactionTarget?: NullableEnumReactionTargetFieldUpdateOperationsInput | $Enums.ReactionTarget | null
+    hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reduceMotion?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    screenReader?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    languageCode?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    darkModeEnabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    videoQuality?: EnumVideoQualityFieldUpdateOperationsInput | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFieldUpdateOperationsInput | boolean
+    alwaysShowCaptions?: BoolFieldUpdateOperationsInput | boolean
+    quietMode?: BoolFieldUpdateOperationsInput | boolean
+    backGroundColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    backGroundOpacity?: FloatFieldUpdateOperationsInput | number
+    textColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    textSize?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type PreferenceUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumPreferenceTypeFieldUpdateOperationsInput | $Enums.PreferenceType
+    notificationType?: NullableEnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType | null
+    push?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    email?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    sms?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reactionTarget?: NullableEnumReactionTargetFieldUpdateOperationsInput | $Enums.ReactionTarget | null
+    hidden?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    reduceMotion?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    screenReader?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    languageCode?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    darkModeEnabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    videoQuality?: EnumVideoQualityFieldUpdateOperationsInput | $Enums.VideoQuality
+    autoPlayAnimations?: BoolFieldUpdateOperationsInput | boolean
+    alwaysShowCaptions?: BoolFieldUpdateOperationsInput | boolean
+    quietMode?: BoolFieldUpdateOperationsInput | boolean
+    backGroundColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    backGroundOpacity?: FloatFieldUpdateOperationsInput | number
+    textColor?: EnumCoLorFieldUpdateOperationsInput | $Enums.CoLor
+    textSize?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type AudienceAndVisibilityUpdateWithoutRestrictedListInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutAudienceAndVisibilityNestedInput
+    blockedProfilesOrPages?: UserUpdateManyWithoutBlockedByNestedInput
+    blockMessages?: UserUpdateManyWithoutBlockedMessagesByNestedInput
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateWithoutRestrictedListInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    blockedProfilesOrPages?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+    blockMessages?: UserUncheckedUpdateManyWithoutBlockedMessagesByNestedInput
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AudienceAndVisibilityUpdateWithoutBlockedProfilesOrPagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutAudienceAndVisibilityNestedInput
+    restrictedList?: UserUpdateManyWithoutRestrictedByNestedInput
+    blockMessages?: UserUpdateManyWithoutBlockedMessagesByNestedInput
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateWithoutBlockedProfilesOrPagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    restrictedList?: UserUncheckedUpdateManyWithoutRestrictedByNestedInput
+    blockMessages?: UserUncheckedUpdateManyWithoutBlockedMessagesByNestedInput
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AudienceAndVisibilityUpdateWithoutBlockMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutAudienceAndVisibilityNestedInput
+    restrictedList?: UserUpdateManyWithoutRestrictedByNestedInput
+    blockedProfilesOrPages?: UserUpdateManyWithoutBlockedByNestedInput
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateWithoutBlockMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    restrictedList?: UserUncheckedUpdateManyWithoutRestrictedByNestedInput
+    blockedProfilesOrPages?: UserUncheckedUpdateManyWithoutBlockedByNestedInput
+  }
+
+  export type AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    whoCanSendFriendRequest?: EnumSendFriendRequestFieldUpdateOperationsInput | $Enums.SendFriendRequest
+    whoCanSeeListFriends?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourEmailAddress?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    peopleWithYourPhoneNumber?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    searchAccountByLink?: BoolFieldUpdateOperationsInput | boolean
+    forFriendsOfFriendRequest?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPeopleMultialGroup?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forPageFollow?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    forOtherPeople?: EnumTypeSendMessageFieldUpdateOperationsInput | $Enums.TypeSendMessage
+    whoCanseeYourFuturePosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    limitWhoCanSeePastPost?: BoolFieldUpdateOperationsInput | boolean
+    allCommentSummariesOnPosts?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourStories?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourStories?: BoolFieldUpdateOperationsInput | boolean
+    archivingStories?: BoolFieldUpdateOperationsInput | boolean
+    allowOtherShareaYourReels?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeeYourReels?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanFollowMe?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeYourFollowers?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeSomethingYouFollow?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanCommentYourPosts?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicPostNotification?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    publicProfileInfo?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    showMostRelevantCommentsFirst?: BoolFieldUpdateOperationsInput | boolean
+    offFacebookPreviews?: BoolFieldUpdateOperationsInput | boolean
+    hideSomethingOnYourProfile?: StringFieldUpdateOperationsInput | string
+    whoCanPostYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoCanSeeWhatOtherPostOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    allowOtherShareYourPostsToTheirStories?: BoolFieldUpdateOperationsInput | boolean
+    whoCanSeePostsYouTagOnYourProfile?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    whoYouWannaToTagAndNotRead?: EnumAudienceFieldUpdateOperationsInput | $Enums.Audience
+    reviewPeopleAddToYourPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
+    reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

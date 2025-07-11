@@ -235,6 +235,168 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ========= Preferences =========
+model Preference {
+  id     String @id @default(uuid())
+  userId String @unique @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  type PreferenceType
+
+  // ========== Notifications ==========
+  notificationType NotificationType? // enum nằm ở file riêng
+  push             Boolean?          @default(false)
+  email            Boolean?          @default(false)
+  sms              Boolean?          @default(false)
+
+  // ========== Reaction ==========
+  reactionTarget ReactionTarget?
+  hidden         Boolean?        @default(false)
+
+  // ========== Accessibility ==========
+  reduceMotion Boolean? @default(false)
+  screenReader Boolean? @default(false)
+
+  // ========== Language & Region ==========
+  languageCode String? // e.g., "en", "vi"
+  timezone     String? // e.g., "Asia/Ho_Chi_Minh"
+  locale       String? // e.g., "en_US", "vi_VN"
+
+  // ========== Dark Mode ==========
+  darkModeEnabled Boolean? @default(false)
+
+  // ========== Media Preferences ==========
+  videoQuality       VideoQuality @default(DEFAULT)
+  autoPlayAnimations Boolean      @default(false)
+  alwaysShowCaptions Boolean      @default(false)
+  quietMode          Boolean      @default(false)
+
+  // ========== Caption Display ==========
+  backGroundColor   CoLor @default(BLACK)
+  backGroundOpacity Float @default(45)
+  textColor         CoLor @default(WHITE)
+  textSize          Float @default(100)
+
+  // ========== Constraints ==========
+  @@unique([userId, notificationType])
+  @@unique([userId, reactionTarget])
+  @@unique([userId, videoQuality])
+}
+
+// ========= Audience & Visibility =========
+model AudienceAndVisibility {
+  id     String @id @default(uuid())
+  userId String @unique @db.Uuid
+  user   User   @relation(name: "UserAudienceVisibility", fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  // ========== How People Find and Contact You ==========
+  whoCanSendFriendRequest    SendFriendRequest @default(EVERYONE)
+  whoCanSeeListFriends       Audience          @default(PUBLIC)
+  peopleWithYourEmailAddress Audience          @default(PUBLIC)
+  peopleWithYourPhoneNumber  Audience          @default(PUBLIC)
+  searchAccountByLink        Boolean           @default(true)
+
+  // ========== Message Request Settings ==========
+  forFriendsOfFriendRequest TypeSendMessage @default(MESSAGEREQUESTS)
+  forPeopleMultialGroup     TypeSendMessage @default(CHATS)
+  forPageFollow             TypeSendMessage @default(MESSAGEREQUESTS)
+  forOtherPeople            TypeSendMessage @default(MESSAGEREQUESTS)
+
+  // ========== Post Visibility ==========
+  whoCanseeYourFuturePosts   Audience @default(ONLYME)
+  limitWhoCanSeePastPost     Boolean  @default(false)
+  allCommentSummariesOnPosts Boolean  @default(true)
+
+  // ========== Story Settings ==========
+  whoCanSeeYourStories       Audience @default(PUBLIC)
+  allowOtherShareYourStories Boolean  @default(true)
+  archivingStories           Boolean  @default(true)
+
+  // ========== Reels Settings ==========
+  allowOtherShareaYourReels Boolean  @default(true)
+  whoCanSeeYourReels        Audience @default(PUBLIC)
+
+  // ========== Follower & Public Content ==========
+  whoCanFollowMe                Audience @default(PUBLIC)
+  whoCanSeeYourFollowers        Audience @default(PUBLIC)
+  whoCanSeeSomethingYouFollow   Audience @default(PUBLIC)
+  whoCanCommentYourPosts        Audience @default(PUBLIC)
+  publicPostNotification        Audience @default(PUBLIC)
+  publicProfileInfo             Audience @default(PUBLIC)
+  showMostRelevantCommentsFirst Boolean  @default(true)
+  offFacebookPreviews           Boolean  @default(true)
+  hideSomethingOnYourProfile    String   @db.VarChar(1000)
+
+  // ========== Profile & Tagging ==========
+  whoCanPostYourProfile                  Audience @default(FRIENDS)
+  whoCanSeeWhatOtherPostOnYourProfile    Audience @default(FRIENDS)
+  allowOtherShareYourPostsToTheirStories Boolean  @default(true)
+  whoCanSeePostsYouTagOnYourProfile      Audience @default(FRIENDS)
+  whoYouWannaToTagAndNotRead             Audience @default(FRIENDS)
+  reviewPeopleAddToYourPostBeforePublish Boolean  @default(false)
+  reviewPostBeforePublish                Boolean  @default(true)
+
+  // ========== Blocking ==========
+  restrictedList         User[] @relation("RestrictedList")
+  blockedProfilesOrPages User[] @relation("BlockedProfilesOrPages")
+  blockMessages          User[] @relation("BlockMessages")
+
+  @@unique([userId, whoCanSeeListFriends])
+  @@unique([userId, whoCanSendFriendRequest])
+}
+
+// ========= Enums =========
+
+enum PreferenceType {
+  NOTIFICATION
+  REACTION
+  ACCESSIBILITY
+  LANGUAGE
+  DARKMODE
+}
+
+enum ReactionTarget {
+  OTHER_PEOPLE
+  MYSELF
+}
+
+enum VideoQuality {
+  DEFAULT
+  SDONLY
+  HDIFAVAILABLE
+}
+
+enum CoLor {
+  BLACK
+  BLUE
+  GREEN
+  CYAN
+  RED
+  MAGENTA
+  WHITE
+  YELLOW
+}
+
+enum SendFriendRequest {
+  EVERYONE
+  FRIENDSOFFRIENDS
+}
+
+enum Audience {
+  PUBLIC
+  FRIENDS
+  FRIENDSEXCEPT
+  SPECIFICFRIENDS
+  ONLYME
+  CUSTOM
+}
+
+enum TypeSendMessage {
+  CHATS
+  MESSAGEREQUESTS
+  DONNOTRECEIVE
+}
+
 model User {
   id        String        @id @default(uuid()) @db.Uuid()
   profileId String        @unique
@@ -289,6 +451,14 @@ model User {
   auth                Authentication[]
   notifications       Notification[]   @relation("UserNotifications")
   notificationActions Notification[]   @relation("UserNotificationActions")
+
+  Preference Preference[]
+
+  // Audience & Visibility relations
+  audienceAndVisibility AudienceAndVisibility?  @relation("UserAudienceVisibility")
+  restrictedBy          AudienceAndVisibility[] @relation("RestrictedList")
+  blockedBy             AudienceAndVisibility[] @relation("BlockedProfilesOrPages")
+  blockedMessagesBy     AudienceAndVisibility[] @relation("BlockMessages")
 }
 
 model Friendship {

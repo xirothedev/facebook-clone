@@ -53,6 +53,14 @@ model User {
   notifications       Notification[]   @relation("UserNotifications")
   notificationActions Notification[]   @relation("UserNotificationActions")
 
+    Preference          Preference[]
+  
+  // Audience & Visibility relations
+  audienceAndVisibility AudienceAndVisibility? @relation("UserAudienceVisibility")
+  restrictedBy         AudienceAndVisibility[] @relation("RestrictedList")
+  blockedBy            AudienceAndVisibility[] @relation("BlockedProfilesOrPages")
+  blockedMessagesBy    AudienceAndVisibility[] @relation("BlockMessages")
+
 }
 
 model Friendship {

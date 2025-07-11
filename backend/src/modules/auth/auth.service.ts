@@ -22,6 +22,7 @@ import type { UserWithPrimaryEmailAndWithoutPassword } from "./auth.interface";
 import type { ChangePasswordDto, ForgotPasswordDto } from "./dto/change-password.dto";
 import type { RegisterUser } from "./dto/register-auth.dto";
 import { TokenService } from "./token.service";
+import { SettingService } from "../setting/setting.service";
 
 const MAX_AVAILABLE_TIME = 5 * 60_000;
 const MAX_TIME_SAVE = 60 * 60 * 24 * 30; // 30 days
@@ -40,6 +41,7 @@ export class AuthService {
 		private readonly redisService: RedisService,
 		private readonly jwtService: JwtService,
 		private readonly configService: ConfigService,
+		private readonly settingService: SettingService,
 	) {}
 
 	public async hashing(string: string): Promise<string> {
@@ -144,6 +146,8 @@ export class AuthService {
 				hashedPassword: hashedPassword,
 			},
 		});
+
+		await this.settingService.createSettingDefault(newUser.id);
 
 		return {
 			message: "Register successful",

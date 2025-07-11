@@ -194,6 +194,70 @@ exports.Prisma.ReactionScalarFieldEnum = {
   commentId: 'commentId'
 };
 
+exports.Prisma.PreferenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  notificationType: 'notificationType',
+  push: 'push',
+  email: 'email',
+  sms: 'sms',
+  reactionTarget: 'reactionTarget',
+  hidden: 'hidden',
+  reduceMotion: 'reduceMotion',
+  screenReader: 'screenReader',
+  languageCode: 'languageCode',
+  timezone: 'timezone',
+  locale: 'locale',
+  darkModeEnabled: 'darkModeEnabled',
+  videoQuality: 'videoQuality',
+  autoPlayAnimations: 'autoPlayAnimations',
+  alwaysShowCaptions: 'alwaysShowCaptions',
+  quietMode: 'quietMode',
+  backGroundColor: 'backGroundColor',
+  backGroundOpacity: 'backGroundOpacity',
+  textColor: 'textColor',
+  textSize: 'textSize'
+};
+
+exports.Prisma.AudienceAndVisibilityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  whoCanSendFriendRequest: 'whoCanSendFriendRequest',
+  whoCanSeeListFriends: 'whoCanSeeListFriends',
+  peopleWithYourEmailAddress: 'peopleWithYourEmailAddress',
+  peopleWithYourPhoneNumber: 'peopleWithYourPhoneNumber',
+  searchAccountByLink: 'searchAccountByLink',
+  forFriendsOfFriendRequest: 'forFriendsOfFriendRequest',
+  forPeopleMultialGroup: 'forPeopleMultialGroup',
+  forPageFollow: 'forPageFollow',
+  forOtherPeople: 'forOtherPeople',
+  whoCanseeYourFuturePosts: 'whoCanseeYourFuturePosts',
+  limitWhoCanSeePastPost: 'limitWhoCanSeePastPost',
+  allCommentSummariesOnPosts: 'allCommentSummariesOnPosts',
+  whoCanSeeYourStories: 'whoCanSeeYourStories',
+  allowOtherShareYourStories: 'allowOtherShareYourStories',
+  archivingStories: 'archivingStories',
+  allowOtherShareaYourReels: 'allowOtherShareaYourReels',
+  whoCanSeeYourReels: 'whoCanSeeYourReels',
+  whoCanFollowMe: 'whoCanFollowMe',
+  whoCanSeeYourFollowers: 'whoCanSeeYourFollowers',
+  whoCanSeeSomethingYouFollow: 'whoCanSeeSomethingYouFollow',
+  whoCanCommentYourPosts: 'whoCanCommentYourPosts',
+  publicPostNotification: 'publicPostNotification',
+  publicProfileInfo: 'publicProfileInfo',
+  showMostRelevantCommentsFirst: 'showMostRelevantCommentsFirst',
+  offFacebookPreviews: 'offFacebookPreviews',
+  hideSomethingOnYourProfile: 'hideSomethingOnYourProfile',
+  whoCanPostYourProfile: 'whoCanPostYourProfile',
+  whoCanSeeWhatOtherPostOnYourProfile: 'whoCanSeeWhatOtherPostOnYourProfile',
+  allowOtherShareYourPostsToTheirStories: 'allowOtherShareYourPostsToTheirStories',
+  whoCanSeePostsYouTagOnYourProfile: 'whoCanSeePostsYouTagOnYourProfile',
+  whoYouWannaToTagAndNotRead: 'whoYouWannaToTagAndNotRead',
+  reviewPeopleAddToYourPostBeforePublish: 'reviewPeopleAddToYourPostBeforePublish',
+  reviewPostBeforePublish: 'reviewPostBeforePublish'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   profileId: 'profileId',
@@ -390,6 +454,56 @@ exports.ReactionType = exports.$Enums.ReactionType = {
   ANGRY: 'ANGRY'
 };
 
+exports.PreferenceType = exports.$Enums.PreferenceType = {
+  NOTIFICATION: 'NOTIFICATION',
+  REACTION: 'REACTION',
+  ACCESSIBILITY: 'ACCESSIBILITY',
+  LANGUAGE: 'LANGUAGE',
+  DARKMODE: 'DARKMODE'
+};
+
+exports.ReactionTarget = exports.$Enums.ReactionTarget = {
+  OTHER_PEOPLE: 'OTHER_PEOPLE',
+  MYSELF: 'MYSELF'
+};
+
+exports.VideoQuality = exports.$Enums.VideoQuality = {
+  DEFAULT: 'DEFAULT',
+  SDONLY: 'SDONLY',
+  HDIFAVAILABLE: 'HDIFAVAILABLE'
+};
+
+exports.CoLor = exports.$Enums.CoLor = {
+  BLACK: 'BLACK',
+  BLUE: 'BLUE',
+  GREEN: 'GREEN',
+  CYAN: 'CYAN',
+  RED: 'RED',
+  MAGENTA: 'MAGENTA',
+  WHITE: 'WHITE',
+  YELLOW: 'YELLOW'
+};
+
+exports.SendFriendRequest = exports.$Enums.SendFriendRequest = {
+  EVERYONE: 'EVERYONE',
+  FRIENDSOFFRIENDS: 'FRIENDSOFFRIENDS'
+};
+
+exports.Audience = exports.$Enums.Audience = {
+  PUBLIC: 'PUBLIC',
+  FRIENDS: 'FRIENDS',
+  FRIENDSEXCEPT: 'FRIENDSEXCEPT',
+  SPECIFICFRIENDS: 'SPECIFICFRIENDS',
+  ONLYME: 'ONLYME',
+  CUSTOM: 'CUSTOM'
+};
+
+exports.TypeSendMessage = exports.$Enums.TypeSendMessage = {
+  CHATS: 'CHATS',
+  MESSAGEREQUESTS: 'MESSAGEREQUESTS',
+  DONNOTRECEIVE: 'DONNOTRECEIVE'
+};
+
 exports.StatusAccount = exports.$Enums.StatusAccount = {
   ACTIVE: 'ACTIVE',
   DISABLE: 'DISABLE',
@@ -476,6 +590,8 @@ exports.Prisma.ModelName = {
   Post: 'Post',
   Comment: 'Comment',
   Reaction: 'Reaction',
+  Preference: 'Preference',
+  AudienceAndVisibility: 'AudienceAndVisibility',
   User: 'User',
   Friendship: 'Friendship',
   Relation: 'Relation',
