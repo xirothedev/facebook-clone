@@ -1,0 +1,67 @@
+model Page {
+    name String
+    phoneNumber String
+    avtUrl String?
+    backGroundurl String?
+    updateAt DateTime?
+    status StatusPage @default(ACTIVE)
+    liked Boolean @default(false)
+
+    // detail location
+    address String?
+    city String?
+    zipcode String?
+
+    // followers
+    followers User[] @relation("followers")
+
+    // post
+    posts Post[]
+
+    // about
+    categories String
+    socialLinks SocialLinkeds[]
+    id String @id @default(uuid()) @db.Uuid()
+    createAt DateTime @default(now())
+    adminInfor User[] @relation("adminInfor")
+    bio String?
+
+    // mentions (update later)
+
+    // reels ( update later )
+
+    // photos
+
+    // videos
+
+    // lives
+
+    // events
+
+    // followers
+
+    // music
+
+    // check-ins
+
+    // sports
+
+    // films
+
+    // tv grogrammers
+
+    //books
+
+    // likes
+
+    // reviews given
+
+}
+
+enum StatusPage {
+    ACTIVE 
+    UNPUBLISHED // ẩn
+    DELETED // bị xóa
+    RESTRICTED // bị giới hạn
+    BANNED // cấm hoàn toàn 
+}

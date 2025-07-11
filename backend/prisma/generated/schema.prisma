@@ -141,10 +141,83 @@ enum NotificationPriority {
   URGENT
 }
 
+model Page {
+  name          String
+  phoneNumber   String
+  avtUrl        String?
+  backGroundurl String?
+  updateAt      DateTime?
+  status        StatusPage @default(ACTIVE)
+  liked         Boolean    @default(false)
+
+  // detail location
+  address String?
+  city    String?
+  zipcode String?
+
+  // followers
+  followers User[] @relation("followers")
+
+  // post
+  posts Post[]
+
+  // about
+  categories  String
+  socialLinks SocialLinkeds[]
+  id          String          @id @default(uuid()) @db.Uuid()
+  createAt    DateTime        @default(now())
+  adminInfor  User[]          @relation("adminInfor")
+  bio         String?
+
+  // mentions (update later)
+
+  // reels ( update later )
+
+  // photos
+
+  // videos
+
+  // lives
+
+  // events
+
+  // followers
+
+  // music
+
+  // check-ins
+
+  // sports
+
+  // films
+
+  // tv grogrammers
+
+  //books
+
+  // likes
+
+  // reviews given
+}
+
+enum StatusPage {
+  ACTIVE
+  UNPUBLISHED // ẩn
+  DELETED // bị xóa
+  RESTRICTED // bị giới hạn
+  BANNED // cấm hoàn toàn 
+}
+
 model Post {
-  id        String     @id @default(cuid())
-  authorId  String     @db.Uuid
-  author    User       @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id String @id @default(cuid())
+
+  // realtions
+  authorId String @db.Uuid
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  pageId String? @db.Uuid()
+  page   Page?   @relation(fields: [pageId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
   createdAt DateTime   @default(now())
   updateAt  DateTime   @updatedAt
   scope     Scope
@@ -163,8 +236,8 @@ model Comment {
   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   content  String
 
-  postId String
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId String?
+  post   Post?   @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   parentId String? // nullable nếu là comment gốc
   parent   Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
@@ -459,6 +532,13 @@ model User {
   restrictedBy          AudienceAndVisibility[] @relation("RestrictedList")
   blockedBy             AudienceAndVisibility[] @relation("BlockedProfilesOrPages")
   blockedMessagesBy     AudienceAndVisibility[] @relation("BlockMessages")
+
+  //page
+  pageId String? @db.Uuid()
+  page   Page?   @relation(name: "adminInfor", fields: [pageId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  followingPageId String? @db.Uuid()
+  followingPage   Page?   @relation(name: "followers", fields: [followingPageId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Friendship {
@@ -514,8 +594,12 @@ model Phone {
 model SocialLinkeds {
   id       String   @id @default(uuid())
   platform Platform
-  userId   String   @db.Uuid
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  userId String @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  pageId String @db.Uuid()
+  page   Page   @relation(fields: [pageId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 }
 
 model Authentication {

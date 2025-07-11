@@ -24,6 +24,7 @@ import { NotificationsModule } from "./modules/notifications/notifications.modul
 import { CommentModule } from "./modules/comment/comment.module";
 import { SettingModule } from "./modules/setting/setting.module";
 import { FriendsModule } from "./modules/friends/friends.module";
+import { PagesModule } from "./modules/pages/pages.module";
 
 @Module({
 	imports: [
@@ -82,6 +83,7 @@ import { FriendsModule } from "./modules/friends/friends.module";
 		CommentModule,
 		SettingModule,
 		FriendsModule,
+		PagesModule,
 	],
 	controllers: [AppController],
 	providers: [

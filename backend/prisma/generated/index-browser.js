@@ -162,9 +162,27 @@ exports.Prisma.NotificationScalarFieldEnum = {
   groupCount: 'groupCount'
 };
 
+exports.Prisma.PageScalarFieldEnum = {
+  name: 'name',
+  phoneNumber: 'phoneNumber',
+  avtUrl: 'avtUrl',
+  backGroundurl: 'backGroundurl',
+  updateAt: 'updateAt',
+  status: 'status',
+  liked: 'liked',
+  address: 'address',
+  city: 'city',
+  zipcode: 'zipcode',
+  categories: 'categories',
+  id: 'id',
+  createAt: 'createAt',
+  bio: 'bio'
+};
+
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   authorId: 'authorId',
+  pageId: 'pageId',
   createdAt: 'createdAt',
   updateAt: 'updateAt',
   scope: 'scope',
@@ -279,7 +297,9 @@ exports.Prisma.UserScalarFieldEnum = {
   language: 'language',
   deletedAt: 'deletedAt',
   avatarUrl: 'avatarUrl',
-  bannerUrl: 'bannerUrl'
+  bannerUrl: 'bannerUrl',
+  pageId: 'pageId',
+  followingPageId: 'followingPageId'
 };
 
 exports.Prisma.FriendshipScalarFieldEnum = {
@@ -319,7 +339,8 @@ exports.Prisma.PhoneScalarFieldEnum = {
 exports.Prisma.SocialLinkedsScalarFieldEnum = {
   id: 'id',
   platform: 'platform',
-  userId: 'userId'
+  userId: 'userId',
+  pageId: 'pageId'
 };
 
 exports.Prisma.AuthenticationScalarFieldEnum = {
@@ -423,6 +444,14 @@ exports.NotificationPriority = exports.$Enums.NotificationPriority = {
   NORMAL: 'NORMAL',
   HIGH: 'HIGH',
   URGENT: 'URGENT'
+};
+
+exports.StatusPage = exports.$Enums.StatusPage = {
+  ACTIVE: 'ACTIVE',
+  UNPUBLISHED: 'UNPUBLISHED',
+  DELETED: 'DELETED',
+  RESTRICTED: 'RESTRICTED',
+  BANNED: 'BANNED'
 };
 
 exports.Scope = exports.$Enums.Scope = {
@@ -595,6 +624,7 @@ exports.AuthType = exports.$Enums.AuthType = {
 exports.Prisma.ModelName = {
   Media: 'Media',
   Notification: 'Notification',
+  Page: 'Page',
   Post: 'Post',
   Comment: 'Comment',
   Reaction: 'Reaction',
