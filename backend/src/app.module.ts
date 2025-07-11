@@ -23,6 +23,7 @@ import { AuthCookieGuard } from "./common/guards/auth-cookie.guard";
 import { NotificationsModule } from "./modules/notifications/notifications.module";
 import { CommentModule } from "./modules/comment/comment.module";
 import { SettingModule } from "./modules/setting/setting.module";
+import { FriendsModule } from "./modules/friends/friends.module";
 
 @Module({
 	imports: [
@@ -80,6 +81,7 @@ import { SettingModule } from "./modules/setting/setting.module";
 		NotificationsModule,
 		CommentModule,
 		SettingModule,
+		FriendsModule,
 	],
 	controllers: [AppController],
 	providers: [

@@ -53,20 +53,20 @@ model User {
   notifications       Notification[]   @relation("UserNotifications")
   notificationActions Notification[]   @relation("UserNotificationActions")
 
-    Preference          Preference[]
-  
-  // Audience & Visibility relations
-  audienceAndVisibility AudienceAndVisibility? @relation("UserAudienceVisibility")
-  restrictedBy         AudienceAndVisibility[] @relation("RestrictedList")
-  blockedBy            AudienceAndVisibility[] @relation("BlockedProfilesOrPages")
-  blockedMessagesBy    AudienceAndVisibility[] @relation("BlockMessages")
+  Preference Preference[]
 
+  // Audience & Visibility relations
+  audienceAndVisibility AudienceAndVisibility?  @relation("UserAudienceVisibility")
+  restrictedBy          AudienceAndVisibility[] @relation("RestrictedList")
+  blockedBy             AudienceAndVisibility[] @relation("BlockedProfilesOrPages")
+  blockedMessagesBy     AudienceAndVisibility[] @relation("BlockMessages")
 }
 
 model Friendship {
   requesterId String   @db.Uuid
   addresseeId String   @db.Uuid
   status      Status   @default(PENDING)
+  statusCustom CustomUser @default(ACCQUAINTANCES)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -81,6 +81,7 @@ model Relation {
   targetUserId String       @db.Uuid
   type         RelationType
   status       Status
+  statusCustom CustomUser @default(ACCQUAINTANCES)
   scope        Scope
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
@@ -177,6 +178,12 @@ enum RelationType {
   YOUNG_BROTHER
   SISTER
   BROTHER
+}
+
+enum CustomUser {
+  ACCQUAINTANCES
+  CLOSEFRIENDS
+  RESTRICTED
 }
 
 enum Status {

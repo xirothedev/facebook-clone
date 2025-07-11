@@ -97,7 +97,7 @@ export class AuthService {
 	}
 
 	// get ip user
-	private extractIp(req: Request): string {
+	extractIp(req: Request): string {
 		const xForwardedFor = req.headers["x-forwarded-for"] as string;
 		return xForwardedFor?.split(",")[0] || req.socket.remoteAddress || "";
 	}

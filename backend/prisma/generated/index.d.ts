@@ -318,6 +318,15 @@ export const RelationType: {
 export type RelationType = (typeof RelationType)[keyof typeof RelationType]
 
 
+export const CustomUser: {
+  ACCQUAINTANCES: 'ACCQUAINTANCES',
+  CLOSEFRIENDS: 'CLOSEFRIENDS',
+  RESTRICTED: 'RESTRICTED'
+};
+
+export type CustomUser = (typeof CustomUser)[keyof typeof CustomUser]
+
+
 export const Status: {
   PENDING: 'PENDING',
   ACCEPTED: 'ACCEPTED',
@@ -455,6 +464,10 @@ export const UserRole: typeof $Enums.UserRole
 export type RelationType = $Enums.RelationType
 
 export const RelationType: typeof $Enums.RelationType
+
+export type CustomUser = $Enums.CustomUser
+
+export const CustomUser: typeof $Enums.CustomUser
 
 export type Status = $Enums.Status
 
@@ -13494,6 +13507,7 @@ export namespace Prisma {
     requesterId: string | null
     addresseeId: string | null
     status: $Enums.Status | null
+    statusCustom: $Enums.CustomUser | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -13502,6 +13516,7 @@ export namespace Prisma {
     requesterId: string | null
     addresseeId: string | null
     status: $Enums.Status | null
+    statusCustom: $Enums.CustomUser | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -13510,6 +13525,7 @@ export namespace Prisma {
     requesterId: number
     addresseeId: number
     status: number
+    statusCustom: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -13520,6 +13536,7 @@ export namespace Prisma {
     requesterId?: true
     addresseeId?: true
     status?: true
+    statusCustom?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -13528,6 +13545,7 @@ export namespace Prisma {
     requesterId?: true
     addresseeId?: true
     status?: true
+    statusCustom?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -13536,6 +13554,7 @@ export namespace Prisma {
     requesterId?: true
     addresseeId?: true
     status?: true
+    statusCustom?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -13617,6 +13636,7 @@ export namespace Prisma {
     requesterId: string
     addresseeId: string
     status: $Enums.Status
+    statusCustom: $Enums.CustomUser
     createdAt: Date
     updatedAt: Date
     _count: FriendshipCountAggregateOutputType | null
@@ -13642,6 +13662,7 @@ export namespace Prisma {
     requesterId?: boolean
     addresseeId?: boolean
     status?: boolean
+    statusCustom?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     requester?: boolean | UserDefaultArgs<ExtArgs>
@@ -13652,6 +13673,7 @@ export namespace Prisma {
     requesterId?: boolean
     addresseeId?: boolean
     status?: boolean
+    statusCustom?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     requester?: boolean | UserDefaultArgs<ExtArgs>
@@ -13662,6 +13684,7 @@ export namespace Prisma {
     requesterId?: boolean
     addresseeId?: boolean
     status?: boolean
+    statusCustom?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     requester?: boolean | UserDefaultArgs<ExtArgs>
@@ -13672,11 +13695,12 @@ export namespace Prisma {
     requesterId?: boolean
     addresseeId?: boolean
     status?: boolean
+    statusCustom?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type FriendshipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requesterId" | "addresseeId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["friendship"]>
+  export type FriendshipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requesterId" | "addresseeId" | "status" | "statusCustom" | "createdAt" | "updatedAt", ExtArgs["result"]["friendship"]>
   export type FriendshipInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     requester?: boolean | UserDefaultArgs<ExtArgs>
     addressee?: boolean | UserDefaultArgs<ExtArgs>
@@ -13700,6 +13724,7 @@ export namespace Prisma {
       requesterId: string
       addresseeId: string
       status: $Enums.Status
+      statusCustom: $Enums.CustomUser
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["friendship"]>
@@ -14130,6 +14155,7 @@ export namespace Prisma {
     readonly requesterId: FieldRef<"Friendship", 'String'>
     readonly addresseeId: FieldRef<"Friendship", 'String'>
     readonly status: FieldRef<"Friendship", 'Status'>
+    readonly statusCustom: FieldRef<"Friendship", 'CustomUser'>
     readonly createdAt: FieldRef<"Friendship", 'DateTime'>
     readonly updatedAt: FieldRef<"Friendship", 'DateTime'>
   }
@@ -14570,6 +14596,7 @@ export namespace Prisma {
     targetUserId: string | null
     type: $Enums.RelationType | null
     status: $Enums.Status | null
+    statusCustom: $Enums.CustomUser | null
     scope: $Enums.Scope | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14580,6 +14607,7 @@ export namespace Prisma {
     targetUserId: string | null
     type: $Enums.RelationType | null
     status: $Enums.Status | null
+    statusCustom: $Enums.CustomUser | null
     scope: $Enums.Scope | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14590,6 +14618,7 @@ export namespace Prisma {
     targetUserId: number
     type: number
     status: number
+    statusCustom: number
     scope: number
     createdAt: number
     updatedAt: number
@@ -14602,6 +14631,7 @@ export namespace Prisma {
     targetUserId?: true
     type?: true
     status?: true
+    statusCustom?: true
     scope?: true
     createdAt?: true
     updatedAt?: true
@@ -14612,6 +14642,7 @@ export namespace Prisma {
     targetUserId?: true
     type?: true
     status?: true
+    statusCustom?: true
     scope?: true
     createdAt?: true
     updatedAt?: true
@@ -14622,6 +14653,7 @@ export namespace Prisma {
     targetUserId?: true
     type?: true
     status?: true
+    statusCustom?: true
     scope?: true
     createdAt?: true
     updatedAt?: true
@@ -14705,6 +14737,7 @@ export namespace Prisma {
     targetUserId: string
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt: Date
     updatedAt: Date
@@ -14732,6 +14765,7 @@ export namespace Prisma {
     targetUserId?: boolean
     type?: boolean
     status?: boolean
+    statusCustom?: boolean
     scope?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14744,6 +14778,7 @@ export namespace Prisma {
     targetUserId?: boolean
     type?: boolean
     status?: boolean
+    statusCustom?: boolean
     scope?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14756,6 +14791,7 @@ export namespace Prisma {
     targetUserId?: boolean
     type?: boolean
     status?: boolean
+    statusCustom?: boolean
     scope?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14768,12 +14804,13 @@ export namespace Prisma {
     targetUserId?: boolean
     type?: boolean
     status?: boolean
+    statusCustom?: boolean
     scope?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type RelationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sourceUserId" | "targetUserId" | "type" | "status" | "scope" | "createdAt" | "updatedAt", ExtArgs["result"]["relation"]>
+  export type RelationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"sourceUserId" | "targetUserId" | "type" | "status" | "statusCustom" | "scope" | "createdAt" | "updatedAt", ExtArgs["result"]["relation"]>
   export type RelationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sourceUser?: boolean | UserDefaultArgs<ExtArgs>
     targetUser?: boolean | UserDefaultArgs<ExtArgs>
@@ -14798,6 +14835,7 @@ export namespace Prisma {
       targetUserId: string
       type: $Enums.RelationType
       status: $Enums.Status
+      statusCustom: $Enums.CustomUser
       scope: $Enums.Scope
       createdAt: Date
       updatedAt: Date
@@ -15230,6 +15268,7 @@ export namespace Prisma {
     readonly targetUserId: FieldRef<"Relation", 'String'>
     readonly type: FieldRef<"Relation", 'RelationType'>
     readonly status: FieldRef<"Relation", 'Status'>
+    readonly statusCustom: FieldRef<"Relation", 'CustomUser'>
     readonly scope: FieldRef<"Relation", 'Scope'>
     readonly createdAt: FieldRef<"Relation", 'DateTime'>
     readonly updatedAt: FieldRef<"Relation", 'DateTime'>
@@ -21308,6 +21347,7 @@ export namespace Prisma {
     requesterId: 'requesterId',
     addresseeId: 'addresseeId',
     status: 'status',
+    statusCustom: 'statusCustom',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -21320,6 +21360,7 @@ export namespace Prisma {
     targetUserId: 'targetUserId',
     type: 'type',
     status: 'status',
+    statusCustom: 'statusCustom',
     scope: 'scope',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -21792,6 +21833,20 @@ export namespace Prisma {
    * Reference to a field of type 'Status[]'
    */
   export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CustomUser'
+   */
+  export type EnumCustomUserFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CustomUser'>
+    
+
+
+  /**
+   * Reference to a field of type 'CustomUser[]'
+   */
+  export type ListEnumCustomUserFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CustomUser[]'>
     
 
 
@@ -22856,6 +22911,7 @@ export namespace Prisma {
     requesterId?: UuidFilter<"Friendship"> | string
     addresseeId?: UuidFilter<"Friendship"> | string
     status?: EnumStatusFilter<"Friendship"> | $Enums.Status
+    statusCustom?: EnumCustomUserFilter<"Friendship"> | $Enums.CustomUser
     createdAt?: DateTimeFilter<"Friendship"> | Date | string
     updatedAt?: DateTimeFilter<"Friendship"> | Date | string
     requester?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -22866,6 +22922,7 @@ export namespace Prisma {
     requesterId?: SortOrder
     addresseeId?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     requester?: UserOrderByWithRelationInput
@@ -22880,6 +22937,7 @@ export namespace Prisma {
     requesterId?: UuidFilter<"Friendship"> | string
     addresseeId?: UuidFilter<"Friendship"> | string
     status?: EnumStatusFilter<"Friendship"> | $Enums.Status
+    statusCustom?: EnumCustomUserFilter<"Friendship"> | $Enums.CustomUser
     createdAt?: DateTimeFilter<"Friendship"> | Date | string
     updatedAt?: DateTimeFilter<"Friendship"> | Date | string
     requester?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -22890,6 +22948,7 @@ export namespace Prisma {
     requesterId?: SortOrder
     addresseeId?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: FriendshipCountOrderByAggregateInput
@@ -22904,6 +22963,7 @@ export namespace Prisma {
     requesterId?: UuidWithAggregatesFilter<"Friendship"> | string
     addresseeId?: UuidWithAggregatesFilter<"Friendship"> | string
     status?: EnumStatusWithAggregatesFilter<"Friendship"> | $Enums.Status
+    statusCustom?: EnumCustomUserWithAggregatesFilter<"Friendship"> | $Enums.CustomUser
     createdAt?: DateTimeWithAggregatesFilter<"Friendship"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Friendship"> | Date | string
   }
@@ -22916,6 +22976,7 @@ export namespace Prisma {
     targetUserId?: UuidFilter<"Relation"> | string
     type?: EnumRelationTypeFilter<"Relation"> | $Enums.RelationType
     status?: EnumStatusFilter<"Relation"> | $Enums.Status
+    statusCustom?: EnumCustomUserFilter<"Relation"> | $Enums.CustomUser
     scope?: EnumScopeFilter<"Relation"> | $Enums.Scope
     createdAt?: DateTimeFilter<"Relation"> | Date | string
     updatedAt?: DateTimeFilter<"Relation"> | Date | string
@@ -22928,6 +22989,7 @@ export namespace Prisma {
     targetUserId?: SortOrder
     type?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     scope?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22944,6 +23006,7 @@ export namespace Prisma {
     targetUserId?: UuidFilter<"Relation"> | string
     type?: EnumRelationTypeFilter<"Relation"> | $Enums.RelationType
     status?: EnumStatusFilter<"Relation"> | $Enums.Status
+    statusCustom?: EnumCustomUserFilter<"Relation"> | $Enums.CustomUser
     scope?: EnumScopeFilter<"Relation"> | $Enums.Scope
     createdAt?: DateTimeFilter<"Relation"> | Date | string
     updatedAt?: DateTimeFilter<"Relation"> | Date | string
@@ -22956,6 +23019,7 @@ export namespace Prisma {
     targetUserId?: SortOrder
     type?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     scope?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22972,6 +23036,7 @@ export namespace Prisma {
     targetUserId?: UuidWithAggregatesFilter<"Relation"> | string
     type?: EnumRelationTypeWithAggregatesFilter<"Relation"> | $Enums.RelationType
     status?: EnumStatusWithAggregatesFilter<"Relation"> | $Enums.Status
+    statusCustom?: EnumCustomUserWithAggregatesFilter<"Relation"> | $Enums.CustomUser
     scope?: EnumScopeWithAggregatesFilter<"Relation"> | $Enums.Scope
     createdAt?: DateTimeWithAggregatesFilter<"Relation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Relation"> | Date | string
@@ -24461,6 +24526,7 @@ export namespace Prisma {
 
   export type FriendshipCreateInput = {
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
     requester: UserCreateNestedOneWithoutSentFriendRequestsInput
@@ -24471,12 +24537,14 @@ export namespace Prisma {
     requesterId: string
     addresseeId: string
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type FriendshipUpdateInput = {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     requester?: UserUpdateOneRequiredWithoutSentFriendRequestsNestedInput
@@ -24487,6 +24555,7 @@ export namespace Prisma {
     requesterId?: StringFieldUpdateOperationsInput | string
     addresseeId?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24495,12 +24564,14 @@ export namespace Prisma {
     requesterId: string
     addresseeId: string
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type FriendshipUpdateManyMutationInput = {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24509,6 +24580,7 @@ export namespace Prisma {
     requesterId?: StringFieldUpdateOperationsInput | string
     addresseeId?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24516,6 +24588,7 @@ export namespace Prisma {
   export type RelationCreateInput = {
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24528,6 +24601,7 @@ export namespace Prisma {
     targetUserId: string
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24536,6 +24610,7 @@ export namespace Prisma {
   export type RelationUpdateInput = {
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24548,6 +24623,7 @@ export namespace Prisma {
     targetUserId?: StringFieldUpdateOperationsInput | string
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24558,6 +24634,7 @@ export namespace Prisma {
     targetUserId: string
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24566,6 +24643,7 @@ export namespace Prisma {
   export type RelationUpdateManyMutationInput = {
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24576,6 +24654,7 @@ export namespace Prisma {
     targetUserId?: StringFieldUpdateOperationsInput | string
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26225,6 +26304,13 @@ export namespace Prisma {
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
+  export type EnumCustomUserFilter<$PrismaModel = never> = {
+    equals?: $Enums.CustomUser | EnumCustomUserFieldRefInput<$PrismaModel>
+    in?: $Enums.CustomUser[] | ListEnumCustomUserFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CustomUser[] | ListEnumCustomUserFieldRefInput<$PrismaModel>
+    not?: NestedEnumCustomUserFilter<$PrismaModel> | $Enums.CustomUser
+  }
+
   export type FriendshipIdCompoundUniqueInput = {
     requesterId: string
     addresseeId: string
@@ -26234,6 +26320,7 @@ export namespace Prisma {
     requesterId?: SortOrder
     addresseeId?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26242,6 +26329,7 @@ export namespace Prisma {
     requesterId?: SortOrder
     addresseeId?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26250,6 +26338,7 @@ export namespace Prisma {
     requesterId?: SortOrder
     addresseeId?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26262,6 +26351,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusFilter<$PrismaModel>
     _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type EnumCustomUserWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CustomUser | EnumCustomUserFieldRefInput<$PrismaModel>
+    in?: $Enums.CustomUser[] | ListEnumCustomUserFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CustomUser[] | ListEnumCustomUserFieldRefInput<$PrismaModel>
+    not?: NestedEnumCustomUserWithAggregatesFilter<$PrismaModel> | $Enums.CustomUser
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCustomUserFilter<$PrismaModel>
+    _max?: NestedEnumCustomUserFilter<$PrismaModel>
   }
 
   export type EnumRelationTypeFilter<$PrismaModel = never> = {
@@ -26282,6 +26381,7 @@ export namespace Prisma {
     targetUserId?: SortOrder
     type?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     scope?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26292,6 +26392,7 @@ export namespace Prisma {
     targetUserId?: SortOrder
     type?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     scope?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26302,6 +26403,7 @@ export namespace Prisma {
     targetUserId?: SortOrder
     type?: SortOrder
     status?: SortOrder
+    statusCustom?: SortOrder
     scope?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -27905,6 +28007,10 @@ export namespace Prisma {
     set?: $Enums.Status
   }
 
+  export type EnumCustomUserFieldUpdateOperationsInput = {
+    set?: $Enums.CustomUser
+  }
+
   export type UserUpdateOneRequiredWithoutSentFriendRequestsNestedInput = {
     create?: XOR<UserCreateWithoutSentFriendRequestsInput, UserUncheckedCreateWithoutSentFriendRequestsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSentFriendRequestsInput
@@ -28688,6 +28794,13 @@ export namespace Prisma {
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
+  export type NestedEnumCustomUserFilter<$PrismaModel = never> = {
+    equals?: $Enums.CustomUser | EnumCustomUserFieldRefInput<$PrismaModel>
+    in?: $Enums.CustomUser[] | ListEnumCustomUserFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CustomUser[] | ListEnumCustomUserFieldRefInput<$PrismaModel>
+    not?: NestedEnumCustomUserFilter<$PrismaModel> | $Enums.CustomUser
+  }
+
   export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
     in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
@@ -28696,6 +28809,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusFilter<$PrismaModel>
     _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCustomUserWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CustomUser | EnumCustomUserFieldRefInput<$PrismaModel>
+    in?: $Enums.CustomUser[] | ListEnumCustomUserFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CustomUser[] | ListEnumCustomUserFieldRefInput<$PrismaModel>
+    not?: NestedEnumCustomUserWithAggregatesFilter<$PrismaModel> | $Enums.CustomUser
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCustomUserFilter<$PrismaModel>
+    _max?: NestedEnumCustomUserFilter<$PrismaModel>
   }
 
   export type NestedEnumRelationTypeFilter<$PrismaModel = never> = {
@@ -30975,6 +31098,7 @@ export namespace Prisma {
   export type RelationCreateWithoutSourceUserInput = {
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30985,6 +31109,7 @@ export namespace Prisma {
     targetUserId: string
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31003,6 +31128,7 @@ export namespace Prisma {
   export type RelationCreateWithoutTargetUserInput = {
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31013,6 +31139,7 @@ export namespace Prisma {
     sourceUserId: string
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31030,6 +31157,7 @@ export namespace Prisma {
 
   export type FriendshipCreateWithoutRequesterInput = {
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
     addressee: UserCreateNestedOneWithoutReceivedFriendRequestsInput
@@ -31038,6 +31166,7 @@ export namespace Prisma {
   export type FriendshipUncheckedCreateWithoutRequesterInput = {
     addresseeId: string
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31054,6 +31183,7 @@ export namespace Prisma {
 
   export type FriendshipCreateWithoutAddresseeInput = {
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
     requester: UserCreateNestedOneWithoutSentFriendRequestsInput
@@ -31062,6 +31192,7 @@ export namespace Prisma {
   export type FriendshipUncheckedCreateWithoutAddresseeInput = {
     requesterId: string
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31899,6 +32030,7 @@ export namespace Prisma {
     targetUserId?: UuidFilter<"Relation"> | string
     type?: EnumRelationTypeFilter<"Relation"> | $Enums.RelationType
     status?: EnumStatusFilter<"Relation"> | $Enums.Status
+    statusCustom?: EnumCustomUserFilter<"Relation"> | $Enums.CustomUser
     scope?: EnumScopeFilter<"Relation"> | $Enums.Scope
     createdAt?: DateTimeFilter<"Relation"> | Date | string
     updatedAt?: DateTimeFilter<"Relation"> | Date | string
@@ -31943,6 +32075,7 @@ export namespace Prisma {
     requesterId?: UuidFilter<"Friendship"> | string
     addresseeId?: UuidFilter<"Friendship"> | string
     status?: EnumStatusFilter<"Friendship"> | $Enums.Status
+    statusCustom?: EnumCustomUserFilter<"Friendship"> | $Enums.CustomUser
     createdAt?: DateTimeFilter<"Friendship"> | Date | string
     updatedAt?: DateTimeFilter<"Friendship"> | Date | string
   }
@@ -34899,6 +35032,7 @@ export namespace Prisma {
     targetUserId: string
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34908,6 +35042,7 @@ export namespace Prisma {
     sourceUserId: string
     type: $Enums.RelationType
     status: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     scope: $Enums.Scope
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34916,6 +35051,7 @@ export namespace Prisma {
   export type FriendshipCreateManyRequesterInput = {
     addresseeId: string
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -34923,6 +35059,7 @@ export namespace Prisma {
   export type FriendshipCreateManyAddresseeInput = {
     requesterId: string
     status?: $Enums.Status
+    statusCustom?: $Enums.CustomUser
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -35107,6 +35244,7 @@ export namespace Prisma {
   export type RelationUpdateWithoutSourceUserInput = {
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35117,6 +35255,7 @@ export namespace Prisma {
     targetUserId?: StringFieldUpdateOperationsInput | string
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35126,6 +35265,7 @@ export namespace Prisma {
     targetUserId?: StringFieldUpdateOperationsInput | string
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35134,6 +35274,7 @@ export namespace Prisma {
   export type RelationUpdateWithoutTargetUserInput = {
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35144,6 +35285,7 @@ export namespace Prisma {
     sourceUserId?: StringFieldUpdateOperationsInput | string
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35153,6 +35295,7 @@ export namespace Prisma {
     sourceUserId?: StringFieldUpdateOperationsInput | string
     type?: EnumRelationTypeFieldUpdateOperationsInput | $Enums.RelationType
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     scope?: EnumScopeFieldUpdateOperationsInput | $Enums.Scope
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35160,6 +35303,7 @@ export namespace Prisma {
 
   export type FriendshipUpdateWithoutRequesterInput = {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addressee?: UserUpdateOneRequiredWithoutReceivedFriendRequestsNestedInput
@@ -35168,6 +35312,7 @@ export namespace Prisma {
   export type FriendshipUncheckedUpdateWithoutRequesterInput = {
     addresseeId?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35175,12 +35320,14 @@ export namespace Prisma {
   export type FriendshipUncheckedUpdateManyWithoutRequesterInput = {
     addresseeId?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FriendshipUpdateWithoutAddresseeInput = {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     requester?: UserUpdateOneRequiredWithoutSentFriendRequestsNestedInput
@@ -35189,6 +35336,7 @@ export namespace Prisma {
   export type FriendshipUncheckedUpdateWithoutAddresseeInput = {
     requesterId?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35196,6 +35344,7 @@ export namespace Prisma {
   export type FriendshipUncheckedUpdateManyWithoutAddresseeInput = {
     requesterId?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    statusCustom?: EnumCustomUserFieldUpdateOperationsInput | $Enums.CustomUser
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

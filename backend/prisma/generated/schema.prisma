@@ -462,11 +462,12 @@ model User {
 }
 
 model Friendship {
-  requesterId String   @db.Uuid
-  addresseeId String   @db.Uuid
-  status      Status   @default(PENDING)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  requesterId  String     @db.Uuid
+  addresseeId  String     @db.Uuid
+  status       Status     @default(PENDING)
+  statusCustom CustomUser @default(ACCQUAINTANCES)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
   requester User @relation("SentFriendRequests", fields: [requesterId], references: [id], onDelete: Cascade)
   addressee User @relation("ReceivedFriendRequests", fields: [addresseeId], references: [id], onDelete: Cascade)
@@ -479,6 +480,7 @@ model Relation {
   targetUserId String       @db.Uuid
   type         RelationType
   status       Status
+  statusCustom CustomUser   @default(ACCQUAINTANCES)
   scope        Scope
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
@@ -575,6 +577,12 @@ enum RelationType {
   YOUNG_BROTHER
   SISTER
   BROTHER
+}
+
+enum CustomUser {
+  ACCQUAINTANCES
+  CLOSEFRIENDS
+  RESTRICTED
 }
 
 enum Status {

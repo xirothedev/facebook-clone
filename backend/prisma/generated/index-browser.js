@@ -286,6 +286,7 @@ exports.Prisma.FriendshipScalarFieldEnum = {
   requesterId: 'requesterId',
   addresseeId: 'addresseeId',
   status: 'status',
+  statusCustom: 'statusCustom',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -295,6 +296,7 @@ exports.Prisma.RelationScalarFieldEnum = {
   targetUserId: 'targetUserId',
   type: 'type',
   status: 'status',
+  statusCustom: 'statusCustom',
   scope: 'scope',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -537,6 +539,12 @@ exports.Status = exports.$Enums.Status = {
   ACCEPTED: 'ACCEPTED',
   DECLINED: 'DECLINED',
   BLOCKED: 'BLOCKED'
+};
+
+exports.CustomUser = exports.$Enums.CustomUser = {
+  ACCQUAINTANCES: 'ACCQUAINTANCES',
+  CLOSEFRIENDS: 'CLOSEFRIENDS',
+  RESTRICTED: 'RESTRICTED'
 };
 
 exports.RelationType = exports.$Enums.RelationType = {
