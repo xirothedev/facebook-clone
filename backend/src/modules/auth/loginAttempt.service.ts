@@ -1,5 +1,5 @@
 import { Injectable, ForbiddenException } from "@nestjs/common";
-import type { RedisService } from "src/redis/redis.service";
+import { RedisService } from "@/redis/redis.service";
 
 @Injectable()
 export class LoginAttemptService {

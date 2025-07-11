@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req } from "@nestjs/common";
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import type { Request } from "express";
-import type { CommentService } from "./comment.service";
+import { CommentService } from "./comment.service";
 import type { CreateCommentDto } from "./dto/create-comment.dto";
 import type { UpdateCommentDto } from "./dto/update-comment.dto";
 

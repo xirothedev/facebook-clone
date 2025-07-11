@@ -1,8 +1,8 @@
+import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import type { Request } from "express";
-import { PrismaService } from "../../prisma/prisma.service";
-import type { UpdateUserInput } from "./dto/update-user.input";
 import type { User } from "prisma/generated";
+import type { UpdateUserInput } from "./dto/update-user.input";
 
 @Injectable()
 export class UsersService {

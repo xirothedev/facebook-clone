@@ -1,4 +1,4 @@
-import type { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import type { Request } from "express";
 import type { CreateCommentDto } from "./dto/create-comment.dto";

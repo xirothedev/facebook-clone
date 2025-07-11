@@ -1,4 +1,7 @@
 import { Cookies } from "@/common/decorators/cookie.decorator";
+import { Public } from "@/common/decorators/public.decorator";
+import { AuthCookieGuard } from "@/common/guards/auth-cookie.guard";
+import { PrismaService } from "@/prisma/prisma.service";
 import {
 	Body,
 	Controller,
@@ -14,14 +17,11 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 import type { Request, Response } from "express";
-import type { PrismaService } from "src/prisma/prisma.service";
-import type { AuthService } from "./auth.service";
+import { AuthService } from "./auth.service";
 import type { ChangePasswordDto, ForgotPasswordDto } from "./dto/change-password.dto";
 import type { LoginAuth } from "./dto/login-auth.dto";
 import type { RegisterUser } from "./dto/register-auth.dto";
-import { AuthCookieGuard } from "@/common/guards/auth-cookie.guard";
-import type { TokenService } from "./token.service";
-import { Public } from "@/common/decorators/public.decorator";
+import { TokenService } from "./token.service";
 
 @Controller("auth")
 export class AuthController {

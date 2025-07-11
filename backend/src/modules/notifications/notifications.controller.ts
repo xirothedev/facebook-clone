@@ -20,7 +20,7 @@ import { UserRole } from "prisma/generated";
 import type { CreateNotificationDto } from "./dto/create-notification.dto";
 import type { FindAllNotificationsDto } from "./dto/find-all-notifications.dto";
 import type { UpdateNotificationDto } from "./dto/update-notification.dto";
-import type { NotificationsService } from "./notifications.service";
+import { NotificationsService } from "./notifications.service";
 
 @ApiTags("notifications")
 @Controller("notifications")
