@@ -1,5 +1,5 @@
 import { Injectable, Logger, type OnModuleInit } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { SupabaseConfig } from "./supabase.interface";
 

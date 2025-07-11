@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { existsSync } from "fs";
 import { readFile } from "fs/promises";
 import * as nodemailer from "nodemailer";

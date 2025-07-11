@@ -1,6 +1,6 @@
 import type { PrismaService } from "@/prisma/prisma.service";
 import { ForbiddenException, Inject, Injectable, UnauthorizedException, forwardRef } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import type { JwtService } from "@nestjs/jwt";
 import { hash, verify } from "argon2";
 import { randomInt } from "crypto";

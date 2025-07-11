@@ -52,6 +52,7 @@ model User {
   auth                Authentication[]
   notifications       Notification[]   @relation("UserNotifications")
   notificationActions Notification[]   @relation("UserNotificationActions")
+
 }
 
 model Friendship {

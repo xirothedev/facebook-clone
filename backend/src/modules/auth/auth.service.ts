@@ -11,7 +11,7 @@ import {
 	UnauthorizedException,
 	forwardRef,
 } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import type { JwtService } from "@nestjs/jwt";
 import { argon2id, hash, verify } from "argon2";
 import type { CookieOptions, Request, Response } from "express";
