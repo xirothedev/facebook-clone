@@ -1,6 +1,6 @@
-import type { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable, Logger } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { type UploadApiOptions, v2 as cloudinary } from "cloudinary";
 import { loadEsm } from "load-esm";
 import { unlink } from "node:fs/promises";

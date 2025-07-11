@@ -1,4 +1,4 @@
-import type { AuthService } from "@/modules/auth/auth.service";
+import { AuthService } from "@/modules/auth/auth.service";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import type { Request } from "express";

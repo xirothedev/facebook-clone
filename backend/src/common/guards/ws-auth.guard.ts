@@ -1,4 +1,4 @@
-import type { AuthService } from "@/modules/auth/auth.service";
+import { AuthService } from "@/modules/auth/auth.service";
 import { type CanActivate, type ExecutionContext, Injectable } from "@nestjs/common";
 import { WsException } from "@nestjs/websockets";
 import type { Socket } from "socket.io";

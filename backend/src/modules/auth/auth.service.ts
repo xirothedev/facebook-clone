@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { PrismaService } from "@/prisma/prisma.service";
-import type { RedisService } from "@/redis/redis.service";
+import { EmailService } from "@/email/email.service";
+import { UsersService } from "@/modules/users/users.service";
+import { PrismaService } from "@/prisma/prisma.service";
+import { RedisService } from "@/redis/redis.service";
 import { Snowflake } from "@/utils/snowflake";
 import {
 	ConflictException,
@@ -11,13 +13,11 @@ import {
 	UnauthorizedException,
 	forwardRef,
 } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
-import type { JwtService } from "@nestjs/jwt";
+import { ConfigService } from "@nestjs/config";
+import { JwtService } from "@nestjs/jwt";
 import { argon2id, hash, verify } from "argon2";
 import type { CookieOptions, Request, Response } from "express";
-import type { EmailService } from "src/email/email.service";
 import { UAParser } from "ua-parser-js";
-import type { UsersService } from "../users/users.service";
 import type { UserWithPrimaryEmailAndWithoutPassword } from "./auth.interface";
 import type { ChangePasswordDto, ForgotPasswordDto } from "./dto/change-password.dto";
 import type { RegisterUser } from "./dto/register-auth.dto";

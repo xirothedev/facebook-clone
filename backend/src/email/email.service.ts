@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { existsSync } from "fs";
 import { readFile } from "fs/promises";
 import * as nodemailer from "nodemailer";
@@ -9,7 +9,7 @@ import { join } from "path";
 export class EmailService {
 	private transporter: nodemailer.Transporter;
 
-	constructor(config: ConfigService) {
+	constructor(readonly config: ConfigService) {
 		this.transporter = nodemailer.createTransport({
 			service: "gmail",
 			auth: {

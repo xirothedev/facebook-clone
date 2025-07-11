@@ -1,12 +1,12 @@
 import { Req } from "@nestjs/common";
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import type { Request } from "express";
-import type { UpdateUserInput } from "./dto/update-user.input";
+import { UpdateUserInput } from "./dto/update-user.input";
 import { Email } from "./entities/email.entity";
 import { Phone } from "./entities/phone.entity";
 import { SocialLinkeds } from "./entities/social-linkeds.entity";
 import { UserQL } from "./entities/user.entity";
-import type { UsersService } from "./users.service";
+import { UsersService } from "./users.service";
 import { Public } from "@/common/decorators/public.decorator";
 
 @Resolver(() => UserQL)
@@ -33,7 +33,7 @@ export class UsersResolver {
 	@Mutation(() => UserQL)
 	updateUser(
 		@Args("id", { type: () => String }) id: string,
-		@Args("updateUserInput") updateUserInput: UpdateUserInput,
+		@Args("updateUserInput", { type: () => UpdateUserInput }) updateUserInput: UpdateUserInput,
 	) {
 		return this.usersService.updateUser(id, updateUserInput);
 	}

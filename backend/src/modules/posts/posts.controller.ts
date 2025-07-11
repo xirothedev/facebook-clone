@@ -19,7 +19,7 @@ import { ReactionType } from "prisma/generated";
 import type { CreatePostDto } from "./dto/create-post.dto";
 import type { QueryPostDto } from "./dto/query-post.dto";
 import type { UpdatePostDto } from "./dto/update-post.dto";
-import type { PostsService } from "./posts.service";
+import { PostsService } from "./posts.service";
 
 @ApiTags("Posts")
 @Controller("posts")

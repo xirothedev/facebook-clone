@@ -1,5 +1,5 @@
 import { WsAuthGuard } from "@/common/guards/ws-auth.guard";
-import type { RedisService } from "@/redis/redis.service";
+import { RedisService } from "@/redis/redis.service";
 import { Logger, UseGuards } from "@nestjs/common";
 import {
 	ConnectedSocket,
@@ -10,7 +10,7 @@ import {
 	WebSocketServer,
 } from "@nestjs/websockets";
 import type { Server, Socket } from "socket.io";
-import type { NotificationsService } from "./notifications.service";
+import { NotificationsService } from "./notifications.service";
 
 @WebSocketGateway({
 	cors: {

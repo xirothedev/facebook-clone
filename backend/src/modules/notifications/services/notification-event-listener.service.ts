@@ -1,9 +1,9 @@
+import { PrismaService } from "@/prisma/prisma.service";
 import { Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { type Notification, NotificationPriority, NotificationStatus } from "prisma/generated";
-import type { PrismaService } from "@/prisma/prisma.service";
 import type { NotificationEvent } from "../events/notification.events";
-import type { NotificationsGateway } from "../notifications.gateway";
+import { NotificationsGateway } from "../notifications.gateway";
 
 @Injectable()
 export class NotificationEventListenerService {
