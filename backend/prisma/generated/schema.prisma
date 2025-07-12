@@ -142,6 +142,7 @@ enum NotificationPriority {
 }
 
 model Page {
+  id            String     @id @default(uuid()) @db.Uuid()
   name          String
   phoneNumber   String
   avtUrl        String?
@@ -156,7 +157,7 @@ model Page {
   zipcode String?
 
   // followers
-  followers User[] @relation("followers")
+  pageFollowers PageFollow[]
 
   // post
   posts Post[]
@@ -164,40 +165,43 @@ model Page {
   // about
   categories  String
   socialLinks SocialLinkeds[]
-  id          String          @id @default(uuid()) @db.Uuid()
   createAt    DateTime        @default(now())
-  adminInfor  User[]          @relation("adminInfor")
   bio         String?
 
-  // mentions (update later)
+  // page admin info (many-to-many thông qua bảng trung gian PageAdmin)
+  admins PageAdmin[] // <-- page có nhiều admin
+}
 
-  // reels ( update later )
+model PageFollow {
+  id         String   @id @default(uuid())
+  userId     String   @db.Uuid
+  pageId     String   @db.Uuid
+  followedAt DateTime @default(now())
 
-  // photos
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
 
-  // videos
+  @@unique([userId, pageId])
+}
 
-  // lives
+model PageAdmin {
+  id      String    @id @default(uuid())
+  userId  String    @db.Uuid
+  pageId  String    @db.Uuid
+  role    AdminRole @default(OWNER)
+  addedAt DateTime  @default(now())
 
-  // events
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
 
-  // followers
+  @@unique([userId, pageId])
+}
 
-  // music
-
-  // check-ins
-
-  // sports
-
-  // films
-
-  // tv grogrammers
-
-  //books
-
-  // likes
-
-  // reviews given
+enum AdminRole {
+  OWNER
+  EDITOR
+  MODERATOR
+  ANALYST
 }
 
 enum StatusPage {
@@ -206,6 +210,21 @@ enum StatusPage {
   DELETED // bị xóa
   RESTRICTED // bị giới hạn
   BANNED // cấm hoàn toàn 
+}
+
+enum Service {
+  DELIVERY
+  CONTACTLESS
+  TAKEOUT
+  DINEIN
+  OUTDOORSEATING
+  ONLINEBOOKING
+  RESERVATIONS
+  CUBSIDEPICKUP
+  INSTOREPICKUP
+  INSTORESHOPPING
+  INPERSONCLASSES
+  ONLINECLASSES
 }
 
 model Post {
@@ -534,11 +553,9 @@ model User {
   blockedMessagesBy     AudienceAndVisibility[] @relation("BlockMessages")
 
   //page
-  pageId String? @db.Uuid()
-  page   Page?   @relation(name: "adminInfor", fields: [pageId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  adminPages PageAdmin[]
 
-  followingPageId String? @db.Uuid()
-  followingPage   Page?   @relation(name: "followers", fields: [followingPageId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  followedPages PageFollow[]
 }
 
 model Friendship {
@@ -716,4 +733,29 @@ enum StatusAccount {
   CHECKPOINT // Cần xác minh danh tính
   BANNED //	Khóa vĩnh viễn
   DEACTIVATED // tạm thời vô hiệu hóa thủ công
+}
+
+enum RelationShip {
+  SINGLE
+  INRELATIONSHIP
+  ENGAGED
+  MARRIED
+  INACIVILUNION
+  INADOMESTICPARTNERSHIP
+  INANOPENRELATIONSHIP
+  ITISCOMPLICATED
+  SEPARATED
+  DIVORCED
+  WIDOWED
+}
+
+enum NameType {
+  MAIDENNAME
+  ALTERNATESPELING
+  MARRIEDNAME
+  FATHERISNAME
+  BIRTHNAME
+  FORMERNAME
+  NAMEWITHTITLE
+  OTHERNAME
 }

@@ -1,6 +1,7 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { CreatePageDto } from "./dto/createPage.dto";
 import { PrismaService } from "@/prisma/prisma.service";
+import { EditDetailPage } from "./dto/ editDetailPage.dto";
 
 @Injectable()
 export class PageService {
@@ -26,6 +27,34 @@ export class PageService {
 
 		return {
 			message: "Create new page successful",
+			data: newPage,
+		};
+	}
+
+	async editDetailPage(userId: string, data: EditDetailPage) {
+		const exitedUser = await this.prismaService.user.findUnique({
+			where: { id: userId },
+		});
+
+		if (!exitedUser) {
+			throw new NotFoundException("user not found");
+		}
+
+		const exitedPage = await this.prismaService.pageAdmin.findFirst({
+			where: { userId: exitedUser.id },
+		});
+
+		if (!exitedPage) {
+			throw new UnauthorizedException("You are not the author page");
+		}
+
+		const newPage = await this.prismaService.page.update({
+			where: { id: exitedPage.id },
+			data: { ...(data as any) },
+		});
+
+		return {
+			message: "Page is updated successsful",
 			data: newPage,
 		};
 	}
