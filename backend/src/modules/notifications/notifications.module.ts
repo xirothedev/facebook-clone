@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, forwardRef } from "@nestjs/common";
 import { NotificationsController } from "./notifications.controller";
 import { NotificationsGateway } from "./notifications.gateway";
 import { NotificationsService } from "./notifications.service";
@@ -8,7 +8,7 @@ import { NotificationGroupingService } from "./services/notification-grouping.se
 import { AuthModule } from "../auth/auth.module";
 
 @Module({
-	imports: [AuthModule],
+	imports: [forwardRef(() => AuthModule)],
 	controllers: [NotificationsController],
 	providers: [
 		NotificationsService,

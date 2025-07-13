@@ -18,7 +18,7 @@ import { UsersModule } from "./modules/users/users.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { RedisModule } from "./redis/redis.module";
 import { SupabaseModule } from "./supabase/supabase.module";
-import { APP_GUARD } from "@nestjs/core";
+import { APP_GUARD, Reflector } from "@nestjs/core";
 import { AuthCookieGuard } from "./common/guards/auth-cookie.guard";
 import { NotificationsModule } from "./modules/notifications/notifications.module";
 import { CommentModule } from "./modules/comment/comment.module";
@@ -94,7 +94,8 @@ import { PagesModule } from "./modules/pages/pages.module";
 		},
 		{
 			provide: APP_GUARD,
-			useClass: AuthCookieGuard,
+			useFactory: (reflector: Reflector) => new AuthCookieGuard(reflector),
+			inject: [Reflector],
 		},
 	],
 })

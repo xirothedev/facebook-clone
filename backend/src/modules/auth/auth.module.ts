@@ -26,7 +26,6 @@ import { SettingModule } from "../setting/setting.module";
 				signOptions: { expiresIn: "1d" },
 			}),
 		}),
-		forwardRef(() => AuthModule),
 	],
 	controllers: [AuthController],
 	providers: [AuthService, TokenService, LoginAttemptService, AuthCookieStrategy],

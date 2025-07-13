@@ -75,18 +75,6 @@ export class AuthService {
 				throw new UnauthorizedException("User not found");
 			}
 
-			// Check if user has any active sessions (optional additional security)
-			const activeSession = await this.prismaService.session.findFirst({
-				where: {
-					userId: user.id,
-					revoked: false,
-				},
-			});
-
-			if (!activeSession) {
-				throw new UnauthorizedException("User session is revoked");
-			}
-
 			return user;
 		} catch (error) {
 			if (error instanceof UnauthorizedException) {
@@ -140,7 +128,7 @@ export class AuthService {
 			data: {
 				profileId: snowflake.generate(),
 				displayName: body.displayName,
-				birthday: body.birthday,
+				birthday: new Date(body.birthday),
 				gender: body.gender,
 				primaryEmail: { create: { value: body.email } },
 				hashedPassword: hashedPassword,
