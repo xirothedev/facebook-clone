@@ -1,8 +1,7 @@
 import { Module } from "@nestjs/common";
-import { FriendsService } from "./friends.service";
-import { AuthModule } from "../auth/auth.module";
-import { FriendsController } from "./friend.controller";
 import { NotificationsModule } from "../notifications/notifications.module";
+import { FriendsController } from "./friend.controller";
+import { FriendsService } from "./friends.service";
 
 @Module({
 	imports: [NotificationsModule],

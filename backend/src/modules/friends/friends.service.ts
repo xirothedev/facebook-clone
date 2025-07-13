@@ -1,8 +1,8 @@
 import { PrismaService } from "@/prisma/prisma.service";
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { Request } from "express";
-import { NotificationsService } from "../notifications/notifications.service";
 import { NotificationType } from "prisma/generated";
+import { NotificationsService } from "../notifications/notifications.service";
 
 @Injectable()
 export class FriendsService {
@@ -167,7 +167,7 @@ export class FriendsService {
 		}
 
 		// Update the friendship status to ACCEPTED
-		const requestUser = await this.prismaService.friendship.updateMany({
+		await this.prismaService.friendship.updateMany({
 			where: {
 				requesterId: requesterId,
 				addresseeId: user.id,

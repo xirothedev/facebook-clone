@@ -2,14 +2,14 @@ import { AuthCookieStrategy } from "@/common/strategies/auth-cookie.strategy";
 import { EmailModule } from "@/email/email.module";
 import { UsersModule } from "@/modules/users/users.module";
 import { RedisModule } from "@/redis/redis.module";
-import { Module, forwardRef } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
+import { SettingModule } from "../setting/setting.module";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { LoginAttemptService } from "./loginAttempt.service";
 import { TokenService } from "./token.service";
-import { SettingModule } from "../setting/setting.module";
 
 @Module({
 	imports: [

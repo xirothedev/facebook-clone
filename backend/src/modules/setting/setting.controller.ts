@@ -1,8 +1,7 @@
-import { Get, Injectable, Post, Query, Req } from "@nestjs/common";
-import { Request } from "express";
-import { SettingService } from "./setting.service";
+import { Get, Injectable, Post, Query } from "@nestjs/common";
 import { UpdateAudienceAndVisibilityDto } from "./dto/update-audience-setting.dto";
 import { UpdatePreferenceDto } from "./dto/update-preference.dto";
+import { SettingService } from "./setting.service";
 @Injectable()
 export class SettingController {
 	constructor(private readonly settingService: SettingService) {}
