@@ -48,6 +48,11 @@ export class UsersController {
 		return this.pageService.getListPage(req);
 	}
 
+	@Get("find-pages")
+	async findPageByName(@Body("namePage") namePage: string) {
+		return this.pageService.findPageByName(namePage);
+	}
+
 	// test
 	@Get("get-all-pages")
 	async getAllPage() {

@@ -126,4 +126,20 @@ export class PageService {
 			data: ListFollowPages,
 		};
 	}
+
+	async findPageByName(namePage: string) {
+		const exitedPages = await this.prismaService.page.findMany({
+			where: {
+				name: {
+					contains: namePage,
+					mode: "insensitive",
+				},
+			},
+		});
+
+		return {
+			message: "Done",
+			data: exitedPages,
+		};
+	}
 }
