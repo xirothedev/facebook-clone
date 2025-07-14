@@ -14,7 +14,7 @@ model Page {
     zipcode String?
 
     // followers
-    pageFollowers PageFollow[]
+    userfollower PageFollow[]
 
     // post
     posts Post[]
@@ -25,7 +25,10 @@ model Page {
     createAt    DateTime        @default(now())
     bio         String?
 
-    admins PageAdmin[]
+    // admin
+    adminId String  @db.Uuid
+    admin   User    @relation("PageAdmin", fields: [adminId], references: [id], onDelete: Cascade)
+
 }
 
 model PageFollow {
@@ -33,19 +36,6 @@ model PageFollow {
     userId     String   @db.Uuid
     pageId     String   @db.Uuid
     followedAt DateTime @default(now())
-
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-    page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
-
-    @@unique([userId, pageId])
-}
-
-model PageAdmin {
-    id      String    @id @default(uuid())
-    userId  String    @db.Uuid
-    pageId  String    @db.Uuid
-    role    AdminRole @default(OWNER)
-    addedAt DateTime  @default(now())
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
     page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)

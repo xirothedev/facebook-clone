@@ -62,7 +62,7 @@ model User {
   blockedMessagesBy     AudienceAndVisibility[] @relation("BlockMessages")
 
   //page
-  adminPages    PageAdmin[]
+  adminPages    Page[]       @relation("PageAdmin")
   followedPages PageFollow[]
 }
 

@@ -176,7 +176,8 @@ exports.Prisma.PageScalarFieldEnum = {
   zipcode: 'zipcode',
   categories: 'categories',
   createAt: 'createAt',
-  bio: 'bio'
+  bio: 'bio',
+  adminId: 'adminId'
 };
 
 exports.Prisma.PageFollowScalarFieldEnum = {
@@ -184,14 +185,6 @@ exports.Prisma.PageFollowScalarFieldEnum = {
   userId: 'userId',
   pageId: 'pageId',
   followedAt: 'followedAt'
-};
-
-exports.Prisma.PageAdminScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  pageId: 'pageId',
-  role: 'role',
-  addedAt: 'addedAt'
 };
 
 exports.Prisma.PostScalarFieldEnum = {
@@ -467,13 +460,6 @@ exports.StatusPage = exports.$Enums.StatusPage = {
   BANNED: 'BANNED'
 };
 
-exports.AdminRole = exports.$Enums.AdminRole = {
-  OWNER: 'OWNER',
-  EDITOR: 'EDITOR',
-  MODERATOR: 'MODERATOR',
-  ANALYST: 'ANALYST'
-};
-
 exports.Scope = exports.$Enums.Scope = {
   EVERYONE: 'EVERYONE',
   FRIENDS_ONLY: 'FRIENDS_ONLY',
@@ -646,7 +632,6 @@ exports.Prisma.ModelName = {
   Notification: 'Notification',
   Page: 'Page',
   PageFollow: 'PageFollow',
-  PageAdmin: 'PageAdmin',
   Post: 'Post',
   Comment: 'Comment',
   Reaction: 'Reaction',

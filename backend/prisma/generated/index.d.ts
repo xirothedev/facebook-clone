@@ -34,11 +34,6 @@ export type Page = $Result.DefaultSelection<Prisma.$PagePayload>
  */
 export type PageFollow = $Result.DefaultSelection<Prisma.$PageFollowPayload>
 /**
- * Model PageAdmin
- * 
- */
-export type PageAdmin = $Result.DefaultSelection<Prisma.$PageAdminPayload>
-/**
  * Model Post
  * 
  */
@@ -756,16 +751,6 @@ export class PrismaClient<
   get pageFollow(): Prisma.PageFollowDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.pageAdmin`: Exposes CRUD operations for the **PageAdmin** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PageAdmins
-    * const pageAdmins = await prisma.pageAdmin.findMany()
-    * ```
-    */
-  get pageAdmin(): Prisma.PageAdminDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.post`: Exposes CRUD operations for the **Post** model.
     * Example usage:
     * ```ts
@@ -1338,7 +1323,6 @@ export namespace Prisma {
     Notification: 'Notification',
     Page: 'Page',
     PageFollow: 'PageFollow',
-    PageAdmin: 'PageAdmin',
     Post: 'Post',
     Comment: 'Comment',
     Reaction: 'Reaction',
@@ -1370,7 +1354,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "media" | "notification" | "page" | "pageFollow" | "pageAdmin" | "post" | "comment" | "reaction" | "preference" | "audienceAndVisibility" | "user" | "friendship" | "relation" | "email" | "phone" | "socialLinkeds" | "authentication" | "session"
+      modelProps: "media" | "notification" | "page" | "pageFollow" | "post" | "comment" | "reaction" | "preference" | "audienceAndVisibility" | "user" | "friendship" | "relation" | "email" | "phone" | "socialLinkeds" | "authentication" | "session"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1667,80 +1651,6 @@ export namespace Prisma {
           count: {
             args: Prisma.PageFollowCountArgs<ExtArgs>
             result: $Utils.Optional<PageFollowCountAggregateOutputType> | number
-          }
-        }
-      }
-      PageAdmin: {
-        payload: Prisma.$PageAdminPayload<ExtArgs>
-        fields: Prisma.PageAdminFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PageAdminFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PageAdminFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>
-          }
-          findFirst: {
-            args: Prisma.PageAdminFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PageAdminFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>
-          }
-          findMany: {
-            args: Prisma.PageAdminFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>[]
-          }
-          create: {
-            args: Prisma.PageAdminCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>
-          }
-          createMany: {
-            args: Prisma.PageAdminCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PageAdminCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>[]
-          }
-          delete: {
-            args: Prisma.PageAdminDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>
-          }
-          update: {
-            args: Prisma.PageAdminUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>
-          }
-          deleteMany: {
-            args: Prisma.PageAdminDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PageAdminUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PageAdminUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>[]
-          }
-          upsert: {
-            args: Prisma.PageAdminUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PageAdminPayload>
-          }
-          aggregate: {
-            args: Prisma.PageAdminAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePageAdmin>
-          }
-          groupBy: {
-            args: Prisma.PageAdminGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PageAdminGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PageAdminCountArgs<ExtArgs>
-            result: $Utils.Optional<PageAdminCountAggregateOutputType> | number
           }
         }
       }
@@ -2794,7 +2704,6 @@ export namespace Prisma {
     notification?: NotificationOmit
     page?: PageOmit
     pageFollow?: PageFollowOmit
-    pageAdmin?: PageAdminOmit
     post?: PostOmit
     comment?: CommentOmit
     reaction?: ReactionOmit
@@ -2905,14 +2814,12 @@ export namespace Prisma {
     pageFollowers: number
     posts: number
     socialLinks: number
-    admins: number
   }
 
   export type PageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pageFollowers?: boolean | PageCountOutputTypeCountPageFollowersArgs
     posts?: boolean | PageCountOutputTypeCountPostsArgs
     socialLinks?: boolean | PageCountOutputTypeCountSocialLinksArgs
-    admins?: boolean | PageCountOutputTypeCountAdminsArgs
   }
 
   // Custom InputTypes
@@ -2945,13 +2852,6 @@ export namespace Prisma {
    */
   export type PageCountOutputTypeCountSocialLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SocialLinkedsWhereInput
-  }
-
-  /**
-   * PageCountOutputType without action
-   */
-  export type PageCountOutputTypeCountAdminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PageAdminWhereInput
   }
 
 
@@ -3275,7 +3175,7 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountAdminPagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PageAdminWhereInput
+    where?: PageWhereInput
   }
 
   /**
@@ -5754,6 +5654,7 @@ export namespace Prisma {
     categories: string | null
     createAt: Date | null
     bio: string | null
+    adminId: string | null
   }
 
   export type PageMaxAggregateOutputType = {
@@ -5771,6 +5672,7 @@ export namespace Prisma {
     categories: string | null
     createAt: Date | null
     bio: string | null
+    adminId: string | null
   }
 
   export type PageCountAggregateOutputType = {
@@ -5788,6 +5690,7 @@ export namespace Prisma {
     categories: number
     createAt: number
     bio: number
+    adminId: number
     _all: number
   }
 
@@ -5807,6 +5710,7 @@ export namespace Prisma {
     categories?: true
     createAt?: true
     bio?: true
+    adminId?: true
   }
 
   export type PageMaxAggregateInputType = {
@@ -5824,6 +5728,7 @@ export namespace Prisma {
     categories?: true
     createAt?: true
     bio?: true
+    adminId?: true
   }
 
   export type PageCountAggregateInputType = {
@@ -5841,6 +5746,7 @@ export namespace Prisma {
     categories?: true
     createAt?: true
     bio?: true
+    adminId?: true
     _all?: true
   }
 
@@ -5931,6 +5837,7 @@ export namespace Prisma {
     categories: string
     createAt: Date
     bio: string | null
+    adminId: string
     _count: PageCountAggregateOutputType | null
     _min: PageMinAggregateOutputType | null
     _max: PageMaxAggregateOutputType | null
@@ -5965,10 +5872,11 @@ export namespace Prisma {
     categories?: boolean
     createAt?: boolean
     bio?: boolean
+    adminId?: boolean
     pageFollowers?: boolean | Page$pageFollowersArgs<ExtArgs>
     posts?: boolean | Page$postsArgs<ExtArgs>
     socialLinks?: boolean | Page$socialLinksArgs<ExtArgs>
-    admins?: boolean | Page$adminsArgs<ExtArgs>
+    admin?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | PageCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["page"]>
 
@@ -5987,6 +5895,8 @@ export namespace Prisma {
     categories?: boolean
     createAt?: boolean
     bio?: boolean
+    adminId?: boolean
+    admin?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["page"]>
 
   export type PageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6004,6 +5914,8 @@ export namespace Prisma {
     categories?: boolean
     createAt?: boolean
     bio?: boolean
+    adminId?: boolean
+    admin?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["page"]>
 
   export type PageSelectScalar = {
@@ -6021,18 +5933,23 @@ export namespace Prisma {
     categories?: boolean
     createAt?: boolean
     bio?: boolean
+    adminId?: boolean
   }
 
-  export type PageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phoneNumber" | "avtUrl" | "backGroundurl" | "updateAt" | "status" | "liked" | "address" | "city" | "zipcode" | "categories" | "createAt" | "bio", ExtArgs["result"]["page"]>
+  export type PageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phoneNumber" | "avtUrl" | "backGroundurl" | "updateAt" | "status" | "liked" | "address" | "city" | "zipcode" | "categories" | "createAt" | "bio" | "adminId", ExtArgs["result"]["page"]>
   export type PageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pageFollowers?: boolean | Page$pageFollowersArgs<ExtArgs>
     posts?: boolean | Page$postsArgs<ExtArgs>
     socialLinks?: boolean | Page$socialLinksArgs<ExtArgs>
-    admins?: boolean | Page$adminsArgs<ExtArgs>
+    admin?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | PageCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type PageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type PageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $PagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Page"
@@ -6040,7 +5957,7 @@ export namespace Prisma {
       pageFollowers: Prisma.$PageFollowPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
       socialLinks: Prisma.$SocialLinkedsPayload<ExtArgs>[]
-      admins: Prisma.$PageAdminPayload<ExtArgs>[]
+      admin: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6057,6 +5974,7 @@ export namespace Prisma {
       categories: string
       createAt: Date
       bio: string | null
+      adminId: string
     }, ExtArgs["result"]["page"]>
     composites: {}
   }
@@ -6454,7 +6372,7 @@ export namespace Prisma {
     pageFollowers<T extends Page$pageFollowersArgs<ExtArgs> = {}>(args?: Subset<T, Page$pageFollowersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends Page$postsArgs<ExtArgs> = {}>(args?: Subset<T, Page$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     socialLinks<T extends Page$socialLinksArgs<ExtArgs> = {}>(args?: Subset<T, Page$socialLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SocialLinkedsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    admins<T extends Page$adminsArgs<ExtArgs> = {}>(args?: Subset<T, Page$adminsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    admin<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6498,6 +6416,7 @@ export namespace Prisma {
     readonly categories: FieldRef<"Page", 'String'>
     readonly createAt: FieldRef<"Page", 'DateTime'>
     readonly bio: FieldRef<"Page", 'String'>
+    readonly adminId: FieldRef<"Page", 'String'>
   }
     
 
@@ -6753,6 +6672,10 @@ export namespace Prisma {
      */
     data: PageCreateManyInput | PageCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PageIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6824,6 +6747,10 @@ export namespace Prisma {
      * Limit how many Pages to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PageIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6964,30 +6891,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SocialLinkedsScalarFieldEnum | SocialLinkedsScalarFieldEnum[]
-  }
-
-  /**
-   * Page.admins
-   */
-  export type Page$adminsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    where?: PageAdminWhereInput
-    orderBy?: PageAdminOrderByWithRelationInput | PageAdminOrderByWithRelationInput[]
-    cursor?: PageAdminWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PageAdminScalarFieldEnum | PageAdminScalarFieldEnum[]
   }
 
   /**
@@ -8068,1081 +7971,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PageFollowInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model PageAdmin
-   */
-
-  export type AggregatePageAdmin = {
-    _count: PageAdminCountAggregateOutputType | null
-    _min: PageAdminMinAggregateOutputType | null
-    _max: PageAdminMaxAggregateOutputType | null
-  }
-
-  export type PageAdminMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    pageId: string | null
-    role: $Enums.AdminRole | null
-    addedAt: Date | null
-  }
-
-  export type PageAdminMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    pageId: string | null
-    role: $Enums.AdminRole | null
-    addedAt: Date | null
-  }
-
-  export type PageAdminCountAggregateOutputType = {
-    id: number
-    userId: number
-    pageId: number
-    role: number
-    addedAt: number
-    _all: number
-  }
-
-
-  export type PageAdminMinAggregateInputType = {
-    id?: true
-    userId?: true
-    pageId?: true
-    role?: true
-    addedAt?: true
-  }
-
-  export type PageAdminMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    pageId?: true
-    role?: true
-    addedAt?: true
-  }
-
-  export type PageAdminCountAggregateInputType = {
-    id?: true
-    userId?: true
-    pageId?: true
-    role?: true
-    addedAt?: true
-    _all?: true
-  }
-
-  export type PageAdminAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PageAdmin to aggregate.
-     */
-    where?: PageAdminWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PageAdmins to fetch.
-     */
-    orderBy?: PageAdminOrderByWithRelationInput | PageAdminOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PageAdminWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PageAdmins from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PageAdmins.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned PageAdmins
-    **/
-    _count?: true | PageAdminCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PageAdminMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PageAdminMaxAggregateInputType
-  }
-
-  export type GetPageAdminAggregateType<T extends PageAdminAggregateArgs> = {
-        [P in keyof T & keyof AggregatePageAdmin]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePageAdmin[P]>
-      : GetScalarType<T[P], AggregatePageAdmin[P]>
-  }
-
-
-
-
-  export type PageAdminGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PageAdminWhereInput
-    orderBy?: PageAdminOrderByWithAggregationInput | PageAdminOrderByWithAggregationInput[]
-    by: PageAdminScalarFieldEnum[] | PageAdminScalarFieldEnum
-    having?: PageAdminScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PageAdminCountAggregateInputType | true
-    _min?: PageAdminMinAggregateInputType
-    _max?: PageAdminMaxAggregateInputType
-  }
-
-  export type PageAdminGroupByOutputType = {
-    id: string
-    userId: string
-    pageId: string
-    role: $Enums.AdminRole
-    addedAt: Date
-    _count: PageAdminCountAggregateOutputType | null
-    _min: PageAdminMinAggregateOutputType | null
-    _max: PageAdminMaxAggregateOutputType | null
-  }
-
-  type GetPageAdminGroupByPayload<T extends PageAdminGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PageAdminGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PageAdminGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PageAdminGroupByOutputType[P]>
-            : GetScalarType<T[P], PageAdminGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PageAdminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    pageId?: boolean
-    role?: boolean
-    addedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    page?: boolean | PageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pageAdmin"]>
-
-  export type PageAdminSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    pageId?: boolean
-    role?: boolean
-    addedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    page?: boolean | PageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pageAdmin"]>
-
-  export type PageAdminSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    pageId?: boolean
-    role?: boolean
-    addedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    page?: boolean | PageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pageAdmin"]>
-
-  export type PageAdminSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    pageId?: boolean
-    role?: boolean
-    addedAt?: boolean
-  }
-
-  export type PageAdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "pageId" | "role" | "addedAt", ExtArgs["result"]["pageAdmin"]>
-  export type PageAdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    page?: boolean | PageDefaultArgs<ExtArgs>
-  }
-  export type PageAdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    page?: boolean | PageDefaultArgs<ExtArgs>
-  }
-  export type PageAdminIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    page?: boolean | PageDefaultArgs<ExtArgs>
-  }
-
-  export type $PageAdminPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PageAdmin"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      page: Prisma.$PagePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      pageId: string
-      role: $Enums.AdminRole
-      addedAt: Date
-    }, ExtArgs["result"]["pageAdmin"]>
-    composites: {}
-  }
-
-  type PageAdminGetPayload<S extends boolean | null | undefined | PageAdminDefaultArgs> = $Result.GetResult<Prisma.$PageAdminPayload, S>
-
-  type PageAdminCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PageAdminFindManyArgs, 'select' | 'include' | 'distinct' | 'omit' | 'relationLoadStrategy'> & {
-      select?: PageAdminCountAggregateInputType | true
-    }
-
-  export interface PageAdminDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PageAdmin'], meta: { name: 'PageAdmin' } }
-    /**
-     * Find zero or one PageAdmin that matches the filter.
-     * @param {PageAdminFindUniqueArgs} args - Arguments to find a PageAdmin
-     * @example
-     * // Get one PageAdmin
-     * const pageAdmin = await prisma.pageAdmin.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PageAdminFindUniqueArgs>(args: SelectSubset<T, PageAdminFindUniqueArgs<ExtArgs>>): Prisma__PageAdminClient<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one PageAdmin that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PageAdminFindUniqueOrThrowArgs} args - Arguments to find a PageAdmin
-     * @example
-     * // Get one PageAdmin
-     * const pageAdmin = await prisma.pageAdmin.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PageAdminFindUniqueOrThrowArgs>(args: SelectSubset<T, PageAdminFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PageAdminClient<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PageAdmin that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageAdminFindFirstArgs} args - Arguments to find a PageAdmin
-     * @example
-     * // Get one PageAdmin
-     * const pageAdmin = await prisma.pageAdmin.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PageAdminFindFirstArgs>(args?: SelectSubset<T, PageAdminFindFirstArgs<ExtArgs>>): Prisma__PageAdminClient<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PageAdmin that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageAdminFindFirstOrThrowArgs} args - Arguments to find a PageAdmin
-     * @example
-     * // Get one PageAdmin
-     * const pageAdmin = await prisma.pageAdmin.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PageAdminFindFirstOrThrowArgs>(args?: SelectSubset<T, PageAdminFindFirstOrThrowArgs<ExtArgs>>): Prisma__PageAdminClient<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more PageAdmins that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageAdminFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all PageAdmins
-     * const pageAdmins = await prisma.pageAdmin.findMany()
-     * 
-     * // Get first 10 PageAdmins
-     * const pageAdmins = await prisma.pageAdmin.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const pageAdminWithIdOnly = await prisma.pageAdmin.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PageAdminFindManyArgs>(args?: SelectSubset<T, PageAdminFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a PageAdmin.
-     * @param {PageAdminCreateArgs} args - Arguments to create a PageAdmin.
-     * @example
-     * // Create one PageAdmin
-     * const PageAdmin = await prisma.pageAdmin.create({
-     *   data: {
-     *     // ... data to create a PageAdmin
-     *   }
-     * })
-     * 
-     */
-    create<T extends PageAdminCreateArgs>(args: SelectSubset<T, PageAdminCreateArgs<ExtArgs>>): Prisma__PageAdminClient<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many PageAdmins.
-     * @param {PageAdminCreateManyArgs} args - Arguments to create many PageAdmins.
-     * @example
-     * // Create many PageAdmins
-     * const pageAdmin = await prisma.pageAdmin.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PageAdminCreateManyArgs>(args?: SelectSubset<T, PageAdminCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many PageAdmins and returns the data saved in the database.
-     * @param {PageAdminCreateManyAndReturnArgs} args - Arguments to create many PageAdmins.
-     * @example
-     * // Create many PageAdmins
-     * const pageAdmin = await prisma.pageAdmin.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many PageAdmins and only return the `id`
-     * const pageAdminWithIdOnly = await prisma.pageAdmin.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PageAdminCreateManyAndReturnArgs>(args?: SelectSubset<T, PageAdminCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a PageAdmin.
-     * @param {PageAdminDeleteArgs} args - Arguments to delete one PageAdmin.
-     * @example
-     * // Delete one PageAdmin
-     * const PageAdmin = await prisma.pageAdmin.delete({
-     *   where: {
-     *     // ... filter to delete one PageAdmin
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PageAdminDeleteArgs>(args: SelectSubset<T, PageAdminDeleteArgs<ExtArgs>>): Prisma__PageAdminClient<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one PageAdmin.
-     * @param {PageAdminUpdateArgs} args - Arguments to update one PageAdmin.
-     * @example
-     * // Update one PageAdmin
-     * const pageAdmin = await prisma.pageAdmin.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PageAdminUpdateArgs>(args: SelectSubset<T, PageAdminUpdateArgs<ExtArgs>>): Prisma__PageAdminClient<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more PageAdmins.
-     * @param {PageAdminDeleteManyArgs} args - Arguments to filter PageAdmins to delete.
-     * @example
-     * // Delete a few PageAdmins
-     * const { count } = await prisma.pageAdmin.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PageAdminDeleteManyArgs>(args?: SelectSubset<T, PageAdminDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PageAdmins.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageAdminUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many PageAdmins
-     * const pageAdmin = await prisma.pageAdmin.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PageAdminUpdateManyArgs>(args: SelectSubset<T, PageAdminUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PageAdmins and returns the data updated in the database.
-     * @param {PageAdminUpdateManyAndReturnArgs} args - Arguments to update many PageAdmins.
-     * @example
-     * // Update many PageAdmins
-     * const pageAdmin = await prisma.pageAdmin.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more PageAdmins and only return the `id`
-     * const pageAdminWithIdOnly = await prisma.pageAdmin.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PageAdminUpdateManyAndReturnArgs>(args: SelectSubset<T, PageAdminUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one PageAdmin.
-     * @param {PageAdminUpsertArgs} args - Arguments to update or create a PageAdmin.
-     * @example
-     * // Update or create a PageAdmin
-     * const pageAdmin = await prisma.pageAdmin.upsert({
-     *   create: {
-     *     // ... data to create a PageAdmin
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the PageAdmin we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PageAdminUpsertArgs>(args: SelectSubset<T, PageAdminUpsertArgs<ExtArgs>>): Prisma__PageAdminClient<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of PageAdmins.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageAdminCountArgs} args - Arguments to filter PageAdmins to count.
-     * @example
-     * // Count the number of PageAdmins
-     * const count = await prisma.pageAdmin.count({
-     *   where: {
-     *     // ... the filter for the PageAdmins we want to count
-     *   }
-     * })
-    **/
-    count<T extends PageAdminCountArgs>(
-      args?: Subset<T, PageAdminCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PageAdminCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a PageAdmin.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageAdminAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PageAdminAggregateArgs>(args: Subset<T, PageAdminAggregateArgs>): Prisma.PrismaPromise<GetPageAdminAggregateType<T>>
-
-    /**
-     * Group by PageAdmin.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageAdminGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PageAdminGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PageAdminGroupByArgs['orderBy'] }
-        : { orderBy?: PageAdminGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PageAdminGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPageAdminGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PageAdmin model
-   */
-  readonly fields: PageAdminFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for PageAdmin.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PageAdminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    page<T extends PageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PageDefaultArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the PageAdmin model
-   */
-  interface PageAdminFieldRefs {
-    readonly id: FieldRef<"PageAdmin", 'String'>
-    readonly userId: FieldRef<"PageAdmin", 'String'>
-    readonly pageId: FieldRef<"PageAdmin", 'String'>
-    readonly role: FieldRef<"PageAdmin", 'AdminRole'>
-    readonly addedAt: FieldRef<"PageAdmin", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * PageAdmin findUnique
-   */
-  export type PageAdminFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * Filter, which PageAdmin to fetch.
-     */
-    where: PageAdminWhereUniqueInput
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin findUniqueOrThrow
-   */
-  export type PageAdminFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * Filter, which PageAdmin to fetch.
-     */
-    where: PageAdminWhereUniqueInput
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin findFirst
-   */
-  export type PageAdminFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * Filter, which PageAdmin to fetch.
-     */
-    where?: PageAdminWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PageAdmins to fetch.
-     */
-    orderBy?: PageAdminOrderByWithRelationInput | PageAdminOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PageAdmins.
-     */
-    cursor?: PageAdminWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PageAdmins from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PageAdmins.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PageAdmins.
-     */
-    distinct?: PageAdminScalarFieldEnum | PageAdminScalarFieldEnum[]
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin findFirstOrThrow
-   */
-  export type PageAdminFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * Filter, which PageAdmin to fetch.
-     */
-    where?: PageAdminWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PageAdmins to fetch.
-     */
-    orderBy?: PageAdminOrderByWithRelationInput | PageAdminOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PageAdmins.
-     */
-    cursor?: PageAdminWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PageAdmins from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PageAdmins.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PageAdmins.
-     */
-    distinct?: PageAdminScalarFieldEnum | PageAdminScalarFieldEnum[]
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin findMany
-   */
-  export type PageAdminFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * Filter, which PageAdmins to fetch.
-     */
-    where?: PageAdminWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PageAdmins to fetch.
-     */
-    orderBy?: PageAdminOrderByWithRelationInput | PageAdminOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing PageAdmins.
-     */
-    cursor?: PageAdminWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PageAdmins from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PageAdmins.
-     */
-    skip?: number
-    distinct?: PageAdminScalarFieldEnum | PageAdminScalarFieldEnum[]
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin create
-   */
-  export type PageAdminCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * The data needed to create a PageAdmin.
-     */
-    data: XOR<PageAdminCreateInput, PageAdminUncheckedCreateInput>
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin createMany
-   */
-  export type PageAdminCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many PageAdmins.
-     */
-    data: PageAdminCreateManyInput | PageAdminCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PageAdmin createManyAndReturn
-   */
-  export type PageAdminCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * The data used to create many PageAdmins.
-     */
-    data: PageAdminCreateManyInput | PageAdminCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PageAdmin update
-   */
-  export type PageAdminUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * The data needed to update a PageAdmin.
-     */
-    data: XOR<PageAdminUpdateInput, PageAdminUncheckedUpdateInput>
-    /**
-     * Choose, which PageAdmin to update.
-     */
-    where: PageAdminWhereUniqueInput
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin updateMany
-   */
-  export type PageAdminUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update PageAdmins.
-     */
-    data: XOR<PageAdminUpdateManyMutationInput, PageAdminUncheckedUpdateManyInput>
-    /**
-     * Filter which PageAdmins to update
-     */
-    where?: PageAdminWhereInput
-    /**
-     * Limit how many PageAdmins to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * PageAdmin updateManyAndReturn
-   */
-  export type PageAdminUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * The data used to update PageAdmins.
-     */
-    data: XOR<PageAdminUpdateManyMutationInput, PageAdminUncheckedUpdateManyInput>
-    /**
-     * Filter which PageAdmins to update
-     */
-    where?: PageAdminWhereInput
-    /**
-     * Limit how many PageAdmins to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PageAdmin upsert
-   */
-  export type PageAdminUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * The filter to search for the PageAdmin to update in case it exists.
-     */
-    where: PageAdminWhereUniqueInput
-    /**
-     * In case the PageAdmin found by the `where` argument doesn't exist, create a new PageAdmin with this data.
-     */
-    create: XOR<PageAdminCreateInput, PageAdminUncheckedCreateInput>
-    /**
-     * In case the PageAdmin was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PageAdminUpdateInput, PageAdminUncheckedUpdateInput>
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin delete
-   */
-  export type PageAdminDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
-    /**
-     * Filter which PageAdmin to delete.
-     */
-    where: PageAdminWhereUniqueInput
-    relationLoadStrategy?: RelationLoadStrategy
-  }
-
-  /**
-   * PageAdmin deleteMany
-   */
-  export type PageAdminDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PageAdmins to delete
-     */
-    where?: PageAdminWhereInput
-    /**
-     * Limit how many PageAdmins to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * PageAdmin without action
-   */
-  export type PageAdminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PageAdmin
-     */
-    select?: PageAdminSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PageAdmin
-     */
-    omit?: PageAdminOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageAdminInclude<ExtArgs> | null
   }
 
 
@@ -16031,7 +14859,7 @@ export namespace Prisma {
       restrictedBy: Prisma.$AudienceAndVisibilityPayload<ExtArgs>[]
       blockedBy: Prisma.$AudienceAndVisibilityPayload<ExtArgs>[]
       blockedMessagesBy: Prisma.$AudienceAndVisibilityPayload<ExtArgs>[]
-      adminPages: Prisma.$PageAdminPayload<ExtArgs>[]
+      adminPages: Prisma.$PagePayload<ExtArgs>[]
       followedPages: Prisma.$PageFollowPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -16471,7 +15299,7 @@ export namespace Prisma {
     restrictedBy<T extends User$restrictedByArgs<ExtArgs> = {}>(args?: Subset<T, User$restrictedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     blockedBy<T extends User$blockedByArgs<ExtArgs> = {}>(args?: Subset<T, User$blockedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     blockedMessagesBy<T extends User$blockedMessagesByArgs<ExtArgs> = {}>(args?: Subset<T, User$blockedMessagesByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceAndVisibilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    adminPages<T extends User$adminPagesArgs<ExtArgs> = {}>(args?: Subset<T, User$adminPagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    adminPages<T extends User$adminPagesArgs<ExtArgs> = {}>(args?: Subset<T, User$adminPagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     followedPages<T extends User$followedPagesArgs<ExtArgs> = {}>(args?: Subset<T, User$followedPagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17402,23 +16230,23 @@ export namespace Prisma {
    */
   export type User$adminPagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PageAdmin
+     * Select specific fields to fetch from the Page
      */
-    select?: PageAdminSelect<ExtArgs> | null
+    select?: PageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PageAdmin
+     * Omit specific fields from the Page
      */
-    omit?: PageAdminOmit<ExtArgs> | null
+    omit?: PageOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageAdminInclude<ExtArgs> | null
-    where?: PageAdminWhereInput
-    orderBy?: PageAdminOrderByWithRelationInput | PageAdminOrderByWithRelationInput[]
-    cursor?: PageAdminWhereUniqueInput
+    include?: PageInclude<ExtArgs> | null
+    where?: PageWhereInput
+    orderBy?: PageOrderByWithRelationInput | PageOrderByWithRelationInput[]
+    cursor?: PageWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: PageAdminScalarFieldEnum | PageAdminScalarFieldEnum[]
+    distinct?: PageScalarFieldEnum | PageScalarFieldEnum[]
   }
 
   /**
@@ -25211,7 +24039,8 @@ export namespace Prisma {
     zipcode: 'zipcode',
     categories: 'categories',
     createAt: 'createAt',
-    bio: 'bio'
+    bio: 'bio',
+    adminId: 'adminId'
   };
 
   export type PageScalarFieldEnum = (typeof PageScalarFieldEnum)[keyof typeof PageScalarFieldEnum]
@@ -25225,17 +24054,6 @@ export namespace Prisma {
   };
 
   export type PageFollowScalarFieldEnum = (typeof PageFollowScalarFieldEnum)[keyof typeof PageFollowScalarFieldEnum]
-
-
-  export const PageAdminScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    pageId: 'pageId',
-    role: 'role',
-    addedAt: 'addedAt'
-  };
-
-  export type PageAdminScalarFieldEnum = (typeof PageAdminScalarFieldEnum)[keyof typeof PageAdminScalarFieldEnum]
 
 
   export const PostScalarFieldEnum: {
@@ -25637,20 +24455,6 @@ export namespace Prisma {
    * Reference to a field of type 'StatusPage[]'
    */
   export type ListEnumStatusPageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusPage[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'AdminRole'
-   */
-  export type EnumAdminRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdminRole'>
-    
-
-
-  /**
-   * Reference to a field of type 'AdminRole[]'
-   */
-  export type ListEnumAdminRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdminRole[]'>
     
 
 
@@ -26195,10 +24999,11 @@ export namespace Prisma {
     categories?: StringFilter<"Page"> | string
     createAt?: DateTimeFilter<"Page"> | Date | string
     bio?: StringNullableFilter<"Page"> | string | null
+    adminId?: UuidFilter<"Page"> | string
     pageFollowers?: PageFollowListRelationFilter
     posts?: PostListRelationFilter
     socialLinks?: SocialLinkedsListRelationFilter
-    admins?: PageAdminListRelationFilter
+    admin?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type PageOrderByWithRelationInput = {
@@ -26216,10 +25021,11 @@ export namespace Prisma {
     categories?: SortOrder
     createAt?: SortOrder
     bio?: SortOrderInput | SortOrder
+    adminId?: SortOrder
     pageFollowers?: PageFollowOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
     socialLinks?: SocialLinkedsOrderByRelationAggregateInput
-    admins?: PageAdminOrderByRelationAggregateInput
+    admin?: UserOrderByWithRelationInput
   }
 
   export type PageWhereUniqueInput = Prisma.AtLeast<{
@@ -26240,10 +25046,11 @@ export namespace Prisma {
     categories?: StringFilter<"Page"> | string
     createAt?: DateTimeFilter<"Page"> | Date | string
     bio?: StringNullableFilter<"Page"> | string | null
+    adminId?: UuidFilter<"Page"> | string
     pageFollowers?: PageFollowListRelationFilter
     posts?: PostListRelationFilter
     socialLinks?: SocialLinkedsListRelationFilter
-    admins?: PageAdminListRelationFilter
+    admin?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type PageOrderByWithAggregationInput = {
@@ -26261,6 +25068,7 @@ export namespace Prisma {
     categories?: SortOrder
     createAt?: SortOrder
     bio?: SortOrderInput | SortOrder
+    adminId?: SortOrder
     _count?: PageCountOrderByAggregateInput
     _max?: PageMaxOrderByAggregateInput
     _min?: PageMinOrderByAggregateInput
@@ -26284,6 +25092,7 @@ export namespace Prisma {
     categories?: StringWithAggregatesFilter<"Page"> | string
     createAt?: DateTimeWithAggregatesFilter<"Page"> | Date | string
     bio?: StringNullableWithAggregatesFilter<"Page"> | string | null
+    adminId?: UuidWithAggregatesFilter<"Page"> | string
   }
 
   export type PageFollowWhereInput = {
@@ -26338,65 +25147,6 @@ export namespace Prisma {
     userId?: UuidWithAggregatesFilter<"PageFollow"> | string
     pageId?: UuidWithAggregatesFilter<"PageFollow"> | string
     followedAt?: DateTimeWithAggregatesFilter<"PageFollow"> | Date | string
-  }
-
-  export type PageAdminWhereInput = {
-    AND?: PageAdminWhereInput | PageAdminWhereInput[]
-    OR?: PageAdminWhereInput[]
-    NOT?: PageAdminWhereInput | PageAdminWhereInput[]
-    id?: StringFilter<"PageAdmin"> | string
-    userId?: UuidFilter<"PageAdmin"> | string
-    pageId?: UuidFilter<"PageAdmin"> | string
-    role?: EnumAdminRoleFilter<"PageAdmin"> | $Enums.AdminRole
-    addedAt?: DateTimeFilter<"PageAdmin"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    page?: XOR<PageScalarRelationFilter, PageWhereInput>
-  }
-
-  export type PageAdminOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    pageId?: SortOrder
-    role?: SortOrder
-    addedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    page?: PageOrderByWithRelationInput
-  }
-
-  export type PageAdminWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    userId_pageId?: PageAdminUserIdPageIdCompoundUniqueInput
-    AND?: PageAdminWhereInput | PageAdminWhereInput[]
-    OR?: PageAdminWhereInput[]
-    NOT?: PageAdminWhereInput | PageAdminWhereInput[]
-    userId?: UuidFilter<"PageAdmin"> | string
-    pageId?: UuidFilter<"PageAdmin"> | string
-    role?: EnumAdminRoleFilter<"PageAdmin"> | $Enums.AdminRole
-    addedAt?: DateTimeFilter<"PageAdmin"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    page?: XOR<PageScalarRelationFilter, PageWhereInput>
-  }, "id" | "userId_pageId">
-
-  export type PageAdminOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    pageId?: SortOrder
-    role?: SortOrder
-    addedAt?: SortOrder
-    _count?: PageAdminCountOrderByAggregateInput
-    _max?: PageAdminMaxOrderByAggregateInput
-    _min?: PageAdminMinOrderByAggregateInput
-  }
-
-  export type PageAdminScalarWhereWithAggregatesInput = {
-    AND?: PageAdminScalarWhereWithAggregatesInput | PageAdminScalarWhereWithAggregatesInput[]
-    OR?: PageAdminScalarWhereWithAggregatesInput[]
-    NOT?: PageAdminScalarWhereWithAggregatesInput | PageAdminScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"PageAdmin"> | string
-    userId?: UuidWithAggregatesFilter<"PageAdmin"> | string
-    pageId?: UuidWithAggregatesFilter<"PageAdmin"> | string
-    role?: EnumAdminRoleWithAggregatesFilter<"PageAdmin"> | $Enums.AdminRole
-    addedAt?: DateTimeWithAggregatesFilter<"PageAdmin"> | Date | string
   }
 
   export type PostWhereInput = {
@@ -27048,7 +25798,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityListRelationFilter
     blockedBy?: AudienceAndVisibilityListRelationFilter
     blockedMessagesBy?: AudienceAndVisibilityListRelationFilter
-    adminPages?: PageAdminListRelationFilter
+    adminPages?: PageListRelationFilter
     followedPages?: PageFollowListRelationFilter
   }
 
@@ -27095,7 +25845,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityOrderByRelationAggregateInput
     blockedBy?: AudienceAndVisibilityOrderByRelationAggregateInput
     blockedMessagesBy?: AudienceAndVisibilityOrderByRelationAggregateInput
-    adminPages?: PageAdminOrderByRelationAggregateInput
+    adminPages?: PageOrderByRelationAggregateInput
     followedPages?: PageFollowOrderByRelationAggregateInput
   }
 
@@ -27145,7 +25895,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityListRelationFilter
     blockedBy?: AudienceAndVisibilityListRelationFilter
     blockedMessagesBy?: AudienceAndVisibilityListRelationFilter
-    adminPages?: PageAdminListRelationFilter
+    adminPages?: PageListRelationFilter
     followedPages?: PageFollowListRelationFilter
   }, "id" | "profileId" | "primaryEmailId" | "primaryPhoneId" | "username">
 
@@ -27916,7 +26666,7 @@ export namespace Prisma {
     pageFollowers?: PageFollowCreateNestedManyWithoutPageInput
     posts?: PostCreateNestedManyWithoutPageInput
     socialLinks?: SocialLinkedsCreateNestedManyWithoutPageInput
-    admins?: PageAdminCreateNestedManyWithoutPageInput
+    admin: UserCreateNestedOneWithoutAdminPagesInput
   }
 
   export type PageUncheckedCreateInput = {
@@ -27934,10 +26684,10 @@ export namespace Prisma {
     categories: string
     createAt?: Date | string
     bio?: string | null
+    adminId: string
     pageFollowers?: PageFollowUncheckedCreateNestedManyWithoutPageInput
     posts?: PostUncheckedCreateNestedManyWithoutPageInput
     socialLinks?: SocialLinkedsUncheckedCreateNestedManyWithoutPageInput
-    admins?: PageAdminUncheckedCreateNestedManyWithoutPageInput
   }
 
   export type PageUpdateInput = {
@@ -27958,7 +26708,7 @@ export namespace Prisma {
     pageFollowers?: PageFollowUpdateManyWithoutPageNestedInput
     posts?: PostUpdateManyWithoutPageNestedInput
     socialLinks?: SocialLinkedsUpdateManyWithoutPageNestedInput
-    admins?: PageAdminUpdateManyWithoutPageNestedInput
+    admin?: UserUpdateOneRequiredWithoutAdminPagesNestedInput
   }
 
   export type PageUncheckedUpdateInput = {
@@ -27976,10 +26726,10 @@ export namespace Prisma {
     categories?: StringFieldUpdateOperationsInput | string
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     pageFollowers?: PageFollowUncheckedUpdateManyWithoutPageNestedInput
     posts?: PostUncheckedUpdateManyWithoutPageNestedInput
     socialLinks?: SocialLinkedsUncheckedUpdateManyWithoutPageNestedInput
-    admins?: PageAdminUncheckedUpdateManyWithoutPageNestedInput
   }
 
   export type PageCreateManyInput = {
@@ -27997,6 +26747,7 @@ export namespace Prisma {
     categories: string
     createAt?: Date | string
     bio?: string | null
+    adminId: string
   }
 
   export type PageUpdateManyMutationInput = {
@@ -28031,6 +26782,7 @@ export namespace Prisma {
     categories?: StringFieldUpdateOperationsInput | string
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
   }
 
   export type PageFollowCreateInput = {
@@ -28078,60 +26830,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     pageId?: StringFieldUpdateOperationsInput | string
     followedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PageAdminCreateInput = {
-    id?: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
-    user: UserCreateNestedOneWithoutAdminPagesInput
-    page: PageCreateNestedOneWithoutAdminsInput
-  }
-
-  export type PageAdminUncheckedCreateInput = {
-    id?: string
-    userId: string
-    pageId: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
-  }
-
-  export type PageAdminUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutAdminPagesNestedInput
-    page?: PageUpdateOneRequiredWithoutAdminsNestedInput
-  }
-
-  export type PageAdminUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    pageId?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PageAdminCreateManyInput = {
-    id?: string
-    userId: string
-    pageId: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
-  }
-
-  export type PageAdminUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PageAdminUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    pageId?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostCreateInput = {
@@ -28872,7 +27570,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -28917,7 +27615,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -28962,7 +27660,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -29007,7 +27705,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -30014,12 +28712,6 @@ export namespace Prisma {
     none?: SocialLinkedsWhereInput
   }
 
-  export type PageAdminListRelationFilter = {
-    every?: PageAdminWhereInput
-    some?: PageAdminWhereInput
-    none?: PageAdminWhereInput
-  }
-
   export type PageFollowOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -30029,10 +28721,6 @@ export namespace Prisma {
   }
 
   export type SocialLinkedsOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PageAdminOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -30051,6 +28739,7 @@ export namespace Prisma {
     categories?: SortOrder
     createAt?: SortOrder
     bio?: SortOrder
+    adminId?: SortOrder
   }
 
   export type PageMaxOrderByAggregateInput = {
@@ -30068,6 +28757,7 @@ export namespace Prisma {
     categories?: SortOrder
     createAt?: SortOrder
     bio?: SortOrder
+    adminId?: SortOrder
   }
 
   export type PageMinOrderByAggregateInput = {
@@ -30085,6 +28775,7 @@ export namespace Prisma {
     categories?: SortOrder
     createAt?: SortOrder
     bio?: SortOrder
+    adminId?: SortOrder
   }
 
   export type EnumStatusPageWithAggregatesFilter<$PrismaModel = never> = {
@@ -30126,52 +28817,6 @@ export namespace Prisma {
     userId?: SortOrder
     pageId?: SortOrder
     followedAt?: SortOrder
-  }
-
-  export type EnumAdminRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.AdminRole | EnumAdminRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.AdminRole[] | ListEnumAdminRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AdminRole[] | ListEnumAdminRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumAdminRoleFilter<$PrismaModel> | $Enums.AdminRole
-  }
-
-  export type PageAdminUserIdPageIdCompoundUniqueInput = {
-    userId: string
-    pageId: string
-  }
-
-  export type PageAdminCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    pageId?: SortOrder
-    role?: SortOrder
-    addedAt?: SortOrder
-  }
-
-  export type PageAdminMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    pageId?: SortOrder
-    role?: SortOrder
-    addedAt?: SortOrder
-  }
-
-  export type PageAdminMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    pageId?: SortOrder
-    role?: SortOrder
-    addedAt?: SortOrder
-  }
-
-  export type EnumAdminRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AdminRole | EnumAdminRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.AdminRole[] | ListEnumAdminRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AdminRole[] | ListEnumAdminRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumAdminRoleWithAggregatesFilter<$PrismaModel> | $Enums.AdminRole
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAdminRoleFilter<$PrismaModel>
-    _max?: NestedEnumAdminRoleFilter<$PrismaModel>
   }
 
   export type EnumScopeFilter<$PrismaModel = never> = {
@@ -30906,6 +29551,12 @@ export namespace Prisma {
     none?: AudienceAndVisibilityWhereInput
   }
 
+  export type PageListRelationFilter = {
+    every?: PageWhereInput
+    some?: PageWhereInput
+    none?: PageWhereInput
+  }
+
   export type EmailOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -30939,6 +29590,10 @@ export namespace Prisma {
   }
 
   export type AudienceAndVisibilityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31413,11 +30068,10 @@ export namespace Prisma {
     connect?: SocialLinkedsWhereUniqueInput | SocialLinkedsWhereUniqueInput[]
   }
 
-  export type PageAdminCreateNestedManyWithoutPageInput = {
-    create?: XOR<PageAdminCreateWithoutPageInput, PageAdminUncheckedCreateWithoutPageInput> | PageAdminCreateWithoutPageInput[] | PageAdminUncheckedCreateWithoutPageInput[]
-    connectOrCreate?: PageAdminCreateOrConnectWithoutPageInput | PageAdminCreateOrConnectWithoutPageInput[]
-    createMany?: PageAdminCreateManyPageInputEnvelope
-    connect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
+  export type UserCreateNestedOneWithoutAdminPagesInput = {
+    create?: XOR<UserCreateWithoutAdminPagesInput, UserUncheckedCreateWithoutAdminPagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdminPagesInput
+    connect?: UserWhereUniqueInput
   }
 
   export type PageFollowUncheckedCreateNestedManyWithoutPageInput = {
@@ -31439,13 +30093,6 @@ export namespace Prisma {
     connectOrCreate?: SocialLinkedsCreateOrConnectWithoutPageInput | SocialLinkedsCreateOrConnectWithoutPageInput[]
     createMany?: SocialLinkedsCreateManyPageInputEnvelope
     connect?: SocialLinkedsWhereUniqueInput | SocialLinkedsWhereUniqueInput[]
-  }
-
-  export type PageAdminUncheckedCreateNestedManyWithoutPageInput = {
-    create?: XOR<PageAdminCreateWithoutPageInput, PageAdminUncheckedCreateWithoutPageInput> | PageAdminCreateWithoutPageInput[] | PageAdminUncheckedCreateWithoutPageInput[]
-    connectOrCreate?: PageAdminCreateOrConnectWithoutPageInput | PageAdminCreateOrConnectWithoutPageInput[]
-    createMany?: PageAdminCreateManyPageInputEnvelope
-    connect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
   }
 
   export type EnumStatusPageFieldUpdateOperationsInput = {
@@ -31494,18 +30141,12 @@ export namespace Prisma {
     deleteMany?: SocialLinkedsScalarWhereInput | SocialLinkedsScalarWhereInput[]
   }
 
-  export type PageAdminUpdateManyWithoutPageNestedInput = {
-    create?: XOR<PageAdminCreateWithoutPageInput, PageAdminUncheckedCreateWithoutPageInput> | PageAdminCreateWithoutPageInput[] | PageAdminUncheckedCreateWithoutPageInput[]
-    connectOrCreate?: PageAdminCreateOrConnectWithoutPageInput | PageAdminCreateOrConnectWithoutPageInput[]
-    upsert?: PageAdminUpsertWithWhereUniqueWithoutPageInput | PageAdminUpsertWithWhereUniqueWithoutPageInput[]
-    createMany?: PageAdminCreateManyPageInputEnvelope
-    set?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    disconnect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    delete?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    connect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    update?: PageAdminUpdateWithWhereUniqueWithoutPageInput | PageAdminUpdateWithWhereUniqueWithoutPageInput[]
-    updateMany?: PageAdminUpdateManyWithWhereWithoutPageInput | PageAdminUpdateManyWithWhereWithoutPageInput[]
-    deleteMany?: PageAdminScalarWhereInput | PageAdminScalarWhereInput[]
+  export type UserUpdateOneRequiredWithoutAdminPagesNestedInput = {
+    create?: XOR<UserCreateWithoutAdminPagesInput, UserUncheckedCreateWithoutAdminPagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdminPagesInput
+    upsert?: UserUpsertWithoutAdminPagesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdminPagesInput, UserUpdateWithoutAdminPagesInput>, UserUncheckedUpdateWithoutAdminPagesInput>
   }
 
   export type PageFollowUncheckedUpdateManyWithoutPageNestedInput = {
@@ -31550,20 +30191,6 @@ export namespace Prisma {
     deleteMany?: SocialLinkedsScalarWhereInput | SocialLinkedsScalarWhereInput[]
   }
 
-  export type PageAdminUncheckedUpdateManyWithoutPageNestedInput = {
-    create?: XOR<PageAdminCreateWithoutPageInput, PageAdminUncheckedCreateWithoutPageInput> | PageAdminCreateWithoutPageInput[] | PageAdminUncheckedCreateWithoutPageInput[]
-    connectOrCreate?: PageAdminCreateOrConnectWithoutPageInput | PageAdminCreateOrConnectWithoutPageInput[]
-    upsert?: PageAdminUpsertWithWhereUniqueWithoutPageInput | PageAdminUpsertWithWhereUniqueWithoutPageInput[]
-    createMany?: PageAdminCreateManyPageInputEnvelope
-    set?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    disconnect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    delete?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    connect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    update?: PageAdminUpdateWithWhereUniqueWithoutPageInput | PageAdminUpdateWithWhereUniqueWithoutPageInput[]
-    updateMany?: PageAdminUpdateManyWithWhereWithoutPageInput | PageAdminUpdateManyWithWhereWithoutPageInput[]
-    deleteMany?: PageAdminScalarWhereInput | PageAdminScalarWhereInput[]
-  }
-
   export type UserCreateNestedOneWithoutFollowedPagesInput = {
     create?: XOR<UserCreateWithoutFollowedPagesInput, UserUncheckedCreateWithoutFollowedPagesInput>
     connectOrCreate?: UserCreateOrConnectWithoutFollowedPagesInput
@@ -31590,38 +30217,6 @@ export namespace Prisma {
     upsert?: PageUpsertWithoutPageFollowersInput
     connect?: PageWhereUniqueInput
     update?: XOR<XOR<PageUpdateToOneWithWhereWithoutPageFollowersInput, PageUpdateWithoutPageFollowersInput>, PageUncheckedUpdateWithoutPageFollowersInput>
-  }
-
-  export type UserCreateNestedOneWithoutAdminPagesInput = {
-    create?: XOR<UserCreateWithoutAdminPagesInput, UserUncheckedCreateWithoutAdminPagesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAdminPagesInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type PageCreateNestedOneWithoutAdminsInput = {
-    create?: XOR<PageCreateWithoutAdminsInput, PageUncheckedCreateWithoutAdminsInput>
-    connectOrCreate?: PageCreateOrConnectWithoutAdminsInput
-    connect?: PageWhereUniqueInput
-  }
-
-  export type EnumAdminRoleFieldUpdateOperationsInput = {
-    set?: $Enums.AdminRole
-  }
-
-  export type UserUpdateOneRequiredWithoutAdminPagesNestedInput = {
-    create?: XOR<UserCreateWithoutAdminPagesInput, UserUncheckedCreateWithoutAdminPagesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAdminPagesInput
-    upsert?: UserUpsertWithoutAdminPagesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdminPagesInput, UserUpdateWithoutAdminPagesInput>, UserUncheckedUpdateWithoutAdminPagesInput>
-  }
-
-  export type PageUpdateOneRequiredWithoutAdminsNestedInput = {
-    create?: XOR<PageCreateWithoutAdminsInput, PageUncheckedCreateWithoutAdminsInput>
-    connectOrCreate?: PageCreateOrConnectWithoutAdminsInput
-    upsert?: PageUpsertWithoutAdminsInput
-    connect?: PageWhereUniqueInput
-    update?: XOR<XOR<PageUpdateToOneWithWhereWithoutAdminsInput, PageUpdateWithoutAdminsInput>, PageUncheckedUpdateWithoutAdminsInput>
   }
 
   export type PostCreatemediasInput = {
@@ -32287,11 +30882,11 @@ export namespace Prisma {
     connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
   }
 
-  export type PageAdminCreateNestedManyWithoutUserInput = {
-    create?: XOR<PageAdminCreateWithoutUserInput, PageAdminUncheckedCreateWithoutUserInput> | PageAdminCreateWithoutUserInput[] | PageAdminUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PageAdminCreateOrConnectWithoutUserInput | PageAdminCreateOrConnectWithoutUserInput[]
-    createMany?: PageAdminCreateManyUserInputEnvelope
-    connect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
+  export type PageCreateNestedManyWithoutAdminInput = {
+    create?: XOR<PageCreateWithoutAdminInput, PageUncheckedCreateWithoutAdminInput> | PageCreateWithoutAdminInput[] | PageUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: PageCreateOrConnectWithoutAdminInput | PageCreateOrConnectWithoutAdminInput[]
+    createMany?: PageCreateManyAdminInputEnvelope
+    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
   }
 
   export type PageFollowCreateNestedManyWithoutUserInput = {
@@ -32430,11 +31025,11 @@ export namespace Prisma {
     connect?: AudienceAndVisibilityWhereUniqueInput | AudienceAndVisibilityWhereUniqueInput[]
   }
 
-  export type PageAdminUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<PageAdminCreateWithoutUserInput, PageAdminUncheckedCreateWithoutUserInput> | PageAdminCreateWithoutUserInput[] | PageAdminUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PageAdminCreateOrConnectWithoutUserInput | PageAdminCreateOrConnectWithoutUserInput[]
-    createMany?: PageAdminCreateManyUserInputEnvelope
-    connect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
+  export type PageUncheckedCreateNestedManyWithoutAdminInput = {
+    create?: XOR<PageCreateWithoutAdminInput, PageUncheckedCreateWithoutAdminInput> | PageCreateWithoutAdminInput[] | PageUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: PageCreateOrConnectWithoutAdminInput | PageCreateOrConnectWithoutAdminInput[]
+    createMany?: PageCreateManyAdminInputEnvelope
+    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
   }
 
   export type PageFollowUncheckedCreateNestedManyWithoutUserInput = {
@@ -32744,18 +31339,18 @@ export namespace Prisma {
     deleteMany?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
   }
 
-  export type PageAdminUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PageAdminCreateWithoutUserInput, PageAdminUncheckedCreateWithoutUserInput> | PageAdminCreateWithoutUserInput[] | PageAdminUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PageAdminCreateOrConnectWithoutUserInput | PageAdminCreateOrConnectWithoutUserInput[]
-    upsert?: PageAdminUpsertWithWhereUniqueWithoutUserInput | PageAdminUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PageAdminCreateManyUserInputEnvelope
-    set?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    disconnect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    delete?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    connect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    update?: PageAdminUpdateWithWhereUniqueWithoutUserInput | PageAdminUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PageAdminUpdateManyWithWhereWithoutUserInput | PageAdminUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PageAdminScalarWhereInput | PageAdminScalarWhereInput[]
+  export type PageUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<PageCreateWithoutAdminInput, PageUncheckedCreateWithoutAdminInput> | PageCreateWithoutAdminInput[] | PageUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: PageCreateOrConnectWithoutAdminInput | PageCreateOrConnectWithoutAdminInput[]
+    upsert?: PageUpsertWithWhereUniqueWithoutAdminInput | PageUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: PageCreateManyAdminInputEnvelope
+    set?: PageWhereUniqueInput | PageWhereUniqueInput[]
+    disconnect?: PageWhereUniqueInput | PageWhereUniqueInput[]
+    delete?: PageWhereUniqueInput | PageWhereUniqueInput[]
+    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
+    update?: PageUpdateWithWhereUniqueWithoutAdminInput | PageUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: PageUpdateManyWithWhereWithoutAdminInput | PageUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: PageScalarWhereInput | PageScalarWhereInput[]
   }
 
   export type PageFollowUpdateManyWithoutUserNestedInput = {
@@ -33031,18 +31626,18 @@ export namespace Prisma {
     deleteMany?: AudienceAndVisibilityScalarWhereInput | AudienceAndVisibilityScalarWhereInput[]
   }
 
-  export type PageAdminUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PageAdminCreateWithoutUserInput, PageAdminUncheckedCreateWithoutUserInput> | PageAdminCreateWithoutUserInput[] | PageAdminUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PageAdminCreateOrConnectWithoutUserInput | PageAdminCreateOrConnectWithoutUserInput[]
-    upsert?: PageAdminUpsertWithWhereUniqueWithoutUserInput | PageAdminUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PageAdminCreateManyUserInputEnvelope
-    set?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    disconnect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    delete?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    connect?: PageAdminWhereUniqueInput | PageAdminWhereUniqueInput[]
-    update?: PageAdminUpdateWithWhereUniqueWithoutUserInput | PageAdminUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PageAdminUpdateManyWithWhereWithoutUserInput | PageAdminUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PageAdminScalarWhereInput | PageAdminScalarWhereInput[]
+  export type PageUncheckedUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<PageCreateWithoutAdminInput, PageUncheckedCreateWithoutAdminInput> | PageCreateWithoutAdminInput[] | PageUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: PageCreateOrConnectWithoutAdminInput | PageCreateOrConnectWithoutAdminInput[]
+    upsert?: PageUpsertWithWhereUniqueWithoutAdminInput | PageUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: PageCreateManyAdminInputEnvelope
+    set?: PageWhereUniqueInput | PageWhereUniqueInput[]
+    disconnect?: PageWhereUniqueInput | PageWhereUniqueInput[]
+    delete?: PageWhereUniqueInput | PageWhereUniqueInput[]
+    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
+    update?: PageUpdateWithWhereUniqueWithoutAdminInput | PageUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: PageUpdateManyWithWhereWithoutAdminInput | PageUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: PageScalarWhereInput | PageScalarWhereInput[]
   }
 
   export type PageFollowUncheckedUpdateManyWithoutUserNestedInput = {
@@ -33619,23 +32214,6 @@ export namespace Prisma {
     _max?: NestedEnumStatusPageFilter<$PrismaModel>
   }
 
-  export type NestedEnumAdminRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.AdminRole | EnumAdminRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.AdminRole[] | ListEnumAdminRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AdminRole[] | ListEnumAdminRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumAdminRoleFilter<$PrismaModel> | $Enums.AdminRole
-  }
-
-  export type NestedEnumAdminRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AdminRole | EnumAdminRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.AdminRole[] | ListEnumAdminRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AdminRole[] | ListEnumAdminRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumAdminRoleWithAggregatesFilter<$PrismaModel> | $Enums.AdminRole
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAdminRoleFilter<$PrismaModel>
-    _max?: NestedEnumAdminRoleFilter<$PrismaModel>
-  }
-
   export type NestedEnumScopeFilter<$PrismaModel = never> = {
     equals?: $Enums.Scope | EnumScopeFieldRefInput<$PrismaModel>
     in?: $Enums.Scope[] | ListEnumScopeFieldRefInput<$PrismaModel>
@@ -34028,7 +32606,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -34072,7 +32650,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -34121,7 +32699,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -34165,7 +32743,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -34225,7 +32803,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -34269,7 +32847,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -34324,7 +32902,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -34368,7 +32946,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -34450,428 +33028,6 @@ export namespace Prisma {
   export type SocialLinkedsCreateManyPageInputEnvelope = {
     data: SocialLinkedsCreateManyPageInput | SocialLinkedsCreateManyPageInput[]
     skipDuplicates?: boolean
-  }
-
-  export type PageAdminCreateWithoutPageInput = {
-    id?: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
-    user: UserCreateNestedOneWithoutAdminPagesInput
-  }
-
-  export type PageAdminUncheckedCreateWithoutPageInput = {
-    id?: string
-    userId: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
-  }
-
-  export type PageAdminCreateOrConnectWithoutPageInput = {
-    where: PageAdminWhereUniqueInput
-    create: XOR<PageAdminCreateWithoutPageInput, PageAdminUncheckedCreateWithoutPageInput>
-  }
-
-  export type PageAdminCreateManyPageInputEnvelope = {
-    data: PageAdminCreateManyPageInput | PageAdminCreateManyPageInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PageFollowUpsertWithWhereUniqueWithoutPageInput = {
-    where: PageFollowWhereUniqueInput
-    update: XOR<PageFollowUpdateWithoutPageInput, PageFollowUncheckedUpdateWithoutPageInput>
-    create: XOR<PageFollowCreateWithoutPageInput, PageFollowUncheckedCreateWithoutPageInput>
-  }
-
-  export type PageFollowUpdateWithWhereUniqueWithoutPageInput = {
-    where: PageFollowWhereUniqueInput
-    data: XOR<PageFollowUpdateWithoutPageInput, PageFollowUncheckedUpdateWithoutPageInput>
-  }
-
-  export type PageFollowUpdateManyWithWhereWithoutPageInput = {
-    where: PageFollowScalarWhereInput
-    data: XOR<PageFollowUpdateManyMutationInput, PageFollowUncheckedUpdateManyWithoutPageInput>
-  }
-
-  export type PageFollowScalarWhereInput = {
-    AND?: PageFollowScalarWhereInput | PageFollowScalarWhereInput[]
-    OR?: PageFollowScalarWhereInput[]
-    NOT?: PageFollowScalarWhereInput | PageFollowScalarWhereInput[]
-    id?: StringFilter<"PageFollow"> | string
-    userId?: UuidFilter<"PageFollow"> | string
-    pageId?: UuidFilter<"PageFollow"> | string
-    followedAt?: DateTimeFilter<"PageFollow"> | Date | string
-  }
-
-  export type PostUpsertWithWhereUniqueWithoutPageInput = {
-    where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutPageInput, PostUncheckedUpdateWithoutPageInput>
-    create: XOR<PostCreateWithoutPageInput, PostUncheckedCreateWithoutPageInput>
-  }
-
-  export type PostUpdateWithWhereUniqueWithoutPageInput = {
-    where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutPageInput, PostUncheckedUpdateWithoutPageInput>
-  }
-
-  export type PostUpdateManyWithWhereWithoutPageInput = {
-    where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutPageInput>
-  }
-
-  export type PostScalarWhereInput = {
-    AND?: PostScalarWhereInput | PostScalarWhereInput[]
-    OR?: PostScalarWhereInput[]
-    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
-    id?: StringFilter<"Post"> | string
-    authorId?: UuidFilter<"Post"> | string
-    pageId?: UuidNullableFilter<"Post"> | string | null
-    createdAt?: DateTimeFilter<"Post"> | Date | string
-    updateAt?: DateTimeFilter<"Post"> | Date | string
-    scope?: EnumScopeFilter<"Post"> | $Enums.Scope
-    status?: EnumPostStatusFilter<"Post"> | $Enums.PostStatus
-    content?: StringNullableFilter<"Post"> | string | null
-    medias?: StringNullableListFilter<"Post">
-  }
-
-  export type SocialLinkedsUpsertWithWhereUniqueWithoutPageInput = {
-    where: SocialLinkedsWhereUniqueInput
-    update: XOR<SocialLinkedsUpdateWithoutPageInput, SocialLinkedsUncheckedUpdateWithoutPageInput>
-    create: XOR<SocialLinkedsCreateWithoutPageInput, SocialLinkedsUncheckedCreateWithoutPageInput>
-  }
-
-  export type SocialLinkedsUpdateWithWhereUniqueWithoutPageInput = {
-    where: SocialLinkedsWhereUniqueInput
-    data: XOR<SocialLinkedsUpdateWithoutPageInput, SocialLinkedsUncheckedUpdateWithoutPageInput>
-  }
-
-  export type SocialLinkedsUpdateManyWithWhereWithoutPageInput = {
-    where: SocialLinkedsScalarWhereInput
-    data: XOR<SocialLinkedsUpdateManyMutationInput, SocialLinkedsUncheckedUpdateManyWithoutPageInput>
-  }
-
-  export type SocialLinkedsScalarWhereInput = {
-    AND?: SocialLinkedsScalarWhereInput | SocialLinkedsScalarWhereInput[]
-    OR?: SocialLinkedsScalarWhereInput[]
-    NOT?: SocialLinkedsScalarWhereInput | SocialLinkedsScalarWhereInput[]
-    id?: StringFilter<"SocialLinkeds"> | string
-    platform?: EnumPlatformFilter<"SocialLinkeds"> | $Enums.Platform
-    userId?: UuidFilter<"SocialLinkeds"> | string
-    pageId?: UuidFilter<"SocialLinkeds"> | string
-  }
-
-  export type PageAdminUpsertWithWhereUniqueWithoutPageInput = {
-    where: PageAdminWhereUniqueInput
-    update: XOR<PageAdminUpdateWithoutPageInput, PageAdminUncheckedUpdateWithoutPageInput>
-    create: XOR<PageAdminCreateWithoutPageInput, PageAdminUncheckedCreateWithoutPageInput>
-  }
-
-  export type PageAdminUpdateWithWhereUniqueWithoutPageInput = {
-    where: PageAdminWhereUniqueInput
-    data: XOR<PageAdminUpdateWithoutPageInput, PageAdminUncheckedUpdateWithoutPageInput>
-  }
-
-  export type PageAdminUpdateManyWithWhereWithoutPageInput = {
-    where: PageAdminScalarWhereInput
-    data: XOR<PageAdminUpdateManyMutationInput, PageAdminUncheckedUpdateManyWithoutPageInput>
-  }
-
-  export type PageAdminScalarWhereInput = {
-    AND?: PageAdminScalarWhereInput | PageAdminScalarWhereInput[]
-    OR?: PageAdminScalarWhereInput[]
-    NOT?: PageAdminScalarWhereInput | PageAdminScalarWhereInput[]
-    id?: StringFilter<"PageAdmin"> | string
-    userId?: UuidFilter<"PageAdmin"> | string
-    pageId?: UuidFilter<"PageAdmin"> | string
-    role?: EnumAdminRoleFilter<"PageAdmin"> | $Enums.AdminRole
-    addedAt?: DateTimeFilter<"PageAdmin"> | Date | string
-  }
-
-  export type UserCreateWithoutFollowedPagesInput = {
-    id?: string
-    profileId: string
-    createdAt?: Date | string
-    updateAt?: Date | string
-    status?: $Enums.StatusAccount
-    flags?: UserCreateflagsInput | $Enums.UserFlag[]
-    roles?: UserCreaterolesInput | $Enums.UserRole[]
-    hashedPassword: string
-    displayName: string
-    username?: string | null
-    gender: $Enums.Gender
-    pronoun?: string | null
-    birthday: Date | string
-    biography?: string | null
-    websites?: UserCreatewebsitesInput | string[]
-    language?: string | null
-    deletedAt?: Date | string | null
-    avatarUrl?: string | null
-    bannerUrl?: string | null
-    primaryEmail: EmailCreateNestedOneWithoutPrimaryEmailUserInput
-    subEmails?: EmailCreateNestedManyWithoutSubEmailsUserInput
-    primaryPhone?: PhoneCreateNestedOneWithoutPrimaryPhoneUserInput
-    subPhones?: PhoneCreateNestedManyWithoutSubPhonesUserInput
-    socialLinkeds?: SocialLinkedsCreateNestedManyWithoutUserInput
-    sentRelations?: RelationCreateNestedManyWithoutSourceUserInput
-    receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
-    sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
-    receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
-    posts?: PostCreateNestedManyWithoutAuthorInput
-    session?: SessionCreateNestedManyWithoutUserInput
-    comments?: CommentCreateNestedManyWithoutAuthorInput
-    reactions?: ReactionCreateNestedManyWithoutAuthorInput
-    auth?: AuthenticationCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutRecipientInput
-    notificationActions?: NotificationCreateNestedManyWithoutActorInput
-    Preference?: PreferenceCreateNestedManyWithoutUserInput
-    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
-    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
-    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
-    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutFollowedPagesInput = {
-    id?: string
-    profileId: string
-    createdAt?: Date | string
-    updateAt?: Date | string
-    status?: $Enums.StatusAccount
-    flags?: UserCreateflagsInput | $Enums.UserFlag[]
-    roles?: UserCreaterolesInput | $Enums.UserRole[]
-    primaryEmailId: string
-    primaryPhoneId?: string | null
-    hashedPassword: string
-    displayName: string
-    username?: string | null
-    gender: $Enums.Gender
-    pronoun?: string | null
-    birthday: Date | string
-    biography?: string | null
-    websites?: UserCreatewebsitesInput | string[]
-    language?: string | null
-    deletedAt?: Date | string | null
-    avatarUrl?: string | null
-    bannerUrl?: string | null
-    subEmails?: EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput
-    subPhones?: PhoneUncheckedCreateNestedManyWithoutSubPhonesUserInput
-    socialLinkeds?: SocialLinkedsUncheckedCreateNestedManyWithoutUserInput
-    sentRelations?: RelationUncheckedCreateNestedManyWithoutSourceUserInput
-    receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
-    sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
-    receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
-    session?: SessionUncheckedCreateNestedManyWithoutUserInput
-    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
-    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
-    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
-    notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
-    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
-    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
-    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
-    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
-    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutFollowedPagesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutFollowedPagesInput, UserUncheckedCreateWithoutFollowedPagesInput>
-  }
-
-  export type PageCreateWithoutPageFollowersInput = {
-    id?: string
-    name: string
-    phoneNumber: string
-    avtUrl?: string | null
-    backGroundurl?: string | null
-    updateAt?: Date | string | null
-    status?: $Enums.StatusPage
-    liked?: boolean
-    address?: string | null
-    city?: string | null
-    zipcode?: string | null
-    categories: string
-    createAt?: Date | string
-    bio?: string | null
-    posts?: PostCreateNestedManyWithoutPageInput
-    socialLinks?: SocialLinkedsCreateNestedManyWithoutPageInput
-    admins?: PageAdminCreateNestedManyWithoutPageInput
-  }
-
-  export type PageUncheckedCreateWithoutPageFollowersInput = {
-    id?: string
-    name: string
-    phoneNumber: string
-    avtUrl?: string | null
-    backGroundurl?: string | null
-    updateAt?: Date | string | null
-    status?: $Enums.StatusPage
-    liked?: boolean
-    address?: string | null
-    city?: string | null
-    zipcode?: string | null
-    categories: string
-    createAt?: Date | string
-    bio?: string | null
-    posts?: PostUncheckedCreateNestedManyWithoutPageInput
-    socialLinks?: SocialLinkedsUncheckedCreateNestedManyWithoutPageInput
-    admins?: PageAdminUncheckedCreateNestedManyWithoutPageInput
-  }
-
-  export type PageCreateOrConnectWithoutPageFollowersInput = {
-    where: PageWhereUniqueInput
-    create: XOR<PageCreateWithoutPageFollowersInput, PageUncheckedCreateWithoutPageFollowersInput>
-  }
-
-  export type UserUpsertWithoutFollowedPagesInput = {
-    update: XOR<UserUpdateWithoutFollowedPagesInput, UserUncheckedUpdateWithoutFollowedPagesInput>
-    create: XOR<UserCreateWithoutFollowedPagesInput, UserUncheckedCreateWithoutFollowedPagesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutFollowedPagesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutFollowedPagesInput, UserUncheckedUpdateWithoutFollowedPagesInput>
-  }
-
-  export type UserUpdateWithoutFollowedPagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
-    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
-    roles?: UserUpdaterolesInput | $Enums.UserRole[]
-    hashedPassword?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
-    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    biography?: NullableStringFieldUpdateOperationsInput | string | null
-    websites?: UserUpdatewebsitesInput | string[]
-    language?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryEmail?: EmailUpdateOneRequiredWithoutPrimaryEmailUserNestedInput
-    subEmails?: EmailUpdateManyWithoutSubEmailsUserNestedInput
-    primaryPhone?: PhoneUpdateOneWithoutPrimaryPhoneUserNestedInput
-    subPhones?: PhoneUpdateManyWithoutSubPhonesUserNestedInput
-    socialLinkeds?: SocialLinkedsUpdateManyWithoutUserNestedInput
-    sentRelations?: RelationUpdateManyWithoutSourceUserNestedInput
-    receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
-    sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
-    receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
-    posts?: PostUpdateManyWithoutAuthorNestedInput
-    session?: SessionUpdateManyWithoutUserNestedInput
-    comments?: CommentUpdateManyWithoutAuthorNestedInput
-    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
-    auth?: AuthenticationUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutRecipientNestedInput
-    notificationActions?: NotificationUpdateManyWithoutActorNestedInput
-    Preference?: PreferenceUpdateManyWithoutUserNestedInput
-    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
-    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
-    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
-    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutFollowedPagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    profileId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
-    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
-    roles?: UserUpdaterolesInput | $Enums.UserRole[]
-    primaryEmailId?: StringFieldUpdateOperationsInput | string
-    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
-    hashedPassword?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
-    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
-    biography?: NullableStringFieldUpdateOperationsInput | string | null
-    websites?: UserUpdatewebsitesInput | string[]
-    language?: NullableStringFieldUpdateOperationsInput | string | null
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    subEmails?: EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput
-    subPhones?: PhoneUncheckedUpdateManyWithoutSubPhonesUserNestedInput
-    socialLinkeds?: SocialLinkedsUncheckedUpdateManyWithoutUserNestedInput
-    sentRelations?: RelationUncheckedUpdateManyWithoutSourceUserNestedInput
-    receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
-    sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
-    receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
-    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
-    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
-    notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
-    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
-    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
-    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
-    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
-    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type PageUpsertWithoutPageFollowersInput = {
-    update: XOR<PageUpdateWithoutPageFollowersInput, PageUncheckedUpdateWithoutPageFollowersInput>
-    create: XOR<PageCreateWithoutPageFollowersInput, PageUncheckedCreateWithoutPageFollowersInput>
-    where?: PageWhereInput
-  }
-
-  export type PageUpdateToOneWithWhereWithoutPageFollowersInput = {
-    where?: PageWhereInput
-    data: XOR<PageUpdateWithoutPageFollowersInput, PageUncheckedUpdateWithoutPageFollowersInput>
-  }
-
-  export type PageUpdateWithoutPageFollowersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: StringFieldUpdateOperationsInput | string
-    avtUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    backGroundurl?: NullableStringFieldUpdateOperationsInput | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStatusPageFieldUpdateOperationsInput | $Enums.StatusPage
-    liked?: BoolFieldUpdateOperationsInput | boolean
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    zipcode?: NullableStringFieldUpdateOperationsInput | string | null
-    categories?: StringFieldUpdateOperationsInput | string
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    posts?: PostUpdateManyWithoutPageNestedInput
-    socialLinks?: SocialLinkedsUpdateManyWithoutPageNestedInput
-    admins?: PageAdminUpdateManyWithoutPageNestedInput
-  }
-
-  export type PageUncheckedUpdateWithoutPageFollowersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: StringFieldUpdateOperationsInput | string
-    avtUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    backGroundurl?: NullableStringFieldUpdateOperationsInput | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    status?: EnumStatusPageFieldUpdateOperationsInput | $Enums.StatusPage
-    liked?: BoolFieldUpdateOperationsInput | boolean
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    zipcode?: NullableStringFieldUpdateOperationsInput | string | null
-    categories?: StringFieldUpdateOperationsInput | string
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    posts?: PostUncheckedUpdateManyWithoutPageNestedInput
-    socialLinks?: SocialLinkedsUncheckedUpdateManyWithoutPageNestedInput
-    admins?: PageAdminUncheckedUpdateManyWithoutPageNestedInput
   }
 
   export type UserCreateWithoutAdminPagesInput = {
@@ -34967,49 +33123,87 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutAdminPagesInput, UserUncheckedCreateWithoutAdminPagesInput>
   }
 
-  export type PageCreateWithoutAdminsInput = {
-    id?: string
-    name: string
-    phoneNumber: string
-    avtUrl?: string | null
-    backGroundurl?: string | null
-    updateAt?: Date | string | null
-    status?: $Enums.StatusPage
-    liked?: boolean
-    address?: string | null
-    city?: string | null
-    zipcode?: string | null
-    categories: string
-    createAt?: Date | string
-    bio?: string | null
-    pageFollowers?: PageFollowCreateNestedManyWithoutPageInput
-    posts?: PostCreateNestedManyWithoutPageInput
-    socialLinks?: SocialLinkedsCreateNestedManyWithoutPageInput
+  export type PageFollowUpsertWithWhereUniqueWithoutPageInput = {
+    where: PageFollowWhereUniqueInput
+    update: XOR<PageFollowUpdateWithoutPageInput, PageFollowUncheckedUpdateWithoutPageInput>
+    create: XOR<PageFollowCreateWithoutPageInput, PageFollowUncheckedCreateWithoutPageInput>
   }
 
-  export type PageUncheckedCreateWithoutAdminsInput = {
-    id?: string
-    name: string
-    phoneNumber: string
-    avtUrl?: string | null
-    backGroundurl?: string | null
-    updateAt?: Date | string | null
-    status?: $Enums.StatusPage
-    liked?: boolean
-    address?: string | null
-    city?: string | null
-    zipcode?: string | null
-    categories: string
-    createAt?: Date | string
-    bio?: string | null
-    pageFollowers?: PageFollowUncheckedCreateNestedManyWithoutPageInput
-    posts?: PostUncheckedCreateNestedManyWithoutPageInput
-    socialLinks?: SocialLinkedsUncheckedCreateNestedManyWithoutPageInput
+  export type PageFollowUpdateWithWhereUniqueWithoutPageInput = {
+    where: PageFollowWhereUniqueInput
+    data: XOR<PageFollowUpdateWithoutPageInput, PageFollowUncheckedUpdateWithoutPageInput>
   }
 
-  export type PageCreateOrConnectWithoutAdminsInput = {
-    where: PageWhereUniqueInput
-    create: XOR<PageCreateWithoutAdminsInput, PageUncheckedCreateWithoutAdminsInput>
+  export type PageFollowUpdateManyWithWhereWithoutPageInput = {
+    where: PageFollowScalarWhereInput
+    data: XOR<PageFollowUpdateManyMutationInput, PageFollowUncheckedUpdateManyWithoutPageInput>
+  }
+
+  export type PageFollowScalarWhereInput = {
+    AND?: PageFollowScalarWhereInput | PageFollowScalarWhereInput[]
+    OR?: PageFollowScalarWhereInput[]
+    NOT?: PageFollowScalarWhereInput | PageFollowScalarWhereInput[]
+    id?: StringFilter<"PageFollow"> | string
+    userId?: UuidFilter<"PageFollow"> | string
+    pageId?: UuidFilter<"PageFollow"> | string
+    followedAt?: DateTimeFilter<"PageFollow"> | Date | string
+  }
+
+  export type PostUpsertWithWhereUniqueWithoutPageInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutPageInput, PostUncheckedUpdateWithoutPageInput>
+    create: XOR<PostCreateWithoutPageInput, PostUncheckedCreateWithoutPageInput>
+  }
+
+  export type PostUpdateWithWhereUniqueWithoutPageInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutPageInput, PostUncheckedUpdateWithoutPageInput>
+  }
+
+  export type PostUpdateManyWithWhereWithoutPageInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutPageInput>
+  }
+
+  export type PostScalarWhereInput = {
+    AND?: PostScalarWhereInput | PostScalarWhereInput[]
+    OR?: PostScalarWhereInput[]
+    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
+    id?: StringFilter<"Post"> | string
+    authorId?: UuidFilter<"Post"> | string
+    pageId?: UuidNullableFilter<"Post"> | string | null
+    createdAt?: DateTimeFilter<"Post"> | Date | string
+    updateAt?: DateTimeFilter<"Post"> | Date | string
+    scope?: EnumScopeFilter<"Post"> | $Enums.Scope
+    status?: EnumPostStatusFilter<"Post"> | $Enums.PostStatus
+    content?: StringNullableFilter<"Post"> | string | null
+    medias?: StringNullableListFilter<"Post">
+  }
+
+  export type SocialLinkedsUpsertWithWhereUniqueWithoutPageInput = {
+    where: SocialLinkedsWhereUniqueInput
+    update: XOR<SocialLinkedsUpdateWithoutPageInput, SocialLinkedsUncheckedUpdateWithoutPageInput>
+    create: XOR<SocialLinkedsCreateWithoutPageInput, SocialLinkedsUncheckedCreateWithoutPageInput>
+  }
+
+  export type SocialLinkedsUpdateWithWhereUniqueWithoutPageInput = {
+    where: SocialLinkedsWhereUniqueInput
+    data: XOR<SocialLinkedsUpdateWithoutPageInput, SocialLinkedsUncheckedUpdateWithoutPageInput>
+  }
+
+  export type SocialLinkedsUpdateManyWithWhereWithoutPageInput = {
+    where: SocialLinkedsScalarWhereInput
+    data: XOR<SocialLinkedsUpdateManyMutationInput, SocialLinkedsUncheckedUpdateManyWithoutPageInput>
+  }
+
+  export type SocialLinkedsScalarWhereInput = {
+    AND?: SocialLinkedsScalarWhereInput | SocialLinkedsScalarWhereInput[]
+    OR?: SocialLinkedsScalarWhereInput[]
+    NOT?: SocialLinkedsScalarWhereInput | SocialLinkedsScalarWhereInput[]
+    id?: StringFilter<"SocialLinkeds"> | string
+    platform?: EnumPlatformFilter<"SocialLinkeds"> | $Enums.Platform
+    userId?: UuidFilter<"SocialLinkeds"> | string
+    pageId?: UuidFilter<"SocialLinkeds"> | string
   }
 
   export type UserUpsertWithoutAdminPagesInput = {
@@ -35111,18 +33305,255 @@ export namespace Prisma {
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type PageUpsertWithoutAdminsInput = {
-    update: XOR<PageUpdateWithoutAdminsInput, PageUncheckedUpdateWithoutAdminsInput>
-    create: XOR<PageCreateWithoutAdminsInput, PageUncheckedCreateWithoutAdminsInput>
+  export type UserCreateWithoutFollowedPagesInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    primaryEmail: EmailCreateNestedOneWithoutPrimaryEmailUserInput
+    subEmails?: EmailCreateNestedManyWithoutSubEmailsUserInput
+    primaryPhone?: PhoneCreateNestedOneWithoutPrimaryPhoneUserInput
+    subPhones?: PhoneCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsCreateNestedManyWithoutUserInput
+    sentRelations?: RelationCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipCreateNestedManyWithoutAddresseeInput
+    posts?: PostCreateNestedManyWithoutAuthorInput
+    session?: SessionCreateNestedManyWithoutUserInput
+    comments?: CommentCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationCreateNestedManyWithoutActorInput
+    Preference?: PreferenceCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
+  }
+
+  export type UserUncheckedCreateWithoutFollowedPagesInput = {
+    id?: string
+    profileId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+    status?: $Enums.StatusAccount
+    flags?: UserCreateflagsInput | $Enums.UserFlag[]
+    roles?: UserCreaterolesInput | $Enums.UserRole[]
+    primaryEmailId: string
+    primaryPhoneId?: string | null
+    hashedPassword: string
+    displayName: string
+    username?: string | null
+    gender: $Enums.Gender
+    pronoun?: string | null
+    birthday: Date | string
+    biography?: string | null
+    websites?: UserCreatewebsitesInput | string[]
+    language?: string | null
+    deletedAt?: Date | string | null
+    avatarUrl?: string | null
+    bannerUrl?: string | null
+    subEmails?: EmailUncheckedCreateNestedManyWithoutSubEmailsUserInput
+    subPhones?: PhoneUncheckedCreateNestedManyWithoutSubPhonesUserInput
+    socialLinkeds?: SocialLinkedsUncheckedCreateNestedManyWithoutUserInput
+    sentRelations?: RelationUncheckedCreateNestedManyWithoutSourceUserInput
+    receivedRelations?: RelationUncheckedCreateNestedManyWithoutTargetUserInput
+    sentFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    receivedFriendRequests?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
+    reactions?: ReactionUncheckedCreateNestedManyWithoutAuthorInput
+    auth?: AuthenticationUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutRecipientInput
+    notificationActions?: NotificationUncheckedCreateNestedManyWithoutActorInput
+    Preference?: PreferenceUncheckedCreateNestedManyWithoutUserInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
+    restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
+    blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type UserCreateOrConnectWithoutFollowedPagesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFollowedPagesInput, UserUncheckedCreateWithoutFollowedPagesInput>
+  }
+
+  export type PageCreateWithoutPageFollowersInput = {
+    id?: string
+    name: string
+    phoneNumber: string
+    avtUrl?: string | null
+    backGroundurl?: string | null
+    updateAt?: Date | string | null
+    status?: $Enums.StatusPage
+    liked?: boolean
+    address?: string | null
+    city?: string | null
+    zipcode?: string | null
+    categories: string
+    createAt?: Date | string
+    bio?: string | null
+    posts?: PostCreateNestedManyWithoutPageInput
+    socialLinks?: SocialLinkedsCreateNestedManyWithoutPageInput
+    admin: UserCreateNestedOneWithoutAdminPagesInput
+  }
+
+  export type PageUncheckedCreateWithoutPageFollowersInput = {
+    id?: string
+    name: string
+    phoneNumber: string
+    avtUrl?: string | null
+    backGroundurl?: string | null
+    updateAt?: Date | string | null
+    status?: $Enums.StatusPage
+    liked?: boolean
+    address?: string | null
+    city?: string | null
+    zipcode?: string | null
+    categories: string
+    createAt?: Date | string
+    bio?: string | null
+    adminId: string
+    posts?: PostUncheckedCreateNestedManyWithoutPageInput
+    socialLinks?: SocialLinkedsUncheckedCreateNestedManyWithoutPageInput
+  }
+
+  export type PageCreateOrConnectWithoutPageFollowersInput = {
+    where: PageWhereUniqueInput
+    create: XOR<PageCreateWithoutPageFollowersInput, PageUncheckedCreateWithoutPageFollowersInput>
+  }
+
+  export type UserUpsertWithoutFollowedPagesInput = {
+    update: XOR<UserUpdateWithoutFollowedPagesInput, UserUncheckedUpdateWithoutFollowedPagesInput>
+    create: XOR<UserCreateWithoutFollowedPagesInput, UserUncheckedCreateWithoutFollowedPagesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFollowedPagesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFollowedPagesInput, UserUncheckedUpdateWithoutFollowedPagesInput>
+  }
+
+  export type UserUpdateWithoutFollowedPagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryEmail?: EmailUpdateOneRequiredWithoutPrimaryEmailUserNestedInput
+    subEmails?: EmailUpdateManyWithoutSubEmailsUserNestedInput
+    primaryPhone?: PhoneUpdateOneWithoutPrimaryPhoneUserNestedInput
+    subPhones?: PhoneUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUpdateManyWithoutAuthorNestedInput
+    session?: SessionUpdateManyWithoutUserNestedInput
+    comments?: CommentUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFollowedPagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    profileId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusAccountFieldUpdateOperationsInput | $Enums.StatusAccount
+    flags?: UserUpdateflagsInput | $Enums.UserFlag[]
+    roles?: UserUpdaterolesInput | $Enums.UserRole[]
+    primaryEmailId?: StringFieldUpdateOperationsInput | string
+    primaryPhoneId?: NullableStringFieldUpdateOperationsInput | string | null
+    hashedPassword?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    pronoun?: NullableStringFieldUpdateOperationsInput | string | null
+    birthday?: DateTimeFieldUpdateOperationsInput | Date | string
+    biography?: NullableStringFieldUpdateOperationsInput | string | null
+    websites?: UserUpdatewebsitesInput | string[]
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    subEmails?: EmailUncheckedUpdateManyWithoutSubEmailsUserNestedInput
+    subPhones?: PhoneUncheckedUpdateManyWithoutSubPhonesUserNestedInput
+    socialLinkeds?: SocialLinkedsUncheckedUpdateManyWithoutUserNestedInput
+    sentRelations?: RelationUncheckedUpdateManyWithoutSourceUserNestedInput
+    receivedRelations?: RelationUncheckedUpdateManyWithoutTargetUserNestedInput
+    sentFriendRequests?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    receivedFriendRequests?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
+    reactions?: ReactionUncheckedUpdateManyWithoutAuthorNestedInput
+    auth?: AuthenticationUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+    notificationActions?: NotificationUncheckedUpdateManyWithoutActorNestedInput
+    Preference?: PreferenceUncheckedUpdateManyWithoutUserNestedInput
+    audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
+    restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
+    blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
+    blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type PageUpsertWithoutPageFollowersInput = {
+    update: XOR<PageUpdateWithoutPageFollowersInput, PageUncheckedUpdateWithoutPageFollowersInput>
+    create: XOR<PageCreateWithoutPageFollowersInput, PageUncheckedCreateWithoutPageFollowersInput>
     where?: PageWhereInput
   }
 
-  export type PageUpdateToOneWithWhereWithoutAdminsInput = {
+  export type PageUpdateToOneWithWhereWithoutPageFollowersInput = {
     where?: PageWhereInput
-    data: XOR<PageUpdateWithoutAdminsInput, PageUncheckedUpdateWithoutAdminsInput>
+    data: XOR<PageUpdateWithoutPageFollowersInput, PageUncheckedUpdateWithoutPageFollowersInput>
   }
 
-  export type PageUpdateWithoutAdminsInput = {
+  export type PageUpdateWithoutPageFollowersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -35137,12 +33568,12 @@ export namespace Prisma {
     categories?: StringFieldUpdateOperationsInput | string
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    pageFollowers?: PageFollowUpdateManyWithoutPageNestedInput
     posts?: PostUpdateManyWithoutPageNestedInput
     socialLinks?: SocialLinkedsUpdateManyWithoutPageNestedInput
+    admin?: UserUpdateOneRequiredWithoutAdminPagesNestedInput
   }
 
-  export type PageUncheckedUpdateWithoutAdminsInput = {
+  export type PageUncheckedUpdateWithoutPageFollowersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -35157,7 +33588,7 @@ export namespace Prisma {
     categories?: StringFieldUpdateOperationsInput | string
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    pageFollowers?: PageFollowUncheckedUpdateManyWithoutPageNestedInput
+    adminId?: StringFieldUpdateOperationsInput | string
     posts?: PostUncheckedUpdateManyWithoutPageNestedInput
     socialLinks?: SocialLinkedsUncheckedUpdateManyWithoutPageNestedInput
   }
@@ -35202,7 +33633,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -35246,7 +33677,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -35272,7 +33703,7 @@ export namespace Prisma {
     bio?: string | null
     pageFollowers?: PageFollowCreateNestedManyWithoutPageInput
     socialLinks?: SocialLinkedsCreateNestedManyWithoutPageInput
-    admins?: PageAdminCreateNestedManyWithoutPageInput
+    admin: UserCreateNestedOneWithoutAdminPagesInput
   }
 
   export type PageUncheckedCreateWithoutPostsInput = {
@@ -35290,9 +33721,9 @@ export namespace Prisma {
     categories: string
     createAt?: Date | string
     bio?: string | null
+    adminId: string
     pageFollowers?: PageFollowUncheckedCreateNestedManyWithoutPageInput
     socialLinks?: SocialLinkedsUncheckedCreateNestedManyWithoutPageInput
-    admins?: PageAdminUncheckedCreateNestedManyWithoutPageInput
   }
 
   export type PageCreateOrConnectWithoutPostsInput = {
@@ -35413,7 +33844,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -35457,7 +33888,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -35489,7 +33920,7 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     pageFollowers?: PageFollowUpdateManyWithoutPageNestedInput
     socialLinks?: SocialLinkedsUpdateManyWithoutPageNestedInput
-    admins?: PageAdminUpdateManyWithoutPageNestedInput
+    admin?: UserUpdateOneRequiredWithoutAdminPagesNestedInput
   }
 
   export type PageUncheckedUpdateWithoutPostsInput = {
@@ -35507,9 +33938,9 @@ export namespace Prisma {
     categories?: StringFieldUpdateOperationsInput | string
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     pageFollowers?: PageFollowUncheckedUpdateManyWithoutPageNestedInput
     socialLinks?: SocialLinkedsUncheckedUpdateManyWithoutPageNestedInput
-    admins?: PageAdminUncheckedUpdateManyWithoutPageNestedInput
   }
 
   export type ReactionUpsertWithWhereUniqueWithoutPostInput = {
@@ -35611,7 +34042,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -35655,7 +34086,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -35841,7 +34272,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -35885,7 +34316,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -36037,7 +34468,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -36081,7 +34512,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -36205,7 +34636,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -36249,7 +34680,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -36369,7 +34800,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -36413,7 +34844,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -36473,7 +34904,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -36517,7 +34948,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -36561,7 +34992,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -36605,7 +35036,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -36654,7 +35085,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -36698,7 +35129,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -36747,7 +35178,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -36791,7 +35222,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -36840,7 +35271,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityCreateNestedOneWithoutUserInput
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -36884,7 +35315,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUncheckedCreateNestedOneWithoutUserInput
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -36944,7 +35375,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -36988,7 +35419,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -37961,27 +36392,53 @@ export namespace Prisma {
     create: XOR<AudienceAndVisibilityCreateWithoutBlockMessagesInput, AudienceAndVisibilityUncheckedCreateWithoutBlockMessagesInput>
   }
 
-  export type PageAdminCreateWithoutUserInput = {
+  export type PageCreateWithoutAdminInput = {
     id?: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
-    page: PageCreateNestedOneWithoutAdminsInput
+    name: string
+    phoneNumber: string
+    avtUrl?: string | null
+    backGroundurl?: string | null
+    updateAt?: Date | string | null
+    status?: $Enums.StatusPage
+    liked?: boolean
+    address?: string | null
+    city?: string | null
+    zipcode?: string | null
+    categories: string
+    createAt?: Date | string
+    bio?: string | null
+    pageFollowers?: PageFollowCreateNestedManyWithoutPageInput
+    posts?: PostCreateNestedManyWithoutPageInput
+    socialLinks?: SocialLinkedsCreateNestedManyWithoutPageInput
   }
 
-  export type PageAdminUncheckedCreateWithoutUserInput = {
+  export type PageUncheckedCreateWithoutAdminInput = {
     id?: string
-    pageId: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
+    name: string
+    phoneNumber: string
+    avtUrl?: string | null
+    backGroundurl?: string | null
+    updateAt?: Date | string | null
+    status?: $Enums.StatusPage
+    liked?: boolean
+    address?: string | null
+    city?: string | null
+    zipcode?: string | null
+    categories: string
+    createAt?: Date | string
+    bio?: string | null
+    pageFollowers?: PageFollowUncheckedCreateNestedManyWithoutPageInput
+    posts?: PostUncheckedCreateNestedManyWithoutPageInput
+    socialLinks?: SocialLinkedsUncheckedCreateNestedManyWithoutPageInput
   }
 
-  export type PageAdminCreateOrConnectWithoutUserInput = {
-    where: PageAdminWhereUniqueInput
-    create: XOR<PageAdminCreateWithoutUserInput, PageAdminUncheckedCreateWithoutUserInput>
+  export type PageCreateOrConnectWithoutAdminInput = {
+    where: PageWhereUniqueInput
+    create: XOR<PageCreateWithoutAdminInput, PageUncheckedCreateWithoutAdminInput>
   }
 
-  export type PageAdminCreateManyUserInputEnvelope = {
-    data: PageAdminCreateManyUserInput | PageAdminCreateManyUserInput[]
+  export type PageCreateManyAdminInputEnvelope = {
+    data: PageCreateManyAdminInput | PageCreateManyAdminInput[]
     skipDuplicates?: boolean
   }
 
@@ -38608,20 +37065,41 @@ export namespace Prisma {
     data: XOR<AudienceAndVisibilityUpdateManyMutationInput, AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesInput>
   }
 
-  export type PageAdminUpsertWithWhereUniqueWithoutUserInput = {
-    where: PageAdminWhereUniqueInput
-    update: XOR<PageAdminUpdateWithoutUserInput, PageAdminUncheckedUpdateWithoutUserInput>
-    create: XOR<PageAdminCreateWithoutUserInput, PageAdminUncheckedCreateWithoutUserInput>
+  export type PageUpsertWithWhereUniqueWithoutAdminInput = {
+    where: PageWhereUniqueInput
+    update: XOR<PageUpdateWithoutAdminInput, PageUncheckedUpdateWithoutAdminInput>
+    create: XOR<PageCreateWithoutAdminInput, PageUncheckedCreateWithoutAdminInput>
   }
 
-  export type PageAdminUpdateWithWhereUniqueWithoutUserInput = {
-    where: PageAdminWhereUniqueInput
-    data: XOR<PageAdminUpdateWithoutUserInput, PageAdminUncheckedUpdateWithoutUserInput>
+  export type PageUpdateWithWhereUniqueWithoutAdminInput = {
+    where: PageWhereUniqueInput
+    data: XOR<PageUpdateWithoutAdminInput, PageUncheckedUpdateWithoutAdminInput>
   }
 
-  export type PageAdminUpdateManyWithWhereWithoutUserInput = {
-    where: PageAdminScalarWhereInput
-    data: XOR<PageAdminUpdateManyMutationInput, PageAdminUncheckedUpdateManyWithoutUserInput>
+  export type PageUpdateManyWithWhereWithoutAdminInput = {
+    where: PageScalarWhereInput
+    data: XOR<PageUpdateManyMutationInput, PageUncheckedUpdateManyWithoutAdminInput>
+  }
+
+  export type PageScalarWhereInput = {
+    AND?: PageScalarWhereInput | PageScalarWhereInput[]
+    OR?: PageScalarWhereInput[]
+    NOT?: PageScalarWhereInput | PageScalarWhereInput[]
+    id?: UuidFilter<"Page"> | string
+    name?: StringFilter<"Page"> | string
+    phoneNumber?: StringFilter<"Page"> | string
+    avtUrl?: StringNullableFilter<"Page"> | string | null
+    backGroundurl?: StringNullableFilter<"Page"> | string | null
+    updateAt?: DateTimeNullableFilter<"Page"> | Date | string | null
+    status?: EnumStatusPageFilter<"Page"> | $Enums.StatusPage
+    liked?: BoolFilter<"Page"> | boolean
+    address?: StringNullableFilter<"Page"> | string | null
+    city?: StringNullableFilter<"Page"> | string | null
+    zipcode?: StringNullableFilter<"Page"> | string | null
+    categories?: StringFilter<"Page"> | string
+    createAt?: DateTimeFilter<"Page"> | Date | string
+    bio?: StringNullableFilter<"Page"> | string | null
+    adminId?: UuidFilter<"Page"> | string
   }
 
   export type PageFollowUpsertWithWhereUniqueWithoutUserInput = {
@@ -38680,7 +37158,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -38724,7 +37202,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -38773,7 +37251,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -38817,7 +37295,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -38877,7 +37355,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -38921,7 +37399,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -38976,7 +37454,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -39020,7 +37498,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -39064,7 +37542,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -39108,7 +37586,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -39157,7 +37635,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -39201,7 +37679,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -39261,7 +37739,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -39305,7 +37783,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -39360,7 +37838,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -39404,7 +37882,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -39448,7 +37926,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -39492,7 +37970,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -39541,7 +38019,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -39585,7 +38063,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -39645,7 +38123,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -39689,7 +38167,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -39744,7 +38222,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -39788,7 +38266,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -39832,7 +38310,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -39876,7 +38354,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -39925,7 +38403,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -39969,7 +38447,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -40029,7 +38507,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -40073,7 +38551,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -40128,7 +38606,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -40172,7 +38650,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -40216,7 +38694,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -40260,7 +38738,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -40286,7 +38764,7 @@ export namespace Prisma {
     bio?: string | null
     pageFollowers?: PageFollowCreateNestedManyWithoutPageInput
     posts?: PostCreateNestedManyWithoutPageInput
-    admins?: PageAdminCreateNestedManyWithoutPageInput
+    admin: UserCreateNestedOneWithoutAdminPagesInput
   }
 
   export type PageUncheckedCreateWithoutSocialLinksInput = {
@@ -40304,9 +38782,9 @@ export namespace Prisma {
     categories: string
     createAt?: Date | string
     bio?: string | null
+    adminId: string
     pageFollowers?: PageFollowUncheckedCreateNestedManyWithoutPageInput
     posts?: PostUncheckedCreateNestedManyWithoutPageInput
-    admins?: PageAdminUncheckedCreateNestedManyWithoutPageInput
   }
 
   export type PageCreateOrConnectWithoutSocialLinksInput = {
@@ -40365,7 +38843,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -40409,7 +38887,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -40441,7 +38919,7 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     pageFollowers?: PageFollowUpdateManyWithoutPageNestedInput
     posts?: PostUpdateManyWithoutPageNestedInput
-    admins?: PageAdminUpdateManyWithoutPageNestedInput
+    admin?: UserUpdateOneRequiredWithoutAdminPagesNestedInput
   }
 
   export type PageUncheckedUpdateWithoutSocialLinksInput = {
@@ -40459,9 +38937,9 @@ export namespace Prisma {
     categories?: StringFieldUpdateOperationsInput | string
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: StringFieldUpdateOperationsInput | string
     pageFollowers?: PageFollowUncheckedUpdateManyWithoutPageNestedInput
     posts?: PostUncheckedUpdateManyWithoutPageNestedInput
-    admins?: PageAdminUncheckedUpdateManyWithoutPageNestedInput
   }
 
   export type UserCreateWithoutAuthInput = {
@@ -40504,7 +38982,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -40548,7 +39026,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -40608,7 +39086,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -40652,7 +39130,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -40696,7 +39174,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminCreateNestedManyWithoutUserInput
+    adminPages?: PageCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowCreateNestedManyWithoutUserInput
   }
 
@@ -40740,7 +39218,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutRestrictedListInput
     blockedBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockedProfilesOrPagesInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedCreateNestedManyWithoutBlockMessagesInput
-    adminPages?: PageAdminUncheckedCreateNestedManyWithoutUserInput
+    adminPages?: PageUncheckedCreateNestedManyWithoutAdminInput
     followedPages?: PageFollowUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -40800,7 +39278,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -40844,7 +39322,7 @@ export namespace Prisma {
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -40869,13 +39347,6 @@ export namespace Prisma {
     id?: string
     platform: $Enums.Platform
     userId: string
-  }
-
-  export type PageAdminCreateManyPageInput = {
-    id?: string
-    userId: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
   }
 
   export type PageFollowUpdateWithoutPageInput = {
@@ -40949,27 +39420,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     platform?: EnumPlatformFieldUpdateOperationsInput | $Enums.Platform
     userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PageAdminUpdateWithoutPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutAdminPagesNestedInput
-  }
-
-  export type PageAdminUncheckedUpdateWithoutPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PageAdminUncheckedUpdateManyWithoutPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReactionCreateManyPostInput = {
@@ -41172,7 +39622,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -41216,7 +39666,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -41284,7 +39734,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -41328,7 +39778,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedMessagesBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockMessagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -41396,7 +39846,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUpdateOneWithoutUserNestedInput
     restrictedBy?: AudienceAndVisibilityUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUpdateManyWithoutBlockedProfilesOrPagesNestedInput
-    adminPages?: PageAdminUpdateManyWithoutUserNestedInput
+    adminPages?: PageUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUpdateManyWithoutUserNestedInput
   }
 
@@ -41440,7 +39890,7 @@ export namespace Prisma {
     audienceAndVisibility?: AudienceAndVisibilityUncheckedUpdateOneWithoutUserNestedInput
     restrictedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutRestrictedListNestedInput
     blockedBy?: AudienceAndVisibilityUncheckedUpdateManyWithoutBlockedProfilesOrPagesNestedInput
-    adminPages?: PageAdminUncheckedUpdateManyWithoutUserNestedInput
+    adminPages?: PageUncheckedUpdateManyWithoutAdminNestedInput
     followedPages?: PageFollowUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -41645,11 +40095,21 @@ export namespace Prisma {
     textSize?: number
   }
 
-  export type PageAdminCreateManyUserInput = {
+  export type PageCreateManyAdminInput = {
     id?: string
-    pageId: string
-    role?: $Enums.AdminRole
-    addedAt?: Date | string
+    name: string
+    phoneNumber: string
+    avtUrl?: string | null
+    backGroundurl?: string | null
+    updateAt?: Date | string | null
+    status?: $Enums.StatusPage
+    liked?: boolean
+    address?: string | null
+    city?: string | null
+    zipcode?: string | null
+    categories: string
+    createAt?: Date | string
+    bio?: string | null
   }
 
   export type PageFollowCreateManyUserInput = {
@@ -42555,25 +41015,61 @@ export namespace Prisma {
     reviewPostBeforePublish?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type PageAdminUpdateWithoutUserInput = {
+  export type PageUpdateWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    page?: PageUpdateOneRequiredWithoutAdminsNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    avtUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    backGroundurl?: NullableStringFieldUpdateOperationsInput | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumStatusPageFieldUpdateOperationsInput | $Enums.StatusPage
+    liked?: BoolFieldUpdateOperationsInput | boolean
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    categories?: StringFieldUpdateOperationsInput | string
+    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    pageFollowers?: PageFollowUpdateManyWithoutPageNestedInput
+    posts?: PostUpdateManyWithoutPageNestedInput
+    socialLinks?: SocialLinkedsUpdateManyWithoutPageNestedInput
   }
 
-  export type PageAdminUncheckedUpdateWithoutUserInput = {
+  export type PageUncheckedUpdateWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
-    pageId?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    avtUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    backGroundurl?: NullableStringFieldUpdateOperationsInput | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumStatusPageFieldUpdateOperationsInput | $Enums.StatusPage
+    liked?: BoolFieldUpdateOperationsInput | boolean
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    categories?: StringFieldUpdateOperationsInput | string
+    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    pageFollowers?: PageFollowUncheckedUpdateManyWithoutPageNestedInput
+    posts?: PostUncheckedUpdateManyWithoutPageNestedInput
+    socialLinks?: SocialLinkedsUncheckedUpdateManyWithoutPageNestedInput
   }
 
-  export type PageAdminUncheckedUpdateManyWithoutUserInput = {
+  export type PageUncheckedUpdateManyWithoutAdminInput = {
     id?: StringFieldUpdateOperationsInput | string
-    pageId?: StringFieldUpdateOperationsInput | string
-    role?: EnumAdminRoleFieldUpdateOperationsInput | $Enums.AdminRole
-    addedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    avtUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    backGroundurl?: NullableStringFieldUpdateOperationsInput | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumStatusPageFieldUpdateOperationsInput | $Enums.StatusPage
+    liked?: BoolFieldUpdateOperationsInput | boolean
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    zipcode?: NullableStringFieldUpdateOperationsInput | string | null
+    categories?: StringFieldUpdateOperationsInput | string
+    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PageFollowUpdateWithoutUserInput = {
