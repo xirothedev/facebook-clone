@@ -27565,7 +27565,7 @@ export namespace Prisma {
     AND?: SessionWhereInput | SessionWhereInput[]
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
-    id?: UuidFilter<"Session"> | string
+    id?: StringFilter<"Session"> | string
     expiresAt?: DateTimeNullableFilter<"Session"> | Date | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
     lastLoginAt?: DateTimeNullableFilter<"Session"> | Date | string | null
@@ -27629,7 +27629,7 @@ export namespace Prisma {
     AND?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
     OR?: SessionScalarWhereWithAggregatesInput[]
     NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Session"> | string
+    id?: StringWithAggregatesFilter<"Session"> | string
     expiresAt?: DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     lastLoginAt?: DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
@@ -38251,7 +38251,7 @@ export namespace Prisma {
     AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
     OR?: SessionScalarWhereInput[]
     NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    id?: UuidFilter<"Session"> | string
+    id?: StringFilter<"Session"> | string
     expiresAt?: DateTimeNullableFilter<"Session"> | Date | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
     lastLoginAt?: DateTimeNullableFilter<"Session"> | Date | string | null

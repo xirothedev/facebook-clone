@@ -11,7 +11,7 @@ export class FriendsService {
 		private readonly notificationsService: NotificationsService,
 	) {}
 
-	async loadingFriendsRequest(userId: string) {
+	async loadingFriendsSentRequest(userId: string) {
 		const users = await this.prismaService.user.findUnique({
 			where: { id: userId },
 			include: { receivedFriendRequests: { where: { status: "PENDING" } } },

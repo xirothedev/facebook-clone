@@ -7,7 +7,7 @@ export class FriendsController {
 
 	@Get("loading-list-request")
 	async loadingFriendsRequest(@Query("userId") userId: string) {
-		return this.friendService.loadingFriendsRequest(userId);
+		return this.friendService.loadingFriendsSentRequest(userId);
 	}
 
 	@Get("loading-list-friends")

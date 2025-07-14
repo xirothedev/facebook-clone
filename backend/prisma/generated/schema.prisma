@@ -168,8 +168,7 @@ model Page {
   createAt    DateTime        @default(now())
   bio         String?
 
-  // page admin info (many-to-many thông qua bảng trung gian PageAdmin)
-  admins PageAdmin[] // <-- page có nhiều admin
+  admins PageAdmin[]
 }
 
 model PageFollow {
@@ -553,8 +552,7 @@ model User {
   blockedMessagesBy     AudienceAndVisibility[] @relation("BlockMessages")
 
   //page
-  adminPages PageAdmin[]
-
+  adminPages    PageAdmin[]
   followedPages PageFollow[]
 }
 
@@ -634,7 +632,7 @@ model Authentication {
 }
 
 model Session {
-  id                 String    @id @default(uuid()) @db.Uuid
+  id                 String    @id @default(uuid())
   expiresAt          DateTime? @db.Timestamptz
   createdAt          DateTime  @default(now()) @db.Timestamptz
   lastLoginAt        DateTime? @default(now()) @db.Timestamptz
